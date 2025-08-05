@@ -18,7 +18,7 @@ sprites.onOverlap(SpriteKind.Firebolt, SpriteKind.Enemy, (projectile: Sprite, en
 // Destoy flamable items
 scene.onHitWall(SpriteKind.Firebolt, (sprite: Sprite, location: tiles.Location) => {
     if (tiles.tileAtLocationEquals(location, sprites.dungeon.stairLadder)) {
-        clearTile(location)
+        dungeon.clearTile(location)
         music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
         tiles.setWallAt(location, false)
     }

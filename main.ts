@@ -9,13 +9,6 @@ namespace ZLevel {
 }
 
 // SETUP
-let current_level = -1
-
-const LEVELS = [
-    tilemap`level 1`,
-    tilemap`level 2`,
-    tilemap`level 3`
-]
 
 game.splash("Welcome to the", "Crawling DUNGEON!")
 
@@ -25,8 +18,12 @@ game.setGameOverScoringType(game.ScoringType.HighScore)
 const player = new Player()
 
 init_inventory()
-advance_level()
-
+let dungeon = new Dungeon([
+    tilemap`level 1`,
+    tilemap`level 2`,
+    tilemap`level 3`,
+])
+    
 controller.menu.onEvent(ControllerButtonEvent.Pressed, () => {
     if (!menuIsVisible) {
         menuIsVisible = true

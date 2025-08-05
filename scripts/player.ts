@@ -211,7 +211,7 @@ class Player {
                 this._sprite.setScale(0.5)
 
                 timer.after(500, () => {
-                    advance_level()
+                    dungeon.advance_level()
                     this._is_falling = false
                 })
             })

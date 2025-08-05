@@ -20,7 +20,7 @@ class Enemy {
     _lifeBar: StatusBarSprite
 
     constructor(tile: tiles.Location) {
-        clearTile(tile)
+        dungeon.clearTile(tile)
         this._sprite = sprites.create(this.image, SpriteKind.Enemy)
         tiles.placeOnTile(this._sprite, tile)
         this._sprite.setFlag(SpriteFlag.BounceOnWall, true)
