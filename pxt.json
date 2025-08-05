@@ -1,0 +1,39 @@
+{
+    "name": "Crawly Dungeon",
+    "description": "",
+    "dependencies": {
+        "device": "*",
+        "color-coded-tilemap": "*",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
+        "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.2.0",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "arcade-timers": "github:microsoft/arcade-timers#v1.1.0",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
+        "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1"
+    },
+    "files": [
+        "scripts/gui.ts",
+        "scripts/dungeon.ts",
+        "scripts/enemies.ts",
+        "scripts/player.ts",
+        "scripts/spells.ts",
+        "scripts/utils.ts",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "images.g.jres",
+        "images.g.ts",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
+    ],
+    "targetVersions": {
+        "branch": "v1.12.25",
+        "tag": "v1.12.25",
+        "commits": "https://github.com/microsoft/pxt-arcade/commits/e2750e18d567167d5fc4f7c49e2a64cc55da9d18",
+        "target": "1.12.25",
+        "pxt": "8.5.36"
+    },
+    "preferredEditor": "tsprj"
+}
