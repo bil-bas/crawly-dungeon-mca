@@ -112,7 +112,7 @@
             "myTiles.transparency16",
             "sprites.builtin.brick",
             "sprites.dungeon.stairLarge",
-            "sprites.dungeon.stairNorth"
+            "sprites.dungeon.stairSouth"
         ]
     }
 }

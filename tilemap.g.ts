@@ -273,7 +273,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairNorth], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth], TileScale.Sixteen);
         }
         return null;
     })

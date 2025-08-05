@@ -1,6 +1,13 @@
 const INITIAL_MANA = 3
 const INITIAL_LIFE = 3
 
+const ALL_STAIRS = [
+    sprites.dungeon.stairNorth,
+    sprites.dungeon.stairEast,
+    sprites.dungeon.stairWest,
+    sprites.dungeon.stairSouth,
+]
+
 // Interacting with the dungeon
 
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (sprite: Sprite, item: Sprite) => {
@@ -15,8 +22,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (sprite: Sprite, enemy: S
     player.touchedEnemy(enemy)
 })
 
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardHole, (sprite: Sprite, tile: tiles.Location) => {
-    player.touchedHole(tile)
+
+ALL_STAIRS.forEach((stair) => {
+    scene.onOverlapTile(SpriteKind.Player, stair, (sprite: Sprite, tile: tiles.Location) => {
+        player.touchedHole(tile)
+    })
 })
 
 // Casting spells

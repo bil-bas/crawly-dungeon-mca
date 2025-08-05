@@ -1,3 +1,6 @@
+const STATUS_BAR_MARGIN = 1
+const STATUS_BAR_HEIGHT = 6
+
 // Indicate a change with floating message.
 function change_floater(icon: Image, change: number) {
     let text = textsprite.create((change > 0 ? "+" : "") + ("" + change))
@@ -30,12 +33,14 @@ function update_labels() {
     coin_label.setText(`${player.coins}`)
 
     life_label.max = player.maxLife
-    life_label.setLabel(`Life ${player.life}/${player.maxLife}`)
+    life_label.setLabel(`L ${player.life}/${player.maxLife}`)
     life_label.value = player.life
+    life_label.left = 1
 
     magic_label.max = player.maxMana
     magic_label.value = player.mana
-    magic_label.setLabel(`Mana ${player.mana}/${player.maxMana}`)
+    magic_label.setLabel(`${player.mana}/${player.maxMana} M`)
+    magic_label.right = screen.width - 1
 
     coin_label.right = 150
 }
@@ -43,21 +48,24 @@ function update_labels() {
 function init_inventory() {
     info.showLife(false)
 
-    magic_label = statusbars.create(80, 6, StatusBarKind.Magic)
-    magic_label.setFlag(SpriteFlag.RelativeToCamera, true)
-    magic_label.bottom = 120
-    magic_label.left = 4
-    magic_label.z = ZLevel.UI
-    magic_label.setColor(7, 15, 5)
-
-    life_label = statusbars.create(80, 6, StatusBarKind.Health)
+    life_label = statusbars.create(51, STATUS_BAR_HEIGHT, StatusBarKind.Health)
     life_label.setFlag(SpriteFlag.RelativeToCamera, true)
-    life_label.bottom = 114
-    life_label.left = 4
+    life_label.bottom = screen.height
     life_label.z = ZLevel.UI
-    life_label.setColor(2, 15, 5)
+    life_label.setBarBorder(1, 15)
+    life_label.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
+    life_label.setColor(Colour.RED, Colour.DARK_PURPLE, Colour.BROWN)
 
-    key_label = create_label(assets.image`key`, -4)
+    magic_label = statusbars.create(50, STATUS_BAR_HEIGHT, StatusBarKind.Magic)
+    magic_label.setFlag(SpriteFlag.RelativeToCamera, true)
+    magic_label.bottom = screen.height
+    magic_label.z = ZLevel.UI
+    magic_label.setBarBorder(1, 15)
+    magic_label.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
+    magic_label.setStatusBarFlag(StatusBarFlag.LabelAtEnd, true)
+    magic_label.setColor(Colour.BLUE, Colour.DARK_PURPLE, Colour.LIGHT_BLUE)
+
+    key_label = create_label(assets.image`key`, 0)
     key_label.top = 0
 
     coin_label = textsprite.create("0")
@@ -85,9 +93,9 @@ function spellIndicator(spell: Spell, primary: boolean): TextSprite {
     let indicator = textsprite.create(`${spell.mana}`)
     indicator.z = ZLevel.UI
     indicator.icon = spell.icon
-    indicator.setOutline(1, 12)
-    indicator.right = screen.width - 2
-    indicator.bottom = screen.height - (primary ? 12 : 0)
+    indicator.setOutline(1, 15)
+    indicator.right = screen.width
+    indicator.bottom = screen.height - (primary ? 10 : 0) - 6
     indicator.setFlag(SpriteFlag.RelativeToCamera, true)
 
     return indicator
