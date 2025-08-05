@@ -1,6 +1,6 @@
 {
     "name": "Crawly Dungeon",
-    "description": "",
+    "description": "Dungeon crawler created with Makecode Arcade (Typescript)",
     "dependencies": {
         "device": "*",
         "color-coded-tilemap": "*",
