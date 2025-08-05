@@ -14,7 +14,7 @@
         "namespace": "myTiles.",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
-        "displayName": "life potion"
+        "displayName": "mana potion"
     },
     "myTiles.tile2": {
         "id": "myTiles.tile2",
@@ -23,7 +23,7 @@
         "namespace": "myTiles.",
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
-        "displayName": "mana potion"
+        "displayName": "life potion"
     },
     "myTiles.tile3": {
         "id": "myTiles.tile3",
@@ -103,7 +103,7 @@
     },
     "level1": {
         "id": "level1",
-        "data": "MTAxMDAwMTAwMDAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMDAwMDAwMDAwMDAwMTAxMDAwMDAwMDAwMDAwMDEwMTAwMDAwMDAwMDAwMDAxMDEwMDAwMDAwMTAxMDAwMTAxMDAwMDAwMDAwMDAxMDEwMTAxMDAwMDAxMDEwMDAxMDEwMDAwMDAwMDAxMDEwMTAxMDEwMTAwMDEwMTAwMDEwMTAwMDAwMDAwMDEwMTAxMDEwMTAxMDAwMTAxMDMwMTAxMDAwMDAwMDAwMTAxMDEwMTAxMDEwMDAxMDEwMTAxMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTAxMDEwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDEwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
+        "data": "MTAxMDAwMTAwMDAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMDAwMDAwMDAwMDAwMTAxMDAwMDAwMDAwMDAwMDEwMTAwMDAwMDAwMDAwMDAxMDEwMDAwMDAwMTAxMDAwMTAxMDAwMDAwMGEwMDAxMDEwMTAxMDAwMDAxMDEwMDAxMDEwMDAwMDAwMDAxMDEwMTAxMDEwMTAwMDEwMTAwMDEwMTAwMDAwMDAwMDEwMTAxMDEwMTAxMDAwMTAxMDMwMTAxMGMwYzBjMGMwMTAxMDEwMTAxMDEwMDAxMDEwMTAxMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTAxMDEwMTAwMDAwMDAwMDAwMDAwMDkwMDAwMDAwMDAwMDAwMTAxMDAwMDA0MDQwNDAwMDAwYjAwMDcwMDAwMDAwMDAxMDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMTA1MDUwNTAwMDAwMDAwMDAwMDAwMDAwODAwMDAwMTAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxMDEwMDAyMDAwNjA2MDYwMDBiMDAwMDAwMDAwNzAwMDEwMTAwMDAwMDAwMDAwMDAwMGIwYjAwMDAwMDBiMGIwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
         "mimeType": "application/mkcd-tilemap",
@@ -112,7 +112,16 @@
             "myTiles.transparency16",
             "sprites.builtin.brick",
             "sprites.dungeon.stairLarge",
-            "sprites.dungeon.stairSouth"
+            "sprites.dungeon.stairSouth",
+            "myTiles.tile1",
+            "myTiles.tile2",
+            "myTiles.tile3",
+            "myTiles.tile4",
+            "myTiles.tile5",
+            "myTiles.tile6",
+            "myTiles.tile7",
+            "myTiles.tile8",
+            "sprites.dungeon.stairLadder"
         ]
     }
 }

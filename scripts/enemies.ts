@@ -20,7 +20,6 @@ class Enemy {
     _lifeBar: StatusBarSprite
 
     constructor(tile: tiles.Location) {
-        dungeon.clearTile(tile)
         this._sprite = sprites.create(this.image, SpriteKind.Enemy)
         tiles.placeOnTile(this._sprite, tile)
         this._sprite.setFlag(SpriteFlag.BounceOnWall, true)
@@ -142,6 +141,7 @@ class Monkey extends Enemy {
     melee(damage: number): number {
         if (player.keys > 0) {
             player.keys -= 1
+            this.life -= damage
             return 0
         } else {
             return super.melee(damage)
@@ -192,6 +192,7 @@ class Skeleton extends Enemy {
     melee(damage: number): number {
         if (player.mana > 0) {
             player.mana -= 1
+            this.life -= damage
             return 0
         } else {
             return super.melee(damage)

@@ -24,17 +24,20 @@ class Dungeon {
         let view_map = tileUtil.cloneMap(this.current_level)
 
         tileUtil.forEachTileInMap(view_map, (column: number, row: number, location: tiles.Location) => {
+            let clear = true
+
             switch (view_map.getTileImage(view_map.getTile(column, row))) {
                 case sprites.builtin.brick:
                     tiles.setWallAt(location, true)
                     this._render_brick(view_map, column, row, location)
-                    break
+                    clear  = false
+                    break 
                 case sprites.dungeon.stairLadder:
                 case sprites.dungeon.doorLockedNorth:
                     tiles.setWallAt(location, true)
+                    clear = false
                     break
                 case sprites.dungeon.stairLarge:
-                    this.clearTile(location)
                     tiles.placeOnTile(player.sprite, location)
                     break
                 case assets.tile`bat`:
@@ -64,7 +67,11 @@ class Dungeon {
                 case assets.tile`chest`:
                     tiles.setTileAt(location, sprites.dungeon.chestClosed)
                     tiles.setWallAt(location, true)
+                    clear = false
                     break
+            }
+            if (clear) {
+                this.clearTile(location)
             }
         })
     }
@@ -153,7 +160,7 @@ class Dungeon {
     }
 
     // go down one level
-    advance_level() {
+    advance_level(): void {
         sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
         sprites.destroyAllSpritesOfKind(SpriteKind.Item)
         this._current_level_index += 1
@@ -164,7 +171,7 @@ class Dungeon {
     }
 
     // Clear tile to transparency
-    clearTile(location: tiles.Location) {
+    clearTile(location: tiles.Location): void {
         tiles.setTileAt(location, assets.tile`transparency16`)
     }
 }

@@ -22,7 +22,7 @@ namespace myImages {
 . . . . . . . . . . . . . . . . 
 `;
             case "myTiles.tile1":
-            case "life potion":return img`
+            case "mana potion":return img`
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 1 f 1 1 1 f 1 1 1 1 1 1 1 1 1 1 
 1 f f 1 f f 1 1 1 1 1 1 1 1 1 1 
@@ -41,7 +41,7 @@ namespace myImages {
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `;
             case "myTiles.tile2":
-            case "mana potion":return img`
+            case "life potion":return img`
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 1 1 f 1 1 1 1 1 f f 1 1 1 1 1 1 
@@ -256,7 +256,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
             case "level 1":
-            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000000000101000000000000010100000000000001010000000101000101000000000001010101000001010001010000000001010101010100010100010100000000010101010101000101030101000000000101010101010001010101010000000000000000000000010101010100000000000000000000000000000101000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000101000000000000000000000000000001010002000000000000000000000000010100000000000000000000000000000101010101010101010101010101010101`, img`
+            case "level1":return tiles.createTilemap(hex`10001000010101010101010101010101010101010100000000000001010000000000000101000000000000010100000001010001010000000a00010101010000010100010100000000010101010101000101000101000000000101010101010001010301010c0c0c0c0101010101010001010101010000000000000000000000010101010100000000000000090000000000000101000004040400000b0007000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101000000000000000b0b0000000b0b0101010101010101010101010101010101`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -273,7 +273,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder], TileScale.Sixteen);
         }
         return null;
     })
@@ -281,9 +281,9 @@ namespace myTiles {
     helpers._registerFactory("tile", function(name: string) {
         switch(helpers.stringTrim(name)) {
             case "transparency16":return myTiles.transparency16;
-            case "life potion":
-            case "tile1":return myTiles.tile1;
             case "mana potion":
+            case "tile1":return myTiles.tile1;
+            case "life potion":
             case "tile2":return myTiles.tile2;
             case "key tile":
             case "tile3":return myTiles.tile3;
