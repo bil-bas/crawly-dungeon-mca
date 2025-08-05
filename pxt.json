@@ -1,5 +1,6 @@
 {
     "name": "Crawly Dungeon",
+    "version": "1.0.0",
     "description": "Dungeon crawler created with Makecode Arcade (Typescript)",
     "dependencies": {
         "device": "*",
