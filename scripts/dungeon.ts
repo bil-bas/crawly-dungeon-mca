@@ -10,15 +10,23 @@ class Dungeon {
     ]
     
     _levels: Array<tiles.TileMapData>
-    _current_level_index: number
+    _current_level_index: number = -1
+    _items: { [id: string]: Item } = {}
 
-    get current_level(): tiles.TileMapData { return this._levels[this._current_level_index]}
+    get current_level(): tiles.TileMapData { return this._levels[this._current_level_index] }
 
     constructor(levels: Array<tiles.TileMapData>) {
         this._levels = levels
-        this._current_level_index = -1
         this.advance_level()
     }
+
+    getItem(tile: tiles.Location) {
+        return this._items[`${tile.x},${tile.y}`]
+    }
+    setItem(tile: tiles.Location, item: Item) {
+        this._items[`${tile.x},${tile.y}`] = item
+    }
+
     // Render the level tiles, add player and creatues.
     _render_walls(): void {
         let view_map = tileUtil.cloneMap(this.current_level)
@@ -51,9 +59,15 @@ class Dungeon {
                 case assets.tile`hermit crab`: new HermitCrab(location); break
                 case assets.tile`shroom`: new Shroom(location); break
 
-                case assets.tile`mana potion`: new ManaPotion(location); break
-                case assets.tile`key tile`: new SkeletonKey(location); break
-                case assets.tile`life potion`: new LifePotion(location);  break
+                case assets.tile`mana potion`:
+                    this.setItem(location, new ManaPotion(location))
+                    break
+                case assets.tile`key tile`:
+                    this.setItem(location, new SkeletonKey(location))
+                    break
+                case assets.tile`life potion`:
+                    this.setItem(location, new LifePotion(location))
+                    break
             }
             if (clear) {
                 this.clearTile(location)

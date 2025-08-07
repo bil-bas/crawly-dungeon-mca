@@ -22,7 +22,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (sprite: Sprite, enemy: S
     player.touchedEnemy(enemy)
 })
 
-
 ALL_STAIRS.forEach((stair) => {
     scene.onOverlapTile(SpriteKind.Player, stair, (sprite: Sprite, tile: tiles.Location) => {
         player.touchedStairs(tile)
