@@ -42,7 +42,7 @@ function update_labels() {
 function init_inventory() {
     info.showLife(false)
 
-    life_status = statusbars.create(41, STATUS_BAR_HEIGHT, StatusBarKind.Health)
+    life_status = statusbars.create(46, STATUS_BAR_HEIGHT, StatusBarKind.Health)
     life_status.setFlag(SpriteFlag.RelativeToCamera, true)
     life_status.bottom = screen.height
     life_status.right = screen.width / 2 + 1
@@ -55,7 +55,7 @@ function init_inventory() {
     life_label.left = -4
     life_label.bottom = screen.height + 5
 
-    magic_status = statusbars.create(40, STATUS_BAR_HEIGHT, StatusBarKind.Magic)
+    magic_status = statusbars.create(45, STATUS_BAR_HEIGHT, StatusBarKind.Magic)
     magic_status.setFlag(SpriteFlag.RelativeToCamera, true)
     magic_status.bottom = screen.height
     magic_status.left = screen.width / 2

@@ -70,6 +70,15 @@ class Dungeon {
                 case assets.tile`life potion`:
                     this.setItem(location, new LifePotion(location))
                     break
+                case assets.tile`shrine of life`:
+                    this.setItem(location, new ShrineofLife(location))
+                    tiles.setWallAt(location, true)
+
+                    break
+                case assets.tile`shrine of mana`:
+                    this.setItem(location, new ShrineofMana(location))
+                    tiles.setWallAt(location, true)
+                    break
             }
             if (clear) {
                 this.clearTile(location)

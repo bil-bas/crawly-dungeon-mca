@@ -6,5 +6,21 @@
         "namespace": "myImages.",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "key"
+    },
+    "myImages.image3": {
+        "id": "myImages.image3",
+        "data": "hwQQACAAAAAAAAAAAAAAAAAAi4iIixHLAAAAAAAAAAAAsJmZmbmIuAAAAAAAAAAAALCZmZm5iLgAAAAAAAAAEwCwOZOZmYi4AAAAAAAwM7MAsBMxmZmIuAAAAAC7u8s8MzMzEZOZuLgAETM7M8w8ERERERGDmbi4EDOxEzEzERERETMzg5m4uBATETszERERMTMzM4OZuLgQEzETERMRERERERGDmbi4AAAQMRsxERERERERg5m4uAAAABExEQATERExM5iZiLgAAAAAAAAAAAATEYOYmYi4AAAAAAAAAAAAsDOYmbmIuAAAAAAAAAAAALCZmZm5iLgAAAAAAAAAAAAAO4iIixHL",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "shrine of mana"
+    },
+    "myImages.image2": {
+        "id": "myImages.image2",
+        "data": "hwQQACAAAAAAAAAAAAAAAAAA6+7u6xHLAAAAAAAAAAAAsCIiIrLuvgAAAAAAAAAAALAiIiKy7r4AAAAAAAAAEwCwMiMiIu6+AAAAAAAwM7MAsBMxIiLuvgAAAAC7u8s8MzMzESMivr4AETM7M8w8EREREREjIr6+EDOxEzEzERERETMzIyK+vhATETszERERMTMzMyMivr4QEzETERMREREREREjIr6+AAAQMRsxERERERERIyK+vgAAABExEQATERExMyIi7r4AAAAAAAAAAAATESMiIu6+AAAAAAAAAAAAsDMiIrLuvgAAAAAAAAAAALAiIiKy7r4AAAAAAAAAAAAA6+7u6xHL",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "shrine of life"
     }
 }

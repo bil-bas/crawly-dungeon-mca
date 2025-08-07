@@ -49,3 +49,43 @@ class SkeletonKey extends Item {
         player.keys += 1
     }
 }
+
+class Shrine extends Item {
+    _isSpent: boolean
+
+    constructor(location: tiles.Location) {
+        super(location)
+        this._isSpent = false
+    }
+
+    use() {     
+        music.play(music.melodyPlayable(this.useSound), music.PlaybackMode.InBackground)
+        this._isSpent = true
+    }
+}
+
+class ShrineofLife extends Shrine {
+    get image(): Image { return assets.image`shrine of life` }
+    get type(): string { return "Shrine of Life" }
+
+    get canUse(): boolean { return !this._isSpent && player.life >= 2 }
+
+    use(): void {
+        super.use()
+        player.life -= 1
+        this._sprite.setImage(sprites.dungeon.statueDark)
+    }
+}
+
+class ShrineofMana extends Shrine {
+    get image(): Image { return assets.image`shrine of mana` }
+    get type(): string { return "Shrine of Mana" }
+
+    get canUse(): boolean { return !this._isSpent && player.mana >= 1 }
+
+    use(): void {
+        super.use()
+        player.mana -= 1
+        this._sprite.setImage(sprites.dungeon.statueDark)
+    }
+}
