@@ -58,6 +58,7 @@ class Dungeon {
                 case assets.tile`monkey`: new Monkey(location); break
                 case assets.tile`hermit crab`: new HermitCrab(location); break
                 case assets.tile`shroom`: new Shroom(location); break
+                case assets.tile`mimic`: new Mimic(location); break
 
                 case assets.tile`mana potion`:
                     this.setItem(location, new ManaPotion(location))

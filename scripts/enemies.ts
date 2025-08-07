@@ -20,7 +20,7 @@ class Enemy {
     _lifeBar: StatusBarSprite
 
     constructor(tile: tiles.Location) {
-        this._sprite = sprites.create(this.image, SpriteKind.Enemy)
+        this._sprite = sprites.create(this.spriteImage, SpriteKind.Enemy)
         tiles.placeOnTile(this._sprite, tile)
         this._sprite.setFlag(SpriteFlag.BounceOnWall, true)
         this._sprite.z = ZLevel.ENEMIES
@@ -30,7 +30,7 @@ class Enemy {
 
     get name(): string { return "Enemy"}
     get sprite(): Sprite { return this._sprite }
-    get image(): Image { return null }
+    get spriteImage(): Image { return null }
     get initial_life(): number { return 1 }
     get killedMessage(): string { return `Murdered by ${this.name}` }
 
@@ -83,7 +83,7 @@ class Enemy {
 
 // BAT
 class Bat extends Enemy {
-    get image(): Image { return sprites.builtin.forestBat0 }
+    get spriteImage(): Image { return sprites.builtin.forestBat0 }
     get name(): string { return "Bat" }
     get killedMessage(): string { return "Exsanguinated by bat" }
 
@@ -102,7 +102,7 @@ class Bat extends Enemy {
 
 // HERMIT CRAB
 class HermitCrab extends Enemy {
-    get image(): Image { return sprites.builtin.hermitCrabWalk0 }
+    get spriteImage(): Image { return sprites.builtin.hermitCrabWalk0 }
     get name(): string { return "Hermit Crab" }
     get killedMessage(): string { return "Squished by Hermit Crab" }
     get initial_life(): number { return 3 }
@@ -123,7 +123,7 @@ class HermitCrab extends Enemy {
 
 // Monkey steals keys
 class Monkey extends Enemy {
-    get image(): Image { return sprites.builtin.forestMonkey0 }
+    get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
     get name(): string { return "Monkey" }
     get killedMessage(): string { return "Eyes gouged by monkey" }
 
@@ -150,7 +150,8 @@ class Monkey extends Enemy {
 }
 
 class Shroom extends Enemy {
-    get image(): Image { return sprites.builtin.forestMonkey0 }
+    get tileImage(): Image { return assets.tile`mimic` }
+    get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
     get name(): string { return "Shroom" }
     get killedMessage(): string { return "Shroomed by a Shroom" }
 
@@ -176,7 +177,7 @@ class Shroom extends Enemy {
 
 // Skeleton steals mana
 class Skeleton extends Enemy {
-    get image(): Image { return sprites.castle.skellyFront }
+    get spriteImage(): Image { return sprites.castle.skellyFront }
     get name(): string { return "Skellington" }
     get killedMessage(): string { return "Rattled by Skellington" }
     constructor(tile: tiles.Location) {
@@ -198,4 +199,10 @@ class Skeleton extends Enemy {
             return super.melee(damage)
         }
     }
+}
+
+class Mimic extends Enemy {
+    get spriteImage(): Image { return sprites.dungeon.chestClosed }
+    get name(): string { return "Mimic" }
+    get killedMessage(): string { return "Swallowed by Mimic" }
 }
