@@ -112,6 +112,7 @@ class Player {
     set life(value: number) {
         change_floater(sprites.projectile.heart3, value - info.life())
         info.setLife(value)
+        update_labels()
     }
 
     constructor() {
@@ -175,7 +176,9 @@ class Player {
 
     touchedEnemy(enemy: Sprite) {
         music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
-        this.life -= enemy.data["obj"].melee(1)
+        let injury = enemy.data["obj"].melee(1)
+        console.logValue("injury", injury)
+        this.life -= injury
     }
 
     touchedItem(sprite: Sprite) {
