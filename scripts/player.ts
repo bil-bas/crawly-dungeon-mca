@@ -177,7 +177,9 @@ class Player {
     touchedEnemy(enemy: Sprite) {
         music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
         let injury = enemy.data["obj"].melee(1)
-        this.life -= injury
+        if (injury != 0) {
+            this.life -= injury
+        }
     }
 
     touchedItem(sprite: Sprite) {
