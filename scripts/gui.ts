@@ -15,32 +15,26 @@ function change_floater(icon: Image, change: number) {
 }
 
 // Create stat label for top of screen.
-function create_label(icon: Image, x: number) {
+function create_label(icon: Image) {
     let label = textsprite.create("x0", 0, 1)
     label.setIcon(icon)
-    label.setOutline(1, 12)
+    label.setOutline(Colour.WHITE, Colour.PURPLE)
     label.setFlag(SpriteFlag.RelativeToCamera, true)
-    label.top = 0
-    label.left = x
     return label
 }
 
 function update_labels() {
-    magic_label.value = player.mana
-    life_label.value = player.life
-
     key_label.setText(`x${player.keys}`)
     coin_label.setText(`${player.coins}`)
 
-    life_label.max = player.maxLife
-    life_label.setLabel(`L ${player.life}/${player.maxLife}`)
-    life_label.value = player.life
-    life_label.left = 1
+    life_status.value = player.life
+    life_status.max = player.maxLife
+    life_label.setText(`${player.life}/${player.maxLife}`)
 
-    magic_label.max = player.maxMana
-    magic_label.value = player.mana
-    magic_label.setLabel(`${player.mana}/${player.maxMana} M`)
-    magic_label.right = screen.width - 1
+    magic_status.value = player.mana
+    magic_status.max = player.maxMana
+    magic_label.setText(`${player.mana}/${player.maxMana}`)
+    magic_label.right = screen.width
 
     coin_label.right = 150
 }
@@ -48,28 +42,39 @@ function update_labels() {
 function init_inventory() {
     info.showLife(false)
 
-    life_label = statusbars.create(51, STATUS_BAR_HEIGHT, StatusBarKind.Health)
-    life_label.setFlag(SpriteFlag.RelativeToCamera, true)
-    life_label.bottom = screen.height
-    life_label.z = ZLevel.UI
-    life_label.setBarBorder(1, 15)
-    life_label.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
-    life_label.setColor(Colour.RED, Colour.DARK_PURPLE, Colour.BROWN)
+    life_status = statusbars.create(41, STATUS_BAR_HEIGHT, StatusBarKind.Health)
+    life_status.setFlag(SpriteFlag.RelativeToCamera, true)
+    life_status.bottom = screen.height
+    life_status.right = screen.width / 2 + 1
+    life_status.z = ZLevel.UI
+    life_status.setBarBorder(1, 15)
+    life_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
+    life_status.setColor(Colour.RED, Colour.DARK_PURPLE, Colour.BROWN)
 
-    magic_label = statusbars.create(50, STATUS_BAR_HEIGHT, StatusBarKind.Magic)
-    magic_label.setFlag(SpriteFlag.RelativeToCamera, true)
-    magic_label.bottom = screen.height
-    magic_label.z = ZLevel.UI
-    magic_label.setBarBorder(1, 15)
-    magic_label.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
-    magic_label.setStatusBarFlag(StatusBarFlag.LabelAtEnd, true)
-    magic_label.setColor(Colour.BLUE, Colour.DARK_PURPLE, Colour.LIGHT_BLUE)
+    life_label = create_label(sprites.projectile.heart3)
+    life_label.left = -4
+    life_label.bottom = screen.height + 4
 
-    key_label = create_label(assets.image`key`, 0)
+    magic_status = statusbars.create(40, STATUS_BAR_HEIGHT, StatusBarKind.Magic)
+    magic_status.setFlag(SpriteFlag.RelativeToCamera, true)
+    magic_status.bottom = screen.height
+    magic_status.left = screen.width / 2
+    magic_status.z = ZLevel.UI
+    magic_status.setBarBorder(1, 15)
+    magic_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
+    magic_status.setStatusBarFlag(StatusBarFlag.LabelAtEnd, true)
+    magic_status.setColor(Colour.BLUE, Colour.DARK_PURPLE, Colour.LIGHT_BLUE)
+        
+    magic_label = create_label(sprites.projectile.firework1)
+    magic_label.right = screen.width
+    magic_label.bottom = screen.height + 4
+
+    key_label = create_label(assets.image`key`)
+    key_label.left = 0
     key_label.top = 0
 
     coin_label = textsprite.create("0")
-    coin_label.setOutline(1, 12)
+    coin_label.setOutline(Colour.WHITE, Colour.PURPLE)
     coin_label.setFlag(SpriteFlag.RelativeToCamera, true)
     coin_label.z = ZLevel.UI
     coin_label.top = 0
@@ -86,16 +91,19 @@ function init_inventory() {
 
 let coin_label: TextSprite
 let key_label: TextSprite
-let magic_label: StatusBarSprite
-let life_label: StatusBarSprite
+let magic_status: StatusBarSprite
+let magic_label: TextSprite
+let life_status: StatusBarSprite
+let life_label: TextSprite
+
 
 function spellIndicator(spell: Spell, primary: boolean): TextSprite {
-    let indicator = textsprite.create(`${spell.mana}`)
+    let indicator = textsprite.create(`${spell.mana} ${primary ? "A" : "B"}`)
     indicator.z = ZLevel.UI
     indicator.icon = spell.icon
-    indicator.setOutline(1, 15)
+    indicator.setOutline(Colour.WHITE, Colour.PURPLE)
     indicator.right = screen.width
-    indicator.bottom = screen.height - (primary ? 10 : 0) - 6
+    indicator.bottom = screen.height - (primary ? 10 : 0) - 8
     indicator.setFlag(SpriteFlag.RelativeToCamera, true)
 
     return indicator
