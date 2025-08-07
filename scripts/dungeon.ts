@@ -10,10 +10,9 @@ class Dungeon {
     ]
     
     _levels: Array<tiles.TileMapData>
+    _current_level: tiles.TileMapData
     _current_level_index: number = -1
     _items: { [id: string]: Item } = {}
-
-    get current_level(): tiles.TileMapData { return this._levels[this._current_level_index] }
 
     constructor(levels: Array<tiles.TileMapData>) {
         this._levels = levels
@@ -28,15 +27,17 @@ class Dungeon {
     }
 
     // Render the level tiles, add player and creatues.
-    _render_walls(): void {
-        let view_map = tileUtil.cloneMap(this.current_level)
+    _render_level(): void {
+        let read_level = this._levels[this._current_level_index]
+        this._current_level = tileUtil.cloneMap(read_level)
+        tiles.setCurrentTilemap(this._current_level)
 
-        tileUtil.forEachTileInMap(view_map, (column: number, row: number, location: tiles.Location) => {
-            let image = view_map.getTileImage(view_map.getTile(column, row))
+        tileUtil.forEachTileInMap(read_level, (column: number, row: number, location: tiles.Location) => {
+            let image = read_level.getTileImage(read_level.getTile(column, row))
             let clear = true
             switch (image) {
                 case sprites.builtin.brick:
-                    this._render_brick(view_map, column, row, location)
+                    this._render_brick(read_level, column, row, location)
                     clear = false
                     break
                 case sprites.dungeon.stairLadder:
@@ -74,6 +75,13 @@ class Dungeon {
                 this.clearTile(location)
             }
         })
+
+        // tileUtil.forEachTileInMap(this._current_level, (column: number, row: number, location: tiles.Location) => {
+        //     let image = this._current_level.getTileImage(this._current_level.getTile(column, row))
+        //     if (image == assets.tile`transparency16`) {
+        //         tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
+        //     }
+        // })
     }
 
     // Replace default tile with correct, linking walls.
@@ -159,8 +167,7 @@ class Dungeon {
         this._current_level_index += 1
         player.sprite.setScale(1)
         controller.moveSprite(player.sprite, 60, 60)
-        tiles.setCurrentTilemap(this.current_level)
-        this._render_walls()
+        this._render_level()
     }
 
     // Clear tile to transparency

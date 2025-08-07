@@ -53,7 +53,7 @@ function init_inventory() {
 
     life_label = create_label(sprites.projectile.heart3)
     life_label.left = -4
-    life_label.bottom = screen.height + 4
+    life_label.bottom = screen.height + 5
 
     magic_status = statusbars.create(40, STATUS_BAR_HEIGHT, StatusBarKind.Magic)
     magic_status.setFlag(SpriteFlag.RelativeToCamera, true)
@@ -67,7 +67,7 @@ function init_inventory() {
         
     magic_label = create_label(sprites.projectile.firework1)
     magic_label.right = screen.width
-    magic_label.bottom = screen.height + 4
+    magic_label.bottom = screen.height + 5
 
     key_label = create_label(assets.image`key`)
     key_label.left = 0
@@ -103,7 +103,7 @@ function spellIndicator(spell: Spell, primary: boolean): TextSprite {
     indicator.icon = spell.icon
     indicator.setOutline(Colour.WHITE, Colour.PURPLE)
     indicator.right = screen.width
-    indicator.bottom = screen.height - (primary ? 10 : 0) - 8
+    indicator.bottom = screen.height - (primary ? 9 : 0) -7
     indicator.setFlag(SpriteFlag.RelativeToCamera, true)
 
     return indicator
