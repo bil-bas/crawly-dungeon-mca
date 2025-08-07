@@ -6,14 +6,14 @@ namespace myImages {
             case "image1":
             case "key":return img`
 . . . . . . . . . 
-. . . f f f . . . 
-. . f 5 5 5 f . . 
-. f 5 5 f 5 5 f . 
-. f 5 f f f 5 f . 
-. f 5 f f f 5 f . 
-. f 5 5 f 5 5 f . 
-. . f 5 5 5 f . . 
-. . . f 5 f . . . 
+. . f f f f f . . 
+. f 1 1 1 1 1 f . 
+f 1 1 1 1 1 1 1 f 
+f 1 1 c 1 c 1 1 f 
+f 1 1 c 1 c 1 1 f 
+. f 1 1 1 1 1 f . 
+. f 1 f 1 f 1 f . 
+. . f f e f f . . 
 . . . f 5 f f . . 
 . . . f 5 f 5 f . 
 . . . f 5 5 5 f . 

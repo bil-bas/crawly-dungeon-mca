@@ -22,6 +22,7 @@
         "scripts/player.ts",
         "scripts/spells.ts",
         "scripts/utils.ts",
+        "scripts/items.ts",
         "main.ts",
         "README.md",
         "assets.json",

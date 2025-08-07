@@ -24,14 +24,13 @@ class Dungeon {
         let view_map = tileUtil.cloneMap(this.current_level)
 
         tileUtil.forEachTileInMap(view_map, (column: number, row: number, location: tiles.Location) => {
+            let image = view_map.getTileImage(view_map.getTile(column, row))
             let clear = true
-
-            switch (view_map.getTileImage(view_map.getTile(column, row))) {
+            switch (image) {
                 case sprites.builtin.brick:
-                    tiles.setWallAt(location, true)
                     this._render_brick(view_map, column, row, location)
-                    clear  = false
-                    break 
+                    clear = false
+                    break
                 case sprites.dungeon.stairLadder:
                 case sprites.dungeon.doorLockedNorth:
                     tiles.setWallAt(location, true)
@@ -40,48 +39,26 @@ class Dungeon {
                 case sprites.dungeon.stairLarge:
                     tiles.placeOnTile(player.sprite, location)
                     break
-                case assets.tile`bat`:
-                    new Bat(location)
-                    break
-                case assets.tile`skeleton`:
-                    new Skeleton(location)
-                    break
-                case assets.tile`monkey`:
-                    new Monkey(location)
-                    break
-                case assets.tile`hermit crab`:
-                    new HermitCrab(location)
-                    break
-                case assets.tile`shroom`:
-                    new Shroom(location)
-                    break
-                case assets.tile`mana potion`:
-                    this._createItem("mana potion", sprites.projectile.firework1, location)
-                    break
-                case assets.tile`key tile`:
-                    this._createItem("key", assets.image`key`, location)
-                    break
-                case assets.tile`life potion`:
-                    this._createItem("life potion", sprites.projectile.heart1, location)
-                    break
                 case assets.tile`chest`:
                     tiles.setTileAt(location, sprites.dungeon.chestClosed)
                     tiles.setWallAt(location, true)
                     clear = false
                     break
+                
+                case assets.tile`bat`: new Bat(location); break
+                case assets.tile`skeleton`: new Skeleton(location); break
+                case assets.tile`monkey`: new Monkey(location); break
+                case assets.tile`hermit crab`: new HermitCrab(location); break
+                case assets.tile`shroom`: new Shroom(location); break
+
+                case assets.tile`mana potion`: new ManaPotion(location); break
+                case assets.tile`key tile`: new SkeletonKey(location); break
+                case assets.tile`life potion`: new LifePotion(location);  break
             }
             if (clear) {
                 this.clearTile(location)
             }
         })
-    }
-
-    // create a sprite from tile
-    _createItem(type: string, image: Image, location: tiles.Location): void {
-        this.clearTile(location)
-        let item = sprites.create(image, SpriteKind.Item)
-        tiles.placeOnTile(item, location)
-        sprites.setDataString(item, "type", type)
     }
 
     // Replace default tile with correct, linking walls.
@@ -97,6 +74,7 @@ class Dungeon {
         
         let tile = this._wall_image_from_adjacent(adjacent_pattern.join(""))
         tiles.setTileAt(location, tile)
+        tiles.setWallAt(location, true)
     }
 
     // check adjacent squares for walls, to work out how to join them.

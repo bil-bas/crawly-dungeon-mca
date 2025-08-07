@@ -25,7 +25,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (sprite: Sprite, enemy: S
 
 ALL_STAIRS.forEach((stair) => {
     scene.onOverlapTile(SpriteKind.Player, stair, (sprite: Sprite, tile: tiles.Location) => {
-        player.touchedHole(tile)
+        player.touchedStairs(tile)
     })
 })
 
@@ -179,23 +179,14 @@ class Player {
         this.life -= enemy.data["obj"].melee(1)
     }
 
-    touchedItem(item: Sprite) {
-        item.destroy()
-        music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.InBackground)
-        switch (sprites.readDataString(item, "type")) {
-            case "mana potion":
-                player.mana += 1
-                break
-            case "life potion":
-                player.life += 1
-                break
-            case "key":
-                player.keys += 1
-                break
-        }
+    touchedItem(sprite: Sprite) {
+        let obj: Item = sprite.data["obj"]
+        if (!obj.canUse) return
+
+        obj.use()
     }
 
-    touchedHole(tile: tiles.Location) {
+    touchedStairs(tile: tiles.Location) {
         if (this._is_falling) return
 
         this._is_falling = true
