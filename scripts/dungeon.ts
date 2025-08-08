@@ -180,6 +180,6 @@ class Dungeon {
 
     // Clear tile to transparency
     clearTile(location: tiles.Location): void {
-        tiles.setTileAt(location, assets.tile`transparency16`)
+        tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
     }
 }

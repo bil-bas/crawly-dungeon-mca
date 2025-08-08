@@ -17,6 +17,7 @@ function change_floater(icon: Image, change: number) {
 // Create stat label for top of screen.
 function create_label(icon: Image) {
     let label = textsprite.create("x0", 0, 1)
+    label.z = ZLevel.UI
     label.setIcon(icon)
     label.setOutline(Colour.WHITE, Colour.PURPLE)
     label.setFlag(SpriteFlag.RelativeToCamera, true)

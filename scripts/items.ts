@@ -76,9 +76,10 @@ class Chest extends Item {
 }
 
 class Shrine extends Item {
-    _isSpent: boolean
+    SPENT_IMAGE = sprites.dungeon.statueDark
+
     get destroyOnUse(): boolean { return false }
-    get isSpent(): boolean { return this._sprite.image == sprites.dungeon.statueDark }
+    get isSpent(): boolean { return this._sprite.image == this.SPENT_IMAGE }
 
     constructor(location: tiles.Location) {
         super(location)
@@ -90,12 +91,12 @@ class ShrineofLife extends Shrine {
     get image(): Image { return assets.image`shrine of life` }
     get type(): string { return "Shrine of Life" }
 
-    get canUse(): boolean { return !this._isSpent && player.life >= 2 }
+    get canUse(): boolean { return !this.isSpent && player.life >= 2 }
 
     use(): void {
         super.use()
         player.life -= 1
-        this._sprite.setImage(sprites.dungeon.statueDark)
+        this._sprite.setImage(this.SPENT_IMAGE)
     }
 }
 
@@ -103,11 +104,11 @@ class ShrineofMana extends Shrine {
     get image(): Image { return assets.image`shrine of mana` }
     get type(): string { return "Shrine of Mana" }
 
-    get canUse(): boolean { return !this._isSpent && player.mana >= 1 }
+    get canUse(): boolean { return !this.isSpent && player.mana >= 1 }
 
     use(): void {
         super.use()
         player.mana -= 1
-        this._sprite.setImage(sprites.dungeon.statueDark)
+        this._sprite.setImage(this.SPENT_IMAGE)
     }
 }
