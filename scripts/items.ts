@@ -4,11 +4,14 @@ class Item {
     get image(): Image { return assets.image`key` }
     get type(): string { return "Item" }
     get canUse(): boolean { return true }
+    get destroyOnUse(): boolean { return true }
     get useSound(): music.Melody { return music.powerUp }
 
     use() {   
         music.play(music.melodyPlayable(this.useSound), music.PlaybackMode.InBackground)
-        this._sprite.destroy()
+        if (this.destroyOnUse) {
+            this._sprite.destroy()
+        }
     }
 
     constructor(tile: tiles.Location) {
@@ -50,17 +53,36 @@ class SkeletonKey extends Item {
     }
 }
 
+class Chest extends Item {
+    get image(): Image { return sprites.dungeon.chestClosed }
+    get type(): string { return "Chest" }
+    get isOpen(): boolean { return this._sprite.image == sprites.dungeon.chestOpen }
+    get destroyOnUse(): boolean { return false }
+
+    constructor(tile: tiles.Location) {
+        super(tile)
+    }
+
+    get canUse(): boolean {
+        return !this.isOpen && player.keys >= 1
+    }
+
+    use(): void {
+        super.use()
+        player.keys -= 1
+        player.coins += 100
+        this._sprite.setImage(sprites.dungeon.chestOpen)
+    }
+}
+
 class Shrine extends Item {
     _isSpent: boolean
+    get destroyOnUse(): boolean { return false }
+    get isSpent(): boolean { return this._sprite.image == sprites.dungeon.statueDark }
 
     constructor(location: tiles.Location) {
         super(location)
-        this._isSpent = false
-    }
-
-    use() {     
-        music.play(music.melodyPlayable(this.useSound), music.PlaybackMode.InBackground)
-        this._isSpent = true
+        this._sprite.y -= 7 // Standing on the tile and so we can interact with it.
     }
 }
 

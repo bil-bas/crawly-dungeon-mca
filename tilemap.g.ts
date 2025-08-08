@@ -194,41 +194,41 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 `;
             case "myTiles.tile10":
             case "shrine of mana":return img`
-. f f f f f . f f f . f . . f . 
-. f . f . f . f . f . f f . f . 
-. f . . . f . f f f . f . f f . 
-. f . . . f . f . f . f . . f . 
-. . . . . . . . . . . . . . . . 
-. . . . . f f f f f f . . . . . 
-. . . . f 8 8 8 8 8 8 f . . . . 
-. . . . f 8 8 8 8 8 8 f . . . . 
-. . . . f 8 8 8 8 8 8 f . . . . 
-. . . . f 8 8 8 8 8 8 f . . . . 
-. . . . f 8 8 8 8 8 8 f . . . . 
-. . . . f 8 8 8 8 8 8 f . . . . 
-. . . . f 8 8 8 8 8 8 f . . . . 
-. . . f 8 8 8 8 8 8 8 8 f . . . 
-. . . f 8 8 8 8 8 8 8 8 f . . . 
-. . . f f f f f f f f f f . . . 
+1 f f f f f 1 f f f 1 f 1 1 f 1 
+1 f 1 f 1 f 1 f 1 f 1 f f 1 f 1 
+1 f 1 1 1 f 1 f f f 1 f 1 f f 1 
+1 f 1 1 1 f 1 f 1 f 1 f 1 1 f 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 f f f f f f 1 1 1 1 1 
+1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
+1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
+1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
+1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
+1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
+1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
+1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
+1 1 1 f 8 8 8 8 8 8 8 8 f 1 1 1 
+1 1 1 f 8 8 8 8 8 8 8 8 f 1 1 1 
+1 1 1 f f f f f f f f f f 1 1 1 
 `;
             case "myTiles.tile9":
             case "shrine of life":return img`
-. . f . . . f . f f . f f . . . 
-. . f . . . f . f . . f . . . . 
-. . f . . . f . f f . f f . . . 
-. . f f f . f . f . . f . . . . 
-. . . . . . . . . . . . f . . . 
-. . . . . f f f f f f . . . . . 
-. . . . f 2 2 2 2 2 2 f . . . . 
-. . . . f 2 2 2 2 2 2 f . . . . 
-. . . . f 2 2 2 2 2 2 f . . . . 
-. . . . f 2 2 2 2 2 2 f . . . . 
-. . . . f 2 2 2 2 2 2 f . . . . 
-. . . . f 2 2 2 2 2 2 f . . . . 
-. . . . f 2 2 2 2 2 2 f . . . . 
-. . . f 2 2 2 2 2 2 2 2 f . . . 
-. . . f 2 2 2 2 2 2 2 2 f . . . 
-. . . f f f f f f f f f f . . . 
+1 1 f 1 1 1 f 1 f f 1 f f 1 1 1 
+1 1 f 1 1 1 f 1 f 1 1 f 1 1 1 1 
+1 1 f 1 1 1 f 1 f f 1 f f 1 1 1 
+1 1 f f f 1 f 1 f 1 1 f 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 f 1 1 1 
+1 1 1 1 1 f f f f f f 1 1 1 1 1 
+1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
+1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
+1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
+1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
+1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
+1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
+1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
+1 1 1 f 2 2 2 2 2 2 2 2 f 1 1 1 
+1 1 1 f 2 2 2 2 2 2 2 2 f 1 1 1 
+1 1 1 f f f f f f f f f f 1 1 1 
 `;
         }
         return null;
@@ -319,7 +319,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
             case "level 1":
-            case "level1":return tiles.createTilemap(hex`10001000010101010101010101010101010101010100000000000001010000000000000101000000000000010100000001010001010000000a00010101010000010100010100000000010101010101000101000101000000000101010101010001010301010c0c0c0c010101010101000101010101000000000e000f000000000101010101000000000000000900000000000d0101040404000000000b0007000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101000000000000000b0b000000000d0101010101010101010101010101010101`, img`
+            case "level1":return tiles.createTilemap(hex`10001000010101010101010101010101010101010100000000010101010101000000000101000000000101010101010001010001010000000a01010505010100010100010100000000010105000101000101000101000000000101010001010001010301010c0c0c0c010101100101000101010101000000000e000f000000000101010101000000000000000900000000000d0101040404000000000b0007000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101000000000000000b0b000000000d0101010101010101010101010101010101`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -336,7 +336,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder,myTiles.tile11,myTiles.tile10,myTiles.tile9], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder,myTiles.tile11,myTiles.tile10,myTiles.tile9,sprites.dungeon.doorLockedNorth], TileScale.Sixteen);
         }
         return null;
     })

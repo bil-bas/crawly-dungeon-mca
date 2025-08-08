@@ -48,12 +48,7 @@ class Dungeon {
                 case sprites.dungeon.stairLarge:
                     tiles.placeOnTile(player.sprite, location)
                     break
-                case assets.tile`chest`:
-                    tiles.setTileAt(location, sprites.dungeon.chestClosed)
-                    tiles.setWallAt(location, true)
-                    clear = false
-                    break
-                
+        
                 case assets.tile`bat`: new Bat(location); break
                 case assets.tile`skeleton`: new Skeleton(location); break
                 case assets.tile`monkey`: new Monkey(location); break
@@ -61,6 +56,9 @@ class Dungeon {
                 case assets.tile`shroom`: new Shroom(location); break
                 case assets.tile`mimic`: new Mimic(location); break
 
+                case assets.tile`chest`:
+                    this.setItem(location, new Chest(location))
+                    break
                 case assets.tile`mana potion`:
                     this.setItem(location, new ManaPotion(location))
                     break
@@ -73,24 +71,25 @@ class Dungeon {
                 case assets.tile`shrine of life`:
                     this.setItem(location, new ShrineofLife(location))
                     tiles.setWallAt(location, true)
-
                     break
                 case assets.tile`shrine of mana`:
                     this.setItem(location, new ShrineofMana(location))
                     tiles.setWallAt(location, true)
                     break
+                default:
+                    clear = false
             }
             if (clear) {
                 this.clearTile(location)
             }
         })
 
-        // tileUtil.forEachTileInMap(this._current_level, (column: number, row: number, location: tiles.Location) => {
-        //     let image = this._current_level.getTileImage(this._current_level.getTile(column, row))
-        //     if (image == assets.tile`transparency16`) {
-        //         tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
-        //     }
-        // })
+        tileUtil.forEachTileInMap(this._current_level, (column: number, row: number, location: tiles.Location) => {
+            let image = this._current_level.getTileImage(this._current_level.getTile(column, row))
+            if (image == assets.tile`transparency16`) {
+                tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
+            }
+        })
     }
 
     // Replace default tile with correct, linking walls.
