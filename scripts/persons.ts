@@ -33,7 +33,7 @@ class Shopkeeper extends Person {
         if (!this._present) return
 
         let forSale: Array<[string, Image]> = []
-        forSale.push([this._label("Leave without buying"), sprites.projectile.bubble4])
+        forSale.push([this._label("Let shopkeeper leave"), sprites.projectile.bubble4])
         forSale.push([this._label("Life Potion", 100), sprites.projectile.heart3])
         forSale.push([this._label("Mana Crystal", 100), sprites.projectile.star3])
         forSale.push([this._label("Skeleton Key", 100), assets.image`key`])
