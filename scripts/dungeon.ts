@@ -182,9 +182,9 @@ class Dungeon {
             case "11101001":
                 return sprites.dungeon.purpleInnerSouthWest
             case "11111111":
-                return assets.tile`transparency16`
+                return assets.tile`top of wall`
             default:
-                return assets.tile`transparency16`
+                return assets.tile`transparency16` // To see backround
         }
     }
 

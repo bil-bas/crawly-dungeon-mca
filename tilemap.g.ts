@@ -230,6 +230,25 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 1 1 1 f 2 2 2 2 2 2 2 2 f 1 1 1 
 1 1 1 f f f f f f f f f f 1 1 1 
 `;
+            case "myTiles.tile12":
+            case "top of wall":return img`
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+`;
         }
         return null;
     })
@@ -277,6 +296,8 @@ namespace myTiles {
     export const tile10 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile9 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile12 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -366,6 +387,8 @@ namespace myTiles {
             case "tile10":return myTiles.tile10;
             case "shrine of life":
             case "tile9":return myTiles.tile9;
+            case "top of wall":
+            case "tile12":return myTiles.tile12;
         }
         return null;
     })
