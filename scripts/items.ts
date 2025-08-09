@@ -53,28 +53,6 @@ class SkeletonKey extends Item {
     }
 }
 
-class Chest extends Item {
-    get image(): Image { return sprites.dungeon.chestClosed }
-    get type(): string { return "Chest" }
-    get isOpen(): boolean { return this._sprite.image == sprites.dungeon.chestOpen }
-    get destroyOnUse(): boolean { return false }
-
-    constructor(tile: tiles.Location) {
-        super(tile)
-    }
-
-    get canUse(): boolean {
-        return !this.isOpen && player.keys >= 1
-    }
-
-    use(): void {
-        super.use()
-        player.keys -= 1
-        player.coins += 100
-        this._sprite.setImage(sprites.dungeon.chestOpen)
-    }
-}
-
 class Shrine extends Item {
     SPENT_IMAGE = sprites.dungeon.statueDark
 

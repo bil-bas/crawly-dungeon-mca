@@ -78,7 +78,9 @@ class Dungeon {
                 case assets.tile`mimic`: new Mimic(location); break
 
                 case assets.tile`chest`:
-                    this.setItem(location, new Chest(location))
+                    tiles.setWallAt(location, true)
+                    tiles.setTileAt(location, sprites.dungeon.chestClosed)
+                    clear = false
                     break
                 case assets.tile`mana potion`:
                     this.setItem(location, new ManaPotion(location))

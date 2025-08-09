@@ -72,7 +72,7 @@ function init_inventory() {
 
     key_label = create_label(assets.image`key`)
     key_label.left = 0
-    key_label.top = 0
+    key_label.bottom = scene.screenHeight() - 8
 
     coin_label = textsprite.create("0")
     coin_label.setOutline(Colour.WHITE, Colour.PURPLE)

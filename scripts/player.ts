@@ -166,6 +166,10 @@ class Player {
             tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
             music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
             tiles.setWallAt(tile, false)
+        } else if (tiles.tileAtLocationEquals(tile, sprites.dungeon.chestClosed) && this.keys >= 1) {
+            this.keys -= 1
+            tiles.setTileAt(tile, sprites.dungeon.chestOpen)
+            music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
         }
     }
 
