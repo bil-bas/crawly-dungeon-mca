@@ -2,6 +2,24 @@ namespace SpriteKind {
     export const Item = SpriteKind.create()
 }
 
+class Minimap {
+    _sprite: Sprite
+
+    constructor() {
+        this._sprite = sprites.create(assets.tile`transparency16`, SpriteKind.Player)
+        this._sprite.top = 0
+        this._sprite.left = 0
+        this._sprite.z = ZLevel.UI
+        this._sprite.setFlag(SpriteFlag.RelativeToCamera, true)
+        
+        game.onUpdateInterval(500, () => {
+            let map = minimap.minimap(MinimapScale.Sixteenth, 1, Colour.BLACK)
+            minimap.includeSprite(map, player.sprite, MinimapSpriteScale.Double)
+            this._sprite.setImage(map.image)
+        })
+    }
+}
+
 class Dungeon {
     static ADJACENT_OFFSETS = [
         [-1, -1], [+0, -1], [+1, -1],
@@ -13,10 +31,13 @@ class Dungeon {
     _current_level: tiles.TileMapData
     _current_level_index: number = -1
     _items: { [id: string]: Item } = {}
+    _minimap: Minimap
 
     constructor(levels: Array<tiles.TileMapData>) {
+        scene.setBackgroundColor(Colour.DARK_PURPLE)
         this._levels = levels
         this.advance_level()
+        this._minimap = new Minimap()
     }
 
     getItem(tile: tiles.Location) {
@@ -86,9 +107,6 @@ class Dungeon {
 
         tileUtil.forEachTileInMap(this._current_level, (column: number, row: number, location: tiles.Location) => {
             let image = this._current_level.getTileImage(this._current_level.getTile(column, row))
-            if (image == assets.tile`transparency16`) {
-                tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
-            }
         })
     }
 
@@ -164,7 +182,7 @@ class Dungeon {
             case "11111111":
                 return assets.tile`transparency16`
             default:
-                return sprites.dungeon.floorDark0
+                return assets.tile`transparency16`
         }
     }
 
@@ -180,6 +198,6 @@ class Dungeon {
 
     // Clear tile to transparency
     clearTile(location: tiles.Location): void {
-        tiles.setTileAt(location, sprites.dungeon.darkGroundCenter)
+        tiles.setTileAt(location, assets.tile`transparency16`)
     }
 }

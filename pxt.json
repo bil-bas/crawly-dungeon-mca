@@ -12,7 +12,8 @@
         "arcade-text": "github:microsoft/arcade-text#v1.3.0",
         "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
         "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
-        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1"
+        "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
+        "arcade-minimap": "github:microsoft/arcade-minimap#v0.6.1"
     },
     "files": [
         "scripts/colours.ts",
