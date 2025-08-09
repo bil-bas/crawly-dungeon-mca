@@ -1,6 +1,38 @@
 const STATUS_BAR_MARGIN = 1
 const STATUS_BAR_HEIGHT = 6
 
+class Menu {
+    static isOpen = false
+    _menu: miniMenu.MenuSprite = null
+
+    constructor(title: string, items: any[][], handler: any) {
+        let menuItems: miniMenu.MenuItem[] = items.map((item) => {
+            return miniMenu.createMenuItem(item[0], item[1])
+        })
+
+        Menu.isOpen = true
+
+        this._menu = miniMenu.createMenuFromArray(menuItems)
+        this._menu.setTitle(` ${title}`)
+        this._menu.setDimensions(scene.screenWidth(), scene.screenHeight())
+        this._menu.setPosition(scene.screenWidth() / 2, scene.screenHeight() / 2)
+        this._menu.setFlag(SpriteFlag.RelativeToCamera, true)
+        this._menu.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.Margin, 0)
+        this._menu.setStyleProperty(miniMenu.StyleKind.Title, miniMenu.StyleProperty.Padding, 0)
+        this._menu.z = ZLevel.MENU
+        
+        this._menu.onButtonPressed(controller.A, () => {
+            Menu.isOpen = false
+
+            handler(this._menu.selectedIndex)
+        })
+    }
+
+    close() {
+        this._menu.close()
+    }
+}
+
 // Indicate a change with floating message.
 function change_floater(icon: Image, change: number) {
     let text = textsprite.create((change > 0 ? "+" : "") + ("" + change))
@@ -41,8 +73,6 @@ function update_labels() {
 }
 
 function init_inventory() {
-    info.showLife(false)
-
     life_status = statusbars.create(46, STATUS_BAR_HEIGHT, StatusBarKind.Health)
     life_status.setFlag(SpriteFlag.RelativeToCamera, true)
     life_status.bottom = screen.height
@@ -71,7 +101,7 @@ function init_inventory() {
     magic_label.bottom = screen.height + 5
 
     key_label = create_label(assets.image`key`)
-    key_label.left = -2
+    key_label.left = -4
     key_label.bottom = scene.screenHeight() - 8
 
     coin_label = textsprite.create("0")
