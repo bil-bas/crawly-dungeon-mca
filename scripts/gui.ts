@@ -7,6 +7,7 @@ class Menu {
 
     constructor(title: string, items: any[][], handler: any) {
         Menu.isOpen = true
+        game.pushScene()
 
         this._menu = miniMenu.createMenuFromArray(items.map((item) => {
             return miniMenu.createMenuItem(item[0], item[1])
@@ -21,7 +22,6 @@ class Menu {
         
         this._menu.onButtonPressed(controller.A, () => {
             Menu.isOpen = false
-
             handler(this._menu.selectedIndex)
         })
 
@@ -33,6 +33,7 @@ class Menu {
 
     close() {
         this._menu.close()
+        game.popScene()
     }
 }
 

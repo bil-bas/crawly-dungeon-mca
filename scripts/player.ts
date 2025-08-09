@@ -151,13 +151,13 @@ class Player {
         // Casting spells
 
         controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (Menu.isOpen) return
-            this.castPrimarySpell()
+            if (Menu.isOpen || !this._primarySpell.canCast() || this.is_falling) return
+            this._primarySpell.cast()
         })
 
         controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (Menu.isOpen) return
-            this.castSecondarySpell()
+            if (Menu.isOpen || !this._secondarySpell.canCast() || this.is_falling) return
+            this._secondarySpell.cast()
         })
     }
 
@@ -231,18 +231,6 @@ class Player {
                 })
             })
         })
-    }
-
-    castPrimarySpell() {
-        if (!this.primarySpell.canCast() || this.is_falling) return
-
-        this._primarySpell.cast()
-    }
-
-    castSecondarySpell() {
-        if (!this.secondarySpell.canCast() || this.is_falling) return
-
-        this.secondarySpell.cast()
     }
 
     updateLineOfSight() {
