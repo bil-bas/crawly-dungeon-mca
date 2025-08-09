@@ -22,11 +22,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (sprite: Sprite, enemy: S
     player.touchedEnemy(enemy)
 })
 
-ALL_STAIRS.forEach((stair) => {
+for (let stair of ALL_STAIRS) {
     scene.onOverlapTile(SpriteKind.Player, stair, (sprite: Sprite, tile: tiles.Location) => {
         player.touchedStairs(tile)
     })
-})
+}
 
 // Casting spells
 
@@ -124,6 +124,10 @@ class Player {
 
         this.primarySpell = new Firebolt()
         this.secondarySpell = new Heal()
+
+        game.onUpdateInterval(100, () => {
+            this.updateLineOfSight()
+        })
     }
 
     addAnimations() {
@@ -221,5 +225,19 @@ class Player {
         if (!this.secondarySpell.canCast() || this.is_falling) return
 
         this.secondarySpell.cast()
+    }
+
+    updateLineOfSight() {
+        for (let enemy of sprites.allOfKind(SpriteKind.Enemy)) {
+            let isVisible = sight.isInSight(this.sprite, enemy, 150, false)
+            console.logValue(enemy.data["obj"].name, isVisible)
+            enemy.setFlag(SpriteFlag.Invisible, !isVisible)
+        }
+
+        for (let enemy of sprites.allOfKind(SpriteKind.Item)) {
+            let isVisible = sight.isInSight(this.sprite, enemy, 150, false)
+            console.logValue(enemy.data["obj"].name, isVisible)
+            enemy.setFlag(SpriteFlag.Invisible, !isVisible)
+        }
     }
 }

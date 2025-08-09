@@ -146,7 +146,9 @@ class Starfire extends Firebolt {
     }
 
     _starfire() {
-        ["left", "right", "up", "down"].forEach((d) => this._firebolt(d))
+        for (let direction of ["left", "right", "up", "down"]) {
+            this._firebolt(direction)
+        }
     }
 }
 

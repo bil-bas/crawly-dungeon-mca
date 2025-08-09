@@ -78,9 +78,7 @@ class Dungeon {
                 case assets.tile`mimic`: new Mimic(location); break
 
                 case assets.tile`chest`:
-                    tiles.setWallAt(location, true)
-                    tiles.setTileAt(location, sprites.dungeon.chestClosed)
-                    clear = false
+                    this.setItem(location, new Chest(location))
                     break
                 case assets.tile`mana potion`:
                     this.setItem(location, new ManaPotion(location))
@@ -93,11 +91,9 @@ class Dungeon {
                     break
                 case assets.tile`shrine of life`:
                     this.setItem(location, new ShrineofLife(location))
-                    tiles.setWallAt(location, true)
                     break
                 case assets.tile`shrine of mana`:
                     this.setItem(location, new ShrineofMana(location))
-                    tiles.setWallAt(location, true)
                     break
                 default:
                     clear = false
