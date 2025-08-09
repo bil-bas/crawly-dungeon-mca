@@ -205,4 +205,10 @@ class Mimic extends Enemy {
     get spriteImage(): Image { return sprites.dungeon.chestClosed }
     get name(): string { return "Mimic" }
     get killedMessage(): string { return "Swallowed by Mimic" }
+
+    melee(damage: number): number {
+        let tile = tiles.getTileLocation(this.sprite.x / 16, this.sprite.y / 16)
+        tiles.setTileAt(tile, assets.tile`dead mimic`)
+        return super.melee(damage)
+    }
 }

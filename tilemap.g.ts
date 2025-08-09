@@ -249,6 +249,25 @@ f f f f f f f f f f f f f f f f
 . . . . . . . f f f . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
+            case "myTiles.tile13":
+            case "dead mimic":return img`
+. b b b b b b b b b b b b b b . 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 4 b 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e e 4 2 4 4 4 4 4 4 4 4 e e b 
+b b b b 2 b b d d b b 2 b b b b 
+. b b 2 2 b b c c b b b b b b . 
+b c c c c c b c c b c c c c c b 
+b c c c c c c b b c c c c c c b 
+b c 1 1 c c 2 c c 2 c c 1 1 c b 
+b 1 2 2 1 c 2 2 2 2 c 1 2 2 1 b 
+b 2 b b b b 2 2 2 2 b b b b b b 
+b 2 e e e 2 2 2 2 c e e e e e b 
+b e e e 2 2 2 2 c e e e e 2 e b 
+b c e e 2 2 2 c e e e e 2 e c b 
+b b b b c 2 2 2 b b b b b b b b 
+. b b . . c 2 2 2 2 . . . b b . 
+`;
         }
         return null;
     })
@@ -298,6 +317,8 @@ namespace myTiles {
     export const tile12 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile3 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile13 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -389,6 +410,8 @@ namespace myTiles {
             case "tile12":return myTiles.tile12;
             case "key":
             case "tile3":return myTiles.tile3;
+            case "dead mimic":
+            case "tile13":return myTiles.tile13;
         }
         return null;
     })
