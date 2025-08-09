@@ -12,19 +12,11 @@ class Dungeon {
     _levels: Array<tiles.TileMapData>
     _current_level: tiles.TileMapData
     _current_level_index: number = -1
-    _items: { [id: string]: Item } = {}
 
     constructor(levels: Array<tiles.TileMapData>) {
         scene.setBackgroundColor(Colour.DARK_PURPLE)
         this._levels = levels
         this.advance_level()
-    }
-
-    getItem(tile: tiles.Location) {
-        return this._items[`${tile.x},${tile.y}`]
-    }
-    setItem(tile: tiles.Location, item: Item) {
-        this._items[`${tile.x},${tile.y}`] = item
     }
 
     // Render the level tiles, add player and creatues.
@@ -59,27 +51,17 @@ class Dungeon {
 
                 case assets.tile`shopkeeper`: new Shopkeeper(location); break
 
-                case assets.tile`chest`:
-                    this.setItem(location, new Chest(location))
-                    break
-                case assets.tile`mana potion`:
-                    this.setItem(location, new ManaPotion(location))
-                    break
-                case assets.tile`key`:
-                    this.setItem(location, new SkeletonKey(location))
-                    break
-                case assets.tile`life potion`:
-                    this.setItem(location, new LifePotion(location))
-                    break
-                case assets.tile`shrine of life`:
-                    this.setItem(location, new ShrineofLife(location))
-                    break
-                case assets.tile`shrine of mana`:
-                    this.setItem(location, new ShrineofMana(location))
-                    break
+                case assets.tile`chest`: new Chest(location); break
+                case assets.tile`mana potion`: new ManaPotion(location); break
+                case assets.tile`key`: new SkeletonKey(location); break
+                case assets.tile`life potion`: new LifePotion(location); break
+                case assets.tile`shrine of life`: new ShrineofLife(location); break
+                case assets.tile`shrine of mana`: new ShrineofMana(location); break
+
                 default:
                     clear = false
             }
+            
             if (clear) {
                 this.clearTile(location)
             }
