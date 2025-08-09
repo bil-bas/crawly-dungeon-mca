@@ -23,41 +23,41 @@ namespace myImages {
 `;
             case "myTiles.tile1":
             case "mana potion":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 f 1 1 1 f 1 1 1 1 1 1 1 1 1 1 
-1 f f 1 f f 1 1 1 1 1 1 1 1 1 1 
-1 f 1 f 1 f 1 1 1 1 1 1 1 1 1 1 
-1 f 1 1 1 f 1 f f f 1 1 1 1 1 1 
-1 f 1 1 1 f 1 1 1 f 1 f f 1 1 1 
-1 f 1 1 1 f 1 f f f 1 f 1 f 1 1 
-1 f 1 1 1 f 1 f 1 f 1 f 1 f 1 1 
-1 f 1 1 1 f 1 f f f 1 f 1 f 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 f 1 f 1 1 1 1 f 1 1 1 1 1 
-1 1 1 f f 1 1 f 1 1 f f 1 1 1 1 
-1 1 1 f 1 1 f 1 f 1 f 1 1 1 1 1 
-1 1 1 f 1 1 1 f 1 1 f f 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . b . . . . . . . 
+. . . . . . . b d b . . . . . . 
+. . . . . . b 5 5 5 b . . . . . 
+. . . . . b b 5 5 5 b b . . . . 
+. . b b b b 5 5 5 1 1 b b b b . 
+. . b 5 5 5 5 5 5 1 1 5 5 5 b . 
+. . b d d 5 5 5 5 5 5 5 d d b . 
+. . . b d d 5 5 5 5 5 d d b . . 
+. . . c b 5 5 5 5 5 5 5 b c . . 
+. . . c b 5 5 5 5 5 5 5 b c . . 
+. . . c 5 5 d d b d d 5 5 c . . 
+. . . c 5 d d c c c d d 5 c . . 
+. . . c c c c . . . c c c c . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
 `;
             case "myTiles.tile2":
             case "life potion":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 f 1 1 1 1 1 f f 1 1 1 1 1 1 
-1 1 f 1 1 1 1 1 f 1 1 1 1 1 1 1 
-1 1 f 1 1 1 f 1 f 1 1 f f f 1 1 
-1 1 f 1 1 1 1 1 f f 1 f 1 f 1 1 
-1 1 f 1 1 1 f 1 f 1 1 f f f 1 1 
-1 1 f 1 1 1 f 1 f 1 1 f 1 1 1 1 
-1 1 f f f 1 f 1 f 1 1 f f f 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 f f 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 f 1 f 1 1 1 1 f 1 1 1 1 1 
-1 1 1 f f 1 1 f 1 1 f f 1 1 1 1 
-1 1 1 f 1 1 f 1 f 1 f 1 1 1 1 1 
-1 1 1 f 1 1 1 f 1 1 f f 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . f f f . f f f . . . . 
+. . . . f 3 3 3 f 3 3 3 f . . . 
+. . . . f 3 3 3 3 3 1 3 f . . . 
+. . . . f 3 3 3 3 3 3 3 f . . . 
+. . . . . f 3 b b b 3 f . . . . 
+. . . . . f f b b b f f . . . . 
+. . . . . . f f b f f . . . . . 
+. . . . . . . f f f . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
 `;
             case "myTiles.tile4":
             case "bat":return img`
@@ -135,25 +135,6 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 3 f 3 3 f 3 3 3 f 3 3 f 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 `;
-            case "myTiles.tile3":
-            case "key tile":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 f 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 f 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 f 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 f 1 1 f 1 1 1 1 1 1 1 1 1 1 
-1 f f 1 f 1 1 f f f 1 f 1 f 1 1 
-1 f f f 1 1 1 f 1 f 1 f 1 f 1 1 
-1 f f f 1 1 1 f f f 1 f 1 f 1 1 
-1 f f 1 f 1 1 f 1 1 1 f 1 f 1 1 
-1 f f 1 1 f 1 f f f 1 f f f 1 1 
-1 f 1 1 1 1 1 1 1 1 1 1 1 f 1 1 
-1 1 1 1 1 1 1 1 1 1 1 f f f 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-`;
             case "myTiles.tile11":
             case "mimic":return img`
 . . . . . . . . . . . . . . . . 
@@ -175,22 +156,22 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 `;
             case "myTiles.tile8":
             case "chest":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . e e e e e e e e . . . . 
-. . . e e e e e e e e e e . . . 
-. . e e e e e e e e e e e e . . 
-. . e e e e e e e e e e e e . . 
-. . c c c c c 5 5 c c c c c . . 
-. . e e e e e 5 5 e e e e e . . 
-. . e e e e e e e e e e e e . . 
-. . e e e e e e e e e e e e . . 
-. . e e e e e e e e e e e e . . 
-. . e e e e e e e e e e e e . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
+. . b b b b b b b b b b b b . . 
+. b e 4 4 4 4 4 4 4 4 4 4 e b . 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+b e e e e e e e e e e e e e e b 
+b e e e e e e e e e e e e e e b 
+b b b b b b b d d b b b b b b b 
+c b b b b b b c c b b b b b b c 
+c c c c c c b c c b c c c c c c 
+b e e e e e c b b c e e e e e b 
+b e e e e e e e e e e e e e e b 
+b c e e e e e e e e e e e e c b 
+b b b b b b b b b b b b b b b b 
+. b b . . . . . . . . . . b b . 
 `;
             case "myTiles.tile10":
             case "shrine of mana":return img`
@@ -249,6 +230,25 @@ f f f f f f f f f f f f f f f f
 f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f 
 `;
+            case "myTiles.tile3":
+            case "key":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . f f f f f . . . . . . 
+. . . . f 1 1 1 1 1 f . . . . . 
+. . . f 1 1 1 1 1 1 1 f . . . . 
+. . . f 1 1 c 1 c 1 1 f . . . . 
+. . . f 1 1 c 1 c 1 1 f . . . . 
+. . . . f 1 1 1 1 1 f . . . . . 
+. . . . f 1 f 1 f 1 f . . . . . 
+. . . . . f f e f f . . . . . . 
+. . . . . . f 5 f f . . . . . . 
+. . . . . . f 5 f 5 f . . . . . 
+. . . . . . f 5 5 5 f . . . . . 
+. . . . . . f 5 f f . . . . . . 
+. . . . . . f 5 5 5 f . . . . . 
+. . . . . . . f f f . . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
         }
         return null;
     })
@@ -287,8 +287,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile7 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile3 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile11 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile8 = image.ofBuffer(hex``);
@@ -298,6 +296,8 @@ namespace myTiles {
     export const tile9 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile12 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile3 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -340,7 +340,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
             case "level 1":
-            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000001010101010100000000010100000a000101010101010001010001010000000001010505010100010100010100000000010105000101000101000101000000000101010001010001010301010c0c0c0c010101100101000101010101000000000e000f000000000101010101000000000000000900000000000d0101040404000000000b0007000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101000000000000000b0b000000000d0101010101010101010101010101010101`, img`
+            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000001010101010100000000010100000a000101010101010001010001010000000001010505010100010100010100000000010105000101000101000101000000000101010001010001010301010c0c0c0c010101100101000101010101000000000e000f000000000101010101000000000000000900000000000d0101040404000000000b0006000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101000000000000000b0b000000000d0101010101010101010101010101010101`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -377,8 +377,6 @@ namespace myTiles {
             case "tile6":return myTiles.tile6;
             case "hermit crab":
             case "tile7":return myTiles.tile7;
-            case "key tile":
-            case "tile3":return myTiles.tile3;
             case "mimic":
             case "tile11":return myTiles.tile11;
             case "chest":
@@ -389,6 +387,8 @@ namespace myTiles {
             case "tile9":return myTiles.tile9;
             case "top of wall":
             case "tile12":return myTiles.tile12;
+            case "key":
+            case "tile3":return myTiles.tile3;
         }
         return null;
     })

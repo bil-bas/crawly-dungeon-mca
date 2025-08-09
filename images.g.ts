@@ -3,25 +3,6 @@ namespace myImages {
 
     helpers._registerFactory("image", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "image1":
-            case "key":return img`
-. . . . . . . . . 
-. . f f f f f . . 
-. f 1 1 1 1 1 f . 
-f 1 1 1 1 1 1 1 f 
-f 1 1 c 1 c 1 1 f 
-f 1 1 c 1 c 1 1 f 
-. f 1 1 1 1 1 f . 
-. f 1 f 1 f 1 f . 
-. . f f e f f . . 
-. . . f 5 f f . . 
-. . . f 5 f 5 f . 
-. . . f 5 5 5 f . 
-. . . f 5 f f . . 
-. . . f 5 5 5 f . 
-. . . . f f f . . 
-. . . . . . . . . 
-`;
             case "image3":
             case "shrine of mana":return img`
 ................
@@ -91,6 +72,25 @@ ebb2222222222bbe
 1eeeebbbbbbeeee1
 beeeeeeeeeeeeeeb
 cbbbbbbbbbbbbbbc
+`;
+            case "image1":
+            case "key":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . f f f f f . . . . . . 
+. . . . f 1 1 1 1 1 f . . . . . 
+. . . f 1 1 1 1 1 1 1 f . . . . 
+. . . f 1 1 c 1 c 1 1 f . . . . 
+. . . f 1 1 c 1 c 1 1 f . . . . 
+. . . . f 1 1 1 1 1 f . . . . . 
+. . . . f 1 f 1 f 1 f . . . . . 
+. . . . . f f e f f . . . . . . 
+. . . . . . f 5 f f . . . . . . 
+. . . . . . f 5 f 5 f . . . . . 
+. . . . . . f 5 5 5 f . . . . . 
+. . . . . . f 5 f f . . . . . . 
+. . . . . . f 5 5 5 f . . . . . 
+. . . . . . . f f f . . . . . . 
+. . . . . . . . . . . . . . . . 
 `;
         }
         return null;

@@ -85,7 +85,7 @@ class Dungeon {
                 case assets.tile`mana potion`:
                     this.setItem(location, new ManaPotion(location))
                     break
-                case assets.tile`key tile`:
+                case assets.tile`key`:
                     this.setItem(location, new SkeletonKey(location))
                     break
                 case assets.tile`life potion`:
