@@ -77,6 +77,8 @@ class Dungeon {
                 case assets.tile`shroom`: new Shroom(location); break
                 case assets.tile`mimic`: new Mimic(location); break
 
+                case assets.tile`shopkeeper`: new Shopkeeper(location); break
+
                 case assets.tile`chest`:
                     this.setItem(location, new Chest(location))
                     break
@@ -190,7 +192,7 @@ class Dungeon {
         sprites.destroyAllSpritesOfKind(SpriteKind.Item)
         this._current_level_index += 1
         player.sprite.setScale(1)
-        controller.moveSprite(player.sprite, 60, 60)
+        player.resetMovement()
         this._render_level()
     }
 

@@ -85,6 +85,10 @@ class Shrine extends Item {
         super(location)
         this._sprite.y -= 7 // Standing on the tile and so we can interact with it.
     }
+
+    use() {
+        
+    }
 }
 
 class ShrineofLife extends Shrine {

@@ -6,13 +6,11 @@ class Menu {
     _menu: miniMenu.MenuSprite = null
 
     constructor(title: string, items: any[][], handler: any) {
-        let menuItems: miniMenu.MenuItem[] = items.map((item) => {
-            return miniMenu.createMenuItem(item[0], item[1])
-        })
-
         Menu.isOpen = true
 
-        this._menu = miniMenu.createMenuFromArray(menuItems)
+        this._menu = miniMenu.createMenuFromArray(items.map((item) => {
+            return miniMenu.createMenuItem(item[0], item[1])
+        }))
         this._menu.setTitle(` ${title}`)
         this._menu.setDimensions(scene.screenWidth(), scene.screenHeight())
         this._menu.setPosition(scene.screenWidth() / 2, scene.screenHeight() / 2)
@@ -26,6 +24,11 @@ class Menu {
 
             handler(this._menu.selectedIndex)
         })
+
+        // Ignore interface.
+        this._menu.onButtonPressed(controller.left, () => { })
+        this._menu.onButtonPressed(controller.right, () => { })
+        this._menu.onButtonPressed(controller.B, () => { })
     }
 
     close() {

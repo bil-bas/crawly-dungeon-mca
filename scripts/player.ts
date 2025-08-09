@@ -21,6 +21,7 @@ class Player {
     _secondarySpell: Spell
     _primarySpellIndicator: TextSprite
     _secondarySpellIndicator: TextSprite
+    _speed = 60
 
     get animUp(): Image[] { return [] }
     get animDown(): Image[] { return [] }
@@ -97,21 +98,40 @@ class Player {
         info.showScore(false)
         game.setGameOverScoringType(game.ScoringType.HighScore)
 
-
         this._addAnimations()
         this._setInitialSpells()
 
-        game.onUpdateInterval(100, () => {
+        game.onUpdateInterval(250, () => {
             this.updateLineOfSight()
         })
 
         this._initEventHandlers()
+        this.resetMovement()
+    }
+
+    freeze() {
+        this._speed = 0
+        this.updateMovement()
+    }
+
+    resetMovement() {
+        this._speed = 60
+        this.updateMovement()
+    }
+
+    updateMovement() {
+        controller.moveSprite(this._sprite, this._speed, this._speed)
     }
 
     _initEventHandlers() {
         // Interacting with the environment
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (sprite: Sprite, item: Sprite) => {
             this.touchedItem(item)
+        })
+
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Person, (sprite: Sprite, person: Sprite) => {
+            if (Menu.isOpen) return
+            person.data["obj"].touch()
         })
 
         scene.onHitWall(SpriteKind.Player, (sprite: Sprite, tile: tiles.Location) => {
@@ -195,7 +215,7 @@ class Player {
 
         this._is_falling = true
 
-        controller.moveSprite(this._sprite, 0, 0)
+        this.freeze()
         tiles.placeOnTile(this._sprite, tile)
 
         timer.after(250, () => {
