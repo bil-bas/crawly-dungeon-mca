@@ -8,7 +8,7 @@ scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, location: tiles.Location) => {
         enemy.setVelocity(30, 0)
     } else if (characterAnimations.matchesRule(enemy, characterAnimations.rule(Predicate.MovingLeft))) {
         enemy.setVelocity(0, 30)
-    } else if (characterAnimations.matchesRule(enemy, characterAnimations.rule(Predicate.MovingRight))) {
+    } else { // right
         enemy.setVelocity(0, -30)
     }
 })
@@ -143,9 +143,8 @@ class Monkey extends Enemy {
             player.keys -= 1
             this.life -= damage
             return 0
-        } else {
-            return super.melee(damage)
         }
+        return super.melee(damage)
     }
 }
 
@@ -195,9 +194,9 @@ class Skeleton extends Enemy {
             player.mana -= 1
             this.life -= damage
             return 0
-        } else {
-            return super.melee(damage)
-        }
+        } 
+        
+        return super.melee(damage)
     }
 }
 

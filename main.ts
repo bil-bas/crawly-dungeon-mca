@@ -9,9 +9,9 @@ namespace ZLevel {
 }
 
 const CLASSES = [
-    ["Witch", sprites.swamp.witchForward0],
-    ["Brute", sprites.castle.heroWalkFront1],
-    ["Random", sprites.builtin.angelFish0],
+    "Witch",
+    "Brute",
+    "Random",
 ]
 
 const LEVELS = [

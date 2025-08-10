@@ -10,70 +10,70 @@ class Dungeon {
     ]
     
     _levels: Array<tiles.TileMapData>
-    _current_level: tiles.TileMapData
-    _current_level_index: number = -1
+    _level: tiles.TileMapData
+    _levelIndex: number = -1
 
     constructor(levels: Array<tiles.TileMapData>) {
-        scene.setBackgroundColor(Colour.DARK_PURPLE)
+        scene.setBackgroundColor(Colour.DPURPLE)
         this._levels = levels
-        this.advance_level()
+        this.advance()
     }
 
     // Render the level tiles, add player and creatues.
     _render_level(): void {
-        let read_level = this._levels[this._current_level_index]
-        this._current_level = tileUtil.cloneMap(read_level)
-        tiles.setCurrentTilemap(this._current_level)
+        let read_level = this._levels[this._levelIndex]
+        this._level = tileUtil.cloneMap(read_level)
+        tiles.setCurrentTilemap(this._level)
 
-        tileUtil.forEachTileInMap(read_level, (column: number, row: number, location: tiles.Location) => {
+        tileUtil.forEachTileInMap(read_level, (column: number, row: number, tile: tiles.Location) => {
             let image = read_level.getTileImage(read_level.getTile(column, row))
             let clear = true
             switch (image) {
                 case sprites.builtin.brick:
-                    this._render_brick(read_level, column, row, location)
+                    this._render_brick(read_level, column, row, tile)
                     clear = false
                     break
                 case sprites.dungeon.stairLadder:
                 case sprites.dungeon.doorLockedNorth:
-                    tiles.setWallAt(location, true)
+                    tiles.setWallAt(tile, true)
                     clear = false
                     break
                 case sprites.dungeon.stairLarge:
-                    tiles.placeOnTile(player.sprite, location)
+                    tiles.placeOnTile(player.sprite, tile)
                     break
         
-                case assets.tile`bat`: new Bat(location); break
-                case assets.tile`skeleton`: new Skeleton(location); break
-                case assets.tile`monkey`: new Monkey(location); break
-                case assets.tile`hermit crab`: new HermitCrab(location); break
-                case assets.tile`shroom`: new Shroom(location); break
-                case assets.tile`mimic`: new Mimic(location); break
+                case assets.tile`bat`: new Bat(tile); break
+                case assets.tile`skeleton`: new Skeleton(tile); break
+                case assets.tile`monkey`: new Monkey(tile); break
+                case assets.tile`hermit crab`: new HermitCrab(tile); break
+                case assets.tile`shroom`: new Shroom(tile); break
+                case assets.tile`mimic`: new Mimic(tile); break
 
-                case assets.tile`shopkeeper`: new Shopkeeper(location); break
+                case assets.tile`shopkeeper`: new ItemShop(tile); break
 
-                case assets.tile`chest`: new Chest(location); break
-                case assets.tile`mana potion`: new ManaPotion(location); break
-                case assets.tile`key`: new SkeletonKey(location); break
-                case assets.tile`life potion`: new LifePotion(location); break
-                case assets.tile`shrine of life`: new ShrineofLife(location); break
-                case assets.tile`shrine of mana`: new ShrineofMana(location); break
+                case assets.tile`chest`: new Chest(tile); break
+                case assets.tile`mana potion`: new ManaPotion(tile); break
+                case assets.tile`key`: new SkeletonKey(tile); break
+                case assets.tile`life potion`: new LifePotion(tile); break
+                case assets.tile`shrine of life`: new ShrineofLife(tile); break
+                case assets.tile`shrine of mana`: new ShrineofMana(tile); break
 
                 default:
                     clear = false
             }
             
             if (clear) {
-                this.clearTile(location)
+                this.clearTile(tile)
             }
         })
 
-        tileUtil.forEachTileInMap(this._current_level, (column: number, row: number, location: tiles.Location) => {
-            let image = this._current_level.getTileImage(this._current_level.getTile(column, row))
+        tileUtil.forEachTileInMap(this._level, (column: number, row: number, _) => {
+            let image = this._level.getTileImage(this._level.getTile(column, row))
         })
     }
 
     // Replace default tile with correct, linking walls.
-    _render_brick(view_map: tiles.TileMapData, column: number, row: number, location: tiles.Location) : void {
+    _render_brick(view_map: tiles.TileMapData, column: number, row: number, tile: tiles.Location) : void {
         let adjacent_pattern = Dungeon.ADJACENT_OFFSETS.map((offset: Array<number>) => {
             let x = column + offset[0], y = row + offset[1]
             
@@ -83,9 +83,8 @@ class Dungeon {
             return (adjacent == sprites.builtin.brick) ? 1 : 0
         })
         
-        let tile = this._wall_image_from_adjacent(adjacent_pattern.join(""))
-        tiles.setTileAt(location, tile)
-        tiles.setWallAt(location, true)
+        tiles.setTileAt(tile, this._wall_image_from_adjacent(adjacent_pattern.join("")))
+        tiles.setWallAt(tile, true)
     }
 
     // check adjacent squares for walls, to work out how to join them.
@@ -149,10 +148,11 @@ class Dungeon {
     }
 
     // go down one level
-    advance_level(): void {
+    advance(): void {
         sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
         sprites.destroyAllSpritesOfKind(SpriteKind.Item)
-        this._current_level_index += 1
+        sprites.destroyAllSpritesOfKind(SpriteKind.Person)
+        this._levelIndex += 1
         player.sprite.setScale(1)
         player.resetMovement()
         this._render_level()

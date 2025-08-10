@@ -81,20 +81,15 @@ class Shrine extends Item {
     get destroyOnUse(): boolean { return false }
     get isSpent(): boolean { return this._sprite.image == this.SPENT_IMAGE }
 
-    constructor(location: tiles.Location) {
-        super(location)
+    constructor(tile: tiles.Location) {
+        super(tile)
         this._sprite.y -= 7 // Standing on the tile and so we can interact with it.
-    }
-
-    use() {
-        
     }
 }
 
 class ShrineofLife extends Shrine {
     get image(): Image { return assets.image`shrine of life` }
     get type(): string { return "Shrine of Life" }
-
     get canUse(): boolean { return !this.isSpent && player.life >= 2 }
 
     use(): void {
@@ -107,7 +102,6 @@ class ShrineofLife extends Shrine {
 class ShrineofMana extends Shrine {
     get image(): Image { return assets.image`shrine of mana` }
     get type(): string { return "Shrine of Mana" }
-
     get canUse(): boolean { return !this.isSpent && player.mana >= 1 }
 
     use(): void {

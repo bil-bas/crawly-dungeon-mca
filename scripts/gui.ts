@@ -3,37 +3,23 @@ const STATUS_BAR_HEIGHT = 6
 
 class Menu {
     static isOpen = false
-    _menu: miniMenu.MenuSprite = null
 
-    constructor(title: string, items: any[][], handler: any) {
+    constructor(title: string, options: string[], handler: any) {
         Menu.isOpen = true
         game.pushScene()
 
-        this._menu = miniMenu.createMenuFromArray(items.map((item) => {
-            return miniMenu.createMenuItem(item[0], item[1])
-        }))
-        this._menu.setTitle(` ${title}`)
-        this._menu.setDimensions(scene.screenWidth(), scene.screenHeight())
-        this._menu.setPosition(scene.screenWidth() / 2, scene.screenHeight() / 2)
-        this._menu.setFlag(SpriteFlag.RelativeToCamera, true)
-        this._menu.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.Margin, 0)
-        this._menu.setStyleProperty(miniMenu.StyleKind.Title, miniMenu.StyleProperty.Padding, 0)
-        this._menu.z = ZLevel.MENU
+        story.menu.showMenu(options, story.menu.MenuStyle.List, story.menu.MenuLocation.FullScreen)
         
-        this._menu.onButtonPressed(controller.A, () => {
+        story.menu.onMenuOptionSelected((option, number) => {
             Menu.isOpen = false
-            handler(this._menu.selectedIndex)
+            handler(number)
         })
-
-        // Ignore interface.
-        this._menu.onButtonPressed(controller.left, () => { })
-        this._menu.onButtonPressed(controller.right, () => { })
-        this._menu.onButtonPressed(controller.B, () => { })
     }
 
     close() {
-        this._menu.close()
         game.popScene()
+        story.menu.closeMenu()
+        Menu.isOpen = false
     }
 }
 
@@ -84,7 +70,7 @@ function init_inventory() {
     life_status.z = ZLevel.UI
     life_status.setBarBorder(1, 15)
     life_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
-    life_status.setColor(Colour.RED, Colour.DARK_PURPLE, Colour.BROWN)
+    life_status.setColor(Colour.RED, Colour.DPURPLE, Colour.BROWN)
 
     life_label = create_label(sprites.projectile.heart3)
     life_label.left = -4
@@ -98,7 +84,7 @@ function init_inventory() {
     magic_status.setBarBorder(1, 15)
     magic_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
     magic_status.setStatusBarFlag(StatusBarFlag.LabelAtEnd, true)
-    magic_status.setColor(Colour.BLUE, Colour.DARK_PURPLE, Colour.LIGHT_BLUE)
+    magic_status.setColor(Colour.BLUE, Colour.DPURPLE, Colour.LBLUE)
         
     magic_label = create_label(sprites.projectile.firework1)
     magic_label.right = screen.width

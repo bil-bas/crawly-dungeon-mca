@@ -23,10 +23,10 @@ class Player {
     _secondarySpellIndicator: TextSprite
     _speed = 60
 
-    get animUp(): Image[] { return [] }
-    get animDown(): Image[] { return [] }
-    get animLeft(): Image[] { return [] }
-    get animRight(): Image[] { return [] }
+    get animUp(): Image[] { return null }
+    get animDown(): Image[] { return null }
+    get animLeft(): Image[] { return null }
+    get animRight(): Image[] { return null }
         
     get primarySpell(): Spell { return this._primarySpell }
     set primarySpell(spell: Spell) {
@@ -161,8 +161,7 @@ class Player {
         })
     }
 
-    _setInitialSpells() {
-    }
+    _setInitialSpells() {}
 
     _addAnimation(frames: Image[], predicate: Predicate) {
         characterAnimations.loopFrames(this._sprite, frames, 200, characterAnimations.rule(predicate))
@@ -226,7 +225,7 @@ class Player {
                 this._sprite.setScale(0.5)
 
                 timer.after(500, () => {
-                    dungeon.advance_level()
+                    dungeon.advance()
                     this._is_falling = false
                 })
             })
