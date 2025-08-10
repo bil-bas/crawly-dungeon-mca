@@ -91,7 +91,7 @@ class Player {
 
     constructor() {
         this._sprite = sprites.create(sprites.swamp.witchForward0, SpriteKind.Player)
-        this._sprite.z = ZLevel.PLAYER
+        this._sprite.z = ZOrder.PLAYER
         scene.cameraFollowSprite(this._sprite)
         info.setLife(INITIAL_LIFE)
         info.showLife(false)

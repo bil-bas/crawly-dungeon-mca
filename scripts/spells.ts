@@ -94,7 +94,7 @@ class Firebolt extends ProjectileSpell {
         }
 
         let ball = sprites.createProjectileFromSprite(sprites.projectile.explosion1, player.sprite, vx, vy)
-        ball.z = ZLevel.SPELLS
+        ball.z = ZOrder.SPELLS
         ball.setKind(SpriteKind.Firebolt)
         ball.setScale(2)
         ball.startEffect(effects.fire)
@@ -107,7 +107,7 @@ class Firebolt extends ProjectileSpell {
 
     _explosion(x: number, y: number): void {
         let explosion = sprites.create(sprites.projectile.explosion2, SpriteKind.Explosion)
-        explosion.z = ZLevel.SPELLS
+        explosion.z = ZOrder.SPELLS
         explosion.setPosition(x, y)
         explosion.setScale(this.explosionScale)
 

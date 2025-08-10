@@ -31,7 +31,7 @@ function change_floater(icon: Image, change: number) {
     let text = textsprite.create((change > 0 ? "+" : "") + ("" + change))
     text.setMaxFontHeight(5)
     text.setIcon(icon)
-    text.z = ZLevel.FLOATER
+    text.z = ZOrder.FLOATER
     text.setPosition(player.sprite.x, player.sprite.y - 8)
     text.vy = -10
     timer.after(500, () => {
@@ -42,7 +42,7 @@ function change_floater(icon: Image, change: number) {
 // Create stat label for top of screen.
 function create_label(icon: Image) {
     let label = textsprite.create("x0", 0, 1)
-    label.z = ZLevel.UI
+    label.z = ZOrder.UI
     label.setIcon(icon)
     label.setOutline(Colour.WHITE, Colour.PURPLE)
     label.setFlag(SpriteFlag.RelativeToCamera, true)
@@ -70,7 +70,7 @@ function init_inventory() {
     life_status.setFlag(SpriteFlag.RelativeToCamera, true)
     life_status.bottom = screen.height
     life_status.right = screen.width / 2 + 1
-    life_status.z = ZLevel.UI
+    life_status.z = ZOrder.UI
     life_status.setBarBorder(1, 15)
     life_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
     life_status.setColor(Colour.RED, Colour.DPURPLE, Colour.BROWN)
@@ -83,7 +83,7 @@ function init_inventory() {
     magic_status.setFlag(SpriteFlag.RelativeToCamera, true)
     magic_status.bottom = screen.height
     magic_status.left = screen.width / 2
-    magic_status.z = ZLevel.UI
+    magic_status.z = ZOrder.UI
     magic_status.setBarBorder(1, 15)
     magic_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
     magic_status.setStatusBarFlag(StatusBarFlag.LabelAtEnd, true)
@@ -100,13 +100,13 @@ function init_inventory() {
     coin_label = textsprite.create("0")
     coin_label.setOutline(Colour.WHITE, Colour.PURPLE)
     coin_label.setFlag(SpriteFlag.RelativeToCamera, true)
-    coin_label.z = ZLevel.UI
+    coin_label.z = ZOrder.UI
     coin_label.top = 0
     coin_label.right = 150
 
     coin_label.data["icon"] = sprites.create(sprites.builtin.coin0)
     coin_label.data["icon"].setFlag(SpriteFlag.RelativeToCamera, true)
-    coin_label.data["icon"].z = ZLevel.UI
+    coin_label.data["icon"].z = ZOrder.UI
     coin_label.data["icon"].top = 1
     coin_label.data["icon"].right = screen.width
 
@@ -123,7 +123,7 @@ let life_label: TextSprite
 
 function spellIndicator(spell: Spell, primary: boolean): TextSprite {
     let indicator = textsprite.create(`${spell.mana} ${primary ? "A" : "B"}`)
-    indicator.z = ZLevel.UI
+    indicator.z = ZOrder.UI
     indicator.icon = spell.icon
     indicator.setOutline(Colour.WHITE, Colour.PURPLE)
     indicator.right = screen.width

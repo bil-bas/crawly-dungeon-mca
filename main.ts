@@ -1,10 +1,10 @@
-namespace ZLevel {
-    export const ITEMS = -4
-    export const ENEMIES = -3
-    export const PLAYER = -2
-    export const SPELLS = -1
-    export const FLOATER = 0
-    export const UI = 1
+namespace ZOrder {
+    export const ITEMS = 0
+    export const ENEMIES = 1
+    export const PLAYER = 2
+    export const SPELLS = 3
+    export const FLOATER = 4
+    export const UI = 500
 }
 
 const CLASSES = [

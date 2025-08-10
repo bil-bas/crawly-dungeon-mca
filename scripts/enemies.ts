@@ -23,7 +23,7 @@ class Enemy {
         this._sprite = sprites.create(this.spriteImage, SpriteKind.Enemy)
         tiles.placeOnTile(this._sprite, tile)
         this._sprite.setFlag(SpriteFlag.BounceOnWall, true)
-        this._sprite.z = ZLevel.ENEMIES
+        this._sprite.z = ZOrder.ENEMIES
         this._sprite.data["obj"] = this
         this._life = this.initial_life
     }
