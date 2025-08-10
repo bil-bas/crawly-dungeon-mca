@@ -41,6 +41,8 @@ class Shop extends Person {
             wares.push(item)
         }
 
+        let closeup = new Closeup(this._sprite.image)
+
         let options = wares.map<string>((ware: ShopItem, _) => {
             let [text, value] = ware
             return this._label(text, value)
@@ -56,6 +58,7 @@ class Shop extends Person {
                 if (index == 0) {
                     this._present = false
                     timer.after(2000, () => this._present = true)
+                    closeup.close()
                     return false
                 } else {
                     let [_, value] = this._wares()[index - 1]
@@ -70,6 +73,7 @@ class Shop extends Person {
                 }
 
                 if (!result) {
+                    closeup.close()
                     this._present = false
                     this._sprite.destroy(effects.bubbles, 1000)
                 }

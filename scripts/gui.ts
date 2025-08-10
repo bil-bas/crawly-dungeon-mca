@@ -2,10 +2,12 @@ const STATUS_BAR_MARGIN = 1
 const STATUS_BAR_HEIGHT = 6
 
 class Menu {
+    static allClosed = true
     _isClosed: boolean
 
     constructor(title: string, options: string[], handler: any) {
         this._isClosed = false
+        Menu.allClosed = false
         if (player) player.freeze()
         
         story.menu.showMenu(options, story.menu.MenuStyle.List, story.menu.MenuLocation.FullScreen)
@@ -23,6 +25,24 @@ class Menu {
         story.menu.closeMenu()
         if (player) player.resetMovement()
         this._isClosed = true
+        timer.after(200, () => Menu.allClosed = true)
+    }
+}
+
+class Closeup {
+    _sprite: Sprite
+
+    constructor(image: Image) {
+        this._sprite = sprites.create(image, SpriteKind.Text)
+        this._sprite.z = ZOrder.UI
+        this._sprite.setScale(4)
+        this._sprite.setFlag(SpriteFlag.RelativeToCamera, true)
+        this._sprite.right = scene.screenWidth()
+        this._sprite.bottom = scene.screenHeight() + 15
+    }
+
+    close() {
+        this._sprite.destroy()
     }
 }
 

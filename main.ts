@@ -22,7 +22,9 @@ const LEVELS = [
 function start() {
     game.splash("Welcome to the", "Crawling DUNGEON!")
 
-   new Menu("Who are you?", CLASSES,
+    let closeup = new Closeup(sprites.dungeon.statueLight)
+
+    new Menu("Who are you?", CLASSES,
         (selected: string, _: number) => {
             if (selected == "Random") {
                 selected = CLASSES[randint(0, CLASSES.length - 2)]
@@ -36,6 +38,8 @@ function start() {
 
             init_inventory()
             dungeon = new Dungeon(LEVELS)
+
+            closeup.close()
 
             return false
         }

@@ -151,12 +151,12 @@ class Player {
         // Casting spells
 
         controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (story.menu.isMenuOpen() || !this._primarySpell.canCast() || this.is_falling) return
+            if (!Menu.allClosed || !this._primarySpell.canCast() || this.is_falling) return
             this._primarySpell.cast()
         })
 
         controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (story.menu.isMenuOpen() || !this._secondarySpell.canCast() || this.is_falling) return
+            if (!Menu.allClosed || !this._secondarySpell.canCast() || this.is_falling) return
             this._secondarySpell.cast()
         })
     }
