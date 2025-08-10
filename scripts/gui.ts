@@ -2,24 +2,27 @@ const STATUS_BAR_MARGIN = 1
 const STATUS_BAR_HEIGHT = 6
 
 class Menu {
-    static isOpen = false
+    _isClosed: boolean
 
     constructor(title: string, options: string[], handler: any) {
-        Menu.isOpen = true
-        game.pushScene()
-
-        story.menu.showMenu(options, story.menu.MenuStyle.List, story.menu.MenuLocation.FullScreen)
+        this._isClosed = false
+        if (player) player.freeze()
         
+        story.menu.showMenu(options, story.menu.MenuStyle.List, story.menu.MenuLocation.FullScreen)
+
         story.menu.onMenuOptionSelected((option, number) => {
-            Menu.isOpen = false
-            handler(number)
+            if (this._isClosed) return // FIXME: closed menus still exist!
+
+            if (!handler(option, number)) {
+                this.close()
+            }
         })
     }
 
     close() {
-        game.popScene()
         story.menu.closeMenu()
-        Menu.isOpen = false
+        if (player) player.resetMovement()
+        this._isClosed = true
     }
 }
 

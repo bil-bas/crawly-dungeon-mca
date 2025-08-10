@@ -268,23 +268,42 @@ b c e e 2 2 2 c e e e e 2 e c b
 b b b b c 2 2 2 b b b b b b b b 
 . b b . . c 2 2 2 2 . . . b b . 
 `;
+            case "myTiles.tile15":
+            case "spell shop":return img`
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 f f f f f f f f f f f f f f 1 
+1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
+1 f 6 f f f f f f f f f f 6 f 1 
+1 f 6 f 1 f 1 1 1 1 1 1 f 6 f 1 
+1 f 6 f f f 1 1 f 1 1 1 f 6 f 1 
+1 f 6 6 6 f 1 f f f f 1 f 6 f 1 
+1 f 6 6 6 f 1 1 f 1 1 1 f 6 f 1 
+1 f 6 6 6 f 1 f f f f 1 f 6 f 1 
+1 f 6 6 6 f 1 1 f 1 1 1 f 6 f 1 
+1 f 6 f f f 1 1 f 1 1 1 f 6 f 1 
+1 f 6 f 1 f 1 1 1 1 1 1 f 6 f 1 
+1 f 6 f f f f f f f f f f 6 f 1 
+1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
+1 f f f f f f f f f f f f f f 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+`;
             case "myTiles.tile14":
-            case "shopkeeper":return img`
+            case "item shop":return img`
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 f f f 1 f 1 f 1 f f f 1 f f 1 
-1 f 1 1 1 f 1 f 1 f 1 f 1 f 1 f 
-1 f f f 1 f f f 1 f 1 f 1 f 1 f 
-1 1 1 f 1 f 1 f 1 f 1 f 1 f f 1 
-1 f f f 1 f 1 f 1 f f f 1 f 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 f f f f f f f f f f f f f f 1 
+1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
+1 f 6 6 6 6 f f f f 6 6 6 6 f 1 
+1 f 6 6 6 6 f f f f 6 6 6 6 f 1 
+1 f 6 6 6 6 6 a a 6 6 6 6 6 f 1 
+1 f 6 6 6 6 f 2 2 f 6 6 6 6 f 1 
+1 f 6 6 6 6 f 2 2 f 6 6 6 6 f 1 
+1 f 6 6 6 f 2 1 2 2 f 6 6 6 f 1 
+1 f 6 6 6 f 2 2 2 2 f 6 6 6 f 1 
+1 f 6 6 6 f 2 2 2 2 f 6 6 6 f 1 
+1 f 6 6 6 6 f f f f 6 6 6 6 f 1 
+1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
+1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
+1 f f f f f f f f f f f f f f 1 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `;
         }
@@ -339,6 +358,8 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile13 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
+    export const tile15 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
     export const tile14 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
@@ -382,7 +403,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
             case "level 1":
-            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000001010101010100000000010100000a000101010101010001010001010000000001010505010100010100010100000000010105000101000101000101000000000101010001010001010301010c0c0c0c010101100101000101010101000000000e000f000000000101010101000000000000000900000000000d0101040404000000000b0006000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101000000000000110b0b000000000d0101010101010101010101010101010101`, img`
+            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000001010101010100000000010100000a000101010101010001010001010000000001010505010100010100010100000000010105000101000101000101000000000101010001010001010301010c0c0c0c010101100101000101010101000000000e000f000000000101010101000000000000000900000000000d0101040404000000000b0006000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101120000000000110b0b000000000d0101010101010101010101010101010101`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -399,7 +420,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder,myTiles.tile11,myTiles.tile10,myTiles.tile9,sprites.dungeon.doorLockedNorth,myTiles.tile14], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder,myTiles.tile11,myTiles.tile10,myTiles.tile9,sprites.dungeon.doorLockedNorth,myTiles.tile14,myTiles.tile15], TileScale.Sixteen);
         }
         return null;
     })
@@ -433,7 +454,9 @@ namespace myTiles {
             case "tile3":return myTiles.tile3;
             case "dead mimic":
             case "tile13":return myTiles.tile13;
-            case "shopkeeper":
+            case "spell shop":
+            case "tile15":return myTiles.tile15;
+            case "item shop":
             case "tile14":return myTiles.tile14;
         }
         return null;

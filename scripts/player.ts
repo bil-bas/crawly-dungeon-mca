@@ -130,7 +130,7 @@ class Player {
         })
 
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Person, (sprite: Sprite, person: Sprite) => {
-            if (Menu.isOpen) return
+            if (story.menu.isMenuOpen()) return
             person.data["obj"].touch()
         })
 
@@ -151,12 +151,12 @@ class Player {
         // Casting spells
 
         controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (Menu.isOpen || !this._primarySpell.canCast() || this.is_falling) return
+            if (story.menu.isMenuOpen() || !this._primarySpell.canCast() || this.is_falling) return
             this._primarySpell.cast()
         })
 
         controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (Menu.isOpen || !this._secondarySpell.canCast() || this.is_falling) return
+            if (story.menu.isMenuOpen() || !this._secondarySpell.canCast() || this.is_falling) return
             this._secondarySpell.cast()
         })
     }

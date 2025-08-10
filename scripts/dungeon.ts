@@ -49,7 +49,8 @@ class Dungeon {
                 case assets.tile`shroom`: new Shroom(tile); break
                 case assets.tile`mimic`: new Mimic(tile); break
 
-                case assets.tile`shopkeeper`: new ItemShop(tile); break
+                case assets.tile`item shop`: new ItemShop(tile); break
+                case assets.tile`spell shop`: new SpellShop(tile); break
 
                 case assets.tile`chest`: new Chest(tile); break
                 case assets.tile`mana potion`: new ManaPotion(tile); break

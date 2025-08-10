@@ -2,6 +2,8 @@ namespace SpriteKind {
     export const Person = SpriteKind.create()
 }
 
+type ShopItem = [string, number]
+
 class Person {
     _sprite: Sprite
 
@@ -22,91 +24,98 @@ class Shop extends Person {
         this._present = true
     }
 
-    _label(text: string, value?: number) {
+    _wares(): ShopItem[] { return null }
+
+    _label(text: string, value: number): string {
         let padding = 25 - text.length
         return `${text}${padStart(value ? (value.toString() + "GC") : "", padding)}`
+    }
+
+    _purchase(selected: string, index: number) {  }
+
+    touch(): void {
+        if (!this._present) return
+
+        let wares = [["Nothing right now", 0]]
+        for (let item of this._wares()) {
+            wares.push(item)
+        }
+
+        let options = wares.map<string>((ware: ShopItem, _) => {
+            let [text, value] = ware
+            return this._label(text, value)
+        })
+
+        new Menu(`You have ${player.coins} gold coins`,
+            options,
+            (selected: string, index: number) => {
+                if (options.indexOf(selected) == -1) return false
+
+                let result: boolean
+
+                if (index == 0) {
+                    this._present = false
+                    timer.after(2000, () => this._present = true)
+                    return false
+                } else {
+                    let [_, value] = this._wares()[index - 1]
+                    if (player.coins >= value) {
+                        player.coins -= value
+                        this._purchase(selected, index - 1)
+                        result = false
+                    } else {
+                        music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
+                        result = true
+                    }
+                }
+
+                if (!result) {
+                    this._present = false
+                    this._sprite.destroy(effects.bubbles, 1000)
+                }
+
+                return result
+            }
+        )
     }
 }
 
 class ItemShop extends Shop {
     get image(): Image { return sprites.builtin.villager1WalkFront1 }
 
-    touch() {
-        if (!this._present) return
-
-        let options: Array<string> = [
-            this._label("Let shopkeeper leave"),
-            this._label("Life Potion", 100),
-            this._label("Mana Crystal", 100),
-            this._label("Skeleton Key", 100),
+    _wares(): ShopItem[] {
+        return [
+            ["Life Potion", 100],
+            ["Mana Crystal", 100],
+            ["Skeleton Key", 100],
         ]
+    }
 
-        let menu: Menu
-        menu = new Menu(`You have ${player.coins} gold coins`,
-            options,
-            (selectedIndex: number) => {
-                if (selectedIndex == 0) {
-                    // just leave
-                } else if (selectedIndex == 1) {
-                    if (player.coins >= 100) {
-                        player.coins -= 100
-                        player.life += 1
-                    } else {
-                        return
-                    }
-                } else if (selectedIndex == 2) {
-                    if (player.coins >= 100) {
-                        player.coins -= 100
-                        player.mana += 1
-                    } else {
-                        return
-                    }
-                } else if (selectedIndex == 3) {
-                    if (player.coins >= 100) {
-                        player.coins -= 100
-                        player.keys += 1
-                    } else {
-                        return
-                    }
-                }
-
-                menu.close()
-                this._present = false
-                this._sprite.destroy(effects.bubbles, 1000)
-            }
-        )
+    _purchase(selected: string, index: number) {
+        switch (selected) {
+            case "Life Potion":
+                player.life += 1
+                break
+            case "Mana Crystal":
+                player.mana += 1
+                break
+            case "Skeleton Key":
+                player.keys += 1
+                break
+        }
     }
 }
 
 class SpellShop extends Shop {
     get image(): Image { return sprites.builtin.villager2WalkFront1 }
 
-    touch() {
-        if (!this._present) return
+    _wares(): ShopItem[] {
+        return SPELL_BOOK.slice(0, 5).map<ShopItem>((spell, _) => {
+            return [`${spell.mana || '*'} ${spell.title}`, spell.value]
+        })
+    }
 
-        let options: Array<string> = [this._label("Let old wizard leave")]
-
-        for (let spell of SPELL_BOOK)  {
-            options.push(this._label(`${spell.mana || '*'} ${spell.title}`, spell.value))
-        }
-
-        let menu: Menu
-        menu = new Menu(`You have ${player.coins} gold coins`,
-            options,
-            (selectedIndex: number) => {
-                let spell: Spell = SPELL_BOOK[selectedIndex]
-
-                if (player.coins >= spell.value) {
-                    player.coins -= spell.value
-                    player.secondarySpell = spell
-                } else {
-                    return
-                }
-
-                menu.close()
-                this._present = false
-                this._sprite.destroy(effects.smiles, 1000)
-            }
-        )
+    _purchase(selected: string, index: number) {
+        player.secondarySpell = SPELL_BOOK[index]
     }
 }

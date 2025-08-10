@@ -1,11 +1,10 @@
 namespace ZLevel {
-    export const ITEMS = 100
-    export const ENEMIES = 200
-    export const PLAYER = 400
-    export const SPELLS = 500
-    export const FLOATER = 600
-    export const UI = 1000
-    export const MENU = 1100
+    export const ITEMS = -4
+    export const ENEMIES = -3
+    export const PLAYER = -2
+    export const SPELLS = -1
+    export const FLOATER = 0
+    export const UI = 1
 }
 
 const CLASSES = [
@@ -23,26 +22,22 @@ const LEVELS = [
 function start() {
     game.splash("Welcome to the", "Crawling DUNGEON!")
 
-    let menu: Menu
-
-    menu = new Menu("Who are you?", CLASSES,
-        (selectedIndex: number) => {
-            menu.close()
-
-            if (selectedIndex == CLASSES.length - 1) {
-                selectedIndex = randint(0, CLASSES.length - 2)
+   new Menu("Who are you?", CLASSES,
+        (selected: string, _: number) => {
+            if (selected == "Random") {
+                selected = CLASSES[randint(0, CLASSES.length - 2)]
             }
 
-            if (selectedIndex == 0) {
+            if (selected == "Witch") {
                 player = new Witch()
-            } else if (selectedIndex == 1) {
+            } else if (selected == "Brute") {
                 player = new Brute()
-            } else {
-                throw "ook"
             }
 
             init_inventory()
             dungeon = new Dungeon(LEVELS)
+
+            return false
         }
     )
 }
