@@ -130,7 +130,6 @@ class Player {
         })
 
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Person, (sprite: Sprite, person: Sprite) => {
-            if (story.menu.isMenuOpen()) return
             person.data["obj"].touch()
         })
 
