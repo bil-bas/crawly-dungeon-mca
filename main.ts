@@ -1,22 +1,16 @@
 namespace ZOrder {
-    export const ITEMS = 0
-    export const ENEMIES = 1
-    export const PLAYER = 2
-    export const SPELLS = 3
-    export const FLOATER = 4
-    export const UI = 500
+    export const ITEMS: int8 = 0
+    export const ENEMIES: int8 = 1
+    export const PLAYER: int8 = 2
+    export const SPELLS: int8 = 3
+    export const FLOATER: int8 = 4
+    export const UI: int8 = 250
 }
 
 const CLASSES = [
     "Witch",
     "Brute",
     "Random",
-]
-
-const LEVELS = [
-    tilemap`level 1`,
-    tilemap`level 2`,
-    tilemap`level 3`,
 ]
 
 function start() {
@@ -37,7 +31,7 @@ function start() {
             }
 
             init_inventory()
-            dungeon = new Dungeon(LEVELS)
+            dungeon = new Dungeon()
 
             closeup.close()
 

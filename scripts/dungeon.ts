@@ -9,19 +9,26 @@ class Dungeon {
         [-1, +1], [+0, +1], [+1, +1],
     ]
     
-    _levels: Array<tiles.TileMapData>
     _level: tiles.TileMapData
-    _levelIndex: number = -1
+    _levelIndex: int8 = -1
 
-    constructor(levels: Array<tiles.TileMapData>) {
+    constructor() {
         scene.setBackgroundColor(Colour.DPURPLE)
-        this._levels = levels
         this.advance()
+    }
+
+    _getLevel(index: number): tiles.TileMapData {
+        switch (index) {
+            case 0: return tilemap`level 1`
+            case 1: return tilemap`level 2`
+            case 2: return tilemap`level 3`
+            default: return null
+        }
     }
 
     // Render the level tiles, add player and creatues.
     _render_level(): void {
-        let read_level = this._levels[this._levelIndex]
+        let read_level = this._getLevel(this._levelIndex)
         this._level = tileUtil.cloneMap(read_level)
         tiles.setCurrentTilemap(this._level)
 
@@ -66,10 +73,6 @@ class Dungeon {
             if (clear) {
                 this.clearTile(tile)
             }
-        })
-
-        tileUtil.forEachTileInMap(this._level, (column: number, row: number, _) => {
-            let image = this._level.getTileImage(this._level.getTile(column, row))
         })
     }
 
@@ -150,9 +153,10 @@ class Dungeon {
 
     // go down one level
     advance(): void {
-        sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
-        sprites.destroyAllSpritesOfKind(SpriteKind.Item)
-        sprites.destroyAllSpritesOfKind(SpriteKind.Person)
+        for (let kind of [SpriteKind.Enemy, SpriteKind.Item, SpriteKind.Person]) {
+            sprites.destroyAllSpritesOfKind(kind)
+        }
+        
         this._levelIndex += 1
         player.sprite.setScale(1)
         player.resetMovement()

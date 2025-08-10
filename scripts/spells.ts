@@ -53,10 +53,10 @@ class ProjectileSpell extends Spell {
 class Firebolt extends ProjectileSpell {
     get icon() { return sprites.projectile.explosion1 }
     get title() { return "Firebolt" }
-    get mana() { return 1 }
+    get mana(): int8 { return 1 }
 
-    get splashRadius(): number {return 0 }
-    get explosionScale(): number { return 1 }
+    get splashRadius(): int8 {return 0 }
+    get explosionScale(): int8 { return 1 }
 
     cast() {
         super.cast()
@@ -89,7 +89,7 @@ class Firebolt extends ProjectileSpell {
             vx = 100
         } else if (direction == "up") {
             vy = -100
-        } else if (direction == "down") {
+        } else { // Down
             vy = 100
         }
 
@@ -105,7 +105,7 @@ class Firebolt extends ProjectileSpell {
         this._explosion(projectile.x, projectile.y)
     }
 
-    _explosion(x: number, y: number): void {
+    _explosion(x: number, y: number) {
         let explosion = sprites.create(sprites.projectile.explosion2, SpriteKind.Explosion)
         explosion.z = ZOrder.SPELLS
         explosion.setPosition(x, y)
@@ -156,12 +156,12 @@ class Starfire extends Firebolt {
 class Fireball extends Firebolt {
     get icon() { return sprites.projectile.explosion3 }
     get title() { return "Fireball" }
-    get mana() { return 3 }
+    get mana(): int8 { return 3 }
 
-    get hitDamage(): number { return 0 }
-    get splashRadius(): number { return 16 * 2 }
-    get splashDamage(): number { return 2 }
-    get explosionScale(): number { return 3 }
+    get hitDamage(): int8 { return 0 }
+    get splashRadius(): int8 { return 16 * 2 }
+    get splashDamage(): int8 { return 2 }
+    get explosionScale(): int8 { return 3 }
 
     onProjectileDestroyed(projectile: Sprite) {
         super.onProjectileDestroyed(projectile)
@@ -178,31 +178,31 @@ class Fireball extends Firebolt {
 class Shock extends ProjectileSpell {
     get icon() { return sprites.projectile.firework1 }
     get title() { return "Shock" }
-    get mana() { return 2 }
+    get mana(): int8 { return 2 }
 }
 
 class IceJavelin extends ProjectileSpell {
     get icon() { return sprites.projectile.firework4 }
     get title() { return "Ice Javelin" }
-    get mana() { return 1 }
+    get mana(): int8 { return 1 }
 }
 
 class FrostStorm extends ProjectileSpell {
     get icon() { return sprites.projectile.explosion4 }
     get title() { return "Frost Storm" }
-    get mana() { return 3 }
+    get mana(): int8 { return 3 }
 }
 
 class RockBlast extends ProjectileSpell {
     get icon() { return sprites.castle.rock1 }
     get title() { return "Rock Blast" }
-    get mana() { return 2 }
+    get mana(): int8 { return 2 }
 }
 
 class Heal extends Spell {
     get icon() { return sprites.projectile.heart3 }
     get title() { return "Heal" }
-    get mana() { return 1 }
+    get mana(): int8 { return 1 }
 
     cast() {
         super.cast()
@@ -214,11 +214,11 @@ class Heal extends Spell {
 class BloodMagic extends Spell {
     get icon() { return sprites.skillmap.decoration8 }
     get title() { return "Blood Magic" }
-    get mana() { return 0 }
+    get mana(): int8 { return 0 }
     get value() { return 50 }
 
     canCast(): boolean {
-        return player.life >= 2
+        return player.life >= 2 && player.mana < player.maxMana
     }
 
     cast() {
@@ -230,7 +230,7 @@ class BloodMagic extends Spell {
 class Restore extends Spell {
     get icon() { return sprites.projectile.heart2 }
     get title() { return "Restore" }
-    get mana() { return 2 }
+    get mana(): int8 { return 2 }
 
     cast() {
         super.cast()
@@ -242,19 +242,19 @@ class Restore extends Spell {
 class Earthquake extends Spell {
     get icon() { return sprites.projectile.drop5 }
     get title() { return "Earthquake" }
-    get mana() { return 4 }
+    get mana(): int8 { return 4 }
 }
 
 class BallLightning extends ProjectileSpell {
     get icon() { return sprites.projectile.laser2 }
     get title() { return "Ball Lighting" }
-    get mana() { return 2 }
+    get mana(): int8 { return 2 }
 }
 
 class Thunderbolt extends ProjectileSpell {
     get icon() { return sprites.projectile.laser4 }
     get title() { return "Thunderbolt" }
-    get mana() { return 3 }
+    get mana(): int8 { return 3 }
 }
 
 const SPELL_BOOK: Array<Spell> = [

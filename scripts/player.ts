@@ -1,7 +1,7 @@
 const INITIAL_MANA = 3
 const INITIAL_LIFE = 3
 
-const ALL_STAIRS = [
+const ALL_STAIRS: Image[] = [
     sprites.dungeon.stairNorth,
     sprites.dungeon.stairEast,
     sprites.dungeon.stairWest,
@@ -186,10 +186,6 @@ class Player {
             tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
             music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
             tiles.setWallAt(tile, false)
-        } else if (tiles.tileAtLocationEquals(tile, sprites.dungeon.chestClosed) && this.keys >= 1) {
-            this.keys -= 1
-            tiles.setTileAt(tile, sprites.dungeon.chestOpen)
-            music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
         }
     }
 
@@ -232,14 +228,11 @@ class Player {
     }
 
     updateLineOfSight() {
-        for (let enemy of sprites.allOfKind(SpriteKind.Enemy)) {
-            let isVisible = sight.isInSight(this.sprite, enemy, 150, false)
-            enemy.setFlag(SpriteFlag.Invisible, !isVisible)
-        }
-
-        for (let enemy of sprites.allOfKind(SpriteKind.Item)) {
-            let isVisible = sight.isInSight(this.sprite, enemy, 150, false)
-            enemy.setFlag(SpriteFlag.Invisible, !isVisible)
+        for (let kind of [SpriteKind.Enemy, SpriteKind.Item, SpriteKind.Person]) {
+            for (let enemy of sprites.allOfKind(kind)) {
+                let isVisible = sight.isInSight(this.sprite, enemy, 150, false)
+                enemy.setFlag(SpriteFlag.Invisible, !isVisible)
+            }
         }
     }
 }
