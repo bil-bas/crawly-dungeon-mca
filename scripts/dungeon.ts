@@ -161,7 +161,7 @@ class Dungeon {
 
     // go down one level
     advance(): void {
-        for (let kind of [SpriteKind.Enemy, SpriteKind.Item, SpriteKind.Person]) {
+        for (let kind of [SpriteKind.Enemy, SpriteKind.Item]) {
             sprites.destroyAllSpritesOfKind(kind)
         }
         

@@ -26,9 +26,9 @@ function start() {
                 selected = CLASSES[randint(0, CLASSES.length - 2)]
             }
 
-            if (selected == "Witch") {
+            if (index == 0) {
                 player = new Witch()
-            } else if (selected == "Brute") {
+            } else if (index == 1) {
                 player = new Brute()
             }
 

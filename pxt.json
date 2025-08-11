@@ -23,7 +23,6 @@
         "scripts/spells.ts",
         "scripts/utils.ts",
         "scripts/items.ts",
-        "scripts/persons.ts",
         "main.ts",
         "README.md",
         "assets.json",

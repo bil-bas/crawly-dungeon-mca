@@ -126,12 +126,8 @@ class Player {
 
     _initEventHandlers() {
         // Interacting with the environment
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (spr_ite: Sprite, item: Sprite) => {
-            this.touchedItem(item)
-        })
-
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Person, (_: Sprite, person: Sprite) => {
-            person.data["obj"].touch()
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (_: Sprite, item: Sprite) => {
+            this.touchedItem(item.data["obj"])
         })
 
         scene.onHitWall(SpriteKind.Player, (_: Sprite, tile: tiles.Location) => {
@@ -245,8 +241,7 @@ class Player {
         }
     }
 
-    touchedItem(sprite: Sprite) {
-        let obj: Item = sprite.data["obj"]
+    touchedItem(obj: Item) {
         if (!obj.canUse) return
 
         obj.use()

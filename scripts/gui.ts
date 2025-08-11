@@ -1,14 +1,11 @@
 class Overlay extends TextSprite {
-    static OUTLINE_COLOUR: int8 = Colour.DARK_PURPLE
-    static PADDING: int8 = 0
-
     constructor(icon: Image, text: string, fg?: number, bg?: number) {
         super(text,
               bg ? bg : Colour.TRANSPARENT, fg ? fg : Colour.WHITE,
               8, // Max Font height
               1, Colour.TRANSPARENT, // Border
-              Overlay.PADDING, // padding
-              1, Overlay.OUTLINE_COLOUR, // Outline
+              0, // padding
+              1, Colour.DARK_PURPLE, // Outline
               icon)
         
         this._setupSprite(this)
@@ -72,7 +69,7 @@ class Closeup extends Overlay {
     constructor(image: Image, speech: string) {
         super(null, speech, Colour.WHITE, Colour.DARK_PURPLE)
         
-        this.setBorder(1, Colour.DARK_PURPLE, Overlay.PADDING)
+        this.setBorder(1, Colour.DARK_PURPLE, 4)
         this.left = 9
         this.bottom = scene.screenHeight()
         this.setBorder(1, Colour.BLACK)
