@@ -58,6 +58,7 @@ class Player {
 
     get mana(): number { return this._mana }
     set mana(value: number) {
+
         new StatUpdate(sprites.projectile.firework1, value - this._mana)
         this._mana = value
         update_labels()
@@ -125,19 +126,26 @@ class Player {
 
     _initEventHandlers() {
         // Interacting with the environment
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (sprite: Sprite, item: Sprite) => {
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (spr_ite: Sprite, item: Sprite) => {
             this.touchedItem(item)
         })
 
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Person, (sprite: Sprite, person: Sprite) => {
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Person, (_: Sprite, person: Sprite) => {
             person.data["obj"].touch()
         })
 
-        scene.onHitWall(SpriteKind.Player, (sprite: Sprite, tile: tiles.Location) => {
+        scene.onHitWall(SpriteKind.Player, (_: Sprite, tile: tiles.Location) => {
             this.touchedWall(tile)
         })
 
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (sprite: Sprite, enemy: Sprite) => {
+        for (let image of [assets.tile`chest`, assets.tile`key`,
+                           assets.tile`mana potion`, assets.tile`life potion`]) {
+            scene.onOverlapTile(SpriteKind.Player, image, (_: Sprite, tile: tiles.Location) => {
+                this.touchedTile(image, tile)
+            })
+        }
+
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (_: Sprite, enemy: Sprite) => {
             this.touchedEnemy(enemy)
         })
 
@@ -169,6 +177,31 @@ class Player {
         })
     }
 
+    touchedTile(image: Image, tile: tiles.Location) {
+        switch (image) {
+            case assets.tile`key`:
+                dungeon.clearTile(tile)
+                this.keys += 1
+                break
+            case assets.tile`chest`:
+                if (this.keys) {
+                    this.keys -= 1
+                    this.coins += randint(100, 200)
+                    tiles.setTileAt(tile, sprites.dungeon.chestOpen)
+                    sounds.play(sounds.unlock)
+                }
+            case assets.tile`life potion`:
+                if (this.life < this.maxLife) {
+                    dungeon.clearTile(tile)
+                    this.life += 1
+                }
+            case assets.tile`mana potion`:
+                if (this.mana < this.maxMana) {
+                    dungeon.clearTile(tile)
+                    this.mana += 1
+                }
+        }
+    }
     _setInitialSpells() {}
 
     _addAnimation(frames: Image[], predicate: Predicate) {
@@ -193,8 +226,8 @@ class Player {
         if (tiles.tileAtLocationEquals(tile, sprites.dungeon.doorLockedNorth) && this.keys >= 1) {
             this.keys -= 1
             tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
-            sounds.play(sounds.unlock)
             tiles.setWallAt(tile, false)
+            sounds.play(sounds.unlock)
         }
     }
 

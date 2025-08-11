@@ -34,47 +34,54 @@ class Dungeon {
 
         tileUtil.forEachTileInMap(read_level, (column: number, row: number, tile: tiles.Location) => {
             let image = read_level.getTileImage(read_level.getTile(column, row))
-            let clear = true
+
             switch (image) {
                 case sprites.builtin.brick:
                     this._render_brick(read_level, column, row, tile)
-                    clear = false
                     break
-                case sprites.dungeon.stairLadder:
-                case sprites.dungeon.doorLockedNorth:
+                case assets.tile`rockslide`:
                     tiles.setWallAt(tile, true)
-                    clear = false
+                case assets.tile`key`:
+                case assets.tile`chest`:
+                case assets.tile`mana potion`:
+                case assets.tile`life potion`:
                     break
                 case sprites.dungeon.stairLarge:
                     tiles.placeOnTile(player.sprite, tile)
                     break
-        
-                case assets.tile`bat`: new Bat(tile); break
-                case assets.tile`skeleton`: new Skeleton(tile); break
-                case assets.tile`monkey`: new Monkey(tile); break
-                case assets.tile`hermit crab`: new HermitCrab(tile); break
-                case assets.tile`shroom`: new Shroom(tile); break
-                case assets.tile`mimic`: new Mimic(tile); break
-
-                case assets.tile`item shop`: new ItemShop(tile); break
-                case assets.tile`spell shop`: new SpellShop(tile); break
-
-                case assets.tile`chest`: new Chest(tile); break
-                case assets.tile`mana potion`: new ManaPotion(tile); break
-                case assets.tile`key`: new SkeletonKey(tile); break
-                case assets.tile`life potion`: new LifePotion(tile); break
-                case assets.tile`shrine`: new Shrine(tile); break
-                case assets.tile`mushroom`: new Mushroom(tile); break
-                case assets.tile`rockslide`: new Rockslide(tile); break
-
+                case sprites.dungeon.doorLockedNorth:
+                case sprites.dungeon.stairLadder: // represents a heavy crate/wooden wall.
+                    tiles.setWallAt(tile, true)
+                    break
                 default:
-                    clear = false
-            }
-            
-            if (clear) {
-                this.clearTile(tile)
+                    this._render_object(image, tile)
             }
         })
+    }
+
+    _render_object(image: Image, tile: tiles.Location) {
+        let clear = true
+
+        switch (image) {
+            case assets.tile`bat`: new Bat(tile); break
+            case assets.tile`skeleton`: new Skeleton(tile); break
+            case assets.tile`monkey`: new Monkey(tile); break
+            case assets.tile`hermit crab`: new HermitCrab(tile); break
+            case assets.tile`shroom`: new Shroom(tile); break
+            case assets.tile`mimic`: new Mimic(tile); break
+
+            case assets.tile`item shop`: new ItemShop(tile); break
+            case assets.tile`spell shop`: new SpellShop(tile); break
+
+            case assets.tile`shrine`: new Shrine(tile); break
+            case assets.tile`mushroom`: new Mushroom(tile); break
+            default:
+                clear = false
+        }
+        
+        if (clear) {
+            this.clearTile(tile)
+        }
     }
 
     // Replace default tile with correct, linking walls.

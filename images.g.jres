@@ -1,10 +1,1 @@
-{
-    "myImages.image1": {
-        "id": "myImages.image1",
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8P8AAAAAAAAfEf8AAAAA8BEREQ8AAADwEczx////APARERFeVVUP8BHM8f9fXw/wERER/1VfDwAfEf8A//AAAPD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "dataEncoding": "base64",
-        "namespace": "myImages.",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "key"
-    }
-}
+{}

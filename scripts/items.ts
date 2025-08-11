@@ -1,8 +1,7 @@
 class Item {
     _sprite: Sprite
 
-    get image(): Image { return assets.image`key` }
-    get type(): string { return "Item" }
+    get image(): Image { return null }
     get canUse(): boolean { return true }
     get destroyOnUse(): boolean { return true }
     get useSound(): music.Playable { return sounds.useItemSound }
@@ -18,62 +17,6 @@ class Item {
         this._sprite = sprites.create(this.image, SpriteKind.Item)
         tiles.placeOnTile(this._sprite, tile)
         this._sprite.data["obj"] = this
-    }
-}
-
-class ManaPotion extends Item {
-    get image(): Image { return sprites.projectile.firework1 }
-    get type(): string { return "Mana Potion" }
-    get canUse(): boolean { return player.mana < player.maxMana}
-
-    use(): void {
-        super.use()
-        player.mana += 1
-    }
-}
-
-class LifePotion extends Item {
-    get image(): Image { return sprites.projectile.heart1 }
-    get type(): string { return "Life Potion" }
-    get canUse(): boolean { return player.life < player.maxLife }
-    
-    use(): void {
-        super.use()
-        player.life += 1
-    }
-}
-
-class SkeletonKey extends Item {
-    get image(): Image { return assets.image`key` }
-    get type(): string { return "Skeleton Key" }
-
-    use(): void {
-        super.use()
-        player.keys += 1
-    }
-}
-
-class Chest extends Item {
-    get image(): Image { return sprites.dungeon.chestClosed }
-    get type(): string { return "Chest" }
-    get isOpen(): boolean { return this._sprite.image == sprites.dungeon.chestOpen }
-    get destroyOnUse(): boolean { return false }
-    get useSound(): music.Playable { return sounds.unlock }
-
-
-    constructor(tile: tiles.Location) {
-        super(tile)
-    }
-
-    get canUse(): boolean {
-        return !this.isOpen && player.keys >= 1
-    }
-
-    use(): void {
-        super.use()
-        player.keys -= 1
-        player.coins += 100
-        this._sprite.setImage(sprites.dungeon.chestOpen)
     }
 }
 
@@ -160,7 +103,7 @@ class Mushroom extends Item {
 
                 timer.after(200, () => {
                     player.life = 1
-                    player.mana = 100
+                    player.mana = player.maxMana
                 })
 
                 this._present = false
@@ -172,14 +115,5 @@ class Mushroom extends Item {
                 return false
             }
         )
-    }
-}
-
-class Rockslide extends Item {
-    get image(): Image { return sprites.castle.rock2 }
-
-    constructor(tile: tiles.Location) {
-        super(tile)
-        tiles.setWallAt(tile, true)
     }
 }
