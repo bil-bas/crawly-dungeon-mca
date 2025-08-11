@@ -1,5 +1,5 @@
 namespace sounds {
-    export const error =  music.melodyPlayable(music.buzzer)
+    export const error =  music.melodyPlayable(music.thump)
     export const teleport = music.melodyPlayable(music.beamUp)
     export const destroyCrate = music.melodyPlayable(music.bigCrash)
     export const unlock = music.melodyPlayable(music.knock)
@@ -7,7 +7,7 @@ namespace sounds {
     export const stairs = music.melodyPlayable(music.jumpDown)
     export const enemyDeath = music.melodyPlayable(music.bigCrash)
     export const useItemSound = music.melodyPlayable(music.knock)
-    export const spellFail = music.melodyPlayable(music.knock)
+    export const spellFail = music.melodyPlayable(music.thump)
     export const spellCast = music.melodyPlayable(music.pewPew)
 
     export function play(sound: music.Playable) {

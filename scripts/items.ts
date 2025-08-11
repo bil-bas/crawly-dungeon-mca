@@ -5,9 +5,10 @@ class Item {
     get type(): string { return "Item" }
     get canUse(): boolean { return true }
     get destroyOnUse(): boolean { return true }
+    get useSound(): music.Playable { return sounds.useItemSound }
 
     use() {
-        sounds.play(sounds.useItemSound)
+        sounds.play(this.useSound)
         if (this.destroyOnUse) {
             this._sprite.destroy()
         }
@@ -57,6 +58,8 @@ class Chest extends Item {
     get type(): string { return "Chest" }
     get isOpen(): boolean { return this._sprite.image == sprites.dungeon.chestOpen }
     get destroyOnUse(): boolean { return false }
+    get useSound(): music.Playable { return sounds.unlock }
+
 
     constructor(tile: tiles.Location) {
         super(tile)
