@@ -174,3 +174,12 @@ class Mushroom extends Item {
         )
     }
 }
+
+class Rockslide extends Item {
+    get image(): Image { return sprites.castle.rock2 }
+
+    constructor(tile: tiles.Location) {
+        super(tile)
+        tiles.setWallAt(tile, true)
+    }
+}
