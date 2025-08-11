@@ -6,9 +6,9 @@ class Overlay extends TextSprite {
     static OUTLINE_COLOUR: int8 = Colour.DPURPLE
     static PADDING: int8 = 0
 
-    constructor(icon: Image, text: string, colour?: number) {
+    constructor(icon: Image, text: string, fg?: number, bg?: number) {
         super(text,
-              Colour.TRANSPARENT, colour == 0 ? 0 : Colour.WHITE,
+              bg ? bg : Colour.TRANSPARENT, fg ? fg : Colour.WHITE,
               8, // Max Font height
               1, Colour.TRANSPARENT, // Border
               Overlay.PADDING, // padding
@@ -74,12 +74,13 @@ class Closeup extends Overlay {
     _portrait: Sprite
 
     constructor(image: Image, speech: string) {
-        super(null, speech)
+        super(null, speech, Colour.WHITE, Colour.DPURPLE)
         
         this.setBorder(1, Colour.DPURPLE, Overlay.PADDING)
         this.left = 9
         this.bottom = scene.screenHeight()
         this.setBorder(1, Colour.BLACK)
+        
 
         this._portrait = sprites.create(image, SpriteKind.Text)
         this._portrait.setScale(4)
@@ -87,7 +88,9 @@ class Closeup extends Overlay {
         this._portrait.bottom = screen.height + 15
         
         this._setupSprite(this)
-        this._portrait.z = 500000
+
+        this._portrait.z = 500
+        this.z = 501
     }
 
     destroy(effect?: effects.ParticleEffect, duration?: number) {

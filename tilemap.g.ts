@@ -173,44 +173,6 @@ b c e e e e e e e e e e e e c b
 b b b b b b b b b b b b b b b b 
 . b b . . . . . . . . . . b b . 
 `;
-            case "myTiles.tile10":
-            case "shrine of mana":return img`
-1 f f f f f 1 f f f 1 f 1 1 f 1 
-1 f 1 f 1 f 1 f 1 f 1 f f 1 f 1 
-1 f 1 1 1 f 1 f f f 1 f 1 f f 1 
-1 f 1 1 1 f 1 f 1 f 1 f 1 1 f 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 f f f f f f 1 1 1 1 1 
-1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
-1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
-1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
-1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
-1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
-1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
-1 1 1 1 f 8 8 8 8 8 8 f 1 1 1 1 
-1 1 1 f 8 8 8 8 8 8 8 8 f 1 1 1 
-1 1 1 f 8 8 8 8 8 8 8 8 f 1 1 1 
-1 1 1 f f f f f f f f f f 1 1 1 
-`;
-            case "myTiles.tile9":
-            case "shrine of life":return img`
-1 1 f 1 1 1 f 1 f f 1 f f 1 1 1 
-1 1 f 1 1 1 f 1 f 1 1 f 1 1 1 1 
-1 1 f 1 1 1 f 1 f f 1 f f 1 1 1 
-1 1 f f f 1 f 1 f 1 1 f 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 f 1 1 1 
-1 1 1 1 1 f f f f f f 1 1 1 1 1 
-1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
-1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
-1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
-1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
-1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
-1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
-1 1 1 1 f 2 2 2 2 2 2 f 1 1 1 1 
-1 1 1 f 2 2 2 2 2 2 2 2 f 1 1 1 
-1 1 1 f 2 2 2 2 2 2 2 2 f 1 1 1 
-1 1 1 f f f f f f f f f f 1 1 1 
-`;
             case "myTiles.tile12":
             case "top of wall":return img`
 f f f f f f f f f f f f f f f f 
@@ -306,6 +268,44 @@ b b b b c 2 2 2 b b b b b b b b
 1 f f f f f f f f f f f f f f 1 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `;
+            case "myTiles.tile9":
+            case "shrine":return img`
+1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
+1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
+1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
+1 1 1 1 1 1 f 8 2 f 1 1 1 1 1 1 
+1 1 1 1 1 f f f f f f 1 1 1 1 1 
+1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
+1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
+1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
+1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
+1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
+1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
+1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
+1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
+1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
+1 1 1 f f f f f f f f f f 1 1 1 
+`;
+            case "myTiles.tile10":
+            case "mushroom":return img`
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 a a a a 1 1 1 1 1 1 
+1 1 1 1 a a a a a a a a 1 1 1 1 
+1 1 1 a a a a a a a a a a 1 1 1 
+1 1 a a a a a a a a a a a a 1 1 
+1 1 a a a a a a a a a a a a 1 1 
+1 1 a a a a a a a a a a a a 1 1 
+1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
+1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
+1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
+1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
+1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
+1 1 1 1 1 e e e e e e 1 1 1 1 1 
+`;
         }
         return null;
     })
@@ -348,10 +348,6 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile8 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile10 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile9 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile12 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile3 = image.ofBuffer(hex``);
@@ -361,6 +357,10 @@ namespace myTiles {
     export const tile15 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile14 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile9 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile10 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -403,7 +403,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 `, [myTiles.transparency16], TileScale.Sixteen);
             case "level 1":
-            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000001010101010100000000010100000a000101010101010001010001010000000001010505010100010100010100000000010105000101000101000101000000000101010001010001010301010c0c0c0c010101100101000101010101000000000e000f000000000101010101000000000000000900000000000d0101040404000000000b0006000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101120000000000110b0b000000000d0101010101010101010101010101010101`, img`
+            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000001010101010100000000010100000a000101010101010001010001010000000001010505010100010100010100000000010105000101000101000101000000000101010001010001010301010c0c0c0c0101010f01010001010101010000000012000e000000000101010101000000000000000900000000000d0101040404000000000b0006000000000101000000000000000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000000007000101110000000000100b0b000000000d0101010101010101010101010101010101`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -420,7 +420,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder,myTiles.tile11,myTiles.tile10,myTiles.tile9,sprites.dungeon.doorLockedNorth,myTiles.tile14,myTiles.tile15], TileScale.Sixteen);
+`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder,myTiles.tile11,myTiles.tile9,sprites.dungeon.doorLockedNorth,myTiles.tile14,myTiles.tile15,myTiles.tile10], TileScale.Sixteen);
         }
         return null;
     })
@@ -444,10 +444,6 @@ namespace myTiles {
             case "tile11":return myTiles.tile11;
             case "chest":
             case "tile8":return myTiles.tile8;
-            case "shrine of mana":
-            case "tile10":return myTiles.tile10;
-            case "shrine of life":
-            case "tile9":return myTiles.tile9;
             case "top of wall":
             case "tile12":return myTiles.tile12;
             case "key":
@@ -458,6 +454,10 @@ namespace myTiles {
             case "tile15":return myTiles.tile15;
             case "item shop":
             case "tile14":return myTiles.tile14;
+            case "shrine":
+            case "tile9":return myTiles.tile9;
+            case "mushroom":
+            case "tile10":return myTiles.tile10;
         }
         return null;
     })

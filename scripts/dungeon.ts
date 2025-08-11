@@ -63,8 +63,8 @@ class Dungeon {
                 case assets.tile`mana potion`: new ManaPotion(tile); break
                 case assets.tile`key`: new SkeletonKey(tile); break
                 case assets.tile`life potion`: new LifePotion(tile); break
-                case assets.tile`shrine of life`: new ShrineofLife(tile); break
-                case assets.tile`shrine of mana`: new ShrineofMana(tile); break
+                case assets.tile`shrine`: new Shrine(tile); break
+                case assets.tile`mushroom`: new Mushroom(tile); break
 
                 default:
                     clear = false

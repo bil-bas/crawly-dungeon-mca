@@ -9,6 +9,8 @@ namespace sounds {
     export const useItemSound = music.melodyPlayable(music.knock)
     export const spellFail = music.melodyPlayable(music.thump)
     export const spellCast = music.melodyPlayable(music.pewPew)
+    export const sacrifice = music.melodyPlayable(music.powerDown)
+    export const eat = music.melodyPlayable(music.jumpUp)
 
     export function play(sound: music.Playable) {
         music.play(sound, music.PlaybackMode.InBackground)
