@@ -133,15 +133,6 @@
         "tilemapTile": true,
         "displayName": "shrine"
     },
-    "myTiles.tile16": {
-        "id": "myTiles.tile16",
-        "data": "hwQQABAAAAAAAADADLALAMALALvM27sAuwyw3cvbzQDdDLDdy7DNANsLsN27sMsAsADL27sAvAAAsN3MDAAAuwCw3csMALC9AMu7y7wL272wzLzMwAzbzbu9zAC7zNvL293LsL3Lu8zbvcuw3cu7vNu9y7Ddu8sLsLsMALsLuwAAAAAAsAAAAA==",
-        "dataEncoding": "base64",
-        "namespace": "myTiles.",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "rockslide"
-    },
     "myTiles.tile10": {
         "id": "myTiles.tile10",
         "data": "hwQQABAAAAAAAACwzAAAAAAAALu7DAAAAACwEbvLAAAAsBsRs8sAAAA7EzGzuwwAsDMzM9G7DLuwMzMT0b28EbAzMxPRvRzRsBMxM9G73N2wExEzs7vcvQAbETO7u7y7ADsRM9u9DAAAsDOz3c0AAAAAu7vdDAAAAACwu8sAAAAAAADLDAAAAA==",
@@ -150,6 +141,15 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "mushroom"
+    },
+    "myTiles.tile16": {
+        "id": "myTiles.tile16",
+        "data": "hwQQABAAAAAAAADADLALAMALALvM27sAuwy/3cvbzQDd/L/dy7/NANv7v927v8sPsP/L27v/vA8Av93M/P//uwC/3cv8/7+9AMu7y7z7272wzLzMz/zbzbu9zP+7zNvL293Lv73Lu8zbvcu/3cu7vNu9y7/du8sLsLsMALsLuwAAAAAAsAAAAA==",
+        "dataEncoding": "base64",
+        "namespace": "myTiles.",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "rockslide"
     },
     "level2": {
         "id": "level2",

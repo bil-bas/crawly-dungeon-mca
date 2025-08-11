@@ -287,25 +287,6 @@ b b b b c 2 2 2 b b b b b b b b
 1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
 1 1 1 f f f f f f f f f f 1 1 1 
 `;
-            case "myTiles.tile16":
-            case "rockslide":return img`
-. . b d b . . . . . b b b b . . 
-. c b d d b . . . b b d d d b . 
-. b c c b . . . b c d d d d b . 
-. . . . . . b b c c b d b b b . 
-. . . . . b d d b c c b b b c . 
-. . b b b c d d b b c c c c . . 
-. b d d d b c b b c . . . . . . 
-c b d d d d c c c c . b b b . . 
-c c b b b b c c c . b d d d b . 
-. c c c b b . . b c b b d d b b 
-. b b . . . . . b c c b b b b . 
-b d d b b . . . . . c c c b . . 
-b b d d b c . . b b b b b b b . 
-. b c c c b . b d d d b b c b . 
-. . . . . . b d d d b c c b . . 
-. . . . . . b b b c c c b . . . 
-`;
             case "myTiles.tile10":
             case "mushroom":return img`
 . . . . . . . . . . . . . . . . 
@@ -324,6 +305,25 @@ c b b b b d d d d b b d d d c .
 . . . . . . b 1 d d b . . . . . 
 . . . . . b 1 1 d d b . . . . . 
 . . . . . b 1 d d b b . . . . . 
+`;
+            case "myTiles.tile16":
+            case "rockslide":return img`
+. . b d b . . . . . b b b b . . 
+. c b d d b . . . b b d d d b . 
+. b c c b f f f b c d d d d b . 
+. . . f f f b b c c b d b b b . 
+. . f f f b d d b c c b b b c . 
+. . b b b c d d b b c c c c . . 
+. b d d d b c b b c f f f f . . 
+c b d d d d c c c c f b b b . . 
+c c b b b b c c c f b d d d b . 
+. c c c b b f f b c b b d d b b 
+. b b f f f f f b c c b b b b . 
+b d d b b f f f f f c c c b . . 
+b b d d b c f f b b b b b b b . 
+. b c c c b f b d d d b b c b . 
+. . . . f f b d d d b c c b . . 
+. . . . . . b b b c c c b . . . 
 `;
         }
         return null;
@@ -379,9 +379,9 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile9 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile16 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile10 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile16 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -477,10 +477,10 @@ namespace myTiles {
             case "tile14":return myTiles.tile14;
             case "shrine":
             case "tile9":return myTiles.tile9;
-            case "rockslide":
-            case "tile16":return myTiles.tile16;
             case "mushroom":
             case "tile10":return myTiles.tile10;
+            case "rockslide":
+            case "tile16":return myTiles.tile16;
         }
         return null;
     })
