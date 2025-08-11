@@ -17,8 +17,10 @@ class Person {
 } 
 
 class Shop extends Person {
-    _present: boolean
+    static ERROR = music.melodyPlayable(music.buzzer)
 
+    _present: boolean
+    
     constructor(tile: tiles.Location) {
         super(tile)
         this._present = true
@@ -28,7 +30,7 @@ class Shop extends Person {
 
     _label(text: string, value: number): string {
         let padding = 25 - text.length
-        return `${text}${padStart(value ? (value.toString() + "GC") : "", padding)}`
+        return `${text}${padStart(value ? (value.toString() + " gold") : "", padding)}`
     }
 
     _purchase(selected: string, index: number) {  }
@@ -36,47 +38,40 @@ class Shop extends Person {
     touch(): void {
         if (!this._present) return
 
+        this._present = false
+
         let wares: ShopItem[] = []
         for (let item of this._wares()) {
             wares.push(item)
         }
-
-        let closeup = new Closeup(this._sprite.image)
 
         let options = wares.map<string>((ware: ShopItem, _) => {
             let [text, value] = ware
             return this._label(text, value)
         })
 
-        new Menu(`You have ${player.coins} gold coins`,
-            options,
+        new Menu(this._sprite.image, `You have ${player.coins} gold`, options, true,
             (selected: string, index: number) => {
-                let result: boolean
-
-                if (index == 0) {
-                    this._present = false
+                if (index == Menu.CANCELLED) {
                     timer.after(2000, () => this._present = true)
-                    closeup.close()
                     return false
-                } else {
-                    let [_, value] = wares[index]
-                    if (player.coins >= value) {
-                        player.coins -= value
+                }
+
+                let [_, value] = wares[index]
+                if (player.coins >= value) {
+                    player.coins -= value
+                    timer.after(200, () => {
                         this._purchase(selected, index)
-                        result = false
-                    } else {
-                        music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
-                        result = true
-                    }
+                    })
+                } else {
+                    music.play(Shop.ERROR, music.PlaybackMode.InBackground)
+                    return true
                 }
 
-                if (!result) {
-                    closeup.close()
-                    this._present = false
-                    this._sprite.destroy(effects.bubbles, 1000)
-                }
-
-                return result
+                this._present = false
+                timer.after(400, () => this._sprite.destroy(effects.bubbles, 2000))
+                
+                return false
             }
         )
     }
@@ -94,16 +89,18 @@ class ItemShop extends Shop {
     }
 
     _purchase(selected: string, index: number) {
-        switch (selected) {
-            case "Life Potion":
+        switch (selected.slice(0, 4)) {
+            case "Life":
                 player.life += 1
                 break
-            case "Mana Crystal":
+            case "Mana":
                 player.mana += 1
                 break
-            case "Skeleton Key":
+            case "Skel":
                 player.keys += 1
                 break
+            default:
+                throw selected
         }
     }
 }

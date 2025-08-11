@@ -1,48 +1,73 @@
-const STATUS_BAR_MARGIN = 1
-const STATUS_BAR_HEIGHT = 6
+const STATUS_BAR_MARGIN: int8 = 1
+const STATUS_BAR_HEIGHT: int8 = 6
+const PADDING: int8 = 4
 
 class Menu {
-    static allClosed = true
-    _isClosed: boolean
+    static CANCELLED = -1
 
-    constructor(title: string, options: string[], handler: any) {
+    _isClosed: boolean
+    _pushScene: boolean
+    _closeup: Closeup
+
+    constructor(actor: Image, question: string, options: string[], pushScene: boolean,
+                handler: (selected: string, index: number) => boolean) {
         this._isClosed = false
-        Menu.allClosed = false
-        if (player) player.freeze()
+        this._pushScene = pushScene
+
+        if (this._pushScene) {
+            story.pushScene()
+        }
+
+        scene.setBackgroundColor(Colour.DPURPLE)
+
+        this._closeup = new Closeup(actor, question)
         
         story.menu.showMenu(options, story.menu.MenuStyle.List, story.menu.MenuLocation.FullScreen)
-
         story.menu.onMenuOptionSelected((option, number) => {
             if (this._isClosed) return // FIXME: closed menus still exist!
 
             if (!handler(option, number)) {
-                this.close()
+                this.destroy()
+            }
+        })
+
+        controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
+            if (!handler("Cancelled", Menu.CANCELLED)) {
+                this.destroy()
             }
         })
     }
 
-    close() {
+    destroy() {
         story.menu.closeMenu()
-        if (player) player.resetMovement()
+        this._closeup.destroy()
         this._isClosed = true
-        timer.after(200, () => Menu.allClosed = true)
+        if (this._pushScene) {
+            timer.after(100, () => story.popScene())
+        }
     }
 }
 
 class Closeup {
     _sprite: Sprite
+    _text: TextSprite
 
-    constructor(image: Image) {
+    constructor(image: Image, speech: string) {
         this._sprite = sprites.create(image, SpriteKind.Text)
         this._sprite.z = ZOrder.UI
         this._sprite.setScale(4)
-        this._sprite.setFlag(SpriteFlag.RelativeToCamera, true)
         this._sprite.right = scene.screenWidth()
         this._sprite.bottom = scene.screenHeight() + 15
+
+        this._text = textsprite.create(speech)
+        this._text.setBorder(1, Colour.BLACK, PADDING)
+        this._text.left = PADDING
+        this._text.bottom = scene.screenHeight() - PADDING
     }
 
-    close() {
+    destroy() {
         this._sprite.destroy()
+        this._text.destroy()
     }
 }
 

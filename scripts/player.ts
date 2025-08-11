@@ -148,15 +148,17 @@ class Player {
         }
 
         // Casting spells
-
+        console.log("Events")
         controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (!Menu.allClosed || !this._primarySpell.canCast() || this.is_falling) return
-            this._primarySpell.cast()
+            if (this._primarySpell.canCast() && !this.is_falling) {
+                this._primarySpell.cast()
+            }
         })
 
         controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (!Menu.allClosed || !this._secondarySpell.canCast() || this.is_falling) return
-            this._secondarySpell.cast()
+            if (this._secondarySpell.canCast() && !this.is_falling) {
+                this._secondarySpell.cast()
+            }
         })
     }
 

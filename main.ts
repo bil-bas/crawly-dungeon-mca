@@ -16,10 +16,13 @@ const CLASSES = [
 function start() {
     game.splash("Welcome to the", "Crawling DUNGEON!")
 
-    let closeup = new Closeup(sprites.dungeon.statueLight)
 
-    new Menu("Who are you?", CLASSES,
-        (selected: string, _: number) => {
+    new Menu(sprites.dungeon.statueLight, "Who are you?", CLASSES, false,
+        (selected: string, index: number) => {
+            if (index == Menu.CANCELLED) {
+                return true
+            }
+            
             if (selected == "Random") {
                 selected = CLASSES[randint(0, CLASSES.length - 2)]
             }
@@ -32,8 +35,6 @@ function start() {
 
             init_inventory()
             dungeon = new Dungeon()
-
-            closeup.close()
 
             return false
         }
