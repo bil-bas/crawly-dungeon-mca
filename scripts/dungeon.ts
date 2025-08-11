@@ -13,7 +13,7 @@ class Dungeon {
     _levelIndex: int8 = -1
 
     constructor() {
-        scene.setBackgroundColor(Colour.DPURPLE)
+        scene.setBackgroundColor(Colour.DARK_PURPLE)
         this.advance()
     }
 
@@ -21,7 +21,6 @@ class Dungeon {
         switch (index) {
             case 0: return tilemap`level 1`
             case 1: return tilemap`level 2`
-            case 2: return tilemap`level 3`
             default: return null
         }
     }
@@ -173,7 +172,7 @@ class Dungeon {
     }
 
     // Clear tile to transparency
-    clearTile(location: tiles.Location): void {
-        tiles.setTileAt(location, assets.tile`transparency16`)
+    clearTile(tile: tiles.Location): void {
+        tiles.setTileAt(tile, assets.tile`transparency16`)
     }
 }

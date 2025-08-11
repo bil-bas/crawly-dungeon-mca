@@ -11,17 +11,17 @@ const ALL_STAIRS: Image[] = [
 
 class Player {        
     _is_falling = false
-    _coins = 0
-    _keys = 0
-    _mana = INITIAL_MANA
-    _maxMana = INITIAL_MANA
-    _maxLife = INITIAL_LIFE
+    _coins: int16 = 0
+    _keys: int8 = 0
+    _mana: int8 = INITIAL_MANA
+    _maxMana: int8 = INITIAL_MANA
+    _maxLife: int8 = INITIAL_LIFE
     _sprite: Sprite
     _primarySpell: Spell
     _secondarySpell: Spell
     _primarySpellIndicator: SpellIndicator
     _secondarySpellIndicator: SpellIndicator
-    _speed = 60
+    _speed: int8 = 60
 
     get animUp(): Image[] { return null }
     get animDown(): Image[] { return null }

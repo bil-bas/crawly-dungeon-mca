@@ -8,10 +8,10 @@ namespace Colour {
     export const TEAL: int8 = 6
     export const GREEN: int8 = 7
     export const BLUE: int8 = 8
-    export const LBLUE: int8 = 9
+    export const LIGHT_BLUE: int8 = 9
     export const PURPLE: int8 = 10
-    export const LPURPLE: int8 = 11
-    export const DPURPLE: int8 = 12
+    export const LIGHT_PURPLE: int8 = 11
+    export const DARK_PURPLE: int8 = 12
     export const TAN: int8 = 13
     export const BROWN: int8 = 14
     export const BLACK: int8 = 15

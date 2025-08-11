@@ -27,8 +27,7 @@ class Shop extends Person {
     _wares(): ShopItem[] { return null }
 
     _label(text: string, value: number): string {
-        let padding = 25 - text.length
-        return `${text}${padStart(value ? (value.toString() + " gold") : "", padding)}`
+        return `${text}${padStart(value ? (value.toString() + " gold") : "", 25 - text.length)}`
     }
 
     _purchase(selected: string, index: number) {  }

@@ -18,11 +18,10 @@ class Enemy {
         this._life = this.initial_life
     }
 
-    get name(): string { return null }
     get sprite(): Sprite { return this._sprite }
     get spriteImage(): Image { return null }
     get initial_life(): int8 { return 1 }
-    get killedMessage(): string { return `Murdered by ${this.name}` }
+    get killedMessage(): string { return null }
 
     get life(): int8 { return this._life }
     set life(value: number) {
@@ -68,14 +67,20 @@ class Enemy {
         characterAnimations.loopFrames(this._sprite, images, 200, rule)
     }
 
-    touchWall(tile: tiles.Location) {}
+    touchWall(tile: tiles.Location) { }
+    
+    destroy() {
+        this.sprite.destroy()
+        if (this._lifeBar) {
+            this._lifeBar.destroy()
+        }
+    }
 }
 
 // BAT
 class Bat extends Enemy {
     get spriteImage(): Image { return sprites.builtin.forestBat0 }
-    get name(): string { return "Bat" }
-    get killedMessage(): string { return `Exsanguinated by ${this.name}` }
+    get killedMessage(): string { return `Exsanguinated by Bat` }
 
     constructor(tile: tiles.Location) {
         super(tile)
@@ -93,8 +98,7 @@ class Bat extends Enemy {
 // HERMIT CRAB
 class HermitCrab extends Enemy {
     get spriteImage(): Image { return sprites.builtin.hermitCrabWalk0 }
-    get name(): string { return "Hermit Crab" }
-    get killedMessage(): string { return `Squished by ${this.name}` }
+    get killedMessage(): string { return `Squished by Hermit Crab` }
     get initial_life(): number { return 3 }
 
     constructor(tile: tiles.Location) {
@@ -131,8 +135,7 @@ class HermitCrab extends Enemy {
 // Monkey steals keys
 class Monkey extends Enemy {
     get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
-    get name(): string { return "Monkey" }
-    get killedMessage(): string { return `Eyes gouged by ${this.name}` }
+    get killedMessage(): string { return `Eyes gouged by Monkey` }
 
     constructor(tile: tiles.Location) {
         super(tile)
@@ -158,8 +161,7 @@ class Monkey extends Enemy {
 class Shroom extends Enemy {
     get tileImage(): Image { return assets.tile`mimic` }
     get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
-    get name(): string { return "Shroom" }
-    get killedMessage(): string { return `Zoomed by a ${this.name}` }
+    get killedMessage(): string { return `Zoomed by a Shroom` }
 
     constructor(tile: tiles.Location) {
         super(tile)
@@ -184,8 +186,7 @@ class Shroom extends Enemy {
 // Skeleton steals mana
 class Skeleton extends Enemy {
     get spriteImage(): Image { return sprites.castle.skellyFront }
-    get name(): string { return "Skellington" }
-    get killedMessage(): string { return `Rattled by ${this.name}` }
+    get killedMessage(): string { return `Rattled by Skellington` }
 
     constructor(tile: tiles.Location) {
         super(tile)
@@ -210,8 +211,7 @@ class Skeleton extends Enemy {
 
 class Mimic extends Enemy {
     get spriteImage(): Image { return sprites.dungeon.chestClosed }
-    get name(): string { return "Mimic" }
-    get killedMessage(): string { return `Swallowed by ${this.name}` }
+    get killedMessage(): string { return `Swallowed by Mimic` }
 
     melee(damage: number): int8 {
         let tile = tiles.getTileLocation(this.sprite.x / 16, this.sprite.y / 16)

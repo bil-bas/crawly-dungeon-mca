@@ -22,10 +22,10 @@ scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles
 // Abstract base spell logic
 class Spell {
     get icon(): Image { return null }
-    get title() { return "Spell" }
-    get mana() { return 999 }
+    get title(): string { return null }
+    get mana(): int8 { return 1 }
     get value() { return this.mana * 50 }
-    get hitDamage(): number { return 1 }
+    get hitDamage(): int8 { return 1 }
 
     canCast(): boolean {
         return player.mana >= this.mana
@@ -38,7 +38,7 @@ class Spell {
 }
 
 class ProjectileSpell extends Spell {
-    get hitDamage(): number { return 1 }
+    get hitDamage(): int8 { return 1 }
 
     onProjectileHitEnemy(projectile: Sprite, enemy: Enemy) {
         projectile.destroy()
@@ -215,7 +215,6 @@ class Heal extends Spell {
 
     cast() {
         super.cast()
-
         player.life += 1
     }
 }
@@ -243,7 +242,6 @@ class Restore extends Spell {
 
     cast() {
         super.cast()
-        
         player.life = INITIAL_LIFE
     }
 }
@@ -266,7 +264,7 @@ class Thunderbolt extends ProjectileSpell {
     get mana(): int8 { return 3 }
 }
 
-const SPELL_BOOK: Array<Spell> = [
+const SPELL_BOOK: Spell[] = [
     // cost 1
     new Heal(),
     new Firebolt(),

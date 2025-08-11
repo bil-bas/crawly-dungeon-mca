@@ -1,9 +1,5 @@
-const STATUS_BAR_MARGIN: int8 = 1
-const STATUS_BAR_HEIGHT: int8 = 6
-
-
 class Overlay extends TextSprite {
-    static OUTLINE_COLOUR: int8 = Colour.DPURPLE
+    static OUTLINE_COLOUR: int8 = Colour.DARK_PURPLE
     static PADDING: int8 = 0
 
     constructor(icon: Image, text: string, fg?: number, bg?: number) {
@@ -40,7 +36,7 @@ class Menu {
             story.pushScene()
         }
 
-        scene.setBackgroundColor(Colour.DPURPLE)
+        scene.setBackgroundColor(Colour.DARK_PURPLE)
 
         this._closeup = new Closeup(actor, question)
         
@@ -74,13 +70,12 @@ class Closeup extends Overlay {
     _portrait: Sprite
 
     constructor(image: Image, speech: string) {
-        super(null, speech, Colour.WHITE, Colour.DPURPLE)
+        super(null, speech, Colour.WHITE, Colour.DARK_PURPLE)
         
-        this.setBorder(1, Colour.DPURPLE, Overlay.PADDING)
+        this.setBorder(1, Colour.DARK_PURPLE, Overlay.PADDING)
         this.left = 9
         this.bottom = scene.screenHeight()
         this.setBorder(1, Colour.BLACK)
-        
 
         this._portrait = sprites.create(image, SpriteKind.Text)
         this._portrait.setScale(4)
@@ -151,14 +146,14 @@ class StatusBar extends Label {
     constructor(kind: number) {
         super(kind == StatusBarKind.Health ? sprites.projectile.heart3 : sprites.projectile.star3, "0/0")
 
-        this._status = statusbars.create(45, STATUS_BAR_HEIGHT, kind)
+        this._status = statusbars.create(45, 6, kind)
 
         if (kind == StatusBarKind.Health) {
-            this._status.setColor(Colour.RED, Colour.DPURPLE, Colour.BROWN)
+            this._status.setColor(Colour.RED, Colour.DARK_PURPLE, Colour.BROWN)
             this._status.right = screen.width / 2
             this.left = -4
         } else {
-            this._status.setColor(Colour.BLUE, Colour.DPURPLE, Colour.LBLUE)
+            this._status.setColor(Colour.BLUE, Colour.DARK_PURPLE, Colour.LIGHT_BLUE)
             this._status.left = screen.width / 2
             this.right = screen.width
         }
