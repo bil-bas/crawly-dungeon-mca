@@ -17,7 +17,7 @@ class Person {
 } 
 
 class Shop extends Person {
-    static ERROR = music.melodyPlayable(music.buzzer)
+    static errorSound = music.melodyPlayable(music.buzzer)
 
     _present: boolean
     
@@ -64,7 +64,7 @@ class Shop extends Person {
                         this._purchase(selected, index)
                     })
                 } else {
-                    music.play(Shop.ERROR, music.PlaybackMode.InBackground)
+                    music.play(Shop.errorSound, music.PlaybackMode.InBackground)
                     return true
                 }
 

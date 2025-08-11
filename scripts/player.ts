@@ -10,6 +10,10 @@ const ALL_STAIRS: Image[] = [
 
 
 class Player {
+    static unlockSound = music.melodyPlayable(music.knock)
+    static meleeSound = music.melodyPlayable(music.footstep)
+    static stairsSound = music.melodyPlayable(music.jumpDown)
+        
     _is_falling = false
     _coins = 0
     _keys = 0
@@ -186,13 +190,13 @@ class Player {
         if (tiles.tileAtLocationEquals(tile, sprites.dungeon.doorLockedNorth) && this.keys >= 1) {
             this.keys -= 1
             tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
-            music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
+            music.play(Player.unlockSound, music.PlaybackMode.InBackground)
             tiles.setWallAt(tile, false)
         }
     }
 
     touchedEnemy(enemy: Sprite) {
-        music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
+        music.play(Player.meleeSound, music.PlaybackMode.InBackground)
         let injury = enemy.data["obj"].melee(1)
         if (injury != 0) {
             this.life -= injury
@@ -215,7 +219,7 @@ class Player {
         tiles.placeOnTile(this._sprite, tile)
 
         timer.after(250, () => {
-            music.play(music.melodyPlayable(music.jumpDown), music.PlaybackMode.InBackground)
+            music.play(Player.stairsSound, music.PlaybackMode.InBackground)
             this._sprite.setScale(0.75)
 
             timer.after(500, () => {

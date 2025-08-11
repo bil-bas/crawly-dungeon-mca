@@ -1,31 +1,28 @@
 namespace SpriteKind {
     export const Explosion = SpriteKind.create()
-    export const Firebolt = SpriteKind.create()
+    export const ProjectileSpell = SpriteKind.create()
 }
 
-sprites.onDestroyed(SpriteKind.Firebolt, (sprite: Sprite) => {
-    sprite.data["obj"].onProjectileDestroyed(sprite)
+sprites.onDestroyed(SpriteKind.ProjectileSpell, (projectile: Sprite) => {
+    projectile.data["obj"].onProjectileDestroyed(projectile)
 })
 
 // Spell effects
 
 // Fireball hits ENEMY
-sprites.onOverlap(SpriteKind.Firebolt, SpriteKind.Enemy, (projectile: Sprite, enemy: Sprite) => {
-    projectile.destroy()  
-    projectile.data["obj"].onProjectileHit(enemy.data["obj"])
+sprites.onOverlap(SpriteKind.ProjectileSpell, SpriteKind.Enemy, (projectile: Sprite, enemy: Sprite) => {
+    projectile.data["obj"].onProjectileHitEnemy(projectile, enemy.data["obj"])
 })
 
 // Destoy flamable items
-scene.onHitWall(SpriteKind.Firebolt, (sprite: Sprite, location: tiles.Location) => {
-    if (tiles.tileAtLocationEquals(location, sprites.dungeon.stairLadder)) {
-        dungeon.clearTile(location)
-        music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
-        tiles.setWallAt(location, false)
-    }
+scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles.Location) => {
+    projectile.data["obj"].onProjectileHitWall(projectile, location)
 })
 
 // Abstract base spell logic
 class Spell {
+    static destroyCrateSound = music.melodyPlayable(music.thump)
+
     get icon(): Image { return null }
     get title() { return "Spell" }
     get mana() { return 999 }
@@ -44,9 +41,14 @@ class Spell {
 class ProjectileSpell extends Spell {
     get hitDamage(): number { return 1 }
 
-    onProjectileHit(enemy: Enemy) {
+    onProjectileHitEnemy(projectile: Sprite, enemy: Enemy) {
+        projectile.destroy()
         enemy.life -= this.hitDamage
     }
+
+    onProjectileHitWall(projectile: Sprite, tile: tiles.Location) { }
+
+    
 }
 
 // A firebolt hits a single target for small damage.
@@ -95,7 +97,7 @@ class Firebolt extends ProjectileSpell {
 
         let ball = sprites.createProjectileFromSprite(sprites.projectile.explosion1, player.sprite, vx, vy)
         ball.z = ZOrder.SPELLS
-        ball.setKind(SpriteKind.Firebolt)
+        ball.setKind(SpriteKind.ProjectileSpell)
         ball.setScale(2)
         ball.startEffect(effects.fire)
         ball.data["obj"] = this
@@ -103,6 +105,16 @@ class Firebolt extends ProjectileSpell {
 
     onProjectileDestroyed(projectile: Sprite) {
         this._explosion(projectile.x, projectile.y)
+    }
+
+    onProjectileHitWall(projectile: Sprite, tile: tiles.Location) {
+        projectile.destroy()
+
+        if (tiles.tileAtLocationEquals(tile, sprites.dungeon.stairLadder)) {
+            dungeon.clearTile(tile)
+            music.play(Spell.destroyCrateSound, music.PlaybackMode.InBackground)
+            tiles.setWallAt(tile, false)
+        }
     }
 
     _explosion(x: number, y: number) {

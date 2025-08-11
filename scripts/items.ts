@@ -1,14 +1,15 @@
 class Item {
+    static useSound = music.melodyPlayable(music.baDing)
+    
     _sprite: Sprite
 
     get image(): Image { return assets.image`key` }
     get type(): string { return "Item" }
     get canUse(): boolean { return true }
     get destroyOnUse(): boolean { return true }
-    get useSound(): music.Melody { return music.powerUp }
 
     use() {   
-        music.play(music.melodyPlayable(this.useSound), music.PlaybackMode.InBackground)
+        music.play(Item.useSound, music.PlaybackMode.InBackground)
         if (this.destroyOnUse) {
             this._sprite.destroy()
         }
