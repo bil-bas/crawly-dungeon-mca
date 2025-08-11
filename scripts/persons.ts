@@ -79,7 +79,7 @@ class Shop extends Person {
 }
 
 class ItemShop extends Shop {
-    get image(): Image { return sprites.builtin.villager1WalkFront1 }
+    get image(): Image { return sprites.builtin.villager3WalkFront1 }
 
     _wares(): ShopItem[] {
         return [
@@ -107,7 +107,7 @@ class ItemShop extends Shop {
 }
 
 class SpellShop extends Shop {
-    get image(): Image { return sprites.builtin.villager2WalkFront1 }
+    get image(): Image { return sprites.builtin.villager1WalkFront1 }
 
     _wares(): ShopItem[] {
         return SPELL_BOOK.slice(0, 3).map<ShopItem>((spell, _) => {
