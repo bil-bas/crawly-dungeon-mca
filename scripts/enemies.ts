@@ -5,7 +5,6 @@ scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, tile: tiles.Location) => {
 
 // Base enemy obj.
 class Enemy {
-    static deathSound = music.melodyPlayable(music.bigCrash)
     _sprite: Sprite
     _life: int8
     _lifeBar: StatusBarSprite
@@ -34,7 +33,7 @@ class Enemy {
             if (this._lifeBar) {
                 this._lifeBar.destroy()
             }
-            music.play(Enemy.deathSound, music.PlaybackMode.InBackground)
+            music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
         } else if (this._life == this.initial_life) {
             // hide status bar when fully healed.
             if (this._lifeBar) {
@@ -48,7 +47,6 @@ class Enemy {
                 this._lifeBar.max = this.initial_life
                 this._lifeBar.attachToSprite(this._sprite)
             }
-
             this._lifeBar.value = this._life
         }
     }

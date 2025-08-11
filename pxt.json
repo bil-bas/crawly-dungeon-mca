@@ -15,6 +15,7 @@
     },
     "files": [
         "scripts/colours.ts",
+        "scripts/sounds.ts",
         "scripts/gui.ts",
         "scripts/dungeon.ts",
         "scripts/enemies.ts",

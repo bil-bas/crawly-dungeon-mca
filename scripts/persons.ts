@@ -17,8 +17,6 @@ class Person {
 } 
 
 class Shop extends Person {
-    static errorSound = music.melodyPlayable(music.buzzer)
-
     _present: boolean
     
     constructor(tile: tiles.Location) {
@@ -64,12 +62,15 @@ class Shop extends Person {
                         this._purchase(selected, index)
                     })
                 } else {
-                    music.play(Shop.errorSound, music.PlaybackMode.InBackground)
+                    sounds.play(sounds.error)
                     return true
                 }
 
                 this._present = false
-                timer.after(400, () => this._sprite.destroy(effects.bubbles, 2000))
+                timer.after(400, () => {
+                    sounds.play(sounds.teleport)
+                    this._sprite.destroy(effects.bubbles, 2000)
+                })
                 
                 return false
             }

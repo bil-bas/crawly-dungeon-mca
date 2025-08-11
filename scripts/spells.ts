@@ -21,8 +21,6 @@ scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles
 
 // Abstract base spell logic
 class Spell {
-    static destroyCrateSound = music.melodyPlayable(music.thump)
-
     get icon(): Image { return null }
     get title() { return "Spell" }
     get mana() { return 999 }
@@ -34,6 +32,7 @@ class Spell {
     }
 
     cast() {
+        sounds.play(sounds.spellCast)
         player.mana -= this.mana
     }
 }
@@ -47,8 +46,6 @@ class ProjectileSpell extends Spell {
     }
 
     onProjectileHitWall(projectile: Sprite, tile: tiles.Location) { }
-
-    
 }
 
 // A firebolt hits a single target for small damage.
@@ -112,7 +109,7 @@ class Firebolt extends ProjectileSpell {
 
         if (tiles.tileAtLocationEquals(tile, sprites.dungeon.stairLadder)) {
             dungeon.clearTile(tile)
-            music.play(Spell.destroyCrateSound, music.PlaybackMode.InBackground)
+            sounds.play(sounds.destroyCrate)
             tiles.setWallAt(tile, false)
         }
     }

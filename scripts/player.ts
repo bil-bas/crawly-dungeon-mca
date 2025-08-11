@@ -9,11 +9,7 @@ const ALL_STAIRS: Image[] = [
 ]
 
 
-class Player {
-    static unlockSound = music.melodyPlayable(music.knock)
-    static meleeSound = music.melodyPlayable(music.footstep)
-    static stairsSound = music.melodyPlayable(music.jumpDown)
-        
+class Player {        
     _is_falling = false
     _coins = 0
     _keys = 0
@@ -152,16 +148,23 @@ class Player {
         }
 
         // Casting spells
-        console.log("Events")
         controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (this._primarySpell.canCast() && !this.is_falling) {
+            if (this.is_falling) return
+        
+            if (this._primarySpell.canCast()) {
                 this._primarySpell.cast()
+            } else {
+                sounds.play(sounds.spellFail)
             }
         })
 
         controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (this._secondarySpell.canCast() && !this.is_falling) {
+            if (this.is_falling) return
+
+            if (this._secondarySpell.canCast()) {
                 this._secondarySpell.cast()
+            } else {
+                sounds.play(sounds.spellFail)
             }
         })
     }
@@ -190,13 +193,13 @@ class Player {
         if (tiles.tileAtLocationEquals(tile, sprites.dungeon.doorLockedNorth) && this.keys >= 1) {
             this.keys -= 1
             tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
-            music.play(Player.unlockSound, music.PlaybackMode.InBackground)
+            sounds.play(sounds.unlock)
             tiles.setWallAt(tile, false)
         }
     }
 
     touchedEnemy(enemy: Sprite) {
-        music.play(Player.meleeSound, music.PlaybackMode.InBackground)
+        sounds.play(sounds.melee)
         let injury = enemy.data["obj"].melee(1)
         if (injury != 0) {
             this.life -= injury
@@ -219,7 +222,7 @@ class Player {
         tiles.placeOnTile(this._sprite, tile)
 
         timer.after(250, () => {
-            music.play(Player.stairsSound, music.PlaybackMode.InBackground)
+            sounds.play(sounds.stairs)
             this._sprite.setScale(0.75)
 
             timer.after(500, () => {
