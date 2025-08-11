@@ -4,23 +4,23 @@ namespace myImages {
     helpers._registerFactory("image", function(name: string) {
         switch(helpers.stringTrim(name)) {
             case "image1":
-            case "key":return img`
+            case "mushroom":return img`
 . . . . . . . . . . . . . . . . 
-. . . . . f f f f f . . . . . . 
-. . . . f 1 1 1 1 1 f . . . . . 
-. . . f 1 1 1 1 1 1 1 f . . . . 
-. . . f 1 1 c 1 c 1 1 f . . . . 
-. . . f 1 1 c 1 c 1 1 f . . . . 
-. . . . f 1 1 1 1 1 f . . . . . 
-. . . . f 1 f 1 f 1 f . . . . . 
-. . . . . f f e f f . . . . . . 
-. . . . . . f 5 f f . . . . . . 
-. . . . . . f 5 f 5 f . . . . . 
-. . . . . . f 5 5 5 f . . . . . 
-. . . . . . f 5 f f . . . . . . 
-. . . . . . f 5 5 5 f . . . . . 
-. . . . . . . f f f . . . . . . 
-. . . . . . . . . . . . . . . . 
+. . . . . b b b b b . . . . . . 
+. . . . b 3 3 3 3 3 b b . . . . 
+. . . b 3 3 3 3 1 1 1 3 b . . . 
+. . . b 3 3 3 3 1 1 1 1 3 b . . 
+. . b 1 1 3 3 3 3 1 1 1 3 b b . 
+. b 1 1 1 3 3 3 3 3 3 3 3 b b b 
+b b 1 1 3 3 1 1 3 3 3 3 b b b c 
+c b b 3 3 1 1 1 1 3 b b d d b c 
+c b b b b d d d d b b d d d c . 
+. c b b b b d d b b b d d c . . 
+. . c c b b b b b b b b c . . . 
+. . . . c c c c c c c c . . . . 
+. . . . . . b 1 d d b . . . . . 
+. . . . . b 1 1 d d b . . . . . 
+. . . . . b 1 d d b b . . . . . 
 `;
         }
         return null;

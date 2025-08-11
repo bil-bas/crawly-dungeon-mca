@@ -270,60 +270,76 @@ b b b b c 2 2 2 b b b b b b b b
 `;
             case "myTiles.tile9":
             case "shrine":return img`
-1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
-1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
-1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
-1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
-1 1 1 1 1 1 f 8 2 f 1 1 1 1 1 1 
-1 1 1 1 1 f f f f f f 1 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
-1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
-1 1 1 f f f f f f f f f f 1 1 1 
-`;
-            case "myTiles.tile10":
-            case "mushroom":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 a a a a 1 1 1 1 1 1 
-1 1 1 1 a a a a a a a a 1 1 1 1 
-1 1 1 a a a a a a a a a a 1 1 1 
-1 1 a a a a a a a a a a a a 1 1 
-1 1 a a a a a a a a a a a a 1 1 
-1 1 a a a a a a a a a a a a 1 1 
-1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
-1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
-1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
-1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
-1 1 1 1 1 1 c c c c 1 1 1 1 1 1 
-1 1 1 1 1 e e e e e e 1 1 1 1 1 
+................
+.......111......
+......1333......
+......1311......
+......3111......
+......3b131.....
+......b3b311....
+......313131....
+.....b3131b1....
+.....b333113....
+.....bc31311....
+....3bc31131....
+....3bc1111.....
+....3c31111.....
+...33c111113....
+...1b3111111....
+.....3111111....
+.....3113111....
+.....31131113...
+.bbbb31131111bb.
+b11133133111131b
+3113131331131313
+3113111331133313
+3111311331133113
+3111133333333113
+3111113333311113
+b11111111111111b
+3bb1111111111bb3
+1333333333333331
+13333bbbbbb33331
+b33333333333333b
+cbbbbbbbbbbbbbbc
 `;
             case "myTiles.tile16":
             case "rockslide":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 d d 1 1 d d d 1 1 
-1 1 d d d 1 d d d d 1 d d d 1 1 
-1 1 d d d b d d d d b d d d 1 1 
-1 1 d d d b f f f f b b b b 1 1 
-1 1 1 b b b b b b b b b b d 1 1 
-1 d d b d d d b b d d d b d 1 1 
-1 d d d d d d b d d d d d 1 1 1 
-1 d d b f f f b b f f f b 1 1 1 
-1 1 1 b b b b b b b b b b 1 1 1 
-1 1 d d d b d d d d b d d d 1 1 
-1 1 d d d b d d d d b d d d 1 1 
-1 1 f f f b f f f f b f f f 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+. . b d b . . . . . b b b b . . 
+. c b d d b . . . b b d d d b . 
+. b c c b . . . b c d d d d b . 
+. . . . . . b b c c b d b b b . 
+. . . . . b d d b c c b b b c . 
+. . b b b c d d b b c c c c . . 
+. b d d d b c b b c . . . . . . 
+c b d d d d c c c c . b b b . . 
+c c b b b b c c c . b d d d b . 
+. c c c b b . . b c b b d d b b 
+. b b . . . . . b c c b b b b . 
+b d d b b . . . . . c c c b . . 
+b b d d b c . . b b b b b b b . 
+. b c c c b . b d d d b b c b . 
+. . . . . . b d d d b c c b . . 
+. . . . . . b b b c c c b . . . 
+`;
+            case "myTiles.tile10":
+            case "mushroom":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . 2 2 2 2 2 2 2 2 2 . . . . 
+. 2 2 2 2 2 2 2 2 2 2 2 2 . . . 
+. 2 2 1 1 1 2 2 2 2 2 2 2 2 . . 
+. 2 2 1 1 1 2 2 2 2 2 2 2 2 . . 
+. 2 2 1 1 1 2 2 2 1 1 1 2 2 . . 
+. 2 2 2 2 2 2 2 2 1 1 1 2 2 . . 
+. 2 2 2 2 2 2 2 2 1 1 1 2 2 . . 
+. 2 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+. . . . . b b e e c . . . . . . 
+. . . . . b b e e c . . . . . . 
+. . . . . b b e e c . . . . . . 
+. . . . . b b e e c . . . . . . 
+. . . . . b b e e c . . . . . . 
+. . . . . b b e e c . . . . . . 
 `;
         }
         return null;
@@ -379,9 +395,9 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile9 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile10 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile16 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile10 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -477,10 +493,10 @@ namespace myTiles {
             case "tile14":return myTiles.tile14;
             case "shrine":
             case "tile9":return myTiles.tile9;
-            case "mushroom":
-            case "tile10":return myTiles.tile10;
             case "rockslide":
             case "tile16":return myTiles.tile16;
+            case "mushroom":
+            case "tile10":return myTiles.tile10;
         }
         return null;
     })

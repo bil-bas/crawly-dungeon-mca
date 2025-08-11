@@ -182,6 +182,7 @@ class Player {
             case assets.tile`key`:
                 dungeon.clearTile(tile)
                 this.keys += 1
+                sounds.play(sounds.useItemSound)
                 break
             case assets.tile`chest`:
                 if (this.keys) {
@@ -190,16 +191,21 @@ class Player {
                     tiles.setTileAt(tile, sprites.dungeon.chestOpen)
                     sounds.play(sounds.unlock)
                 }
+                break
             case assets.tile`life potion`:
                 if (this.life < this.maxLife) {
                     dungeon.clearTile(tile)
                     this.life += 1
+                    sounds.play(sounds.useItemSound)
                 }
+                break
             case assets.tile`mana potion`:
                 if (this.mana < this.maxMana) {
                     dungeon.clearTile(tile)
                     this.mana += 1
+                    sounds.play(sounds.useItemSound)
                 }
+                break
         }
     }
     _setInitialSpells() {}

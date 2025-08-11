@@ -48,6 +48,7 @@ class Dungeon {
                     break
                 case sprites.dungeon.stairLarge:
                     tiles.placeOnTile(player.sprite, tile)
+                    this.clearTile(tile)
                     break
                 case sprites.dungeon.doorLockedNorth:
                 case sprites.dungeon.stairLadder: // represents a heavy crate/wooden wall.

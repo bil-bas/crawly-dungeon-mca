@@ -78,7 +78,7 @@ class Shrine extends Item {
 class Mushroom extends Item {
     _present: boolean
 
-    get image(): Image { return sprites.builtin.forestMushroomPatch }
+    get image(): Image { return assets.tile`mushroom` }
 
     constructor(tile: tiles.Location) {
         super(tile)
