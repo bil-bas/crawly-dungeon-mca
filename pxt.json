@@ -10,7 +10,7 @@
         "arcade-text": "github:microsoft/arcade-text#v1.3.0",
         "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
         "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
-        "sight": "github:felixtsu/pxt-sight#v0.2.2",
+        "arcade-shadowcasting": "github:riknoll/arcade-shadowcasting#v0.0.4",
         "arcade-storytelling": "github:microsoft/arcade-storytelling#v1.0.3"
     },
     "files": [

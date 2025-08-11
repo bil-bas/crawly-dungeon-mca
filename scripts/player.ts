@@ -101,9 +101,9 @@ class Player {
         this._addAnimations()
         this._setInitialSpells()
 
-        game.onUpdateInterval(250, () => {
-            this.updateLineOfSight()
-        })
+        shadowcasting.setAnchor(this._sprite)
+        shadowcasting.setShadowColor(Colour.BLACK)
+        shadowcasting.setShadowMode(shadowcasting.ShadowCastingMode.Fill)
 
         this._initEventHandlers()
         this.resetMovement()
@@ -225,15 +225,6 @@ class Player {
                 })
             })
         })
-    }
-
-    updateLineOfSight() {
-        for (let kind of [SpriteKind.Enemy, SpriteKind.Item, SpriteKind.Person]) {
-            for (let enemy of sprites.allOfKind(kind)) {
-                let isVisible = sight.isInSight(this.sprite, enemy, 150, false)
-                enemy.setFlag(SpriteFlag.Invisible, !isVisible)
-            }
-        }
     }
 }
 

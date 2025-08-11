@@ -36,7 +36,7 @@ class Shop extends Person {
     touch(): void {
         if (!this._present) return
 
-        let wares = [["Nothing right now", 0]]
+        let wares: ShopItem[] = []
         for (let item of this._wares()) {
             wares.push(item)
         }
@@ -51,8 +51,6 @@ class Shop extends Person {
         new Menu(`You have ${player.coins} gold coins`,
             options,
             (selected: string, index: number) => {
-                if (options.indexOf(selected) == -1) return false
-
                 let result: boolean
 
                 if (index == 0) {
@@ -61,10 +59,10 @@ class Shop extends Person {
                     closeup.close()
                     return false
                 } else {
-                    let [_, value] = this._wares()[index - 1]
+                    let [_, value] = wares[index]
                     if (player.coins >= value) {
                         player.coins -= value
-                        this._purchase(selected, index - 1)
+                        this._purchase(selected, index)
                         result = false
                     } else {
                         music.play(music.melodyPlayable(music.thump), music.PlaybackMode.InBackground)
@@ -114,7 +112,7 @@ class SpellShop extends Shop {
     get image(): Image { return sprites.builtin.villager2WalkFront1 }
 
     _wares(): ShopItem[] {
-        return SPELL_BOOK.slice(0, 5).map<ShopItem>((spell, _) => {
+        return SPELL_BOOK.slice(0, 3).map<ShopItem>((spell, _) => {
             return [`${spell.mana || '*'} ${spell.title}`, spell.value]
         })
     }
