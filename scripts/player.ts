@@ -11,7 +11,6 @@ const ALL_STAIRS: Image[] = [
 
 class Player {        
     _is_falling = false
-    _coins: int16 = 0
     _keys: int8 = 0
     _mana: int8 = INITIAL_MANA
     _maxMana: int8 = INITIAL_MANA
@@ -48,15 +47,14 @@ class Player {
     get sprite(): Sprite { return this._sprite }
     get is_falling(): boolean { return this._is_falling }
   
-    get coins(): number { return this._coins }
+    get coins(): number { return info.score() }
     set coins(value: number) {
-        new StatUpdate(sprites.builtin.coin0, value - this._coins)
-        this._coins = value
+        new StatUpdate(sprites.builtin.coin0, value - info.score())
         info.setScore(value)
         update_labels()
     }
 
-    get mana(): number { return this._mana }
+    get mana(): int8 { return this._mana }
     set mana(value: number) {
 
         new StatUpdate(sprites.projectile.firework1, value - this._mana)
@@ -64,26 +62,26 @@ class Player {
         update_labels()
     }
 
-    get maxMana(): number { return this._maxMana }
+    get maxMana(): int8 { return this._maxMana }
     set maxMana(value: number) {
         this._maxMana = value
         update_labels()
     }
 
-    get maxLife(): number { return this._maxLife }
+    get maxLife(): int8 { return this._maxLife }
         set maxLife(value: number) {
         this._maxLife = value
         update_labels()
     }
 
-    get keys(): number { return this._keys }
+    get keys(): int8 { return this._keys }
     set keys(value: number) {
         new StatUpdate(assets.image`key`, value - this._keys)
         this._keys = value
         update_labels()
     }
 
-    get life(): number { return info.life() }
+    get life(): int8 { return info.life() }
     set life(value: number) {
         new StatUpdate(sprites.projectile.heart3, value - info.life())
         info.setLife(value)
@@ -236,15 +234,11 @@ class Player {
     touchedEnemy(enemy: Sprite) {
         sounds.play(sounds.melee)
         let injury = enemy.data["obj"].melee(1)
-        if (injury != 0) {
-            this.life -= injury
-        }
+        this.life -= injury
     }
 
     touchedItem(obj: Item) {
-        if (!obj.canUse) return
-
-        obj.use()
+        if (obj.canUse) obj.use()
     }
 
     touchedStairs(tile: tiles.Location) {
