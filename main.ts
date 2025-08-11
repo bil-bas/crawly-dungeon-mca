@@ -16,7 +16,6 @@ const CLASSES = [
 function start() {
     game.splash("Welcome to the", "Crawling DUNGEON!")
 
-
     new Menu(sprites.dungeon.statueLight, "Who are you?", CLASSES, false,
         (selected: string, index: number) => {
             if (index == Menu.CANCELLED) {

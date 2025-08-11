@@ -1,5 +1,5 @@
 namespace Colour {
-    export const TRANS: int8 = 0
+    export const TRANSPARENT: int8 = 0
     export const WHITE: int8 = 1
     export const RED: int8 = 2
     export const PINK: int8 = 3

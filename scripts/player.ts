@@ -19,8 +19,8 @@ class Player {
     _sprite: Sprite
     _primarySpell: Spell
     _secondarySpell: Spell
-    _primarySpellIndicator: TextSprite
-    _secondarySpellIndicator: TextSprite
+    _primarySpellIndicator: SpellIndicator
+    _secondarySpellIndicator: SpellIndicator
     _speed = 60
 
     get animUp(): Image[] { return null }
@@ -34,7 +34,7 @@ class Player {
             this._primarySpellIndicator.destroy()
         }
         this._primarySpell = spell
-        this._primarySpellIndicator = spellIndicator(this._primarySpell, true)
+        this._primarySpellIndicator = new SpellIndicator(this._primarySpell, true)
     }
     get secondarySpell(): Spell { return this._secondarySpell }
     set secondarySpell(spell: Spell) {
@@ -42,7 +42,7 @@ class Player {
             this._secondarySpellIndicator.destroy()
         }
         this._secondarySpell = spell
-        this._secondarySpellIndicator = spellIndicator(this._secondarySpell, false)
+        this._secondarySpellIndicator = new SpellIndicator(this._secondarySpell, false)
     }
 
     get sprite(): Sprite { return this._sprite }
@@ -50,7 +50,7 @@ class Player {
   
     get coins(): number { return this._coins }
     set coins(value: number) {
-        change_floater(sprites.builtin.coin0, value - this._coins)
+        new StatUpdate(sprites.builtin.coin0, value - this._coins)
         this._coins = value
         info.setScore(value)
         update_labels()
@@ -58,7 +58,7 @@ class Player {
 
     get mana(): number { return this._mana }
     set mana(value: number) {
-        change_floater(sprites.projectile.firework1, value - this._mana)
+        new StatUpdate(sprites.projectile.firework1, value - this._mana)
         this._mana = value
         update_labels()
     }
@@ -77,14 +77,14 @@ class Player {
 
     get keys(): number { return this._keys }
     set keys(value: number) {
-        change_floater(assets.image`key`, value - this._keys)
+        new StatUpdate(assets.image`key`, value - this._keys)
         this._keys = value
         update_labels()
     }
 
     get life(): number { return info.life() }
     set life(value: number) {
-        change_floater(sprites.projectile.heart3, value - info.life())
+        new StatUpdate(sprites.projectile.heart3, value - info.life())
         info.setLife(value)
         update_labels()
     }

@@ -1,6 +1,28 @@
 const STATUS_BAR_MARGIN: int8 = 1
 const STATUS_BAR_HEIGHT: int8 = 6
-const PADDING: int8 = 4
+
+
+class Overlay extends TextSprite {
+    static OUTLINE_COLOUR: int8 = Colour.DPURPLE
+    static PADDING: int8 = 0
+
+    constructor(icon: Image, text: string, colour?: number) {
+        super(text,
+              Colour.TRANSPARENT, colour == 0 ? 0 : Colour.WHITE,
+              8, // Max Font height
+              1, Colour.TRANSPARENT, // Border
+              Overlay.PADDING, // padding
+              1, Overlay.OUTLINE_COLOUR, // Outline
+              icon)
+        
+        this._setupSprite(this)
+    }   
+
+    _setupSprite(sprite: Sprite) {
+        sprite.z = ZOrder.UI
+        sprite.setFlag(SpriteFlag.RelativeToCamera, true)
+    }
+}
 
 class Menu {
     static CANCELLED = -1
@@ -48,132 +70,144 @@ class Menu {
     }
 }
 
-class Closeup {
-    _sprite: Sprite
-    _text: TextSprite
+class Closeup extends Overlay {
+    _portrait: Sprite
 
     constructor(image: Image, speech: string) {
-        this._sprite = sprites.create(image, SpriteKind.Text)
-        this._sprite.z = ZOrder.UI
-        this._sprite.setScale(4)
-        this._sprite.right = scene.screenWidth()
-        this._sprite.bottom = scene.screenHeight() + 15
+        super(null, speech)
+        
+        this.setBorder(1, Colour.DPURPLE, Overlay.PADDING)
+        this.left = 9
+        this.bottom = scene.screenHeight()
+        this.setBorder(1, Colour.BLACK)
 
-        this._text = textsprite.create(speech)
-        this._text.setBorder(1, Colour.BLACK, PADDING)
-        this._text.left = PADDING
-        this._text.bottom = scene.screenHeight() - PADDING
+        this._portrait = sprites.create(image, SpriteKind.Text)
+        this._portrait.setScale(4)
+        this._portrait.right = screen.width
+        this._portrait.bottom = screen.height + 15
+        
+        this._setupSprite(this)
+        this._portrait.z = 500000
     }
 
-    destroy() {
-        this._sprite.destroy()
-        this._text.destroy()
+    destroy(effect?: effects.ParticleEffect, duration?: number) {
+        super.destroy()
+        this._portrait.destroy()
     }
 }
 
-// Indicate a change with floating message.
-function change_floater(icon: Image, change: number) {
-    let text = textsprite.create((change > 0 ? "+" : "") + ("" + change))
-    text.setMaxFontHeight(5)
-    text.setIcon(icon)
-    text.z = ZOrder.FLOATER
-    text.setPosition(player.sprite.x, player.sprite.y - 8)
-    text.vy = -10
-    timer.after(500, () => {
-        sprites.destroy(text)
-    })
+class Label extends Overlay {
+    constructor(icon: Image, text: string, textColor?: number) {
+        super(icon, text, textColor || Colour.WHITE)
+    }
 }
 
-// Create stat label for top of screen.
-function create_label(icon: Image) {
-    let label = textsprite.create("x0", 0, 1)
-    label.z = ZOrder.UI
-    label.setIcon(icon)
-    label.setOutline(Colour.WHITE, Colour.PURPLE)
-    label.setFlag(SpriteFlag.RelativeToCamera, true)
-    return label
+class StatUpdate extends Label {
+    constructor(icon: Image, change: number) {
+        super(icon, `${change > 0 ? "+" : ""}${change}`, change < 0 ? Colour.RED : Colour.GREEN)
+
+        this.setMaxFontHeight(5)
+        this.setPosition(player.sprite.x, player.sprite.y - 8)
+        this.vy = -15
+        timer.after(300, () => {
+            sprites.destroy(this)
+        })
+
+        this.z = ZOrder.FLOATER
+    }
+}
+
+class CoinLabel extends Label {
+    _icon: Sprite
+
+    constructor() {
+        super(null, "0", Colour.YELLOW)
+
+        this.top = -1
+
+        this._icon = sprites.create(sprites.builtin.coin0, SpriteKind.Text)
+        this._icon.top = 1
+        this._icon.right = screen.width - 1
+        this._setupSprite(this._icon)
+    }
+
+    destroy(effect?: effects.ParticleEffect, duration?: number) {
+        super.destroy()
+        this._icon.destroy()
+    }
+
+    setText(text: string) {
+        super.setText(text)
+        this.right = screen.width - 8
+    }
+}
+
+class StatusBar extends Label {
+    _status: StatusBarSprite
+    
+    constructor(kind: number) {
+        super(kind == StatusBarKind.Health ? sprites.projectile.heart3 : sprites.projectile.star3, "0/0")
+
+        this._status = statusbars.create(45, STATUS_BAR_HEIGHT, kind)
+
+        if (kind == StatusBarKind.Health) {
+            this._status.setColor(Colour.RED, Colour.DPURPLE, Colour.BROWN)
+            this._status.right = screen.width / 2
+            this.left = -4
+        } else {
+            this._status.setColor(Colour.BLUE, Colour.DPURPLE, Colour.LBLUE)
+            this._status.left = screen.width / 2
+            this.right = screen.width
+        }
+
+        this._status.bottom = screen.height
+        this._status.setBarBorder(1, Colour.BLACK)
+        this._status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
+
+        this.setMaxFontHeight(5)
+        this.bottom = screen.height + 8
+
+        this._setupSprite(this._status)
+    }
+
+    updateValues(value: number, max: number) {
+        this._status.max = max
+        this._status.value = value
+        this.setText(`${value}/${max}`)
+    }
 }
 
 function update_labels() {
     key_label.setText(`x${player.keys}`)
     coin_label.setText(`${player.coins}`)
 
-    life_status.value = player.life
-    life_status.max = player.maxLife
-    life_label.setText(`${player.life}/${player.maxLife}`)
-
-    magic_status.value = player.mana
-    magic_status.max = player.maxMana
-    magic_label.setText(`${player.mana}/${player.maxMana}`)
-    magic_label.right = screen.width
-
-    coin_label.right = 150
+    life_status.updateValues(player.life, player.maxLife)
+    magic_status.updateValues(player.mana, player.maxMana)
 }
 
 function init_inventory() {
-    life_status = statusbars.create(46, STATUS_BAR_HEIGHT, StatusBarKind.Health)
-    life_status.setFlag(SpriteFlag.RelativeToCamera, true)
-    life_status.bottom = screen.height
-    life_status.right = screen.width / 2 + 1
-    life_status.z = ZOrder.UI
-    life_status.setBarBorder(1, 15)
-    life_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
-    life_status.setColor(Colour.RED, Colour.DPURPLE, Colour.BROWN)
+    life_status = new StatusBar(StatusBarKind.Health)
+    magic_status = new StatusBar(StatusBarKind.Magic)
 
-    life_label = create_label(sprites.projectile.heart3)
-    life_label.left = -4
-    life_label.bottom = screen.height + 5
-
-    magic_status = statusbars.create(45, STATUS_BAR_HEIGHT, StatusBarKind.Magic)
-    magic_status.setFlag(SpriteFlag.RelativeToCamera, true)
-    magic_status.bottom = screen.height
-    magic_status.left = screen.width / 2
-    magic_status.z = ZOrder.UI
-    magic_status.setBarBorder(1, 15)
-    magic_status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
-    magic_status.setStatusBarFlag(StatusBarFlag.LabelAtEnd, true)
-    magic_status.setColor(Colour.BLUE, Colour.DPURPLE, Colour.LBLUE)
-        
-    magic_label = create_label(sprites.projectile.firework1)
-    magic_label.right = screen.width
-    magic_label.bottom = screen.height + 5
-
-    key_label = create_label(assets.image`key`)
+    key_label = new Label(assets.image`key`, "x0")
     key_label.left = -4
     key_label.bottom = scene.screenHeight() - 8
 
-    coin_label = textsprite.create("0")
-    coin_label.setOutline(Colour.WHITE, Colour.PURPLE)
-    coin_label.setFlag(SpriteFlag.RelativeToCamera, true)
-    coin_label.z = ZOrder.UI
-    coin_label.top = 0
-    coin_label.right = 150
-
-    coin_label.data["icon"] = sprites.create(sprites.builtin.coin0)
-    coin_label.data["icon"].setFlag(SpriteFlag.RelativeToCamera, true)
-    coin_label.data["icon"].z = ZOrder.UI
-    coin_label.data["icon"].top = 1
-    coin_label.data["icon"].right = screen.width
+    coin_label = new CoinLabel()
 
     update_labels()
 }
 
-let coin_label: TextSprite
-let key_label: TextSprite
-let magic_status: StatusBarSprite
-let magic_label: TextSprite
-let life_status: StatusBarSprite
-let life_label: TextSprite
 
-
-function spellIndicator(spell: Spell, primary: boolean): TextSprite {
-    let indicator = textsprite.create(`${spell.mana} ${primary ? "A" : "B"}`)
-    indicator.z = ZOrder.UI
-    indicator.icon = spell.icon
-    indicator.setOutline(Colour.WHITE, Colour.PURPLE)
-    indicator.right = screen.width
-    indicator.bottom = screen.height - (primary ? 9 : 0) -7
-    indicator.setFlag(SpriteFlag.RelativeToCamera, true)
-
-    return indicator
+class SpellIndicator extends Overlay {
+    constructor(spell: Spell, primary: boolean) {
+        super(spell.icon, `${spell.mana} ${primary ? "A" : "B"}`)
+        this.right = screen.width
+        this.bottom = screen.height - (primary ? 9 : 0) - 7
+    }
 }
+
+let coin_label: CoinLabel
+let key_label: Label
+let magic_status: StatusBar
+let life_status: StatusBar
