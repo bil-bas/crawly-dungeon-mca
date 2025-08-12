@@ -180,6 +180,63 @@ class StatusBar extends Label {
     }
 }
 
+class ScreenMessage extends Overlay {
+    _actionText: TextSprite
+
+    constructor(lines: string[], action: string, handler: () => void) {
+        game.pushScene()
+
+        super(null, lines.join("\\n"), Colour.LIGHT_BLUE, Colour.DARK_PURPLE)
+        scene.setBackgroundColor(Colour.DARK_PURPLE)        
+        this.setMaxFontHeight(5)
+        this.left = 4
+        this.top = 4
+
+        this._actionText = new Overlay(null, action)
+        this._actionText.left = 4
+        this._actionText.bottom = screen.height
+
+        controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
+            handler()
+        })
+    }
+}
+
+class StartMessage extends ScreenMessage {
+    constructor(handler: () => void) {
+        let message = [
+            "\\n     Welcome to the",
+            "     Crawly Dungeon!",
+            "\\n\\nSeek your fortune, as",
+            "many before you tried and",
+            "failed...",
+        ]
+        super(message, "Press <A> to delve!", () => {
+            game.popScene()
+            handler()
+        })
+    }
+}
+
+class DeathMessage extends ScreenMessage {
+    constructor(player: Player) {
+        let message: string[] = [
+            `A ${player._klass} died today,`,
+            `grasping ${player.coins} gold.`,
+            "\\nThe richest corpses were:",
+        ]
+
+        for (let highscore of dataStore.richest) {
+            let [klass, score] = highscore
+            message.push(`${padStart(score.toString(), 6)} gold: ${klass}`)
+        }
+
+        super(message, "\\nPress <A> to live again!", () => {
+            game.reset()
+        })
+    }
+}
+
 function update_labels() {
     key_label.setText(`x${player.keys}`)
     coin_label.setText(`${player.coins}`)

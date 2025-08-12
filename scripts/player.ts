@@ -12,8 +12,10 @@ const ALL_STAIRS: Image[] = [
 class Player {        
     _is_falling = false
     _keys: int8 = 0
+    _coins: number = 0
     _mana: int8 = INITIAL_MANA
     _maxMana: int8 = INITIAL_MANA
+    _life: int8 = INITIAL_LIFE
     _maxLife: int8 = INITIAL_LIFE
     _sprite: Sprite
     _primarySpell: Spell
@@ -21,6 +23,7 @@ class Player {
     _primarySpellIndicator: SpellIndicator
     _secondarySpellIndicator: SpellIndicator
     _speed: int8 = 60
+    _klass: string
 
     get animUp(): Image[] { return null }
     get animDown(): Image[] { return null }
@@ -47,16 +50,15 @@ class Player {
     get sprite(): Sprite { return this._sprite }
     get is_falling(): boolean { return this._is_falling }
   
-    get coins(): number { return info.score() }
+    get coins(): number { return this._coins }
     set coins(value: number) {
-        new StatUpdate(sprites.builtin.coin0, value - info.score())
-        info.setScore(value)
+        new StatUpdate(sprites.builtin.coin0, value - this._coins)
+        this._coins = value
         update_labels()
     }
 
     get mana(): int8 { return this._mana }
     set mana(value: number) {
-
         new StatUpdate(sprites.projectile.firework1, value - this._mana)
         this._mana = value
         update_labels()
@@ -81,21 +83,22 @@ class Player {
         update_labels()
     }
 
-    get life(): int8 { return info.life() }
+    get life(): int8 { return this._life }
     set life(value: number) {
-        new StatUpdate(sprites.projectile.heart3, value - info.life())
-        info.setLife(value)
+        new StatUpdate(sprites.projectile.heart3, value - this._life)
+        this._life = Math.max(value, 0)
         update_labels()
+        if (this._life == 0) {
+            dataStore.setRichest(this._klass, this.coins)
+            new DeathMessage(this)
+        }
     }
-
-    constructor() {
+    
+    constructor(klass: string) {
+        this._klass = klass
         this._sprite = sprites.create(sprites.swamp.witchForward0, SpriteKind.Player)
         this._sprite.z = ZOrder.PLAYER
         scene.cameraFollowSprite(this._sprite)
-        info.setLife(INITIAL_LIFE)
-        info.showLife(false)
-        info.showScore(false)
-        game.setGameOverScoringType(game.ScoringType.HighScore)
 
         this._addAnimations()
         this._setInitialSpells()

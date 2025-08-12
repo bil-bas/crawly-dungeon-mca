@@ -7,11 +7,9 @@ namespace ZOrder {
     export const UI: int8 = 250
 }
 
-function start() {
-    game.splash("Welcome to the", "Crawling DUNGEON!")
 
-    dataStore.unlockClass(Haemomancer.title)
 
+function chooseYourClass() {
     new Menu(sprites.dungeon.statueLight, "Who are you?", dataStore.classes, false,
         (selected: string, index: number) => {
             if (index == Menu.CANCELLED) {
@@ -31,11 +29,11 @@ function start() {
     )
 }
 
-function createPlayer(title: string): Player {
-    switch (title) {
-        case Witch.title: return new Witch()
-        case Haemomancer.title: return new Haemomancer()
-        case Archmage.title: return new Archmage()
+function createPlayer(klass: string): Player {
+    switch (klass) {
+        case Witch.title: return new Witch(klass)
+        case Haemomancer.title: return new Haemomancer(klass)
+        case Archmage.title: return new Archmage(klass)
         default: return null
     }
 }
@@ -44,5 +42,4 @@ function createPlayer(title: string): Player {
 let player: Player
 let dungeon: Dungeon
 
-start()
-
+new StartMessage(chooseYourClass)
