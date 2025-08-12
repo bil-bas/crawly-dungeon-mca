@@ -34,7 +34,7 @@ class Shrine extends Item {
 
     use() {
         new Menu(this._sprite.image, `What will you give up?`,
-                ["Sacrifice your Blood", "Sacrifice your Mana"], true,
+                ["Sacrifice your Blood", "Sacrifice your Mana"],
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
                     after(2000, () => this._present = true)
@@ -76,7 +76,7 @@ class Mushroom extends Item {
             "Eat of the stalk",
         ]
 
-        new Menu(this._sprite.image, `What dare you injest?`, options, true,
+        new Menu(this._sprite.image, `What dare you injest?`, options,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
                     after(2000, () => this._present = true)
@@ -123,7 +123,7 @@ class Shop extends Item {
             return this._label(text, value)
         })
 
-        new Menu(this._sprite.image, `You have ${player.coins} gold`, options, true,
+        new Menu(this._sprite.image, `You have ${player.coins} gold`, options,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
                     after(2000, () => this._present = true)

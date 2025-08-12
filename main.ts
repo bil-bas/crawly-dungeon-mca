@@ -10,7 +10,7 @@ namespace ZOrder {
 
 
 function chooseYourClass() {
-    new Menu(sprites.dungeon.statueLight, "Who are you?", dataStore.classes, false,
+    new Menu(sprites.dungeon.statueLight, "Who are you?", dataStore.classes,
         (selected: string, index: number) => {
             if (index == Menu.CANCELLED) {
                 return true

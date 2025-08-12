@@ -20,17 +20,13 @@ class Overlay extends TextSprite {
 class Menu {
     static readonly CANCELLED = -1
 
-    _pushScene: boolean
     _closeup: Closeup
     _menu: miniMenu.MenuSprite
 
-    constructor(actor: Image, question: string, options: string[], pushScene: boolean,
+    constructor(actor: Image, question: string, options: string[],
                 handler: (selected: string, index: number) => boolean) {
-        this._pushScene = pushScene
 
-        if (this._pushScene) {
-            game.pushScene()
-        }
+        game.pushScene()
 
         scene.setBackgroundColor(Colour.DARK_PURPLE)
 
@@ -65,9 +61,7 @@ class Menu {
     destroy() {
         this._menu.close()
         this._closeup.destroy()
-        if (this._pushScene) {
-            after(100, () => game.popScene())
-        }
+        after(100, () => game.popScene())
     }
 }
 
