@@ -18,35 +18,44 @@ class Overlay extends TextSprite {
 }
 
 class Menu {
-    static CANCELLED = -1
+    static readonly CANCELLED = -1
 
-    _isClosed: boolean
     _pushScene: boolean
     _closeup: Closeup
+    _menu: miniMenu.MenuSprite
 
     constructor(actor: Image, question: string, options: string[], pushScene: boolean,
                 handler: (selected: string, index: number) => boolean) {
-        this._isClosed = false
         this._pushScene = pushScene
 
         if (this._pushScene) {
-            story.pushScene()
+            game.pushScene()
         }
 
         scene.setBackgroundColor(Colour.DARK_PURPLE)
 
         this._closeup = new Closeup(actor, question)
-        
-        story.menu.showMenu(options, story.menu.MenuStyle.List, story.menu.MenuLocation.FullScreen)
-        story.menu.onMenuOptionSelected((option, number) => {
-            if (this._isClosed) return // FIXME: closed menus still exist!
 
-            if (!handler(option, number)) {
+        let items = options.map((name, i) => {
+            return miniMenu.createMenuItem(name)
+        })
+
+        this._menu = miniMenu.createMenuFromArray(items)
+        this._menu.setDimensions(screen.width, screen.height)
+        this._menu.left = 0
+        this._menu.top = 0
+
+        this._menu.onButtonPressed(controller.A, (text: string, index: number) => {
+            if (!this._menu) return
+
+            if (!handler(text, index)) {
                 this.destroy()
             }
         })
 
-        controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
+        this._menu.onButtonPressed(controller.B, (text: string, index: number) => {
+            if (!this._menu) return
+
             if (!handler("Cancelled", Menu.CANCELLED)) {
                 this.destroy()
             }
@@ -54,11 +63,10 @@ class Menu {
     }
 
     destroy() {
-        story.menu.closeMenu()
+        this._menu.close()
         this._closeup.destroy()
-        this._isClosed = true
         if (this._pushScene) {
-            timer.after(100, () => story.popScene())
+            timer.after(100, () => game.popScene())
         }
     }
 }

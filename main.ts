@@ -7,37 +7,37 @@ namespace ZOrder {
     export const UI: int8 = 250
 }
 
-const CLASSES = [
-    "Witch",
-    "Brute",
-    "Random",
-]
-
 function start() {
     game.splash("Welcome to the", "Crawling DUNGEON!")
 
-    new Menu(sprites.dungeon.statueLight, "Who are you?", CLASSES, false,
+    dataStore.unlockClass(Haemomancer.title)
+
+    new Menu(sprites.dungeon.statueLight, "Who are you?", dataStore.classes, false,
         (selected: string, index: number) => {
             if (index == Menu.CANCELLED) {
                 return true
             }
             
-            if (selected == "Random") {
-                selected = CLASSES[randint(0, CLASSES.length - 2)]
+            if (selected == Random.title) {
+                selected = dataStore.classes[randint(0, dataStore.classes.length - 2)]
             }
 
-            if (index == 0) {
-                player = new Witch()
-            } else if (index == 1) {
-                player = new Brute()
-            }
-
+            player = createPlayer(selected)
             init_inventory()
             dungeon = new Dungeon()
 
             return false
         }
     )
+}
+
+function createPlayer(title: string) {
+    switch (title) {
+        case Witch.title: return new Witch()
+        case Haemomancer.title: return new Haemomancer()
+        case Archmage.title: return new Archmage()
+        default: throw "ook"
+    }
 }
 
 // SETUP

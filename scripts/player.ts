@@ -266,6 +266,8 @@ class Player {
 }
 
 class Witch extends Player {
+    static get title() { return "Witch" }
+
     get animUp() { return [sprites.swamp.witchBack0, sprites.swamp.witchBack1, sprites.swamp.witchBack2, sprites.swamp.witchBack3] }
     get animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
     get animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
@@ -277,14 +279,24 @@ class Witch extends Player {
     }
 }
 
-class Brute extends Player {
-    get animUp() { return [sprites.castle.heroWalkBack1 , sprites.castle.heroWalkBack2, sprites.castle.heroWalkBack3, sprites.castle.heroWalkBack4] }
-    get animDown() { return [sprites.castle.heroWalkFront1, sprites.castle.heroWalkFront2, sprites.castle.heroWalkFront3, sprites.castle.heroWalkFront4] }
-    get animLeft() { return [sprites.castle.heroWalkSideLeft1, sprites.castle.heroWalkSideLeft2, sprites.castle.heroWalkSideLeft3, sprites.castle.heroWalkSideLeft4] }
-    get animRight() { return [sprites.castle.heroWalkSideRight1, sprites.castle.heroWalkSideRight2, sprites.castle.heroWalkSideRight3, sprites.castle.heroWalkSideRight4] }
+class Haemomancer extends Witch {
+    static get title() { return "Haemomancer" }
 
     _setInitialSpells() {
         this.primarySpell = new Firebolt()
         this.secondarySpell = new BloodMagic()
     }
+}
+
+class Archmage extends Witch {
+    static get title() { return "Archmage" }
+
+    _setInitialSpells() {
+        this.primarySpell = new Firebolt()
+        this.secondarySpell = new Fireball()
+    }
+}
+
+class Random extends Player {
+    static get title() { return "Random" }
 }
