@@ -1,3 +1,5 @@
+type MenuOption = [Image, string]
+
 class Overlay extends TextSprite {
     constructor(icon: Image, text: string, fg?: number, bg?: number) {
         super(text,
@@ -23,17 +25,20 @@ class Menu {
     _closeup: Closeup
     _menu: miniMenu.MenuSprite
 
-    constructor(actor: Image, question: string, options: string[],
+    constructor(actor: Image, question: string, options: MenuOption[],
+                protected pushScene: boolean,
                 handler: (selected: string, index: number) => boolean) {
 
-        game.pushScene()
+        if (this.pushScene) game.pushScene()
 
         scene.setBackgroundColor(Colour.DARK_PURPLE)
 
         this._closeup = new Closeup(actor, question)
 
-        let items = options.map((name, i) => {
-            return miniMenu.createMenuItem(name)
+        let items = options.map((option, i) => {
+            let [icon, text] = option
+            //if (!icon) throw "ouchies"
+            return miniMenu.createMenuItem(text, icon)
         })
 
         this._menu = miniMenu.createMenuFromArray(items)
@@ -61,7 +66,9 @@ class Menu {
     destroy() {
         this._menu.close()
         this._closeup.destroy()
-        after(100, () => game.popScene())
+        if (this.pushScene) {
+            after(100, () => game.popScene())
+        }
     }
 }
 

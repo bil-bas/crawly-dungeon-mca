@@ -1,4 +1,4 @@
-type ShopItem = [string, number]
+type ShopItem = [Image, string, number]
 
 class Item {
     _sprite: Sprite
@@ -33,8 +33,11 @@ class Shrine extends Item {
     }
 
     use() {
-        new Menu(this._sprite.image, `What will you give up?`,
-                ["Sacrifice your Blood", "Sacrifice your Mana"],
+        let options: MenuOption[] = [
+            [sprites.projectile.heart3, "Sacrifice your Blood"],
+            [sprites.projectile.flash3, "Sacrifice your Mana"],
+        ]
+        new Menu(this._sprite.image, `What will you give up?`, options, true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
                     after(2000, () => this._present = true)
@@ -70,13 +73,13 @@ class Mushroom extends Item {
     get image(): Image { return assets.tile`mushroom` }
 
     use() {
-        let options = [
-            "Eat of the cap",
-            "Eat of the gills",
-            "Eat of the stalk",
+        let options: MenuOption[] = [
+            [sprites.castle.treeSmallPine, "Eat of the cap"],
+            [sprites.skillmap.fans, "Eat of the gills"],
+            [sprites.skillmap.kaijuIcon, "Eat of the stalk"],
         ]
 
-        new Menu(this._sprite.image, `What dare you injest?`, options,
+        new Menu(this._sprite.image, `What dare you injest?`, options, true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
                     after(2000, () => this._present = true)
@@ -113,24 +116,21 @@ class Shop extends Item {
     use(): void {
         this._present = false
 
-        let wares: ShopItem[] = []
-        for (let item of this._wares()) {
-            wares.push(item)
-        }
+        let wares = this._wares()
 
-        let options = wares.map<string>((ware: ShopItem, _) => {
-            let [text, value] = ware
-            return this._label(text, value)
+        let options = wares.map<MenuOption>((ware: ShopItem, _) => {
+            let [image, text, value] = ware
+            return [image, this._label(text, value)]
         })
 
-        new Menu(this._sprite.image, `You have ${player.coins} gold`, options,
+        new Menu(this._sprite.image, `You have ${player.coins} gold`, options, true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
                     after(2000, () => this._present = true)
                     return false
                 }
 
-                let [_, value] = wares[index]
+                let [image, title, value] = wares[index]
                 if (player.coins >= value) {
                     player.coins -= value
                     after(200, () => {
@@ -158,9 +158,9 @@ class ItemShop extends Shop {
 
     _wares(): ShopItem[] {
         return [
-            ["Life Potion", 100],
-            ["Mana Crystal", 100],
-            ["Skeleton Key", 100],
+            [assets.tile`life potion`, "Life Potion", 100],
+            [assets.tile`mana potion`, "Mana Crystal", 100],
+            [assets.tile`key`, "Skeleton Key", 100],
         ]
     }
 
@@ -186,7 +186,7 @@ class SpellShop extends Shop {
 
     _wares(): ShopItem[] {
         return SPELL_BOOK.map<ShopItem>((spell: Spell, _: number) => {
-            return [`${spell.mana || '*'} ${spell.title}`, spell.value]
+            return [spell.icon, `${spell.mana || '*'} ${spell.title}`, spell.value]
         })
     }
 

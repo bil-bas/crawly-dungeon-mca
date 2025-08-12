@@ -10,7 +10,9 @@ namespace ZOrder {
 
 
 function chooseYourClass() {
-    new Menu(sprites.dungeon.statueLight, "Who are you?", dataStore.classes,
+    let options = dataStore.classes.map<MenuOption>((klass, i) => [sprites.dungeon.doorOpenNorth, klass])
+    
+    new Menu(sprites.dungeon.statueLight, "Who are you?", options, false,
         (selected: string, index: number) => {
             if (index == Menu.CANCELLED) {
                 return true
