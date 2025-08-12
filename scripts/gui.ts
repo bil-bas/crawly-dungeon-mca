@@ -205,11 +205,14 @@ class ScreenMessage extends Overlay {
 class StartMessage extends ScreenMessage {
     constructor(handler: () => void) {
         let message = [
-            "\\n     Welcome to the",
+            "\\n",
+            "     Welcome to the",
             "     Crawly Dungeon!",
-            "\\n\\nSeek your fortune, as",
-            "many before you tried and",
-            "failed...",
+            "\\n",
+            "Seek your fortune, as",
+            "many before you have,",
+            "predictably, tried and",
+            "unerringly failed...",
         ]
         super(message, "Press <A> to delve!", () => {
             game.popScene()
