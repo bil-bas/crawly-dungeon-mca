@@ -190,24 +190,6 @@ class Shock extends ProjectileSpell {
     get mana(): int8 { return 2 }
 }
 
-class IceJavelin extends ProjectileSpell {
-    get icon() { return sprites.projectile.firework4 }
-    get title() { return "Ice Javelin" }
-    get mana(): int8 { return 1 }
-}
-
-class FrostStorm extends ProjectileSpell {
-    get icon() { return sprites.projectile.explosion4 }
-    get title() { return "Frost Storm" }
-    get mana(): int8 { return 3 }
-}
-
-class RockBlast extends ProjectileSpell {
-    get icon() { return sprites.castle.rock1 }
-    get title() { return "Rock Blast" }
-    get mana(): int8 { return 2 }
-}
-
 class Heal extends Spell {
     get icon() { return sprites.projectile.heart3 }
     get title() { return "Heal" }
@@ -246,45 +228,20 @@ class Restore extends Spell {
     }
 }
 
-class Earthquake extends Spell {
-    get icon() { return sprites.projectile.drop5 }
-    get title() { return "Earthquake" }
-    get mana(): int8 { return 4 }
-}
-
-class BallLightning extends ProjectileSpell {
-    get icon() { return sprites.projectile.laser2 }
-    get title() { return "Ball Lighting" }
-    get mana(): int8 { return 2 }
-}
-
-class Thunderbolt extends ProjectileSpell {
-    get icon() { return sprites.projectile.laser4 }
-    get title() { return "Thunderbolt" }
-    get mana(): int8 { return 3 }
-}
-
 const SPELL_BOOK: Spell[] = [
     // cost 1
     new Heal(),
     new Firebolt(),
-    new IceJavelin(),
     new BloodMagic(),
 
     // cost 2 - Raise dead,
-    new Shock(),
-    new RockBlast(),
-    new BallLightning(),
   
     // cost 3 - Goblin Horde,
     new Restore(),
-    new FrostStorm(),
     new Fireball(), 
     new Starfire(),
-    new Thunderbolt(),
 
     // cost 4
-    new Earthquake(),
 ]
 
 

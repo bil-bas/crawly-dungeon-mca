@@ -33,7 +33,6 @@ function createPlayer(klass: string): Player {
     switch (klass) {
         case Witch.title: return new Witch(klass)
         case Haemomancer.title: return new Haemomancer(klass)
-        case Archmage.title: return new Archmage(klass)
         default: return null
     }
 }

@@ -291,14 +291,6 @@ class Haemomancer extends Witch {
     }
 }
 
-class Archmage extends Witch {
-    static get title() { return "Archmage" }
-
-    _setInitialSpells() {
-        this.primarySpell = new Firebolt()
-        this.secondarySpell = new Fireball()
-    }
-}
 
 class Random extends Player {
     static get title() { return "Random" }
