@@ -5,7 +5,6 @@ class Item {
     protected canUse: boolean = true
 
     protected get image(): Image { return null }
-    protected get useSound(): music.Playable { return sounds.useItemSound }
     protected get message(): string { return null }
     protected get options(): MenuOption[] { return null }
 
@@ -21,7 +20,6 @@ class Item {
     use(): void {
         if (!this.canUse) return
         
-        sounds.play(this.useSound)
         this.canUse = false
 
         new Menu(this.sprite.image, this.message, this.options, true,
@@ -37,7 +35,8 @@ class Item {
                 }
 
                 this.canUse = false
-                this.postUse()
+
+                after(250, () => this.postUse())
                 
                 return false
             }
@@ -85,14 +84,12 @@ class Shrine extends Item {
         }
     }
 
-    protected postUse() {
-        after(400, () => {
-            player.coins += 1000
-            sounds.play(sounds.sacrifice)
-                    
-            this.sprite.startEffect(effects.coolRadial, 2000)
-            after(1000, () => this.sprite.setImage(this.SPENT_IMAGE))
-        })
+    protected postUse(): void {
+        player.coins += 1000
+        sounds.play(sounds.sacrifice)
+                
+        this.sprite.startEffect(effects.coolRadial, 2000)
+        after(1000, () => this.sprite.setImage(this.SPENT_IMAGE))
     }
 }
 
@@ -108,7 +105,7 @@ class Mushroom extends Item {
         ]
     }
 
-    protected tryUse(selected: string, index: number) {
+    protected tryUse(selected: string, index: number): boolean {
         after(200, () => {
             player.life = 1
             player.mana = player.maxMana
@@ -117,11 +114,9 @@ class Mushroom extends Item {
         return true
     }
 
-    protected postUse() {
-        after(400, () => {
-            sounds.play(sounds.eat)
-            this.sprite.destroy(effects.hearts, 1000)
-        })
+    protected postUse(): void {
+        sounds.play(sounds.eat)
+        this.sprite.destroy(effects.hearts, 1000)
     }
 }
 
@@ -147,20 +142,16 @@ class Shop extends Item {
         let [image, title, value] = this.wares[index]
         if (player.coins >= value) {
             player.coins -= value
-            after(200, () => {
-                this.purchase(selected, index)
-            })
+            after(200, () => this.purchase(selected, index))
             return true
         } else {
             return false
         }
     }
 
-    protected postUse() {
-        after(400, () => {
-            sounds.play(sounds.teleport)
-            this.sprite.destroy(effects.bubbles, 2000)
-        })
+    protected postUse(): void {
+        sounds.play(sounds.teleport)
+        this.sprite.destroy(effects.bubbles, 2000)
     }
 }
 
@@ -175,7 +166,7 @@ class ItemShop extends Shop {
         ]
     }
 
-    protected purchase(selected: string, index: number) {
+    protected purchase(selected: string, index: number): void {
         switch (selected.slice(0, 4)) {
             case "Life":
                 player.life += 1
@@ -201,7 +192,7 @@ class SpellShop extends Shop {
         })
     }
 
-    protected purchase(selected: string, index: number) {
+    protected purchase(selected: string, index: number): void {
         player.secondarySpell = SPELL_BOOK[index]
     }
 }
