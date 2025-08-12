@@ -29,9 +29,11 @@ class Menu {
                 protected pushScene: boolean,
                 handler: (selected: string, index: number) => boolean) {
 
-        if (this.pushScene) game.pushScene()
-
-        scene.setBackgroundColor(Colour.DARK_PURPLE)
+        if (this.pushScene) {
+            game.pushScene()
+        }
+        
+        scene.setBackgroundColor(Colour.WHITE)
 
         this._closeup = new Closeup(actor, question)
 

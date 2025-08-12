@@ -1,22 +1,46 @@
 type ShopItem = [Image, string, number]
 
 class Item {
-    _sprite: Sprite
-    _present: boolean = true
+    protected sprite: Sprite
+    protected present: boolean = true
 
-    get image(): Image { return null }
-    get canUse() { return this._present }
-    get destroyOnUse(): boolean { return true }
-    get useSound(): music.Playable { return sounds.useItemSound }
-
-    use() {
-        sounds.play(this.useSound)
-    }
+    protected get image(): Image { return null }
+    protected get canUse() { return this.present }
+    protected get useSound(): music.Playable { return sounds.useItemSound }
+    protected get message(): string { return "" }
+    protected get options(): MenuOption[] { return [] }
 
     constructor(tile: tiles.Location) {
-        this._sprite = sprites.create(this.image, SpriteKind.Item)
-        tiles.placeOnTile(this._sprite, tile)
-        this._sprite.data["obj"] = this
+        this.sprite = sprites.create(this.image, SpriteKind.Item)
+        tiles.placeOnTile(this.sprite, tile)
+        this.sprite.data["obj"] = this
+    }
+
+    protected tryUse(selected: string, index: number): boolean { return true }
+    protected postUse(): void { }
+
+    use(): void {
+        sounds.play(this.useSound)
+        this.present = false
+
+        new Menu(this.sprite.image, this.message, this.options, true,
+            (selected: string, index: number) => {
+                if (index == Menu.CANCELLED) {
+                    after(2000, () => this.present = true)
+                    return false
+                }
+
+                if (!this.tryUse(selected, index)) {
+                    sounds.play(sounds.error)
+                    return true
+                }
+
+                this.present = false
+                this.postUse()
+                
+                return false
+            }
+        )
     }
 }
 
@@ -25,138 +49,116 @@ class Shrine extends Item {
     SPENT_IMAGE = sprites.dungeon.statueDark
 
     get image(): Image { return sprites.dungeon.statueLight }
-    get isSpent(): boolean { return this._sprite.image == this.SPENT_IMAGE }
+    get isSpent(): boolean { return this.sprite.image == this.SPENT_IMAGE }
+    get message(): string { return `What will you give up?` }
 
     constructor(tile: tiles.Location) {
         super(tile)
-        this._sprite.y -= 7 // Standing on the tile and so we can interact with it.
+        this.sprite.y -= 7 // Standing on the tile and so we can interact with it.
     }
 
-    use() {
-        let options: MenuOption[] = [
-            [sprites.projectile.heart3, "Sacrifice your Blood"],
-            [sprites.projectile.flash3, "Sacrifice your Mana"],
+    protected get options(): MenuOption[] {
+        return [
+            [sprites.projectile.heart3, "Sacrifice Blood"],
+            [sprites.projectile.flash2, "Sacrifice Mana"],
         ]
-        new Menu(this._sprite.image, `What will you give up?`, options, true,
-            (selected: string, index: number) => {
-                if (index == Menu.CANCELLED) {
-                    after(2000, () => this._present = true)
-                    return false
-                }
+    }
 
-                if (index == 0 && player.life > 1) {
-                    player.life = 1
-                } else if (index == 1 && player.mana > 0) {
-                    player.mana = 0
-                } else {
-                    sounds.play(sounds.error)
-                    return true
-                }
+    protected tryUse(selected: string, index: number): boolean {
+        if (index == 0 && player.life > 1) {
+            player.life = 1
+            return true
+        } else if (index == 1 && player.mana > 0) {
+            player.mana = 0
+            return true
+        } else {
+            return false
+        }
+    }
 
-                this._present = false
-
-                after(400, () => {
-                    player.coins += 1000
-                    sounds.play(sounds.sacrifice)
+    protected postUse() {
+        after(400, () => {
+            player.coins += 1000
+            sounds.play(sounds.sacrifice)
                     
-                    this._sprite.startEffect(effects.coolRadial, 2000)
-                    after(1000, () => this._sprite.setImage(this.SPENT_IMAGE))
-                })
-                
-                return false
-            }
-        )
+            this.sprite.startEffect(effects.coolRadial, 2000)
+            after(1000, () => this.sprite.setImage(this.SPENT_IMAGE))
+        })
     }
 }
 
 class Mushroom extends Item {
-    get image(): Image { return assets.tile`mushroom` }
+    protected get image(): Image { return assets.tile`mushroom` }
+    protected get message(): string { return "What dare you injest?" }
 
-    use() {
-        let options: MenuOption[] = [
-            [sprites.castle.treeSmallPine, "Eat of the cap"],
-            [sprites.skillmap.fans, "Eat of the gills"],
-            [sprites.skillmap.kaijuIcon, "Eat of the stalk"],
+    protected get options(): MenuOption[] {
+        return [
+            [assets.tile`mushroom`, "Eat of the cap"],
+            [assets.tile`mushroom`, "Eat of the gills"],
+            [assets.tile`mushroom`, "Eat of the stalk"],
         ]
+    }
 
-        new Menu(this._sprite.image, `What dare you injest?`, options, true,
-            (selected: string, index: number) => {
-                if (index == Menu.CANCELLED) {
-                    after(2000, () => this._present = true)
-                    return false
-                }
+    protected tryUse(selected: string, index: number) {
+        after(200, () => {
+            player.life = 1
+            player.mana = player.maxMana
+        })
+        
+        return true
+    }
 
-                after(200, () => {
-                    player.life = 1
-                    player.mana = player.maxMana
-                })
-
-                this._present = false
-                after(400, () => {
-                    sounds.play(sounds.eat)
-                    this._sprite.destroy(effects.hearts, 1000)
-                })
-                
-                return false
-            }
-        )
+    protected postUse() {
+        after(400, () => {
+            sounds.play(sounds.eat)
+            this.sprite.destroy(effects.hearts, 1000)
+        })
     }
 }
 
 
 class Shop extends Item {
-    _wares(): ShopItem[] { return null }
+    protected get message() { return `You have ${player.coins} gold` }
+    protected get wares(): ShopItem[] { return [] }
 
-    _label(text: string, value: number): string {
-        return `${text}${padStart(value ? (value.toString() + " gold") : "", 25 - text.length)}`
+    protected label(text: string, value: number): string {
+        return `${text}${padStart(value ? (value.toString() + " gold") : "", 22 - text.length)}`
     }
 
-    _purchase(selected: string, index: number) { }
-
-    use(): void {
-        this._present = false
-
-        let wares = this._wares()
-
-        let options = wares.map<MenuOption>((ware: ShopItem, _) => {
+    protected get options(): MenuOption[] {
+        return this.wares.map<MenuOption>((ware: ShopItem, _) => {
             let [image, text, value] = ware
-            return [image, this._label(text, value)]
+            return [image, this.label(text, value)]
         })
+    }
 
-        new Menu(this._sprite.image, `You have ${player.coins} gold`, options, true,
-            (selected: string, index: number) => {
-                if (index == Menu.CANCELLED) {
-                    after(2000, () => this._present = true)
-                    return false
-                }
+    protected purchase(selected: string, index: number): void { }
 
-                let [image, title, value] = wares[index]
-                if (player.coins >= value) {
-                    player.coins -= value
-                    after(200, () => {
-                        this._purchase(selected, index)
-                    })
-                } else {
-                    sounds.play(sounds.error)
-                    return true
-                }
+    protected tryUse(selected: string, index: number): boolean {
+        let [image, title, value] = this.wares[index]
+        if (player.coins >= value) {
+            player.coins -= value
+            after(200, () => {
+                this.purchase(selected, index)
+            })
+            return true
+        } else {
+            return false
+        }
+    }
 
-                this._present = false
-                after(400, () => {
-                    sounds.play(sounds.teleport)
-                    this._sprite.destroy(effects.bubbles, 2000)
-                })
-                
-                return false
-            }
-        )
+    protected postUse() {
+        after(400, () => {
+            sounds.play(sounds.teleport)
+            this.sprite.destroy(effects.bubbles, 2000)
+        })
     }
 }
 
 class ItemShop extends Shop {
-    get image(): Image { return sprites.builtin.villager3WalkFront1 }
+    protected get image(): Image { return sprites.builtin.villager3WalkFront1 }
 
-    _wares(): ShopItem[] {
+    protected get wares(): ShopItem[] {
         return [
             [assets.tile`life potion`, "Life Potion", 100],
             [assets.tile`mana potion`, "Mana Crystal", 100],
@@ -164,7 +166,7 @@ class ItemShop extends Shop {
         ]
     }
 
-    _purchase(selected: string, index: number) {
+    protected purchase(selected: string, index: number) {
         switch (selected.slice(0, 4)) {
             case "Life":
                 player.life += 1
@@ -182,15 +184,15 @@ class ItemShop extends Shop {
 }
 
 class SpellShop extends Shop {
-    get image(): Image { return sprites.builtin.villager1WalkFront1 }
+    protected get image(): Image { return sprites.builtin.villager1WalkFront1 }
 
-    _wares(): ShopItem[] {
+    protected get wares(): ShopItem[] {
         return SPELL_BOOK.map<ShopItem>((spell: Spell, _: number) => {
             return [spell.icon, `${spell.mana || '*'} ${spell.title}`, spell.value]
         })
     }
 
-    _purchase(selected: string, index: number) {
-        player.secondarySpell = findSpell(selected)
+    protected purchase(selected: string, index: number) {
+        player.secondarySpell = SPELL_BOOK[index]
     }
 }

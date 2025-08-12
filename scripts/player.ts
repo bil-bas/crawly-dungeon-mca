@@ -241,7 +241,7 @@ class Player {
     }
 
     touchedItem(obj: Item) {
-        if (obj.canUse) obj.use()
+        obj.use()
     }
 
     touchedStairs(tile: tiles.Location) {
