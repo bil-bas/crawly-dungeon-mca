@@ -6,7 +6,6 @@
         "device": "*",
         "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.2.0",
         "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
-        "arcade-timers": "github:microsoft/arcade-timers#v1.1.0",
         "arcade-text": "github:aqeeaqee/arcade-text#v1.5.2",
         "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
         "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",

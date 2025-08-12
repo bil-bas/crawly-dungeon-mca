@@ -37,7 +37,7 @@ class Shrine extends Item {
                 ["Sacrifice your Blood", "Sacrifice your Mana"], true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
-                    timer.after(2000, () => this._present = true)
+                    after(2000, () => this._present = true)
                     return false
                 }
 
@@ -52,12 +52,12 @@ class Shrine extends Item {
 
                 this._present = false
 
-                timer.after(400, () => {
+                after(400, () => {
                     player.coins += 1000
                     sounds.play(sounds.sacrifice)
                     
                     this._sprite.startEffect(effects.coolRadial, 2000)
-                    timer.after(1000, () => this._sprite.setImage(this.SPENT_IMAGE))
+                    after(1000, () => this._sprite.setImage(this.SPENT_IMAGE))
                 })
                 
                 return false
@@ -79,17 +79,17 @@ class Mushroom extends Item {
         new Menu(this._sprite.image, `What dare you injest?`, options, true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
-                    timer.after(2000, () => this._present = true)
+                    after(2000, () => this._present = true)
                     return false
                 }
 
-                timer.after(200, () => {
+                after(200, () => {
                     player.life = 1
                     player.mana = player.maxMana
                 })
 
                 this._present = false
-                timer.after(400, () => {
+                after(400, () => {
                     sounds.play(sounds.eat)
                     this._sprite.destroy(effects.hearts, 1000)
                 })
@@ -126,14 +126,14 @@ class Shop extends Item {
         new Menu(this._sprite.image, `You have ${player.coins} gold`, options, true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
-                    timer.after(2000, () => this._present = true)
+                    after(2000, () => this._present = true)
                     return false
                 }
 
                 let [_, value] = wares[index]
                 if (player.coins >= value) {
                     player.coins -= value
-                    timer.after(200, () => {
+                    after(200, () => {
                         this._purchase(selected, index)
                     })
                 } else {
@@ -142,7 +142,7 @@ class Shop extends Item {
                 }
 
                 this._present = false
-                timer.after(400, () => {
+                after(400, () => {
                     sounds.play(sounds.teleport)
                     this._sprite.destroy(effects.bubbles, 2000)
                 })

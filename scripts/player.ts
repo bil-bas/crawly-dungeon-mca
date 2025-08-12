@@ -252,14 +252,14 @@ class Player {
         this.freeze()
         tiles.placeOnTile(this._sprite, tile)
 
-        timer.after(250, () => {
+        after(250, () => {
             sounds.play(sounds.stairs)
             this._sprite.setScale(0.75)
 
-            timer.after(500, () => {
+            after(500, () => {
                 this._sprite.setScale(0.5)
 
-                timer.after(500, () => {
+                after(500, () => {
                     dungeon.advance()
                     this._is_falling = false
                 })

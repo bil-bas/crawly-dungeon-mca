@@ -120,13 +120,13 @@ class Firebolt extends ProjectileSpell {
         explosion.setPosition(x, y)
         explosion.setScale(this.explosionScale)
 
-        timer.after(50, () => {
+        after(50, () => {
             explosion.setImage(sprites.projectile.explosion3)
 
-            timer.after(50, () => {
+            after(50, () => {
                 explosion.setImage(sprites.projectile.explosion4)
 
-                timer.after(50, () => {
+                after(50, () => {
                     explosion.destroy()
                 })
             })
@@ -145,10 +145,10 @@ class Starfire extends Firebolt {
 
         this._starfire()
 
-        timer.after(200, () => {
+        after(200, () => {
             this._starfire()
 
-            timer.after(200, () => {
+            after(200, () => {
                 this._starfire()
             })
         })

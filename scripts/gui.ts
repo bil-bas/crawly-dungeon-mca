@@ -66,7 +66,7 @@ class Menu {
         this._menu.close()
         this._closeup.destroy()
         if (this._pushScene) {
-            timer.after(100, () => game.popScene())
+            after(100, () => game.popScene())
         }
     }
 }
@@ -112,7 +112,7 @@ class StatUpdate extends Label {
         this.setMaxFontHeight(5)
         this.setPosition(player.sprite.x, player.sprite.y - 8)
         this.vy = -15
-        timer.after(300, () => {
+        after(300, () => {
             sprites.destroy(this)
         })
 
