@@ -31,12 +31,12 @@ function start() {
     )
 }
 
-function createPlayer(title: string) {
+function createPlayer(title: string): Player {
     switch (title) {
         case Witch.title: return new Witch()
         case Haemomancer.title: return new Haemomancer()
         case Archmage.title: return new Archmage()
-        default: throw "ook"
+        default: return null
     }
 }
 

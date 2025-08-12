@@ -19,10 +19,6 @@ class DataStore {
            settings.writeJSON("richest", richest)
         }
     }
-
-    clear() {
-        settings.clear()
-    }
 }
 
 const dataStore = new DataStore()
