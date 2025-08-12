@@ -44,7 +44,7 @@ class Menu {
         })
 
         this._menu = miniMenu.createMenuFromArray(items)
-        this._menu.setDimensions(screen.width, screen.height)
+        this._menu.setDimensions(screen.width, screen.height * 0.6)
         this._menu.left = 0
         this._menu.top = 0
 
@@ -80,10 +80,9 @@ class Closeup extends Overlay {
     constructor(image: Image, speech: string) {
         super(null, speech, Colour.WHITE, Colour.DARK_PURPLE)
         
-        this.setBorder(1, Colour.DARK_PURPLE, 4)
-        this.left = 9
+        this.setBorder(4, Colour.DARK_PURPLE)
+        this.left = 4
         this.bottom = scene.screenHeight()
-        this.setBorder(1, Colour.BLACK)
 
         this._portrait = sprites.create(image, SpriteKind.Text)
         this._portrait.setScale(4)

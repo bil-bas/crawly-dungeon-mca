@@ -2,13 +2,12 @@ type ShopItem = [Image, string, number]
 
 class Item {
     protected sprite: Sprite
-    protected present: boolean = true
+    protected canUse: boolean = true
 
     protected get image(): Image { return null }
-    protected get canUse() { return this.present }
     protected get useSound(): music.Playable { return sounds.useItemSound }
-    protected get message(): string { return "" }
-    protected get options(): MenuOption[] { return [] }
+    protected get message(): string { return null }
+    protected get options(): MenuOption[] { return null }
 
     constructor(tile: tiles.Location) {
         this.sprite = sprites.create(this.image, SpriteKind.Item)
@@ -20,13 +19,15 @@ class Item {
     protected postUse(): void { }
 
     use(): void {
+        if (!this.canUse) return
+        
         sounds.play(this.useSound)
-        this.present = false
+        this.canUse = false
 
         new Menu(this.sprite.image, this.message, this.options, true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
-                    after(2000, () => this.present = true)
+                    after(100, () => this.movedChecker())
                     return false
                 }
 
@@ -35,22 +36,30 @@ class Item {
                     return true
                 }
 
-                this.present = false
+                this.canUse = false
                 this.postUse()
                 
                 return false
             }
         )
     }
+    
+    protected movedChecker(): void {
+        if (this.sprite.overlapsWith(player.sprite)) {
+            after(100, () => this.movedChecker())
+        } else {
+            this.canUse = true
+        }
+    }
 }
 
 
 class Shrine extends Item {
-    SPENT_IMAGE = sprites.dungeon.statueDark
+    protected SPENT_IMAGE = sprites.dungeon.statueDark
 
-    get image(): Image { return sprites.dungeon.statueLight }
-    get isSpent(): boolean { return this.sprite.image == this.SPENT_IMAGE }
-    get message(): string { return `What will you give up?` }
+    protected get image(): Image { return sprites.dungeon.statueLight }
+    protected get isSpent(): boolean { return this.sprite.image == this.SPENT_IMAGE }
+    protected get message(): string { return `What will you give up?` }
 
     constructor(tile: tiles.Location) {
         super(tile)

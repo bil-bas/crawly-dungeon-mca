@@ -118,16 +118,16 @@ class HermitCrab extends Enemy {
         let crab = this._sprite
         if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingUp))) {
             crab.setVelocity(-30, 0)
-            console.log("up to left")
+            //console.log("up to left")
         } else if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingDown))) {
             crab.setVelocity(30, 0)
-            console.log("down to right")
+            //console.log("down to right")
         } else if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingLeft))) {
             crab.setVelocity(0, 30)
-            console.log("left to down")
+            //console.log("left to down")
         } else if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingRight))) {
             crab.setVelocity(0, -30)
-            console.log("right to up")
+            //console.log("right to up")
         }
     }
 }
