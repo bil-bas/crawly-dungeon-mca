@@ -275,19 +275,19 @@ class Witch extends Player {
     get animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
     get animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
     get animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
-
-    _setInitialSpells() {
-        this.primarySpell = new Firebolt()
-        this.secondarySpell = new Heal()
+    
+    _setInitialSpells(): void {
+        this.primarySpell = findSpell("Firebolt")
+        this.secondarySpell = findSpell("Heal")
     }
 }
 
 class Haemomancer extends Witch {
     static get title() { return "Haemomancer" }
 
-    _setInitialSpells() {
-        this.primarySpell = new Firebolt()
-        this.secondarySpell = new BloodMagic()
+    _setInitialSpells(): void {
+        this.primarySpell = findSpell("Firebolt")
+        this.secondarySpell = findSpell("Blood Magic")
     }
 }
 

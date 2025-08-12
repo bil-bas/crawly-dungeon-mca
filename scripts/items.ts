@@ -185,12 +185,12 @@ class SpellShop extends Shop {
     get image(): Image { return sprites.builtin.villager1WalkFront1 }
 
     _wares(): ShopItem[] {
-        return SPELL_BOOK.map<ShopItem>((spell, _) => {
+        return SPELL_BOOK.map<ShopItem>((spell: Spell, _: number) => {
             return [`${spell.mana || '*'} ${spell.title}`, spell.value]
         })
     }
 
     _purchase(selected: string, index: number) {
-        player.secondarySpell = SPELL_BOOK[index]
+        player.secondarySpell = findSpell(selected)
     }
 }

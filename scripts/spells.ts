@@ -31,7 +31,7 @@ class Spell {
         return player.mana >= this.mana
     }
 
-    cast() {
+    cast(): void {
         sounds.play(sounds.spellCast)
         player.mana -= this.mana
     }
@@ -184,11 +184,6 @@ class Fireball extends Firebolt {
     }
 }
 
-class Shock extends ProjectileSpell {
-    get icon() { return sprites.projectile.firework1 }
-    get title() { return "Shock" }
-    get mana(): int8 { return 2 }
-}
 
 class Heal extends Spell {
     get icon() { return sprites.projectile.heart3 }
@@ -212,6 +207,7 @@ class BloodMagic extends Spell {
     }
 
     cast() {
+        super.cast()
         player.life -= 1
         player.mana += 1
     }
@@ -243,5 +239,9 @@ const SPELL_BOOK: Spell[] = [
 
     // cost 4
 ]
+
+function findSpell(title: string) {
+    return SPELL_BOOK.find((value: Spell, i: number) => value.title == title)
+}
 
 
