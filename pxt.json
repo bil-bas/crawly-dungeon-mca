@@ -44,6 +44,7 @@
         "arcade"
     ],
     "preferredEditor": "tsprj",
+    "languageRestriction": "javascript-only",
     "yotta": {
         "config": {
             "PXT_GC_CHECKS": 1
