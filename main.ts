@@ -2,8 +2,9 @@ namespace ZOrder {
     export const ITEMS: int8 = 0
     export const ENEMIES: int8 = 1
     export const PLAYER: int8 = 2
-    export const SPELLS: int8 = 3
-    export const FLOATER: int8 = 4
+    export const PET: int8 = 3
+    export const SPELLS: int8 = 4
+    export const FLOATER: int8 = 5
     export const UI: int8 = 250
 }
 
@@ -15,13 +16,13 @@ function chooseYourClass(): void {
     if (dataStore.randomUnlocked) {
         options.push([Random.icon, Random.title])
     }
-    
+
     new Menu(sprites.dungeon.statueLight, "Who are you?", options, false,
         (selected: string, index: number): boolean => {
             if (index == Menu.CANCELLED) {
                 return true // Disable cancel button!
             }
-            
+
             if (selected == Random.title) {
                 selected = dataStore.classes[randint(0, dataStore.classes.length - 1)]
             }

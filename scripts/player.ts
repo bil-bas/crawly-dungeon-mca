@@ -26,12 +26,20 @@ class Player {
     protected _primarySpellIndicator: SpellIndicator
     protected _secondarySpellIndicator: SpellIndicator
     protected _speed: int8 = 60
+    protected _pet: Pet|null = null
+
+    public get pet(): Pet|null { return this._pet }
+    public set pet(pet: Pet | null) {
+        if (this.pet) {
+            this.pet.destroy()
+        }
+        this._pet = pet
+    }
 
     protected animUp() { return [sprites.swamp.witchBack0, sprites.swamp.witchBack1, sprites.swamp.witchBack2, sprites.swamp.witchBack3] }
     protected animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
     protected animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
     protected animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
-
 
     public get primarySpell(): Spell|null { return this._primarySpell }
     public set primarySpell(spell: Spell) {
@@ -309,7 +317,7 @@ class Druid extends Wizard {
 
     constructor(klass: string) {
         super(klass)
-        this.secondarySpell = findSpell("Heal")
+        this.secondarySpell = findSpell("Summon")
     }
 }
 

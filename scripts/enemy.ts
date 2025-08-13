@@ -51,7 +51,6 @@ class Enemy {
 
     public melee(damage: number) : int8 {
         this._life -= damage
-        game.setGameOverMessage(false, this.killedMessage)
         return 1
     }
 

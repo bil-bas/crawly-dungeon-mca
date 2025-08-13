@@ -233,6 +233,29 @@ class Restore extends Spell {
     }
 }
 
+class Summon extends Spell {
+    public get icon(): Image { return sprites.builtin.angelFish0 }
+    public get title(): string { return "Summon" }
+    public get mana(): int8 { return 2 }
+
+    public cast(): void {
+        super.cast()
+
+        player.pet = this.randomPet()
+    }
+
+    protected randomPet(): Pet {
+        Math.randomRange(0, game.runtime()) // Push the RNG to be more random.
+
+        switch (randint(0, 2)) {
+            case 0: return new Cat()
+            case 1: return new Dog()
+            case 2: return new ClownFish()
+            default: throw null
+        }
+    }
+}
+
 const SPELL_BOOK: Spell[] = [
     // cost 1
     new Heal(),
@@ -240,6 +263,7 @@ const SPELL_BOOK: Spell[] = [
     new BloodMagic(),
 
     // cost 2 - Raise dead,
+    new Summon(),
 
     // cost 3 - Goblin Horde,
     new Restore(),

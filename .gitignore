@@ -12,3 +12,4 @@ _site
 .simstate.json
 
 *.code-workspace
+.vscode
