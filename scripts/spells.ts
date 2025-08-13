@@ -3,6 +3,13 @@ namespace SpriteKind {
     export const ProjectileSpell = SpriteKind.create()
 }
 
+namespace Direction {
+    export const LEFT: int8 = 1
+    export const RIGHT: int8 = 2
+    export const UP: int8 = 3
+    export const DOWN: int8 = 4
+}
+
 sprites.onDestroyed(SpriteKind.ProjectileSpell, (projectile: Sprite) => {
     projectile.data["obj"].onProjectileDestroyed(projectile)
 })
@@ -46,6 +53,30 @@ class ProjectileSpell extends Spell {
     }
 
     public onProjectileHitWall(projectile: Sprite, tile: tiles.Location): void { }
+
+    public cast(): void {
+        super.cast()
+
+        if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingRight)) ||
+            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingRight))) {
+            
+            this.castInDirection(Direction.RIGHT)
+        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingLeft)) ||
+            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
+            
+            this.castInDirection(Direction.LEFT)
+        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingUp)) ||
+            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingUp))) {
+            
+            this.castInDirection(Direction.UP)
+        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingDown)) ||
+            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingDown))) {
+            
+            this.castInDirection(Direction.DOWN)
+        }
+    }
+
+    protected castInDirection(direction: number) { }
 }
 
 // A firebolt hits a single target for small damage.
@@ -55,47 +86,27 @@ class Firebolt extends ProjectileSpell {
     public get mana(): int8 { return 1 }
 
     protected get splashRadius(): int8 {return 0 }
-    protected get explosionScale(): int8 { return 1 }
-
-    public cast(): void {
-        super.cast()
-
-        if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingRight)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingRight))) {
-            
-            this.firebolt("right")
-        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingLeft)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
-            
-            this.firebolt("left")
-        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingUp)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingUp))) {
-            
-            this.firebolt("up")
-        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingDown)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingDown))) {
-            
-            this.firebolt("down")
-        }
-    }
-
-    protected firebolt(direction: string): void {
+    
+    protected castInDirection(direction: number): void {
         let vx = 0, vy = 0
 
-        if (direction == "left") {
-            vx = -100
-        } else if (direction == "right") {
-            vx = 100
-        } else if (direction == "up") {
-            vy = -100
-        } else { // Down
-            vy = 100
+        switch (direction) {
+            case Direction.LEFT:
+                vx = -100
+                break
+            case Direction.RIGHT:
+                vx = 100
+                break
+            case Direction.UP:
+                vy = -100
+                break
+            default:
+                vy = 100
         }
 
         let ball = sprites.createProjectileFromSprite(sprites.projectile.explosion1, player.sprite, vx, vy)
         ball.z = ZOrder.SPELLS
         ball.setKind(SpriteKind.ProjectileSpell)
-        ball.setScale(2)
         ball.startEffect(effects.fire)
         ball.data["obj"] = this
     }
@@ -114,11 +125,10 @@ class Firebolt extends ProjectileSpell {
         }
     }
 
-    protected explosion(x: number, y: number): void {
+    protected explosion(x: number, y: number): Sprite {
         let explosion = sprites.create(sprites.projectile.explosion2, SpriteKind.Explosion)
         explosion.z = ZOrder.SPELLS
         explosion.setPosition(x, y)
-        explosion.setScale(this.explosionScale)
 
         after(50, () => {
             explosion.setImage(sprites.projectile.explosion3)
@@ -131,6 +141,7 @@ class Firebolt extends ProjectileSpell {
                 })
             })
         })
+        return explosion
     }
 }
 
@@ -145,18 +156,18 @@ class Starfire extends Firebolt {
 
         this.starfire()
 
-        after(200, () => {
+        after(300, () => {
             this.starfire()
 
-            after(200, () => {
+            after(300, () => {
                 this.starfire()
             })
         })
     }
 
     protected starfire(): void {
-        for (let direction of ["left", "right", "up", "down"]) {
-            this.firebolt(direction)
+        for (let direction of [Direction.UP, Direction.DOWN, Direction.RIGHT, Direction.LEFT]) {
+            this.castInDirection(direction)
         }
     }
 }
@@ -166,20 +177,19 @@ class Fireball extends Firebolt {
     public get icon() { return sprites.projectile.explosion3 }
     public get title() { return "Fireball" }
     public get mana(): int8 { return 3 }
-
     public get hitDamage(): int8 { return 0 }
-    protected get splashRadius(): int8 { return 16 * 2 }
     protected get splashDamage(): int8 { return 2 }
-    protected get explosionScale(): int8 { return 3 }
 
-    public onProjectileDestroyed(projectile: Sprite): void {
-        super.onProjectileDestroyed(projectile)
+    protected explosion(x: number, y: number): Sprite {
+        let explosion = super.explosion(x, y)
+        explosion.setScale(4)
 
         sprites.allOfKind(SpriteKind.Enemy).forEach((enemy: Sprite) => {
-            if (projectile.overlapsWith(enemy)) {
+            if (explosion.overlapsWith(enemy)) {
                 enemy.data["obj"].life -= this.splashDamage
             }
         })
+        return explosion
     }
 }
 
@@ -243,5 +253,3 @@ function findSpell(title: string): Spell {
     return SPELL_BOOK.find((value: Spell, i: number) => value.title == title)
     throw title
 }
-
-
