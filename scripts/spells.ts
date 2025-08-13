@@ -176,8 +176,7 @@ class Fireball extends Firebolt {
         super.onProjectileDestroyed(projectile)
 
         sprites.allOfKind(SpriteKind.Enemy).forEach((enemy: Sprite) => {
-            let distance_to_center = spriteutils.distanceBetween(projectile, enemy)
-            if (distance_to_center - enemy.width * 0.5 < this.splashRadius) {
+            if (projectile.overlapsWith(enemy)) {
                 enemy.data["obj"].life -= this.splashDamage
             }
         })

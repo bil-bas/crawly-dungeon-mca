@@ -11,7 +11,6 @@
         "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.2.0",
         "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
         "arcade-text": "github:aqeeaqee/arcade-text#v1.5.2",
-        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.4.1",
         "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
         "arcade-shadowcasting": "github:riknoll/arcade-shadowcasting#v0.0.4",
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1"
