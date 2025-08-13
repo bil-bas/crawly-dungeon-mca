@@ -9,7 +9,7 @@ const ALL_STAIRS: Image[] = [
 ]
 
 
-class Player {  
+class Player {
     static get title(): string { throw null }
     static get icon(): Image { return sprites.swamp.witchForward0 }
 
@@ -31,8 +31,8 @@ class Player {
     protected animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
     protected animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
     protected animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
-    
-        
+
+
     public get primarySpell(): Spell|null { return this._primarySpell }
     public set primarySpell(spell: Spell) {
         if (this._primarySpellIndicator) {
@@ -49,7 +49,7 @@ class Player {
         this._secondarySpell = spell
         this._secondarySpellIndicator = new SpellIndicator(this._secondarySpell, false)
     }
-  
+
     public get coins(): number { return this._coins }
     public set coins(value: number) {
         new StatUpdate(sprites.builtin.coin0, value - this._coins)
@@ -93,7 +93,7 @@ class Player {
             new DeathMessage(this)
         }
     }
-    
+
     constructor(public title: string) {
         this.sprite = sprites.create(sprites.swamp.witchForward0, SpriteKind.Player)
         this.sprite.z = ZOrder.PLAYER
@@ -156,7 +156,7 @@ class Player {
         // Casting spells
         controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
             if (this.isFalling) return
-        
+
             if (this._primarySpell.canCast()) {
                 this._primarySpell.cast()
             } else {
@@ -214,13 +214,13 @@ class Player {
     protected addAnimations(): void {
         this.addAnimation(this.animUp(), Predicate.MovingUp)
         this.addAnimation([this.animUp()[0]], Predicate.FacingUp)
-        
+
         this.addAnimation(this.animDown(), Predicate.MovingDown)
         this.addAnimation([this.animDown()[0]], Predicate.FacingDown)
-        
+
         this.addAnimation(this.animLeft(), Predicate.MovingLeft)
         this.addAnimation([this.animLeft()[0]], Predicate.FacingLeft)
-        
+
         this.addAnimation(this.animRight(), Predicate.MovingRight)
         this.addAnimation([this.animRight()[0]], Predicate.FacingRight)
     }
@@ -291,7 +291,7 @@ class BloodWitch extends Wizard {
     protected animDown() { return super.replaceAll(super.animDown(), Colour.RED) }
     protected animLeft() { return super.replaceAll(super.animLeft(), Colour.RED) }
     protected animRight() { return super.replaceAll(super.animRight(), Colour.RED) }
-    
+
     constructor(klass: string) {
         super(klass)
         this.secondarySpell = findSpell("Blood Magic")
@@ -306,7 +306,7 @@ class Druid extends Wizard {
     protected animDown() { return super.replaceAll(super.animDown(), Colour.GREEN) }
     protected animLeft() { return super.replaceAll(super.animLeft(), Colour.GREEN) }
     protected animRight() { return super.replaceAll(super.animRight(), Colour.GREEN) }
-    
+
     constructor(klass: string) {
         super(klass)
         this.secondarySpell = findSpell("Heal")
@@ -318,5 +318,3 @@ class Random extends Player {
     static get title() { return "Random" }
     static get icon(): Image { return assets.image`random` }
 }
-
-

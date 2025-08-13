@@ -9,9 +9,9 @@ class Overlay extends TextSprite {
               0, // padding
               1, Colour.DARK_PURPLE, // Outline
               icon)
-        
+
         this.setupSprite(this)
-    }   
+    }
 
     protected setupSprite(sprite: Sprite) {
         sprite.z = ZOrder.UI
@@ -32,7 +32,7 @@ class Menu {
         if (this.pushScene) {
             game.pushScene()
         }
-        
+
         scene.setBackgroundColor(Colour.WHITE)
 
         this.closeup = new Closeup(actor, question)
@@ -79,7 +79,7 @@ class Closeup extends Overlay {
 
     constructor(image: Image, speech: string) {
         super(undefined, speech, Colour.WHITE, Colour.DARK_PURPLE)
-        
+
         this.setBorder(4, Colour.DARK_PURPLE)
         this.left = 4
         this.bottom = scene.screenHeight()
@@ -88,7 +88,7 @@ class Closeup extends Overlay {
         this.portrait.setScale(4)
         this.portrait.right = screen.width
         this.portrait.bottom = screen.height + 15
-        
+
         this.setupSprite(this)
 
         this.portrait.z = 500
@@ -149,7 +149,7 @@ class CoinLabel extends Label {
 
 class StatusBar extends Label {
     protected readonly status: StatusBarSprite
-    
+
     constructor(kind: number) {
         super(kind == StatusBarKind.Health ? sprites.projectile.heart3 : sprites.projectile.star3, "0/0")
 
@@ -189,7 +189,7 @@ class ScreenMessage extends Overlay {
         game.pushScene()
 
         super(undefined, lines.join("\\n"), Colour.LIGHT_BLUE, Colour.DARK_PURPLE)
-        scene.setBackgroundColor(Colour.DARK_PURPLE)        
+        scene.setBackgroundColor(Colour.DARK_PURPLE)
         this.setMaxFontHeight(5)
         this.left = 4
         this.top = 4

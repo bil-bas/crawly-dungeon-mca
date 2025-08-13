@@ -8,7 +8,7 @@ class Dungeon {
         [-1, +0],           [+1, +0],
         [-1, +1], [+0, +1], [+1, +1],
     ]
-    
+
     public level: tiles.TileMapData|null = null
     protected levelIndex: int8 = -1
 
@@ -77,7 +77,7 @@ class Dungeon {
             default:
                 clear = false
         }
-        
+
         if (clear) {
             this.clearTile(tile)
         }
@@ -87,20 +87,20 @@ class Dungeon {
     protected render_brick(view_map: tiles.TileMapData, column: number, row: number, tile: tiles.Location) : void {
         let adjacent_pattern = Dungeon.ADJACENT_OFFSETS.map((offset: Array<number>) => {
             let x = column + offset[0], y = row + offset[1]
-            
+
             if (view_map.isOutsideMap(x, y)) return 1
 
             let adjacent = view_map.getTileImage(view_map.getTile(x, y))
             return (adjacent == sprites.builtin.brick) ? 1 : 0
         })
-        
+
         tiles.setTileAt(tile, this.wall_image_from_adjacent(adjacent_pattern.join("")))
         tiles.setWallAt(tile, true)
     }
 
     // check adjacent squares for walls, to work out how to join them.
     protected wall_image_from_adjacent(pattern: string): Image {
-        switch (pattern) {        
+        switch (pattern) {
             case "11111110":
                 return sprites.dungeon.purpleOuterNorthWest
             case "11111011":
@@ -109,10 +109,10 @@ class Dungeon {
                 return sprites.dungeon.purpleOuterSouthEast
             case "01111111":
                 return sprites.dungeon.purpleOuterSouthWest
-            
+
             case "11111000":
             case "11111001":
-            case "11111100":   
+            case "11111100":
             case "11111101":
                 return sprites.dungeon.purpleOuterNorth0
             case "00011111":
@@ -130,7 +130,7 @@ class Dungeon {
             case "11010111":
             case "11110111":
                 return sprites.dungeon.purpleOuterWest0
-            
+
             case "00001011":
             case "00001111":
             case "00101011":
@@ -163,7 +163,7 @@ class Dungeon {
         for (let kind of [SpriteKind.Enemy, SpriteKind.Item]) {
             sprites.destroyAllSpritesOfKind(kind)
         }
-        
+
         this.levelIndex += 1
         player.sprite.setScale(1)
         player.resetMovement()

@@ -57,7 +57,7 @@ class Enemy {
 
     protected add_animation(images: Image[], predicate1: Predicate, predicate2?: Predicate) {
         let rule: characterAnimations.Rule
-        
+
         if (predicate2) {
             rule = characterAnimations.rule(predicate1, predicate2)
         } else {
@@ -67,7 +67,7 @@ class Enemy {
     }
 
     public touchWall(tile: tiles.Location) { }
-    
+
     public destroy(): void {
         this.sprite.destroy()
         if (this.lifeBar) {
@@ -88,7 +88,7 @@ class Bat extends Enemy {
 
         let left = [sprites.builtin.forestBat0, sprites.builtin.forestBat1, sprites.builtin.forestBat2, sprites.builtin.forestBat3]
         this.add_animation(left, Predicate.MovingLeft)
-        
+
         this.add_animation(left, Predicate.MovingRight)
     }
 }
@@ -142,7 +142,7 @@ class Monkey extends Enemy {
 
         let up = [sprites.builtin.forestMonkey0, sprites.builtin.forestMonkey1, sprites.builtin.forestMonkey2, sprites.builtin.forestMonkey3]
         this.add_animation(up, Predicate.MovingUp)
-        
+
         let down = [sprites.builtin.forestMonkey4, sprites.builtin.forestMonkey5, sprites.builtin.forestMonkey2, sprites.builtin.forestMonkey7]
         this.add_animation(up, Predicate.MovingDown)
     }
@@ -170,13 +170,13 @@ class Shroom extends Enemy {
 
         let ne = [sprites.swamp.mushroomBackLeft0, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft3]
         this.add_animation(ne, Predicate.MovingLeft, Predicate.MovingUp)
-        
+
         let nw = [sprites.swamp.mushroomBackRight0, sprites.swamp.mushroomBackRight1, sprites.swamp.mushroomBackRight2, sprites.swamp.mushroomBackRight3]
         this.add_animation(nw, Predicate.MovingRight, Predicate.MovingUp)
-        
+
         let sw = [sprites.swamp.mushroomFrontLeft0, sprites.swamp.mushroomFrontLeft2, sprites.swamp.mushroomFrontLeft2, sprites.swamp.mushroomFrontLeft3]
         this.add_animation(sw, Predicate.MovingLeft, Predicate.MovingDown)
-        
+
         let se = [sprites.swamp.mushroomFrontRight0, sprites.swamp.mushroomFrontRight1, sprites.swamp.mushroomFrontRight2, sprites.swamp.mushroomFrontRight3]
         this.add_animation(se, Predicate.MovingRight, Predicate.MovingDown)
     }
@@ -202,8 +202,8 @@ class Skeleton extends Enemy {
             player.mana -= 1
             this._life -= damage
             return 0
-        } 
-        
+        }
+
         return super.melee(damage)
     }
 }

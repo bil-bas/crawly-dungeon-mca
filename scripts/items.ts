@@ -19,7 +19,7 @@ class Item {
 
     use(): void {
         if (!this.canUse) return
-        
+
         this.canUse = false
 
         new Menu(this.sprite.image, this.message, this.options, true,
@@ -37,12 +37,12 @@ class Item {
                 this.canUse = false
 
                 after(250, () => this.postUse())
-                
+
                 return false
             }
         )
     }
-    
+
     protected movedChecker(): void {
         if (this.sprite.overlapsWith(player.sprite)) {
             after(100, () => this.movedChecker())
@@ -87,7 +87,7 @@ class Shrine extends Item {
     protected postUse(): void {
         player.coins += 1000
         sounds.play(sounds.sacrifice)
-                
+
         this.sprite.startEffect(effects.coolRadial, 2000)
         after(1000, () => this.sprite.setImage(this.SPENT_IMAGE))
     }
@@ -110,7 +110,7 @@ class Mushroom extends Item {
             player.life = 1
             player.mana = player.maxMana
         })
-        
+
         return true
     }
 

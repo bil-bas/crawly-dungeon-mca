@@ -59,19 +59,19 @@ class ProjectileSpell extends Spell {
 
         if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingRight)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingRight))) {
-            
+
             this.castInDirection(Direction.RIGHT)
         } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingLeft)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
-            
+
             this.castInDirection(Direction.LEFT)
         } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingUp)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingUp))) {
-            
+
             this.castInDirection(Direction.UP)
         } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingDown)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingDown))) {
-            
+
             this.castInDirection(Direction.DOWN)
         }
     }
@@ -86,7 +86,7 @@ class Firebolt extends ProjectileSpell {
     public get mana(): int8 { return 1 }
 
     protected get splashRadius(): int8 {return 0 }
-    
+
     protected castInDirection(direction: number): void {
         let vx = 0, vy = 0
 
@@ -240,10 +240,10 @@ const SPELL_BOOK: Spell[] = [
     new BloodMagic(),
 
     // cost 2 - Raise dead,
-  
+
     // cost 3 - Goblin Horde,
     new Restore(),
-    new Fireball(), 
+    new Fireball(),
     new Starfire(),
 
     // cost 4
@@ -251,5 +251,4 @@ const SPELL_BOOK: Spell[] = [
 
 function findSpell(title: string): Spell {
     return SPELL_BOOK.find((value: Spell, i: number) => value.title == title)
-    throw title
 }
