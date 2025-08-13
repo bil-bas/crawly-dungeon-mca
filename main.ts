@@ -40,8 +40,9 @@ type PlayerConstructor = new (title: string) => Player
 
 function playerIcon(title: string): Image {
     switch (title) {
-        case Witch.title: return Witch.icon
-        case Haemomancer.title: return Haemomancer.icon
+        case Druid.title: return Druid.icon
+        case Wizard.title: return Wizard.icon
+        case BloodWitch.title: return BloodWitch.icon
         case Random.title: return Random.icon
         default: throw null
     }
@@ -49,8 +50,9 @@ function playerIcon(title: string): Image {
 
 function createPlayer(title: string): Player {
     switch (title) {
-        case Witch.title: return new Witch(title)
-        case Haemomancer.title: return new Haemomancer(title)
+        case Druid.title: return new Druid(title)
+        case Wizard.title: return new Wizard(title)
+        case BloodWitch.title: return new BloodWitch(title)
         default: throw null
     }
 }
@@ -58,6 +60,8 @@ function createPlayer(title: string): Player {
 
 // SETUP
 const dataStore = new DataStore()
+dataStore.unlockClass("Druid")
+
 let player: Player
 let dungeon: Dungeon
 let gui: Gui

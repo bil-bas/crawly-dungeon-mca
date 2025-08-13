@@ -2,7 +2,7 @@
 type HighScore = [string, number]
 
 class DataStore {
-    public get classes(): string[] { return settings.readJSON("classes") || [Witch.title] }
+    public get classes(): string[] { return settings.readJSON("classes") || [Wizard.title] }
     public get richest(): HighScore[] { return settings.readJSON("richest") || [] }
     public get randomUnlocked(): boolean { return settings.readJSON("randomUnlocked") || false }
 

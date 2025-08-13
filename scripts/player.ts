@@ -11,7 +11,7 @@ const ALL_STAIRS: Image[] = [
 
 class Player {  
     static get title(): string { throw null }
-    static get icon(): Image { throw null }
+    static get icon(): Image { return sprites.swamp.witchForward0 }
 
     protected isFalling: boolean = false
     protected _keys: int8 = 0
@@ -27,10 +27,11 @@ class Player {
     protected _secondarySpellIndicator: SpellIndicator
     protected _speed: int8 = 60
 
-    protected get animUp(): Image[] { throw null }
-    protected get animDown(): Image[] { throw null }
-    protected get animLeft(): Image[] { throw null }
-    protected get animRight(): Image[] { throw null }
+    protected animUp() { return [sprites.swamp.witchBack0, sprites.swamp.witchBack1, sprites.swamp.witchBack2, sprites.swamp.witchBack3] }
+    protected animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
+    protected animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
+    protected animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
+    
         
     public get primarySpell(): Spell|null { return this._primarySpell }
     public set primarySpell(spell: Spell) {
@@ -211,17 +212,17 @@ class Player {
     }
 
     protected addAnimations(): void {
-        this.addAnimation(this.animUp, Predicate.MovingUp)
-        this.addAnimation([this.animUp[0]], Predicate.FacingUp)
+        this.addAnimation(this.animUp(), Predicate.MovingUp)
+        this.addAnimation([this.animUp()[0]], Predicate.FacingUp)
         
-        this.addAnimation(this.animDown, Predicate.MovingDown)
-        this.addAnimation([this.animDown[0]], Predicate.FacingDown)
+        this.addAnimation(this.animDown(), Predicate.MovingDown)
+        this.addAnimation([this.animDown()[0]], Predicate.FacingDown)
         
-        this.addAnimation(this.animLeft, Predicate.MovingLeft)
-        this.addAnimation([this.animLeft[0]], Predicate.FacingLeft)
+        this.addAnimation(this.animLeft(), Predicate.MovingLeft)
+        this.addAnimation([this.animLeft()[0]], Predicate.FacingLeft)
         
-        this.addAnimation(this.animRight, Predicate.MovingRight)
-        this.addAnimation([this.animRight[0]], Predicate.FacingRight)
+        this.addAnimation(this.animRight(), Predicate.MovingRight)
+        this.addAnimation([this.animRight()[0]], Predicate.FacingRight)
     }
 
     protected touchedWall(tile: tiles.Location): void {
@@ -261,16 +262,50 @@ class Player {
             })
         })
     }
+
+       protected static replace(icon: Image, colour: number): Image {
+        icon = icon.clone()
+        icon.replace(Colour.YELLOW, colour)
+        return icon
+    }
+
+    protected replaceAll(frames: Image[], color: number): Image[] {
+        return frames.map((icon: Image) => Wizard.replace(icon, color))
+    }
 }
 
-class Witch extends Player {
-    static get title(): string { return "Witch" }
-    static get icon(): Image { return sprites.swamp.witchForward0 }
+class Wizard extends Player {
+    static get title(): string { return "Wizard" }
 
-    protected get animUp() { return [sprites.swamp.witchBack0, sprites.swamp.witchBack1, sprites.swamp.witchBack2, sprites.swamp.witchBack3] }
-    protected get animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
-    protected get animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
-    protected get animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
+    constructor(klass: string) {
+        super(klass)
+        this.secondarySpell = findSpell("Fireball")
+    }
+}
+
+class BloodWitch extends Wizard {
+    static get title(): string { return "Blood Witch" }
+    static get icon(): Image { return Player.replace(Player.icon, Colour.RED) }
+
+    protected animUp() { return super.replaceAll(super.animUp(), Colour.RED) }
+    protected animDown() { return super.replaceAll(super.animDown(), Colour.RED) }
+    protected animLeft() { return super.replaceAll(super.animLeft(), Colour.RED) }
+    protected animRight() { return super.replaceAll(super.animRight(), Colour.RED) }
+    
+    constructor(klass: string) {
+        super(klass)
+        this.secondarySpell = findSpell("Blood Magic")
+    }
+}
+
+class Druid extends Wizard {
+    static get title(): string { return "Druid" }
+    static get icon(): Image { return Player.replace(Player.icon, Colour.GREEN) }
+
+    protected animUp() { return super.replaceAll(super.animUp(), Colour.GREEN) }
+    protected animDown() { return super.replaceAll(super.animDown(), Colour.GREEN) }
+    protected animLeft() { return super.replaceAll(super.animLeft(), Colour.GREEN) }
+    protected animRight() { return super.replaceAll(super.animRight(), Colour.GREEN) }
     
     constructor(klass: string) {
         super(klass)
@@ -278,16 +313,10 @@ class Witch extends Player {
     }
 }
 
-class Haemomancer extends Witch {
-    static get title(): string { return "Haemomancer" }
-
-    constructor(klass: string) {
-        super(klass)
-        this.secondarySpell = findSpell("Blood Magic")
-    }
-}
 
 class Random extends Player {
     static get title() { return "Random" }
     static get icon(): Image { return assets.image`random` }
 }
+
+
