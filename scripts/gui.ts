@@ -242,7 +242,7 @@ class DeathMessage extends ScreenMessage {
     }
 }
 
-class Hud {
+class Gui {
     protected readonly coinLabel: CoinLabel
     protected readonly keyLabel: Label
     protected readonly magicStatus: StatusBar
@@ -277,5 +277,3 @@ class SpellIndicator extends Overlay {
         this.bottom = screen.height - (primary ? 9 : 0) - 7
     }
 }
-
-let hud: Hud

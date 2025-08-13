@@ -4,9 +4,9 @@ class Item {
     protected sprite: Sprite
     protected canUse: boolean = true
 
-    protected get image(): Image { return null }
-    protected get message(): string { return null }
-    protected get options(): MenuOption[] { return null }
+    protected get image(): Image { throw null }
+    protected get message(): string { throw null }
+    protected get options(): MenuOption[] {  throw null }
 
     constructor(tile: tiles.Location) {
         this.sprite = sprites.create(this.image, SpriteKind.Item)
@@ -123,7 +123,7 @@ class Mushroom extends Item {
 
 class Shop extends Item {
     protected get message() { return `You have ${player.coins} gold` }
-    protected get wares(): ShopItem[] { return [] }
+    protected get wares(): ShopItem[] { throw null }
 
     protected label(text: string, value: number): string {
         return `${text}${padStart(value ? (value.toString() + " gold") : "", 22 - text.length)}`

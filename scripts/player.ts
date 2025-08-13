@@ -18,8 +18,8 @@ class Player {
     protected _life: int8 = INITIAL_LIFE
     protected _maxLife: int8 = INITIAL_LIFE
     public readonly sprite: Sprite
-    protected _primarySpell: Spell|null = null
-    protected _secondarySpell: Spell|null = null
+    protected _primarySpell: Spell
+    protected _secondarySpell: Spell
     protected _primarySpellIndicator: SpellIndicator
     protected _secondarySpellIndicator: SpellIndicator
     protected _speed: int8 = 60
@@ -50,40 +50,40 @@ class Player {
     public set coins(value: number) {
         new StatUpdate(sprites.builtin.coin0, value - this._coins)
         this._coins = value
-        hud.updateLabels()
+        gui.updateLabels()
     }
 
     public get mana(): int8 { return this._mana }
     public set mana(value: number) {
         new StatUpdate(sprites.projectile.firework1, value - this._mana)
         this._mana = value
-        hud.updateLabels()
+        gui.updateLabels()
     }
 
     public get maxMana(): int8 { return this._maxMana }
     public set maxMana(value: number) {
         this._maxMana = value
-        hud.updateLabels()
+        gui.updateLabels()
     }
 
     public get maxLife(): int8 { return this._maxLife }
     public set maxLife(value: number) {
         this._maxLife = value
-        hud.updateLabels()
+        gui.updateLabels()
     }
 
     public get keys(): int8 { return this._keys }
     public set keys(value: number) {
         new StatUpdate(assets.image`key`, value - this._keys)
         this._keys = value
-        hud.updateLabels()
+        gui.updateLabels()
     }
 
     public get life(): int8 { return this._life }
     public set life(value: number) {
         new StatUpdate(sprites.projectile.heart3, value - this._life)
         this._life = Math.max(value, 0)
-        hud.updateLabels()
+        gui.updateLabels()
         if (this._life == 0) {
             dataStore.setRichest(this.title, this.coins)
             new DeathMessage(this)

@@ -21,7 +21,7 @@ function chooseYourClass() {
             }
 
             player = createPlayer(selected)
-            hud = new Hud()
+            gui = new Gui()
             dungeon = new Dungeon()
 
             return false
@@ -33,12 +33,13 @@ function createPlayer(klass: string): Player {
     switch (klass) {
         case Witch.title: return new Witch(klass)
         case Haemomancer.title: return new Haemomancer(klass)
-        default: return null
+        default: throw klass
     }
 }
 
 // SETUP
 let player: Player
 let dungeon: Dungeon
+let gui: Gui
 
 new StartMessage(chooseYourClass)

@@ -21,10 +21,10 @@ scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles
 
 // Abstract base spell logic
 class Spell {
-    public get icon(): Image { return null }
-    public get title(): string { return null }
+    public get icon(): Image { throw null }
+    public get title(): string { throw null}
     public get mana(): int8 { return 1 }
-    public get value() { return this.mana * 50 }
+    public get value(): int16 { return this.mana * 50 }
     public get hitDamage(): int8 { return 1 }
 
     public canCast(): boolean {
@@ -50,8 +50,8 @@ class ProjectileSpell extends Spell {
 
 // A firebolt hits a single target for small damage.
 class Firebolt extends ProjectileSpell {
-    public get icon() { return sprites.projectile.explosion1 }
-    public get title() { return "Firebolt" }
+    public get icon(): Image { return sprites.projectile.explosion1 }
+    public get title(): string { return "Firebolt" }
     public get mana(): int8 { return 1 }
 
     protected get splashRadius(): int8 {return 0 }
@@ -200,7 +200,7 @@ class BloodMagic extends Spell {
     public get icon() { return sprites.skillmap.decoration8 }
     public get title() { return "Blood Magic" }
     public get mana(): int8 { return 0 }
-    public get value() { return 50 }
+    public get value(): int16 { return 50 }
 
     public canCast(): boolean {
         return player.life >= 2 && player.mana < player.maxMana
@@ -214,8 +214,8 @@ class BloodMagic extends Spell {
 }
 
 class Restore extends Spell {
-    public get icon() { return sprites.projectile.heart2 }
-    public get title() { return "Restore" }
+    public get icon(): Image { return sprites.projectile.heart2 }
+    public get title(): string { return "Restore" }
     public get mana(): int8 { return 2 }
 
     public cast(): void {
@@ -240,8 +240,9 @@ const SPELL_BOOK: Spell[] = [
     // cost 4
 ]
 
-function findSpell(title: string) {
+function findSpell(title: string): Spell {
     return SPELL_BOOK.find((value: Spell, i: number) => value.title == title)
+    throw title
 }
 
 
