@@ -22,7 +22,7 @@ scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles
 // Abstract base spell logic
 class Spell {
     public get icon(): Image { throw null }
-    public get title(): string { throw null}
+    public get title(): string { throw null }
     public get mana(): int8 { return 1 }
     public get value(): int16 { return this.mana * 50 }
     public get hitDamage(): int8 { return 1 }

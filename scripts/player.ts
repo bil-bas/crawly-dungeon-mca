@@ -9,7 +9,10 @@ const ALL_STAIRS: Image[] = [
 ]
 
 
-class Player {        
+class Player {  
+    static get title(): string { throw null }
+    static get icon(): Image { throw null }
+
     protected isFalling: boolean = false
     protected _keys: int8 = 0
     protected _coins: number = 0
@@ -24,10 +27,10 @@ class Player {
     protected _secondarySpellIndicator: SpellIndicator
     protected _speed: int8 = 60
 
-    protected get animUp(): Image[] { return [] }
-    protected get animDown(): Image[] { return [] }
-    protected get animLeft(): Image[] { return [] }
-    protected get animRight(): Image[] { return [] }
+    protected get animUp(): Image[] { throw null }
+    protected get animDown(): Image[] { throw null }
+    protected get animLeft(): Image[] { throw null }
+    protected get animRight(): Image[] { throw null }
         
     public get primarySpell(): Spell|null { return this._primarySpell }
     public set primarySpell(spell: Spell) {
@@ -261,7 +264,8 @@ class Player {
 }
 
 class Witch extends Player {
-    static get title() { return "Witch" }
+    static get title(): string { return "Witch" }
+    static get icon(): Image { return sprites.swamp.witchForward0 }
 
     protected get animUp() { return [sprites.swamp.witchBack0, sprites.swamp.witchBack1, sprites.swamp.witchBack2, sprites.swamp.witchBack3] }
     protected get animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
@@ -275,15 +279,15 @@ class Witch extends Player {
 }
 
 class Haemomancer extends Witch {
-    static get title() { return "Haemomancer" }
+    static get title(): string { return "Haemomancer" }
 
     constructor(klass: string) {
         super(klass)
-        this.secondarySpell = findSpell("BloodMagic")
+        this.secondarySpell = findSpell("Blood Magic")
     }
 }
 
-
 class Random extends Player {
     static get title() { return "Random" }
+    static get icon(): Image { return assets.image`random` }
 }

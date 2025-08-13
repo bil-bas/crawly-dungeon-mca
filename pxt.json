@@ -2,6 +2,10 @@
     "name": "Crawly Dungeon",
     "version": "1.0.4",
     "description": "Dungeon crawler created with Makecode Arcade (Typescript)",
+    "authors": [
+        "Bil Bas"
+    ],
+    "license": "MIT",
     "dependencies": {
         "device": "*",
         "arcade-tile-util": "github:microsoft/arcade-tile-util#v1.2.0",

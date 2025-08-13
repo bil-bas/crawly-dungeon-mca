@@ -7,20 +7,27 @@ namespace ZOrder {
     export const UI: int8 = 250
 }
 
-function chooseYourClass() {
-    let options = dataStore.classes.map<MenuOption>((klass, i) => [sprites.dungeon.doorOpenNorth, klass])
+function chooseYourClass(): void {
+    let options = dataStore.classes.map<MenuOption>((title: string) => {
+        return [playerIcon(title), title]
+    })
+
+    if (dataStore.randomUnlocked) {
+        options.push([Random.icon, Random.title])
+    }
     
     new Menu(sprites.dungeon.statueLight, "Who are you?", options, false,
-        (selected: string, index: number) => {
+        (selected: string, index: number): boolean => {
             if (index == Menu.CANCELLED) {
-                return true
+                return true // Disable cancel button!
             }
             
             if (selected == Random.title) {
-                selected = dataStore.classes[randint(0, dataStore.classes.length - 2)]
+                selected = dataStore.classes[randint(0, dataStore.classes.length - 1)]
             }
 
             player = createPlayer(selected)
+
             gui = new Gui()
             dungeon = new Dungeon()
 
@@ -29,15 +36,28 @@ function chooseYourClass() {
     )
 }
 
-function createPlayer(klass: string): Player {
-    switch (klass) {
-        case Witch.title: return new Witch(klass)
-        case Haemomancer.title: return new Haemomancer(klass)
-        default: throw klass
+type PlayerConstructor = new (title: string) => Player
+
+function playerIcon(title: string): Image {
+    switch (title) {
+        case Witch.title: return Witch.icon
+        case Haemomancer.title: return Haemomancer.icon
+        case Random.title: return Random.icon
+        default: throw null
     }
 }
 
+function createPlayer(title: string): Player {
+    switch (title) {
+        case Witch.title: return new Witch(title)
+        case Haemomancer.title: return new Haemomancer(title)
+        default: throw null
+    }
+}
+
+
 // SETUP
+const dataStore = new DataStore()
 let player: Player
 let dungeon: Dungeon
 let gui: Gui
