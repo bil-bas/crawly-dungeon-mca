@@ -3,21 +3,21 @@ namespace SpriteKind {
 }
 
 class Dungeon {
-    static ADJACENT_OFFSETS = [
+    protected static readonly ADJACENT_OFFSETS = [
         [-1, -1], [+0, -1], [+1, -1],
         [-1, +0],           [+1, +0],
         [-1, +1], [+0, +1], [+1, +1],
     ]
     
-    _level: tiles.TileMapData
-    _levelIndex: int8 = -1
+    public level: tiles.TileMapData
+    protected levelIndex: int8 = -1
 
     constructor() {
         scene.setBackgroundColor(Colour.DARK_PURPLE)
         this.advance()
     }
 
-    _getLevel(index: number): tiles.TileMapData {
+    protected getLevel(index: number): tiles.TileMapData {
         switch (index) {
             case 0: return tilemap`level 1`
             case 1: return tilemap`level 2`
@@ -26,17 +26,17 @@ class Dungeon {
     }
 
     // Render the level tiles, add player and creatues.
-    _render_level(): void {
-        let read_level = this._getLevel(this._levelIndex)
-        this._level = tileUtil.cloneMap(read_level)
-        tiles.setCurrentTilemap(this._level)
+    protected render_level(): void {
+        let read_level = this.getLevel(this.levelIndex)
+        this.level = tileUtil.cloneMap(read_level)
+        tiles.setCurrentTilemap(this.level)
 
         tileUtil.forEachTileInMap(read_level, (column: number, row: number, tile: tiles.Location) => {
             let image = read_level.getTileImage(read_level.getTile(column, row))
 
             switch (image) {
                 case sprites.builtin.brick:
-                    this._render_brick(read_level, column, row, tile)
+                    this.render_brick(read_level, column, row, tile)
                     break
                 case assets.tile`rockslide`:
                     tiles.setWallAt(tile, true)
@@ -54,12 +54,12 @@ class Dungeon {
                     tiles.setWallAt(tile, true)
                     break
                 default:
-                    this._render_object(image, tile)
+                    this.render_object(image, tile)
             }
         })
     }
 
-    _render_object(image: Image, tile: tiles.Location) {
+    protected render_object(image: Image, tile: tiles.Location): void {
         let clear = true
 
         switch (image) {
@@ -85,7 +85,7 @@ class Dungeon {
     }
 
     // Replace default tile with correct, linking walls.
-    _render_brick(view_map: tiles.TileMapData, column: number, row: number, tile: tiles.Location) : void {
+    protected render_brick(view_map: tiles.TileMapData, column: number, row: number, tile: tiles.Location) : void {
         let adjacent_pattern = Dungeon.ADJACENT_OFFSETS.map((offset: Array<number>) => {
             let x = column + offset[0], y = row + offset[1]
             
@@ -95,12 +95,12 @@ class Dungeon {
             return (adjacent == sprites.builtin.brick) ? 1 : 0
         })
         
-        tiles.setTileAt(tile, this._wall_image_from_adjacent(adjacent_pattern.join("")))
+        tiles.setTileAt(tile, this.wall_image_from_adjacent(adjacent_pattern.join("")))
         tiles.setWallAt(tile, true)
     }
 
     // check adjacent squares for walls, to work out how to join them.
-    _wall_image_from_adjacent(pattern: string): Image {
+    protected wall_image_from_adjacent(pattern: string): Image {
         switch (pattern) {        
             case "11111110":
                 return sprites.dungeon.purpleOuterNorthWest
@@ -160,19 +160,19 @@ class Dungeon {
     }
 
     // go down one level
-    advance(): void {
+    public advance(): void {
         for (let kind of [SpriteKind.Enemy, SpriteKind.Item]) {
             sprites.destroyAllSpritesOfKind(kind)
         }
         
-        this._levelIndex += 1
+        this.levelIndex += 1
         player.sprite.setScale(1)
         player.resetMovement()
-        this._render_level()
+        this.render_level()
     }
 
     // Clear tile to transparency
-    clearTile(tile: tiles.Location): void {
+    public clearTile(tile: tiles.Location): void {
         tiles.setTileAt(tile, assets.tile`transparency16`)
     }
 }

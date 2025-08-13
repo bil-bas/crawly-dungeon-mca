@@ -10,125 +10,120 @@ const ALL_STAIRS: Image[] = [
 
 
 class Player {        
-    _is_falling = false
-    _keys: int8 = 0
-    _coins: number = 0
-    _mana: int8 = INITIAL_MANA
-    _maxMana: int8 = INITIAL_MANA
-    _life: int8 = INITIAL_LIFE
-    _maxLife: int8 = INITIAL_LIFE
-    _sprite: Sprite
-    _primarySpell: Spell
-    _secondarySpell: Spell
-    _primarySpellIndicator: SpellIndicator
-    _secondarySpellIndicator: SpellIndicator
-    _speed: int8 = 60
-    _klass: string
+    protected isFalling: boolean = false
+    protected _keys: int8 = 0
+    protected _coins: number = 0
+    protected _mana: int8 = INITIAL_MANA
+    protected _maxMana: int8 = INITIAL_MANA
+    protected _life: int8 = INITIAL_LIFE
+    protected _maxLife: int8 = INITIAL_LIFE
+    public readonly sprite: Sprite
+    protected _primarySpell: Spell
+    protected _secondarySpell: Spell
+    protected _primarySpellIndicator: SpellIndicator
+    protected _secondarySpellIndicator: SpellIndicator
+    protected _speed: int8 = 60
 
-    get animUp(): Image[] { return null }
-    get animDown(): Image[] { return null }
-    get animLeft(): Image[] { return null }
-    get animRight(): Image[] { return null }
+    protected get animUp(): Image[] { return null }
+    protected get animDown(): Image[] { return null }
+    protected get animLeft(): Image[] { return null }
+    protected get animRight(): Image[] { return null }
         
-    get primarySpell(): Spell { return this._primarySpell }
-    set primarySpell(spell: Spell) {
+    public get primarySpell(): Spell { return this._primarySpell }
+    public set primarySpell(spell: Spell) {
         if (this._primarySpellIndicator) {
             this._primarySpellIndicator.destroy()
         }
         this._primarySpell = spell
         this._primarySpellIndicator = new SpellIndicator(this._primarySpell, true)
     }
-    get secondarySpell(): Spell { return this._secondarySpell }
-    set secondarySpell(spell: Spell) {
+    public get secondarySpell(): Spell { return this._secondarySpell }
+    public set secondarySpell(spell: Spell) {
         if (this._secondarySpellIndicator) {
             this._secondarySpellIndicator.destroy()
         }
         this._secondarySpell = spell
         this._secondarySpellIndicator = new SpellIndicator(this._secondarySpell, false)
     }
-
-    get sprite(): Sprite { return this._sprite }
-    get is_falling(): boolean { return this._is_falling }
   
-    get coins(): number { return this._coins }
-    set coins(value: number) {
+    public get coins(): number { return this._coins }
+    public set coins(value: number) {
         new StatUpdate(sprites.builtin.coin0, value - this._coins)
         this._coins = value
-        update_labels()
+        hud.updateLabels()
     }
 
-    get mana(): int8 { return this._mana }
-    set mana(value: number) {
+    public get mana(): int8 { return this._mana }
+    public set mana(value: number) {
         new StatUpdate(sprites.projectile.firework1, value - this._mana)
         this._mana = value
-        update_labels()
+        hud.updateLabels()
     }
 
-    get maxMana(): int8 { return this._maxMana }
-    set maxMana(value: number) {
+    public get maxMana(): int8 { return this._maxMana }
+    public set maxMana(value: number) {
         this._maxMana = value
-        update_labels()
+        hud.updateLabels()
     }
 
-    get maxLife(): int8 { return this._maxLife }
-        set maxLife(value: number) {
+    public get maxLife(): int8 { return this._maxLife }
+    public set maxLife(value: number) {
         this._maxLife = value
-        update_labels()
+        hud.updateLabels()
     }
 
-    get keys(): int8 { return this._keys }
-    set keys(value: number) {
+    public get keys(): int8 { return this._keys }
+    public set keys(value: number) {
         new StatUpdate(assets.image`key`, value - this._keys)
         this._keys = value
-        update_labels()
+        hud.updateLabels()
     }
 
-    get life(): int8 { return this._life }
-    set life(value: number) {
+    public get life(): int8 { return this._life }
+    public set life(value: number) {
         new StatUpdate(sprites.projectile.heart3, value - this._life)
         this._life = Math.max(value, 0)
-        update_labels()
+        hud.updateLabels()
         if (this._life == 0) {
-            dataStore.setRichest(this._klass, this.coins)
+            dataStore.setRichest(this.title, this.coins)
             new DeathMessage(this)
         }
     }
     
-    constructor(klass: string) {
-        this._klass = klass
-        this._sprite = sprites.create(sprites.swamp.witchForward0, SpriteKind.Player)
-        this._sprite.z = ZOrder.PLAYER
-        scene.cameraFollowSprite(this._sprite)
+    constructor(public title: string) {
+        this.sprite = sprites.create(sprites.swamp.witchForward0, SpriteKind.Player)
+        this.sprite.z = ZOrder.PLAYER
+        scene.cameraFollowSprite(this.sprite)
 
-        this._addAnimations()
-        this._setInitialSpells()
+        this.addAnimations()
+        this.setInitialSpells()
 
-        shadowcasting.setAnchor(this._sprite)
+        shadowcasting.setAnchor(this.sprite)
         shadowcasting.setShadowColor(Colour.BLACK)
         shadowcasting.setShadowMode(shadowcasting.ShadowCastingMode.Fill)
 
-        this._initEventHandlers()
+        this.initEventHandlers()
         this.resetMovement()
     }
 
-    freeze() {
+    public freeze(): void {
         this._speed = 0
         this.updateMovement()
     }
 
-    resetMovement() {
+    public resetMovement(): void {
         this._speed = 60
         this.updateMovement()
     }
 
-    updateMovement() {
-        controller.moveSprite(this._sprite, this._speed, this._speed)
+    protected updateMovement(): void {
+        controller.moveSprite(this.sprite, this._speed, this._speed)
     }
 
-    _initEventHandlers() {
+    protected initEventHandlers(): void {
         // Interacting with the environment
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (_: Sprite, item: Sprite) => {
-            this.touchedItem(item.data["obj"])
+            item.data["obj"].use()
         })
 
         scene.onHitWall(SpriteKind.Player, (_: Sprite, tile: tiles.Location) => {
@@ -154,7 +149,7 @@ class Player {
 
         // Casting spells
         controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (this.is_falling) return
+            if (this.isFalling) return
         
             if (this._primarySpell.canCast()) {
                 this._primarySpell.cast()
@@ -164,7 +159,7 @@ class Player {
         })
 
         controller.B.onEvent(ControllerButtonEvent.Pressed, () => {
-            if (this.is_falling) return
+            if (this.isFalling) return
 
             if (this._secondarySpell.canCast()) {
                 this._secondarySpell.cast()
@@ -174,7 +169,7 @@ class Player {
         })
     }
 
-    touchedTile(image: Image, tile: tiles.Location) {
+    protected touchedTile(image: Image, tile: tiles.Location): void {
         switch (image) {
             case assets.tile`key`:
                 dungeon.clearTile(tile)
@@ -205,27 +200,28 @@ class Player {
                 break
         }
     }
-    _setInitialSpells() {}
 
-    _addAnimation(frames: Image[], predicate: Predicate) {
-        characterAnimations.loopFrames(this._sprite, frames, 200, characterAnimations.rule(predicate))
+    protected setInitialSpells(): void {}
+
+    protected addAnimation(frames: Image[], predicate: Predicate): void{
+        characterAnimations.loopFrames(this.sprite, frames, 200, characterAnimations.rule(predicate))
     }
 
-    _addAnimations() {
-        this._addAnimation(this.animUp, Predicate.MovingUp)
-        this._addAnimation([this.animUp[0]], Predicate.FacingUp)
+    protected addAnimations(): void {
+        this.addAnimation(this.animUp, Predicate.MovingUp)
+        this.addAnimation([this.animUp[0]], Predicate.FacingUp)
         
-        this._addAnimation(this.animDown, Predicate.MovingDown)
-        this._addAnimation([this.animDown[0]], Predicate.FacingDown)
+        this.addAnimation(this.animDown, Predicate.MovingDown)
+        this.addAnimation([this.animDown[0]], Predicate.FacingDown)
         
-        this._addAnimation(this.animLeft, Predicate.MovingLeft)
-        this._addAnimation([this.animLeft[0]], Predicate.FacingLeft)
+        this.addAnimation(this.animLeft, Predicate.MovingLeft)
+        this.addAnimation([this.animLeft[0]], Predicate.FacingLeft)
         
-        this._addAnimation(this.animRight, Predicate.MovingRight)
-        this._addAnimation([this.animRight[0]], Predicate.FacingRight)
+        this.addAnimation(this.animRight, Predicate.MovingRight)
+        this.addAnimation([this.animRight[0]], Predicate.FacingRight)
     }
 
-    touchedWall(tile: tiles.Location) {
+    protected touchedWall(tile: tiles.Location): void {
         if (tiles.tileAtLocationEquals(tile, sprites.dungeon.doorLockedNorth) && this.keys >= 1) {
             this.keys -= 1
             tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
@@ -234,34 +230,30 @@ class Player {
         }
     }
 
-    touchedEnemy(enemy: Sprite) {
+    protected touchedEnemy(enemy: Sprite): void {
         sounds.play(sounds.melee)
         let injury = enemy.data["obj"].melee(1)
         this.life -= injury
     }
 
-    touchedItem(obj: Item) {
-        obj.use()
-    }
+    protected touchedStairs(tile: tiles.Location): void {
+        if (this.isFalling) return
 
-    touchedStairs(tile: tiles.Location) {
-        if (this._is_falling) return
-
-        this._is_falling = true
+        this.isFalling = true
 
         this.freeze()
-        tiles.placeOnTile(this._sprite, tile)
+        tiles.placeOnTile(this.sprite, tile)
 
         after(250, () => {
             sounds.play(sounds.stairs)
-            this._sprite.setScale(0.75)
+            this.sprite.setScale(0.75)
 
             after(500, () => {
-                this._sprite.setScale(0.5)
+                this.sprite.setScale(0.5)
 
                 after(500, () => {
                     dungeon.advance()
-                    this._is_falling = false
+                    this.isFalling = false
                 })
             })
         })
@@ -271,12 +263,12 @@ class Player {
 class Witch extends Player {
     static get title() { return "Witch" }
 
-    get animUp() { return [sprites.swamp.witchBack0, sprites.swamp.witchBack1, sprites.swamp.witchBack2, sprites.swamp.witchBack3] }
-    get animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
-    get animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
-    get animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
+    protected get animUp() { return [sprites.swamp.witchBack0, sprites.swamp.witchBack1, sprites.swamp.witchBack2, sprites.swamp.witchBack3] }
+    protected get animDown() { return [sprites.swamp.witchForward0, sprites.swamp.witchForward1, sprites.swamp.witchForward2, sprites.swamp.witchForward3] }
+    protected get animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
+    protected get animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
     
-    _setInitialSpells(): void {
+    protected setInitialSpells(): void {
         this.primarySpell = findSpell("Firebolt")
         this.secondarySpell = findSpell("Heal")
     }
@@ -285,7 +277,7 @@ class Witch extends Player {
 class Haemomancer extends Witch {
     static get title() { return "Haemomancer" }
 
-    _setInitialSpells(): void {
+    protected setInitialSpells(): void {
         this.primarySpell = findSpell("Firebolt")
         this.secondarySpell = findSpell("Blood Magic")
     }

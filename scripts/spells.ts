@@ -21,17 +21,17 @@ scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles
 
 // Abstract base spell logic
 class Spell {
-    get icon(): Image { return null }
-    get title(): string { return null }
-    get mana(): int8 { return 1 }
-    get value() { return this.mana * 50 }
-    get hitDamage(): int8 { return 1 }
+    public get icon(): Image { return null }
+    public get title(): string { return null }
+    public get mana(): int8 { return 1 }
+    public get value() { return this.mana * 50 }
+    public get hitDamage(): int8 { return 1 }
 
-    canCast(): boolean {
+    public canCast(): boolean {
         return player.mana >= this.mana
     }
 
-    cast(): void {
+    public cast(): void {
         sounds.play(sounds.spellCast)
         player.mana -= this.mana
     }
@@ -40,46 +40,46 @@ class Spell {
 class ProjectileSpell extends Spell {
     get hitDamage(): int8 { return 1 }
 
-    onProjectileHitEnemy(projectile: Sprite, enemy: Enemy) {
+    public onProjectileHitEnemy(projectile: Sprite, enemy: Enemy): void {
         projectile.destroy()
         enemy.life -= this.hitDamage
     }
 
-    onProjectileHitWall(projectile: Sprite, tile: tiles.Location) { }
+    public onProjectileHitWall(projectile: Sprite, tile: tiles.Location): void { }
 }
 
 // A firebolt hits a single target for small damage.
 class Firebolt extends ProjectileSpell {
-    get icon() { return sprites.projectile.explosion1 }
-    get title() { return "Firebolt" }
-    get mana(): int8 { return 1 }
+    public get icon() { return sprites.projectile.explosion1 }
+    public get title() { return "Firebolt" }
+    public get mana(): int8 { return 1 }
 
-    get splashRadius(): int8 {return 0 }
-    get explosionScale(): int8 { return 1 }
+    protected get splashRadius(): int8 {return 0 }
+    protected get explosionScale(): int8 { return 1 }
 
-    cast() {
+    public cast(): void {
         super.cast()
 
         if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingRight)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingRight))) {
             
-            this._firebolt("right")
+            this.firebolt("right")
         } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingLeft)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
             
-            this._firebolt("left")
+            this.firebolt("left")
         } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingUp)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingUp))) {
             
-            this._firebolt("up")
+            this.firebolt("up")
         } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingDown)) ||
             characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingDown))) {
             
-            this._firebolt("down")
+            this.firebolt("down")
         }
     }
 
-    _firebolt(direction: string) {
+    protected firebolt(direction: string): void {
         let vx = 0, vy = 0
 
         if (direction == "left") {
@@ -100,11 +100,11 @@ class Firebolt extends ProjectileSpell {
         ball.data["obj"] = this
     }
 
-    onProjectileDestroyed(projectile: Sprite) {
-        this._explosion(projectile.x, projectile.y)
+    public onProjectileDestroyed(projectile: Sprite): void {
+        this.explosion(projectile.x, projectile.y)
     }
 
-    onProjectileHitWall(projectile: Sprite, tile: tiles.Location) {
+    public onProjectileHitWall(projectile: Sprite, tile: tiles.Location): void {
         projectile.destroy()
 
         if (tiles.tileAtLocationEquals(tile, sprites.dungeon.stairLadder)) {
@@ -114,7 +114,7 @@ class Firebolt extends ProjectileSpell {
         }
     }
 
-    _explosion(x: number, y: number) {
+    protected explosion(x: number, y: number): void {
         let explosion = sprites.create(sprites.projectile.explosion2, SpriteKind.Explosion)
         explosion.z = ZOrder.SPELLS
         explosion.setPosition(x, y)
@@ -136,43 +136,43 @@ class Firebolt extends ProjectileSpell {
 
 // Starfire sends 3 firebolts to each of the cardinal directions
 class Starfire extends Firebolt {
-    get icon() { return sprites.projectile.flash1 }
-    get title() { return "Starfire" }
-    get mana() { return 3 }
+    public get icon() { return sprites.projectile.flash1 }
+    public get title() { return "Starfire" }
+    public get mana() { return 3 }
 
-    cast() {
+    public cast(): void {
         super.cast()
 
-        this._starfire()
+        this.starfire()
 
         after(200, () => {
-            this._starfire()
+            this.starfire()
 
             after(200, () => {
-                this._starfire()
+                this.starfire()
             })
         })
     }
 
-    _starfire() {
+    protected starfire(): void {
         for (let direction of ["left", "right", "up", "down"]) {
-            this._firebolt(direction)
+            this.firebolt(direction)
         }
     }
 }
 
 // Fireball explodes and does damage over a large area.
 class Fireball extends Firebolt {
-    get icon() { return sprites.projectile.explosion3 }
-    get title() { return "Fireball" }
-    get mana(): int8 { return 3 }
+    public get icon() { return sprites.projectile.explosion3 }
+    public get title() { return "Fireball" }
+    public get mana(): int8 { return 3 }
 
-    get hitDamage(): int8 { return 0 }
-    get splashRadius(): int8 { return 16 * 2 }
-    get splashDamage(): int8 { return 2 }
-    get explosionScale(): int8 { return 3 }
+    public get hitDamage(): int8 { return 0 }
+    protected get splashRadius(): int8 { return 16 * 2 }
+    protected get splashDamage(): int8 { return 2 }
+    protected get explosionScale(): int8 { return 3 }
 
-    onProjectileDestroyed(projectile: Sprite) {
+    public onProjectileDestroyed(projectile: Sprite): void {
         super.onProjectileDestroyed(projectile)
 
         sprites.allOfKind(SpriteKind.Enemy).forEach((enemy: Sprite) => {
@@ -186,27 +186,27 @@ class Fireball extends Firebolt {
 
 
 class Heal extends Spell {
-    get icon() { return sprites.projectile.heart3 }
-    get title() { return "Heal" }
-    get mana(): int8 { return 1 }
+    public get icon() { return sprites.projectile.heart3 }
+    public get title() { return "Heal" }
+    public get mana(): int8 { return 1 }
 
-    cast() {
+    public cast(): void {
         super.cast()
         player.life += 1
     }
 }
 
 class BloodMagic extends Spell {
-    get icon() { return sprites.skillmap.decoration8 }
-    get title() { return "Blood Magic" }
-    get mana(): int8 { return 0 }
-    get value() { return 50 }
+    public get icon() { return sprites.skillmap.decoration8 }
+    public get title() { return "Blood Magic" }
+    public get mana(): int8 { return 0 }
+    public get value() { return 50 }
 
-    canCast(): boolean {
+    public canCast(): boolean {
         return player.life >= 2 && player.mana < player.maxMana
     }
 
-    cast() {
+    public cast(): void {
         super.cast()
         player.life -= 1
         player.mana += 1
@@ -214,11 +214,11 @@ class BloodMagic extends Spell {
 }
 
 class Restore extends Spell {
-    get icon() { return sprites.projectile.heart2 }
-    get title() { return "Restore" }
-    get mana(): int8 { return 2 }
+    public get icon() { return sprites.projectile.heart2 }
+    public get title() { return "Restore" }
+    public get mana(): int8 { return 2 }
 
-    cast() {
+    public cast(): void {
         super.cast()
         player.life = INITIAL_LIFE
     }

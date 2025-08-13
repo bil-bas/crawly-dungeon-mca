@@ -7,8 +7,6 @@ namespace ZOrder {
     export const UI: int8 = 250
 }
 
-
-
 function chooseYourClass() {
     let options = dataStore.classes.map<MenuOption>((klass, i) => [sprites.dungeon.doorOpenNorth, klass])
     
@@ -23,7 +21,7 @@ function chooseYourClass() {
             }
 
             player = createPlayer(selected)
-            init_inventory()
+            hud = new Hud()
             dungeon = new Dungeon()
 
             return false

@@ -2,11 +2,10 @@
 type HighScore = [string, number]
 
 class DataStore {
+    public get classes(): string[] { return settings.readJSON("classes") || [Witch.title] }
+    public get richest(): HighScore[] { return settings.readJSON("richest") || [] }
 
-    get classes(): string[] { return settings.readJSON("classes") || [Witch.title] }
-    get richest(): HighScore[] { return settings.readJSON("richest") || [] }
-
-    unlockClass(title: string) {
+    public unlockClass(title: string): void {
         let classes = this.classes
         if (classes.indexOf(title) == -1) {
             classes.push(title)
@@ -15,7 +14,7 @@ class DataStore {
         }
     }
 
-    setRichest(klass: string, amount: number) {
+    public setRichest(klass: string, amount: number): void {
         let richest = this.richest
         richest.push([klass, amount])
         richest = richest.sort((a, b) => {
@@ -23,8 +22,8 @@ class DataStore {
             let [bk, ba] = b
             return ba - aa
         }).slice(0, 8)
+
         settings.writeJSON("richest", richest)
-        console.inspect(richest)
     }
 }
 

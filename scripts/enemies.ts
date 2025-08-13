@@ -5,58 +5,57 @@ scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, tile: tiles.Location) => {
 
 // Base enemy obj.
 class Enemy {
-    _sprite: Sprite
-    _life: int8
-    _lifeBar: StatusBarSprite
+    protected readonly sprite: Sprite
+    protected _life: int8
+    protected lifeBar: StatusBarSprite
 
     constructor(tile: tiles.Location) {
-        this._sprite = sprites.create(this.spriteImage, SpriteKind.Enemy)
-        tiles.placeOnTile(this._sprite, tile)
-        this._sprite.setFlag(SpriteFlag.BounceOnWall, true)
-        this._sprite.z = ZOrder.ENEMIES
-        this._sprite.data["obj"] = this
-        this._life = this.initial_life
+        this.sprite = sprites.create(this.spriteImage, SpriteKind.Enemy)
+        tiles.placeOnTile(this.sprite, tile)
+        this.sprite.setFlag(SpriteFlag.BounceOnWall, true)
+        this.sprite.z = ZOrder.ENEMIES
+        this.sprite.data["obj"] = this
+        this._life = this.initialLife
     }
 
-    get sprite(): Sprite { return this._sprite }
-    get spriteImage(): Image { return null }
-    get initial_life(): int8 { return 1 }
-    get killedMessage(): string { return null }
+    protected get spriteImage(): Image { return null }
+    protected get initialLife(): int8 { return 1 }
+    protected get killedMessage(): string { return null }
 
-    get life(): int8 { return this._life }
-    set life(value: number) {
+    public get life(): int8 { return this._life }
+    public set life(value: number) {
         this._life = Math.max(value, 0)
 
         if (this._life == 0) {
-            this._sprite.destroy()
-            if (this._lifeBar) {
-                this._lifeBar.destroy()
+            this.sprite.destroy()
+            if (this.lifeBar) {
+                this.lifeBar.destroy()
             }
             music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
-        } else if (this._life == this.initial_life) {
+        } else if (this._life == this.initialLife) {
             // hide status bar when fully healed.
-            if (this._lifeBar) {
-                this._lifeBar.destroy()
-                this._lifeBar = null
+            if (this.lifeBar) {
+                this.lifeBar.destroy()
+                this.lifeBar = null
             }
         } else {
             // Create a new status bar if necessary
-            if (!this._lifeBar) {
-                this._lifeBar = statusbars.create(this._sprite.width, 2, StatusBarKind.EnemyHealth)
-                this._lifeBar.max = this.initial_life
-                this._lifeBar.attachToSprite(this._sprite)
+            if (!this.lifeBar) {
+                this.lifeBar = statusbars.create(this.sprite.width, 2, StatusBarKind.EnemyHealth)
+                this.lifeBar.max = this.initialLife
+                this.lifeBar.attachToSprite(this.sprite)
             }
-            this._lifeBar.value = this._life
+            this.lifeBar.value = this._life
         }
     }
 
-    melee(damage: number) : int8 {
-        this.life -= damage
+    public melee(damage: number) : int8 {
+        this._life -= damage
         game.setGameOverMessage(false, this.killedMessage)
         return 1
     }
 
-    add_animation(images: Image[], predicate1: Predicate, predicate2?: Predicate) {
+    protected add_animation(images: Image[], predicate1: Predicate, predicate2?: Predicate) {
         let rule: characterAnimations.Rule
         
         if (predicate2) {
@@ -64,28 +63,28 @@ class Enemy {
         } else {
             rule = characterAnimations.rule(predicate1)
         }
-        characterAnimations.loopFrames(this._sprite, images, 200, rule)
+        characterAnimations.loopFrames(this.sprite, images, 200, rule)
     }
 
-    touchWall(tile: tiles.Location) { }
+    public touchWall(tile: tiles.Location) { }
     
-    destroy() {
+    public destroy(): void {
         this.sprite.destroy()
-        if (this._lifeBar) {
-            this._lifeBar.destroy()
+        if (this.lifeBar) {
+            this.lifeBar.destroy()
         }
     }
 }
 
 // BAT
 class Bat extends Enemy {
-    get spriteImage(): Image { return sprites.builtin.forestBat0 }
-    get killedMessage(): string { return `Exsanguinated by Bat` }
+    protected get spriteImage(): Image { return sprites.builtin.forestBat0 }
+    protected get killedMessage(): string { return `Exsanguinated by Bat` }
 
     constructor(tile: tiles.Location) {
         super(tile)
 
-        this._sprite.vx = 40
+        this.sprite.vx = 40
 
         let left = [sprites.builtin.forestBat0, sprites.builtin.forestBat1, sprites.builtin.forestBat2, sprites.builtin.forestBat3]
         this.add_animation(left, Predicate.MovingLeft)
@@ -97,15 +96,15 @@ class Bat extends Enemy {
 
 // HERMIT CRAB
 class HermitCrab extends Enemy {
-    get spriteImage(): Image { return sprites.builtin.hermitCrabWalk0 }
-    get killedMessage(): string { return `Squished by Hermit Crab` }
-    get initial_life(): number { return 3 }
+    protected get spriteImage(): Image { return sprites.builtin.hermitCrabWalk0 }
+    protected get killedMessage(): string { return `Squished by Hermit Crab` }
+    protected get initialLife(): number { return 3 }
 
     constructor(tile: tiles.Location) {
         super(tile)
 
-        this._sprite.vy = -30
-        this._sprite.setScale(2)
+        this.sprite.vy = -30
+        this.sprite.setScale(2)
 
         let walk = [sprites.builtin.hermitCrabWalk0, sprites.builtin.hermitCrabWalk1, sprites.builtin.hermitCrabWalk2, sprites.builtin.hermitCrabWalk3]
         this.add_animation(walk, Predicate.MovingUp)
@@ -114,8 +113,8 @@ class HermitCrab extends Enemy {
         this.add_animation(walk, Predicate.MovingRight)
     }
 
-    touchWall(tile: tiles.Location) {
-        let crab = this._sprite
+    public touchWall(tile: tiles.Location): void {
+        let crab = this.sprite
         if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingUp))) {
             crab.setVelocity(-30, 0)
             //console.log("up to left")
@@ -134,12 +133,12 @@ class HermitCrab extends Enemy {
 
 // Monkey steals keys
 class Monkey extends Enemy {
-    get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
-    get killedMessage(): string { return `Eyes gouged by Monkey` }
+    protected get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
+    protected get killedMessage(): string { return `Eyes gouged by Monkey` }
 
     constructor(tile: tiles.Location) {
         super(tile)
-        this._sprite.vy = 50
+        this.sprite.vy = 50
 
         let up = [sprites.builtin.forestMonkey0, sprites.builtin.forestMonkey1, sprites.builtin.forestMonkey2, sprites.builtin.forestMonkey3]
         this.add_animation(up, Predicate.MovingUp)
@@ -148,10 +147,10 @@ class Monkey extends Enemy {
         this.add_animation(up, Predicate.MovingDown)
     }
 
-    melee(damage: number): int8 {
+    public melee(damage: number): int8 {
         if (player.keys > 0) {
             player.keys -= 1
-            this.life -= damage
+            this._life -= damage
             return 0
         }
         return super.melee(damage)
@@ -159,15 +158,15 @@ class Monkey extends Enemy {
 }
 
 class Shroom extends Enemy {
-    get tileImage(): Image { return assets.tile`mimic` }
-    get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
-    get killedMessage(): string { return `Zoomed by a Shroom` }
+    protected get tileImage(): Image { return assets.tile`mimic` }
+    protected get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
+    protected get killedMessage(): string { return `Zoomed by a Shroom` }
 
     constructor(tile: tiles.Location) {
         super(tile)
 
-        this._sprite.vx = 20
-        this._sprite.vy = 20
+        this.sprite.vx = 20
+        this.sprite.vy = 20
 
         let ne = [sprites.swamp.mushroomBackLeft0, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft3]
         this.add_animation(ne, Predicate.MovingLeft, Predicate.MovingUp)
@@ -185,23 +184,23 @@ class Shroom extends Enemy {
 
 // Skeleton steals mana
 class Skeleton extends Enemy {
-    get spriteImage(): Image { return sprites.castle.skellyFront }
-    get killedMessage(): string { return `Rattled by Skellington` }
+    protected get spriteImage(): Image { return sprites.castle.skellyFront }
+    protected get killedMessage(): string { return `Rattled by Skellington` }
 
     constructor(tile: tiles.Location) {
         super(tile)
 
-        this._sprite.vy = 40
+        this.sprite.vy = 40
 
         let down = [sprites.castle.skellyWalkFront1, sprites.castle.skellyWalkFront2]
         this.add_animation(down, Predicate.MovingUp)
         this.add_animation(down, Predicate.MovingDown)
     }
 
-    melee(damage: number): int8 {
+    public melee(damage: number): int8 {
         if (player.mana > 0) {
             player.mana -= 1
-            this.life -= damage
+            this._life -= damage
             return 0
         } 
         
@@ -210,10 +209,10 @@ class Skeleton extends Enemy {
 }
 
 class Mimic extends Enemy {
-    get spriteImage(): Image { return sprites.dungeon.chestClosed }
-    get killedMessage(): string { return `Swallowed by Mimic` }
+    protected get spriteImage(): Image { return sprites.dungeon.chestClosed }
+    protected get killedMessage(): string { return `Swallowed by Mimic` }
 
-    melee(damage: number): int8 {
+    public melee(damage: number): int8 {
         let tile = tiles.getTileLocation(this.sprite.x / 16, this.sprite.y / 16)
         tiles.setTileAt(tile, assets.tile`dead mimic`)
         return super.melee(damage)
