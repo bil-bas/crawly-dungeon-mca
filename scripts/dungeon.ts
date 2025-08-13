@@ -9,7 +9,7 @@ class Dungeon {
         [-1, +1], [+0, +1], [+1, +1],
     ]
     
-    public level: tiles.TileMapData
+    public level: tiles.TileMapData|null = null
     protected levelIndex: int8 = -1
 
     constructor() {
@@ -20,8 +20,7 @@ class Dungeon {
     protected getLevel(index: number): tiles.TileMapData {
         switch (index) {
             case 0: return tilemap`level 1`
-            case 1: return tilemap`level 2`
-            default: return null
+            default: throw index
         }
     }
 

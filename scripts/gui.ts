@@ -1,7 +1,7 @@
 type MenuOption = [Image, string]
 
 class Overlay extends TextSprite {
-    constructor(icon: Image, text: string, fg?: number, bg?: number) {
+    constructor(icon: Image|undefined, text: string, fg?: number, bg?: number) {
         super(text,
               bg ? bg : Colour.TRANSPARENT, fg ? fg : Colour.WHITE,
               8, // Max Font height
@@ -78,7 +78,7 @@ class Closeup extends Overlay {
     protected readonly portrait: Sprite
 
     constructor(image: Image, speech: string) {
-        super(null, speech, Colour.WHITE, Colour.DARK_PURPLE)
+        super(undefined, speech, Colour.WHITE, Colour.DARK_PURPLE)
         
         this.setBorder(4, Colour.DARK_PURPLE)
         this.left = 4
@@ -102,7 +102,7 @@ class Closeup extends Overlay {
 }
 
 class Label extends Overlay {
-    constructor(icon: Image, text: string, textColor?: number) {
+    constructor(icon: Image|undefined, text: string, textColor?: number) {
         super(icon, text, textColor || Colour.WHITE)
     }
 }
@@ -126,7 +126,7 @@ class CoinLabel extends Label {
     protected readonly coin: Sprite
 
     constructor() {
-        super(null, "0", Colour.YELLOW)
+        super(undefined, "0", Colour.YELLOW)
 
         this.top = -1
 
@@ -188,13 +188,13 @@ class ScreenMessage extends Overlay {
     constructor(lines: string[], action: string, handler: () => void) {
         game.pushScene()
 
-        super(null, lines.join("\\n"), Colour.LIGHT_BLUE, Colour.DARK_PURPLE)
+        super(undefined, lines.join("\\n"), Colour.LIGHT_BLUE, Colour.DARK_PURPLE)
         scene.setBackgroundColor(Colour.DARK_PURPLE)        
         this.setMaxFontHeight(5)
         this.left = 4
         this.top = 4
 
-        this.actionText = new Overlay(null, action)
+        this.actionText = new Overlay(undefined, action)
         this.actionText.left = 4
         this.actionText.bottom = screen.height
 

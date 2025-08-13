@@ -7,7 +7,7 @@ scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, tile: tiles.Location) => {
 class Enemy {
     protected readonly sprite: Sprite
     protected _life: int8
-    protected lifeBar: StatusBarSprite
+    protected lifeBar: StatusBarSprite|null = null
 
     constructor(tile: tiles.Location) {
         this.sprite = sprites.create(this.spriteImage, SpriteKind.Enemy)
@@ -18,9 +18,9 @@ class Enemy {
         this._life = this.initialLife
     }
 
-    protected get spriteImage(): Image { return null }
+    protected get spriteImage(): Image { return assets.tile`bat` }
     protected get initialLife(): int8 { return 1 }
-    protected get killedMessage(): string { return null }
+    protected get killedMessage(): string { return "" }
 
     public get life(): int8 { return this._life }
     public set life(value: number) {

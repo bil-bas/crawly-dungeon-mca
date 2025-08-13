@@ -18,18 +18,18 @@ class Player {
     protected _life: int8 = INITIAL_LIFE
     protected _maxLife: int8 = INITIAL_LIFE
     public readonly sprite: Sprite
-    protected _primarySpell: Spell
-    protected _secondarySpell: Spell
+    protected _primarySpell: Spell|null = null
+    protected _secondarySpell: Spell|null = null
     protected _primarySpellIndicator: SpellIndicator
     protected _secondarySpellIndicator: SpellIndicator
     protected _speed: int8 = 60
 
-    protected get animUp(): Image[] { return null }
-    protected get animDown(): Image[] { return null }
-    protected get animLeft(): Image[] { return null }
-    protected get animRight(): Image[] { return null }
+    protected get animUp(): Image[] { return [] }
+    protected get animDown(): Image[] { return [] }
+    protected get animLeft(): Image[] { return [] }
+    protected get animRight(): Image[] { return [] }
         
-    public get primarySpell(): Spell { return this._primarySpell }
+    public get primarySpell(): Spell|null { return this._primarySpell }
     public set primarySpell(spell: Spell) {
         if (this._primarySpellIndicator) {
             this._primarySpellIndicator.destroy()
@@ -37,7 +37,7 @@ class Player {
         this._primarySpell = spell
         this._primarySpellIndicator = new SpellIndicator(this._primarySpell, true)
     }
-    public get secondarySpell(): Spell { return this._secondarySpell }
+    public get secondarySpell(): Spell|null { return this._secondarySpell }
     public set secondarySpell(spell: Spell) {
         if (this._secondarySpellIndicator) {
             this._secondarySpellIndicator.destroy()
@@ -96,7 +96,6 @@ class Player {
         scene.cameraFollowSprite(this.sprite)
 
         this.addAnimations()
-        this.setInitialSpells()
 
         shadowcasting.setAnchor(this.sprite)
         shadowcasting.setShadowColor(Colour.BLACK)
@@ -104,6 +103,9 @@ class Player {
 
         this.initEventHandlers()
         this.resetMovement()
+
+        this.primarySpell = findSpell("Firebolt")
+        this.secondarySpell = findSpell("Fireball")
     }
 
     public freeze(): void {
@@ -201,8 +203,6 @@ class Player {
         }
     }
 
-    protected setInitialSpells(): void {}
-
     protected addAnimation(frames: Image[], predicate: Predicate): void{
         characterAnimations.loopFrames(this.sprite, frames, 200, characterAnimations.rule(predicate))
     }
@@ -268,8 +268,8 @@ class Witch extends Player {
     protected get animLeft() { return [sprites.swamp.witchLeft0, sprites.swamp.witchLeft1, sprites.swamp.witchLeft2, sprites.swamp.witchLeft3] }
     protected get animRight() { return [sprites.swamp.witchRight0, sprites.swamp.witchRight1, sprites.swamp.witchRight2, sprites.swamp.witchRight3] }
     
-    protected setInitialSpells(): void {
-        this.primarySpell = findSpell("Firebolt")
+    constructor(klass: string) {
+        super(klass)
         this.secondarySpell = findSpell("Heal")
     }
 }
@@ -277,9 +277,9 @@ class Witch extends Player {
 class Haemomancer extends Witch {
     static get title() { return "Haemomancer" }
 
-    protected setInitialSpells(): void {
-        this.primarySpell = findSpell("Firebolt")
-        this.secondarySpell = findSpell("Blood Magic")
+    constructor(klass: string) {
+        super(klass)
+        this.secondarySpell = findSpell("BloodMagic")
     }
 }
 
