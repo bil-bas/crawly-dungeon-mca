@@ -32,6 +32,7 @@
         "tilemap.g.ts",
         "tutorial-info-cache.json"
     ],
+    "public": true,
     "targetVersions": {
         "branch": "v1.12.25",
         "tag": "v1.12.25",
