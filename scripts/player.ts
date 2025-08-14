@@ -221,15 +221,19 @@ class Player extends Entity {
     protected addAnimations(): void {
         this.addAnimation(this.animUp(), Predicate.MovingUp)
         this.addAnimation([this.animUp()[0]], Predicate.FacingUp)
+        this.addAnimation(this.animUp(), Predicate.HittingWallUp)
 
         this.addAnimation(this.animDown(), Predicate.MovingDown)
         this.addAnimation([this.animDown()[0]], Predicate.FacingDown)
+        this.addAnimation(this.animDown(), Predicate.HittingWallDown)
 
         this.addAnimation(this.animLeft(), Predicate.MovingLeft)
         this.addAnimation([this.animLeft()[0]], Predicate.FacingLeft)
+        this.addAnimation(this.animLeft(), Predicate.HittingWallLeft)
 
         this.addAnimation(this.animRight(), Predicate.MovingRight)
         this.addAnimation([this.animRight()[0]], Predicate.FacingRight)
+        this.addAnimation(this.animRight(), Predicate.HittingWallRight)
     }
 
     protected touchedWall(tile: tiles.Location): void {

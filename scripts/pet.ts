@@ -36,7 +36,6 @@ class Pet extends EntityWithStatus {
 
     constructor(image: Image) {
         super(image, SpriteKind.Pet, ZOrder.PET, scene.locationOfSprite(player))
-        this.setScale(0.75)
         this.thinkAboutThinking()
         this.onDestroyed(() => player.pet = null)
     }
@@ -119,6 +118,5 @@ class ClownFish extends Pet {
 
     constructor() {
         super(sprites.builtin.clownFish0)
-        this.setScale(1)
     }
 }
