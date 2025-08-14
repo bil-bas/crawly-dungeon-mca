@@ -18,6 +18,7 @@ class Pet extends EntityWithStatus {
     protected get distanceRange(): [int8, int8] { throw NOT_IMPLEMENTED }
     protected get speed(): int8 { return 30 }
     protected get thinkingDelay(): int16 { return 2000 }
+    protected get animationDelay(): int16 { return 200 }
     protected get sitLeft(): Image { return this.walkLeft[0] }
     protected get sitRight(): Image { return images.flipX(this.sitLeft) }
     protected get walkLeft(): Image[] { throw NOT_IMPLEMENTED }
@@ -62,7 +63,7 @@ class Pet extends EntityWithStatus {
         scene.followPath(this, path, this.speed)
 
         let direction = (path[path.length - 1].x > path[0].x) ? this.walkRight : this.walkLeft
-        animation.runImageAnimation(this, direction, 200, true)
+        animation.runImageAnimation(this, direction, this.animationDelay, true)
     }
 
     public thinkAboutThinking() {
@@ -102,16 +103,27 @@ class Dog extends Pet {
     }
 }
 
-class ClownFish extends Pet {
+class Zombie extends Pet {
+    public get maxLife(): int8 { return 3 }
+    protected get animationDelay(): int16 { return 500 }
     protected get distanceRange(): [int8, int8] { return [2, 4] }
-    protected get sit(): Image { return sprites.builtin.clownFish0 }
-    protected get walkLeft(): Image[] { return [sprites.builtin.clownFish0, sprites.builtin.clownFish1, sprites.builtin.clownFish2, sprites.builtin.clownFish3] }
+    protected get sit(): Image { return Zombie.zombify(sprites.builtin.villager3WalkFront1) }
+    protected get walkLeft(): Image[] {
+        return [sprites.builtin.villager3WalkLeft1, sprites.builtin.villager3WalkLeft2].map((i) => Zombie.zombify(i))
+    }
 
-    protected get meleeDamage(): int8 { return 2 }
+    protected get meleeDamage(): int8 { return 1 }
     protected get speed(): int8 { return 10 }
-    protected get thinkingDelay(): int16 { return 3000 }
+    protected get thinkingDelay(): int16 { return 4000 }
 
     constructor() {
-        super(sprites.builtin.clownFish0)
+        super(Zombie.zombify(sprites.builtin.villager3WalkFront1))
+    }
+
+    public static zombify(image: Image) {
+        image = image.clone()
+        image.replace(Colour.BROWN, Colour.GREEN)
+        image.replace(Colour.ORANGE, Colour.WHITE)
+        return image
     }
 }

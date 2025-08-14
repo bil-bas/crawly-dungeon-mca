@@ -252,12 +252,24 @@ class Summon extends Spell {
     protected randomPet(): Pet {
         Math.randomRange(0, game.runtime()) // Push the RNG to be more random.
 
-        switch (randint(0, 2)) {
+        switch (randint(0, 1)) {
             case 0: return new Cat()
             case 1: return new Dog()
-            case 2: return new ClownFish()
             default: throw null
         }
+    }
+}
+
+class RaiseDead extends Spell {
+    public get icon(): Image { return Zombie.zombify(sprites.builtin.villager3WalkFront1) }
+    public get title(): string { return "Raise Dead" }
+    public get mana(): int8 { return 2 }
+
+    public cast(): void {
+        super.cast()
+
+        player.pet = new Zombie()
+        player.pet.summon()
     }
 }
 
@@ -269,6 +281,7 @@ const SPELL_BOOK: Spell[] = [
 
     // cost 2 - Raise dead,
     new Summon(),
+    new RaiseDead(),
 
     // cost 3 - Goblin Horde,
     new Restore(),

@@ -105,6 +105,7 @@ class Monkey extends Enemy {
 }
 
 class Shroom extends Enemy {
+    public get maxLife(): int8 { return 2 }
     protected get killedMessage(): string { return `Zoomed by a Shroom` }
 
     constructor(tile: tiles.Location) {

@@ -28,7 +28,7 @@ class Player extends Entity {
 
     public get pet(): Pet|null { return this._pet }
     public set pet(pet: Pet | null) {
-        if (this.pet) {
+        if (this.pet && pet) { // Replaced pet with new one.
             this.pet.unsummon()
         }
         this._pet = pet
@@ -315,6 +315,21 @@ class Druid extends Wizard {
     constructor(klass: string) {
         super(klass)
         this.secondarySpell = findSpell("Summon")
+    }
+}
+
+class Necromancer extends Wizard {
+    static get title(): string { return "Necromancer" }
+    static get icon(): Image { return images.replaceColour(Player.icon,  Colour.YELLOW, Colour.BLACK) }
+
+    protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.BLACK) }
+    protected animDown() { return images.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.BLACK) }
+    protected animLeft() { return images.replaceColourAll(super.animLeft(), Colour.YELLOW, Colour.BLACK) }
+    protected animRight() { return images.replaceColourAll(super.animRight(), Colour.YELLOW, Colour.BLACK) }
+
+    constructor(klass: string) {
+        super(klass)
+        this.secondarySpell = findSpell("Raise Dead")
     }
 }
 

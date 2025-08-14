@@ -46,6 +46,7 @@ function playerIcon(title: string): Image {
         case Druid.title: return Druid.icon
         case Wizard.title: return Wizard.icon
         case BloodWitch.title: return BloodWitch.icon
+        case Necromancer.title: return Necromancer.icon
         case Random.title: return Random.icon
         default: throw null
     }
@@ -56,6 +57,7 @@ function createPlayer(title: string): Player {
         case Druid.title: return new Druid(title)
         case Wizard.title: return new Wizard(title)
         case BloodWitch.title: return new BloodWitch(title)
+        case Necromancer.title: return new Necromancer(title)
         default: throw null
     }
 }
