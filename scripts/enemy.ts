@@ -160,6 +160,11 @@ class Mimic extends Enemy {
         super(sprites.dungeon.chestClosed, tile)
     }
 
+    protected onWounded() {
+        animation.runImageAnimation(this, [sprites.dungeon.chestOpen, sprites.dungeon.chestClosed],
+                                    200, true)
+    }
+
     protected onDeath() {
         tiles.setTileAt(scene.locationOfSprite(this), assets.tile`dead mimic`)
         super.onDeath()
