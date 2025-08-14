@@ -7,7 +7,8 @@ scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, tile: tiles.Location) => {
 class Enemy {
     protected readonly sprite: Sprite
     protected _life: int8
-    protected lifeBar: StatusBarSprite|null = null
+    protected lifeBar: StatusBarSprite | null = null
+    protected meleeCooldownAt: number = 0
 
     constructor(tile: tiles.Location) {
         this.sprite = sprites.create(this.spriteImage, SpriteKind.Enemy)
@@ -49,8 +50,12 @@ class Enemy {
         }
     }
 
-    public melee(damage: number) : int8 {
-        this._life -= damage
+    public melee(damage: number): int8 {
+        if (game.runtime() < this.meleeCooldownAt) return 0
+
+        this.life -= damage
+        this.meleeCooldownAt = game.runtime() + 1000
+        sounds.play(sounds.melee)
         return 1
     }
 

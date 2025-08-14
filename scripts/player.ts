@@ -243,9 +243,10 @@ class Player {
     }
 
     protected touchedEnemy(enemy: Sprite): void {
-        sounds.play(sounds.melee)
         let injury = enemy.data["obj"].melee(1)
-        this.life -= injury
+        if (injury) {
+            this.life -= injury
+        }
     }
 
     protected touchedStairs(tile: tiles.Location): void {
