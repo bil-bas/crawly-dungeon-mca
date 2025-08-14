@@ -243,6 +243,7 @@ class Summon extends Spell {
         super.cast()
 
         player.pet = this.randomPet()
+        player.pet.summon()
     }
 
     protected randomPet(): Pet {

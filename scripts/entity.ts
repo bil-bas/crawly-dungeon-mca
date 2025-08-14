@@ -1,7 +1,7 @@
 class Entity extends Sprite {
     protected _life: int8
 
-    public get maxLife(): int8 { throw "Not implemented" }
+    public get maxLife(): int8 { return 1 }
 
     constructor(image: Image, kind: number, z: number, tile: tiles.Location) {
         super(image)
@@ -10,6 +10,19 @@ class Entity extends Sprite {
         this.z = z
         tiles.placeOnTile(this, tile)
         game.currentScene().physicsEngine.addSprite(this)
+    }
+
+    public summon(): void {
+        sounds.play(sounds.teleport)
+        this.setFlag(SpriteFlag.Invisible, true)
+        this.startEffect(effects.bubbles, 1000)
+        after(500, () => this.setFlag(SpriteFlag.Invisible, false))
+    }
+
+    public unsummon(): void {
+        sounds.play(sounds.teleport)
+        this.startEffect(effects.bubbles, 1000)
+        after(500, () => this.destroy())
     }
 }
 
@@ -33,7 +46,7 @@ class EntityWithStatus extends Entity {
                 this.lifeBar = null
             }
         } else {
-            // Create a new status bar if necessary
+            // Create a new status bar if necessary.
             if (!this.lifeBar) {
                 this.lifeBar = statusbars.create(this.width, 2, StatusBarKind.EnemyHealth)
                 this.lifeBar.max = this.maxLife

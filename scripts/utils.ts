@@ -16,8 +16,8 @@ function after(time: number, thenDo: () => void) {
 
 namespace scene {
     function screenCoordinateToTile(value: number) {
-        const tm = game.currentScene().tileMap
-        return value >> tm.scale
+        const scale = game.currentScene().tileMap.scale || 4 // default to 16 pixel wide tiles.
+        return value >> scale
     }
 
     export function locationOfSprite(s: Sprite): tiles.Location {

@@ -1,16 +1,14 @@
 type ShopItem = [Image, string, number]
 
-class Item extends Sprite {
+class Item extends Entity {
     protected canUse: boolean = true
 
     protected get message(): string { throw null }
     protected get options(): MenuOption[] {  throw null }
 
     constructor(image: Image, tile: tiles.Location) {
-        super(image)
-        this.setKind(SpriteKind.Item)
+        super(image, SpriteKind.Item, ZOrder.ITEMS, tile)
         game.currentScene().physicsEngine.addSprite(this)
-        tiles.placeOnTile(this, tile)
     }
 
     protected tryUse(selected: string, index: number): boolean { return true }
@@ -151,8 +149,7 @@ class Shop extends Item {
     }
 
     protected postUse(): void {
-        sounds.play(sounds.teleport)
-        this.destroy(effects.bubbles, 2000)
+        this.unsummon()
     }
 }
 

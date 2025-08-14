@@ -9,8 +9,8 @@ sprites.onOverlap(SpriteKind.Pet, SpriteKind.Enemy, (pet: Sprite, enemy: Sprite)
 })
 
 class Pet extends EntityWithStatus {
-    public get maxLife(): int8 { return 1 }
-    protected get damage(): int8 { return 1 }
+    protected get meleeDamage(): int8 { return 1 }
+    protected get distanceRange(): [int8, int8] { throw "Not impemented" }
     protected get speed(): int8 { return 30 }
     protected get thinkingDelay(): int16 { return 2000 }
 
@@ -18,15 +18,21 @@ class Pet extends EntityWithStatus {
         super(image, SpriteKind.Pet, ZOrder.PET, scene.locationOfSprite(player))
         this.setScale(0.75)
         after(this.thinkingDelay, () => this.think())
+        this.onDestroyed(() => player.pet = null)
     }
 
     protected think(): void {
-        if (!this || !player) return
-
         let path = scene.aStar(scene.locationOfSprite(this), scene.locationOfSprite(player))
 
-        if (path != undefined && path.length > 2) {
-            scene.followPath(this, path.slice(0, -2), this.speed)
+        if (path) {
+            let [min, max] = this.distanceRange
+            let preferred = randint(min, max)
+
+            if (path.length > preferred) {
+                scene.followPath(this, path.slice(0, -preferred), this.speed)
+            } else if (path.length < preferred) {
+                // TODO: Wander away
+            }
         }
 
         after(this.thinkingDelay, () => {
@@ -35,11 +41,12 @@ class Pet extends EntityWithStatus {
     }
 
     public onHitEnemy(enemy: Enemy): void {
-        enemy.melee(this.damage)
+        enemy.melee(this.meleeDamage)
     }
 }
 
 class Cat extends Pet {
+    protected get distanceRange(): [int8, int8] { return [0, 2] }
     protected get thinkingDelay(): int16 { return 1000 }
     protected get speed(): int8 { return 40 }
 
@@ -49,6 +56,7 @@ class Cat extends Pet {
 }
 
 class Dog extends Pet {
+    protected get distanceRange(): [int8, int8] { return [1, 1] }
     public get maxLife(): int8 { return 2 }
 
     constructor() {
@@ -57,11 +65,14 @@ class Dog extends Pet {
 }
 
 class ClownFish extends Pet {
-    protected get damage(): int8 { return 2 }
+    protected get distanceRange(): [int8, int8] { return [2, 4] }
+
+    protected get meleeDamage(): int8 { return 2 }
     protected get speed(): int8 { return 10 }
     protected get thinkingDelay(): int16 { return 3000 }
 
     constructor() {
         super(sprites.builtin.clownFish0)
+        this.setScale(1)
     }
 }

@@ -14,7 +14,6 @@ class Enemy extends EntityWithStatus {
         this.setFlag(SpriteFlag.BounceOnWall, true)
     }
 
-    public get maxLife(): int8 { return 1 }
     protected get killedMessage(): string { return "" }
 
     public melee(damage: number): int8 {
