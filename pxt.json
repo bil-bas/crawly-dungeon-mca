@@ -2,9 +2,6 @@
     "name": "Crawly Dungeon",
     "version": "1.0.4",
     "description": "Dungeon crawler created with Makecode Arcade (Typescript)",
-    "authors": [
-        "Bil Bas"
-    ],
     "license": "MIT",
     "dependencies": {
         "device": "*",
@@ -45,6 +42,9 @@
     ],
     "preferredEditor": "tsprj",
     "languageRestriction": "javascript-only",
+    "authors": [
+        "Bil Bas"
+    ],
     "yotta": {
         "config": {
             "PXT_GC_CHECKS": 1
