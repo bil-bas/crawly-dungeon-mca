@@ -1,17 +1,16 @@
 type ShopItem = [Image, string, number]
 
-class Item {
-    protected sprite: Sprite
+class Item extends Sprite {
     protected canUse: boolean = true
 
-    protected get image(): Image { throw null }
     protected get message(): string { throw null }
     protected get options(): MenuOption[] {  throw null }
 
-    constructor(tile: tiles.Location) {
-        this.sprite = sprites.create(this.image, SpriteKind.Item)
-        tiles.placeOnTile(this.sprite, tile)
-        this.sprite.data["obj"] = this
+    constructor(image: Image, tile: tiles.Location) {
+        super(image)
+        this.setKind(SpriteKind.Item)
+        game.currentScene().physicsEngine.addSprite(this)
+        tiles.placeOnTile(this, tile)
     }
 
     protected tryUse(selected: string, index: number): boolean { return true }
@@ -22,7 +21,7 @@ class Item {
 
         this.canUse = false
 
-        new Menu(this.sprite.image, this.message, this.options, true,
+        new Menu(this.image, this.message, this.options, true,
             (selected: string, index: number) => {
                 if (index == Menu.CANCELLED) {
                     after(100, () => this.movedChecker())
@@ -44,7 +43,7 @@ class Item {
     }
 
     protected movedChecker(): void {
-        if (this.sprite.overlapsWith(player.sprite)) {
+        if (this.overlapsWith(player)) {
             after(100, () => this.movedChecker())
         } else {
             this.canUse = true
@@ -54,15 +53,14 @@ class Item {
 
 
 class Shrine extends Item {
-    protected SPENT_IMAGE = sprites.dungeon.statueDark
+    protected readonly SPENT_IMAGE = sprites.dungeon.statueDark
 
-    protected get image(): Image { return sprites.dungeon.statueLight }
-    protected get isSpent(): boolean { return this.sprite.image == this.SPENT_IMAGE }
+    protected get isSpent(): boolean { return this.image == this.SPENT_IMAGE }
     protected get message(): string { return `What will you give up?` }
 
     constructor(tile: tiles.Location) {
-        super(tile)
-        this.sprite.y -= 7 // Standing on the tile and so we can interact with it.
+        super(sprites.dungeon.statueLight, tile)
+        this.y -= 7 // Standing on the tile and so we can interact with it.
     }
 
     protected get options(): MenuOption[] {
@@ -88,14 +86,17 @@ class Shrine extends Item {
         player.coins += 1000
         sounds.play(sounds.sacrifice)
 
-        this.sprite.startEffect(effects.coolRadial, 2000)
-        after(1000, () => this.sprite.setImage(this.SPENT_IMAGE))
+        this.startEffect(effects.coolRadial, 2000)
+        after(1000, () => this.setImage(this.SPENT_IMAGE))
     }
 }
 
 class Mushroom extends Item {
-    protected get image(): Image { return assets.tile`mushroom` }
     protected get message(): string { return "What dare you injest?" }
+
+    constructor(tile: tiles.Location) {
+        super(assets.tile`mushroom`, tile)
+    }
 
     protected get options(): MenuOption[] {
         return [
@@ -116,7 +117,7 @@ class Mushroom extends Item {
 
     protected postUse(): void {
         sounds.play(sounds.eat)
-        this.sprite.destroy(effects.hearts, 1000)
+        this.destroy(effects.hearts, 1000)
     }
 }
 
@@ -151,12 +152,14 @@ class Shop extends Item {
 
     protected postUse(): void {
         sounds.play(sounds.teleport)
-        this.sprite.destroy(effects.bubbles, 2000)
+        this.destroy(effects.bubbles, 2000)
     }
 }
 
 class ItemShop extends Shop {
-    protected get image(): Image { return sprites.builtin.villager3WalkFront1 }
+    constructor(tile: tiles.Location) {
+        super(sprites.builtin.villager3WalkFront1, tile)
+    }
 
     protected get wares(): ShopItem[] {
         return [
@@ -184,7 +187,9 @@ class ItemShop extends Shop {
 }
 
 class SpellShop extends Shop {
-    protected get image(): Image { return sprites.builtin.villager1WalkFront1 }
+    constructor(tile: tiles.Location) {
+        super(sprites.builtin.villager1WalkFront1, tile)
+    }
 
     protected get wares(): ShopItem[] {
         return SPELL_BOOK.map<ShopItem>((spell: Spell, _: number) => {

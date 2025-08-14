@@ -45,7 +45,7 @@ class Dungeon {
                 case assets.tile`life potion`:
                     break
                 case sprites.dungeon.stairLarge:
-                    tiles.placeOnTile(player.sprite, tile)
+                    tiles.placeOnTile(player, tile)
                     this.clearTile(tile)
                     break
                 case sprites.dungeon.doorLockedNorth:
@@ -165,7 +165,7 @@ class Dungeon {
         }
 
         this.levelIndex += 1
-        player.sprite.setScale(1)
+        player.setScale(1)
         player.resetMovement()
         this.render_level()
     }

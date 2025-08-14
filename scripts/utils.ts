@@ -13,3 +13,14 @@ function padStart(text: string, length: number): string {
 function after(time: number, thenDo: () => void) {
     setTimeout(thenDo, time)
 }
+
+namespace scene {
+    function screenCoordinateToTile(value: number) {
+        const tm = game.currentScene().tileMap
+        return value >> tm.scale
+    }
+
+    export function locationOfSprite(s: Sprite): tiles.Location {
+        return tiles.getTileLocation(screenCoordinateToTile(s.x), screenCoordinateToTile(s.y))
+    }
+}

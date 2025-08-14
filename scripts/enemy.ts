@@ -1,54 +1,21 @@
 // Enemy interactions
 scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, tile: tiles.Location) => {
-    enemy.data["obj"].touchWall(tile)
+    let enemy_ = enemy as Enemy
+    enemy_.touchWall(tile)
 })
 
+
 // Base enemy obj.
-class Enemy {
-    protected readonly sprite: Sprite
-    protected _life: int8
-    protected lifeBar: StatusBarSprite | null = null
+class Enemy extends EntityWithStatus {
     protected meleeCooldownAt: number = 0
 
-    constructor(tile: tiles.Location) {
-        this.sprite = sprites.create(this.spriteImage, SpriteKind.Enemy)
-        tiles.placeOnTile(this.sprite, tile)
-        this.sprite.setFlag(SpriteFlag.BounceOnWall, true)
-        this.sprite.z = ZOrder.ENEMIES
-        this.sprite.data["obj"] = this
-        this._life = this.initialLife
+    constructor(image: Image, tile: tiles.Location) {
+        super(image,  SpriteKind.Enemy, ZOrder.ENEMIES, tile)
+        this.setFlag(SpriteFlag.BounceOnWall, true)
     }
 
-    protected get spriteImage(): Image { return assets.tile`bat` }
-    protected get initialLife(): int8 { return 1 }
+    public get maxLife(): int8 { return 1 }
     protected get killedMessage(): string { return "" }
-
-    public get life(): int8 { return this._life }
-    public set life(value: number) {
-        this._life = Math.max(value, 0)
-
-        if (this._life == 0) {
-            this.sprite.destroy()
-            if (this.lifeBar) {
-                this.lifeBar.destroy()
-            }
-            music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
-        } else if (this._life == this.initialLife) {
-            // hide status bar when fully healed.
-            if (this.lifeBar) {
-                this.lifeBar.destroy()
-                this.lifeBar = null
-            }
-        } else {
-            // Create a new status bar if necessary
-            if (!this.lifeBar) {
-                this.lifeBar = statusbars.create(this.sprite.width, 2, StatusBarKind.EnemyHealth)
-                this.lifeBar.max = this.initialLife
-                this.lifeBar.attachToSprite(this.sprite)
-            }
-            this.lifeBar.value = this._life
-        }
-    }
 
     public melee(damage: number): int8 {
         if (game.runtime() < this.meleeCooldownAt) return 0
@@ -67,28 +34,19 @@ class Enemy {
         } else {
             rule = characterAnimations.rule(predicate1)
         }
-        characterAnimations.loopFrames(this.sprite, images, 200, rule)
+        characterAnimations.loopFrames(this, images, 200, rule)
     }
 
     public touchWall(tile: tiles.Location) { }
-
-    public destroy(): void {
-        this.sprite.destroy()
-        if (this.lifeBar) {
-            this.lifeBar.destroy()
-        }
-    }
 }
 
 // BAT
 class Bat extends Enemy {
-    protected get spriteImage(): Image { return sprites.builtin.forestBat0 }
     protected get killedMessage(): string { return `Exsanguinated by Bat` }
 
     constructor(tile: tiles.Location) {
-        super(tile)
-
-        this.sprite.vx = 40
+        super(sprites.builtin.forestBat0, tile)
+        this.vx = 40
 
         let left = [sprites.builtin.forestBat0, sprites.builtin.forestBat1, sprites.builtin.forestBat2, sprites.builtin.forestBat3]
         this.add_animation(left, Predicate.MovingLeft)
@@ -100,15 +58,14 @@ class Bat extends Enemy {
 
 // HERMIT CRAB
 class HermitCrab extends Enemy {
-    protected get spriteImage(): Image { return sprites.builtin.hermitCrabWalk0 }
     protected get killedMessage(): string { return `Squished by Hermit Crab` }
-    protected get initialLife(): number { return 3 }
+    public get maxLife(): number { return 3 }
 
     constructor(tile: tiles.Location) {
-        super(tile)
+        super(sprites.builtin.hermitCrabWalk0, tile)
 
-        this.sprite.vy = -30
-        this.sprite.setScale(2)
+        this.vy = -30
+        this.setScale(2)
 
         let walk = [sprites.builtin.hermitCrabWalk0, sprites.builtin.hermitCrabWalk1, sprites.builtin.hermitCrabWalk2, sprites.builtin.hermitCrabWalk3]
         this.add_animation(walk, Predicate.MovingUp)
@@ -118,18 +75,17 @@ class HermitCrab extends Enemy {
     }
 
     public touchWall(tile: tiles.Location): void {
-        let crab = this.sprite
-        if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingUp))) {
-            crab.setVelocity(-30, 0)
+        if (characterAnimations.matchesRule(this, characterAnimations.rule(Predicate.MovingUp))) {
+            this.setVelocity(-30, 0)
             //console.log("up to left")
-        } else if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingDown))) {
-            crab.setVelocity(30, 0)
+        } else if (characterAnimations.matchesRule(this, characterAnimations.rule(Predicate.MovingDown))) {
+            this.setVelocity(30, 0)
             //console.log("down to right")
-        } else if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingLeft))) {
-            crab.setVelocity(0, 30)
+        } else if (characterAnimations.matchesRule(this, characterAnimations.rule(Predicate.MovingLeft))) {
+            this.setVelocity(0, 30)
             //console.log("left to down")
-        } else if (characterAnimations.matchesRule(crab, characterAnimations.rule(Predicate.MovingRight))) {
-            crab.setVelocity(0, -30)
+        } else if (characterAnimations.matchesRule(this, characterAnimations.rule(Predicate.MovingRight))) {
+            this.setVelocity(0, -30)
             //console.log("right to up")
         }
     }
@@ -137,12 +93,11 @@ class HermitCrab extends Enemy {
 
 // Monkey steals keys
 class Monkey extends Enemy {
-    protected get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
     protected get killedMessage(): string { return `Eyes gouged by Monkey` }
 
     constructor(tile: tiles.Location) {
-        super(tile)
-        this.sprite.vy = 50
+        super(sprites.builtin.forestMonkey0, tile)
+        this.vy = 50
 
         let up = [sprites.builtin.forestMonkey0, sprites.builtin.forestMonkey1, sprites.builtin.forestMonkey2, sprites.builtin.forestMonkey3]
         this.add_animation(up, Predicate.MovingUp)
@@ -162,15 +117,13 @@ class Monkey extends Enemy {
 }
 
 class Shroom extends Enemy {
-    protected get tileImage(): Image { return assets.tile`mimic` }
-    protected get spriteImage(): Image { return sprites.builtin.forestMonkey0 }
     protected get killedMessage(): string { return `Zoomed by a Shroom` }
 
     constructor(tile: tiles.Location) {
-        super(tile)
+        super(sprites.builtin.forestMonkey0, tile)
 
-        this.sprite.vx = 20
-        this.sprite.vy = 20
+        this.vx = 20
+        this.vy = 20
 
         let ne = [sprites.swamp.mushroomBackLeft0, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft3]
         this.add_animation(ne, Predicate.MovingLeft, Predicate.MovingUp)
@@ -188,13 +141,12 @@ class Shroom extends Enemy {
 
 // Skeleton steals mana
 class Skeleton extends Enemy {
-    protected get spriteImage(): Image { return sprites.castle.skellyFront }
     protected get killedMessage(): string { return `Rattled by Skellington` }
 
     constructor(tile: tiles.Location) {
-        super(tile)
+        super(sprites.castle.skellyFront, tile)
 
-        this.sprite.vy = 40
+        this.vy = 40
 
         let down = [sprites.castle.skellyWalkFront1, sprites.castle.skellyWalkFront2]
         this.add_animation(down, Predicate.MovingUp)
@@ -213,12 +165,14 @@ class Skeleton extends Enemy {
 }
 
 class Mimic extends Enemy {
-    protected get spriteImage(): Image { return sprites.dungeon.chestClosed }
     protected get killedMessage(): string { return `Swallowed by Mimic` }
 
+    constructor(tile: tiles.Location) {
+        super(sprites.dungeon.chestClosed, tile)
+    }
+
     public melee(damage: number): int8 {
-        let tile = tiles.getTileLocation(this.sprite.x / 16, this.sprite.y / 16)
-        tiles.setTileAt(tile, assets.tile`dead mimic`)
+        tiles.setTileAt(scene.locationOfSprite(this), assets.tile`dead mimic`)
         return super.melee(damage)
     }
 }

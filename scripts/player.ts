@@ -9,7 +9,7 @@ const ALL_STAIRS: Image[] = [
 ]
 
 
-class Player {
+class Player extends Entity {
     static get title(): string { throw null }
     static get icon(): Image { return sprites.swamp.witchForward0 }
 
@@ -18,9 +18,7 @@ class Player {
     protected _coins: number = 0
     protected _mana: int8 = INITIAL_MANA
     protected _maxMana: int8 = INITIAL_MANA
-    protected _life: int8 = INITIAL_LIFE
     protected _maxLife: int8 = INITIAL_LIFE
-    public readonly sprite: Sprite
     protected _primarySpell: Spell
     protected _secondarySpell: Spell
     protected _primarySpellIndicator: SpellIndicator
@@ -103,13 +101,12 @@ class Player {
     }
 
     constructor(public title: string) {
-        this.sprite = sprites.create(sprites.swamp.witchForward0, SpriteKind.Player)
-        this.sprite.z = ZOrder.PLAYER
-        scene.cameraFollowSprite(this.sprite)
+        super(sprites.swamp.witchForward0, SpriteKind.Player, ZOrder.PLAYER, tiles.getTileLocation(0, 0))
+        scene.cameraFollowSprite(this)
 
         this.addAnimations()
 
-        shadowcasting.setAnchor(this.sprite)
+        shadowcasting.setAnchor(this)
         shadowcasting.setShadowColor(Colour.BLACK)
         shadowcasting.setShadowMode(shadowcasting.ShadowCastingMode.Fill)
 
@@ -131,13 +128,14 @@ class Player {
     }
 
     protected updateMovement(): void {
-        controller.moveSprite(this.sprite, this._speed, this._speed)
+        controller.moveSprite(this, this._speed, this._speed)
     }
 
     protected initEventHandlers(): void {
         // Interacting with the environment
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (_: Sprite, item: Sprite) => {
-            item.data["obj"].use()
+            let item_ = item as Item
+            item_.use()
         })
 
         scene.onHitWall(SpriteKind.Player, (_: Sprite, tile: tiles.Location) => {
@@ -152,7 +150,8 @@ class Player {
         }
 
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (_: Sprite, enemy: Sprite) => {
-            this.touchedEnemy(enemy)
+            let enemy_ = enemy as Enemy
+            this.touchedEnemy(enemy_)
         })
 
         for (let stair of ALL_STAIRS) {
@@ -216,7 +215,7 @@ class Player {
     }
 
     protected addAnimation(frames: Image[], predicate: Predicate): void{
-        characterAnimations.loopFrames(this.sprite, frames, 200, characterAnimations.rule(predicate))
+        characterAnimations.loopFrames(this, frames, 200, characterAnimations.rule(predicate))
     }
 
     protected addAnimations(): void {
@@ -242,8 +241,8 @@ class Player {
         }
     }
 
-    protected touchedEnemy(enemy: Sprite): void {
-        let injury = enemy.data["obj"].melee(1)
+    protected touchedEnemy(enemy: Enemy): void {
+        let injury = enemy.melee(1)
         if (injury) {
             this.life -= injury
         }
@@ -255,14 +254,14 @@ class Player {
         this.isFalling = true
 
         this.freeze()
-        tiles.placeOnTile(this.sprite, tile)
+        tiles.placeOnTile(this, tile)
 
         after(250, () => {
             sounds.play(sounds.stairs)
-            this.sprite.setScale(0.75)
+            this.setScale(0.75)
 
             after(500, () => {
-                this.sprite.setScale(0.5)
+                this.setScale(0.5)
 
                 after(500, () => {
                     dungeon.advance()
@@ -272,7 +271,7 @@ class Player {
         })
     }
 
-       protected static replace(icon: Image, colour: number): Image {
+    protected static replace(icon: Image, colour: number): Image {
         icon = icon.clone()
         icon.replace(Colour.YELLOW, colour)
         return icon

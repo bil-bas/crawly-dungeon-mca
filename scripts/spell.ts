@@ -18,7 +18,8 @@ sprites.onDestroyed(SpriteKind.ProjectileSpell, (projectile: Sprite) => {
 
 // Fireball hits ENEMY
 sprites.onOverlap(SpriteKind.ProjectileSpell, SpriteKind.Enemy, (projectile: Sprite, enemy: Sprite) => {
-    projectile.data["obj"].onProjectileHitEnemy(projectile, enemy.data["obj"])
+    let enemy_ = enemy as Enemy
+    projectile.data["obj"].onProjectileHitEnemy(projectile, enemy_)
 })
 
 // Destoy flamable items
@@ -57,20 +58,20 @@ class ProjectileSpell extends Spell {
     public cast(): void {
         super.cast()
 
-        if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingRight)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingRight))) {
+        if (characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.MovingRight)) ||
+            characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingRight))) {
 
             this.castInDirection(Direction.RIGHT)
-        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingLeft)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
+        } else if (characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.MovingLeft)) ||
+            characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingLeft))) {
 
             this.castInDirection(Direction.LEFT)
-        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingUp)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingUp))) {
+        } else if (characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.MovingUp)) ||
+            characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingUp))) {
 
             this.castInDirection(Direction.UP)
-        } else if (characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.MovingDown)) ||
-            characterAnimations.matchesRule(player.sprite, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingDown))) {
+        } else if (characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.MovingDown)) ||
+            characterAnimations.matchesRule(player, characterAnimations.rule(Predicate.NotMoving, Predicate.FacingDown))) {
 
             this.castInDirection(Direction.DOWN)
         }
@@ -104,7 +105,7 @@ class Firebolt extends ProjectileSpell {
                 vy = 100
         }
 
-        let ball = sprites.createProjectileFromSprite(sprites.projectile.explosion1, player.sprite, vx, vy)
+        let ball = sprites.createProjectileFromSprite(sprites.projectile.explosion1, player, vx, vy)
         ball.z = ZOrder.SPELLS
         ball.setKind(SpriteKind.ProjectileSpell)
         ball.startEffect(effects.fire)

@@ -15,6 +15,7 @@
     },
     "files": [
         "scripts/pet.ts",
+        "scripts/entity.ts",
         "scripts/dataStore.ts",
         "scripts/colours.ts",
         "scripts/sounds.ts",
