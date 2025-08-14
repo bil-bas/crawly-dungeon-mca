@@ -3,8 +3,8 @@ type ShopItem = [Image, string, number]
 class Item extends Entity {
     protected canUse: boolean = true
 
-    protected get message(): string { throw null }
-    protected get options(): MenuOption[] {  throw null }
+    protected get message(): string { throw NOT_IMPLEMENTED }
+    protected get options(): MenuOption[] {  throw NOT_IMPLEMENTED }
 
     constructor(image: Image, tile: tiles.Location) {
         super(image, SpriteKind.Item, ZOrder.ITEMS, tile)
@@ -121,10 +121,10 @@ class Mushroom extends Item {
 
 class Shop extends Item {
     protected get message() { return `You have ${player.coins} gold` }
-    protected get wares(): ShopItem[] { throw null }
+    protected get wares(): ShopItem[] { throw NOT_IMPLEMENTED }
 
     protected label(text: string, value: number): string {
-        return `${text}${padStart(value ? (value.toString() + " gold") : "", 22 - text.length)}`
+        return `${text}${padStart(value ? (value.toString() + " gold") : "", 23 - text.length)}`
     }
 
     protected get options(): MenuOption[] {

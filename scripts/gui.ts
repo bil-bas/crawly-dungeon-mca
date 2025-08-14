@@ -275,7 +275,8 @@ class Gui {
 class SpellIndicator extends Overlay {
     constructor(spell: Spell, primary: boolean) {
         super(spell.icon, `${spell.mana} ${primary ? "A" : "B"}`)
+        this.setMaxFontHeight(5)
         this.right = screen.width
-        this.bottom = screen.height - (primary ? 9 : 0) - 7
+        this.bottom = screen.height - (primary ? 10 : 0) - 5
     }
 }

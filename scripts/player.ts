@@ -10,7 +10,7 @@ const ALL_STAIRS: Image[] = [
 
 
 class Player extends Entity {
-    static get title(): string { throw null }
+    static get title(): string { throw NOT_IMPLEMENTED }
     static get icon(): Image { return sprites.swamp.witchForward0 }
 
     protected isFalling: boolean = false
@@ -314,7 +314,7 @@ class Druid extends Wizard {
 
     constructor(klass: string) {
         super(klass)
-        this.secondarySpell = findSpell("Summon")
+        this.secondarySpell = findSpell("Beast Friend")
     }
 }
 

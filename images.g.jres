@@ -22,5 +22,69 @@
         "namespace": "myImages.",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "catSit"
+    },
+    "myImages.image5": {
+        "id": "myImages.image5",
+        "data": "hwQJAAkAAACQmZmZAAAAAJmZlJkJAAAAmZmVmQkAAACZmZSZCQAAAFlUWVQJAAAAmZmUmQkAAACZmZWZCQAAAJmZlJkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "starfire"
+    },
+    "myImages.image6": {
+        "id": "myImages.image6",
+        "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAGRGRmQkAAAAZ8REfCQAAABkRHh4JAAAAGfERHgkAAAAZEZGZCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "raise dead"
+    },
+    "myImages.image4": {
+        "id": "myImages.image4",
+        "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAmYmImAkAAACJGCKCCQAAACkiIiIJAAAAiSgiggkAAACZiYiYCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "blood magic"
+    },
+    "myImages.image10": {
+        "id": "myImages.image10",
+        "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAmZmSmQkAAACZmZKZCQAAAJkiIpIJAAAAmZmSmQkAAACZmZKZCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "heal"
+    },
+    "myImages.image11": {
+        "id": "myImages.image11",
+        "data": "hwQJAAkAAACQmZmZAAAAAJkpIpkJAAAAmSknmQkAAAApIiciCQAAACl3dycJAAAAKSInIgkAAACZKSeZCQAAAJkpIpkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "restore"
+    },
+    "myImages.image9": {
+        "id": "myImages.image9",
+        "data": "hwQJAAkAAACQmZmZAAAAAJmZkpkJAAAAmZmZmQkAAACZmZKZCQAAAJkpJJkJAAAAmUlFmQkAAACZSUSZCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "firebolt"
+    },
+    "myImages.image7": {
+        "id": "myImages.image7",
+        "data": "hwQJAAkAAACQmZmZAAAAAJkpIpkJAAAAmUJEkgkAAAApREUkCQAAAClUVSQJAAAAKURFJAkAAACZQkSSCQAAAJkpIpkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "fireball"
+    },
+    "myImages.image8": {
+        "id": "myImages.image8",
+        "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAmZ7ungkAAACZme7uCQAAAJme7u4JAAAAmZnu7gkAAACZnu6eCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "beast friend"
     }
 }
