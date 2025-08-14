@@ -7,6 +7,7 @@ scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, tile: tiles.Location) => {
 
 // Base enemy obj.
 class Enemy extends EntityWithStatus {
+    protected get meleeCooldown(): int16 { return 500 }
     protected meleeCooldownAt: number = 0
 
     constructor(image: Image, tile: tiles.Location) {
@@ -20,12 +21,12 @@ class Enemy extends EntityWithStatus {
         if (game.runtime() < this.meleeCooldownAt) return 0
 
         this.life -= damage
-        this.meleeCooldownAt = game.runtime() + 1000
+        this.meleeCooldownAt = game.runtime() + this.meleeCooldown
         sounds.play(sounds.melee)
         return 1
     }
 
-    public touchWall(tile: tiles.Location) { }
+    public touchWall(tile: tiles.Location): void { }
 }
 
 // BAT
@@ -152,14 +153,15 @@ class Skeleton extends Enemy {
 }
 
 class Mimic extends Enemy {
+    public get maxLife(): int8 { return 2 }
     protected get killedMessage(): string { return `Swallowed by Mimic` }
 
     constructor(tile: tiles.Location) {
         super(sprites.dungeon.chestClosed, tile)
     }
 
-    public melee(damage: number): int8 {
+    protected onDeath() {
         tiles.setTileAt(scene.locationOfSprite(this), assets.tile`dead mimic`)
-        return super.melee(damage)
+        super.onDeath()
     }
 }

@@ -10,6 +10,7 @@ namespace Direction {
     export const DOWN: int8 = 4
 }
 
+
 sprites.onDestroyed(SpriteKind.ProjectileSpell, (projectile: Sprite) => {
     projectile.data["obj"].onProjectileDestroyed(projectile)
 })
@@ -107,6 +108,7 @@ class Firebolt extends ProjectileSpell {
 
         let ball = sprites.createProjectileFromSprite(sprites.projectile.explosion1, player, vx, vy)
         ball.z = ZOrder.SPELLS
+        ball.setFlag(SpriteFlag.AutoDestroy, false) // Allow it to go off-camera.
         ball.setKind(SpriteKind.ProjectileSpell)
         ball.startEffect(effects.fire)
         ball.data["obj"] = this
@@ -185,9 +187,10 @@ class Fireball extends Firebolt {
         let explosion = super.explosion(x, y)
         explosion.setScale(4)
 
-        sprites.allOfKind(SpriteKind.Enemy).forEach((enemy: Sprite) => {
-            if (explosion.overlapsWith(enemy)) {
-                enemy.data["obj"].life -= this.splashDamage
+        sprites.allOfKind(SpriteKind.Enemy).forEach((sprite: Sprite) => {
+            if (explosion.overlapsWith(sprite)) {
+                let enemy = sprite as Enemy
+                enemy.life -= this.splashDamage
             }
         })
         return explosion

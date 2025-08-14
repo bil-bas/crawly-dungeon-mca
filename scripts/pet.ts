@@ -20,24 +20,18 @@ class Pet extends EntityWithStatus {
     protected get speed(): int8 { return 30 }
     protected get thinkingDelay(): int16 { return 2000 }
     protected get sitLeft(): Image { return this.walkLeft[0] }
-    protected get sitRight(): Image {
-        let image = this.sitLeft.clone()
-        image.flipX()
-        return image
-    }
+    protected get sitRight(): Image { return images.flipX(this.sitLeft) }
     protected get walkLeft(): Image[] { throw NOT_IMPLEMENTED }
-    protected get walkRight(): Image[] {
-        return this.walkLeft.map((image: Image) => {
-            image = image.clone()
-            image.flipX()
-            return image
-        })
-    }
+    protected get walkRight(): Image[] { return images.flipXAll(this.walkLeft) }
 
     constructor(image: Image) {
         super(image, SpriteKind.Pet, ZOrder.PET, scene.locationOfSprite(player))
         this.thinkAboutThinking()
-        this.onDestroyed(() => player.pet = null)
+    }
+
+    protected onDeath(): void {
+        player.pet = null
+        super.onDeath()
     }
 
     protected think(): void {

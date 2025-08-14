@@ -29,7 +29,7 @@ class Player extends Entity {
     public get pet(): Pet|null { return this._pet }
     public set pet(pet: Pet | null) {
         if (this.pet) {
-            this.pet.destroy()
+            this.pet.unsummon()
         }
         this._pet = pet
     }
@@ -95,9 +95,16 @@ class Player extends Entity {
         this._life = Math.max(value, 0)
         gui.updateLabels()
         if (this._life == 0) {
-            dataStore.setRichest(this.title, this.coins)
-            new DeathMessage(this)
+            this.maxLife = 0
+            this.onDeath()
         }
+    }
+
+    protected onDeath(): void {
+        sounds.play(sounds.enemyDeath)
+        dataStore.setRichest(this.title, this.coins)
+        new DeathMessage(this)
+        this.destroy()
     }
 
     constructor(public title: string) {
@@ -283,12 +290,12 @@ class Wizard extends Player {
 
 class BloodWitch extends Wizard {
     static get title(): string { return "Blood Witch" }
-    static get icon(): Image { return Player.replaceColour(Player.icon, Colour.YELLOW, Colour.RED) }
+    static get icon(): Image { return images.replaceColour(Player.icon, Colour.YELLOW, Colour.RED) }
 
-    protected animUp() { return super.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.RED) }
-    protected animDown() { return super.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.RED) }
-    protected animLeft() { return super.replaceColourAll(super.animLeft(), Colour.YELLOW, Colour.RED) }
-    protected animRight() { return super.replaceColourAll(super.animRight(), Colour.YELLOW, Colour.RED) }
+    protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.RED) }
+    protected animDown() { return images.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.RED) }
+    protected animLeft() { return images.replaceColourAll(super.animLeft(), Colour.YELLOW, Colour.RED) }
+    protected animRight() { return images.replaceColourAll(super.animRight(), Colour.YELLOW, Colour.RED) }
 
     constructor(klass: string) {
         super(klass)
@@ -298,12 +305,12 @@ class BloodWitch extends Wizard {
 
 class Druid extends Wizard {
     static get title(): string { return "Druid" }
-    static get icon(): Image { return Player.replaceColour(Player.icon,  Colour.YELLOW, Colour.GREEN) }
+    static get icon(): Image { return images.replaceColour(Player.icon,  Colour.YELLOW, Colour.GREEN) }
 
-    protected animUp() { return super.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.GREEN) }
-    protected animDown() { return super.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.GREEN) }
-    protected animLeft() { return super.replaceColourAll(super.animLeft(), Colour.YELLOW, Colour.GREEN) }
-    protected animRight() { return super.replaceColourAll(super.animRight(), Colour.YELLOW, Colour.GREEN) }
+    protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.GREEN) }
+    protected animDown() { return images.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.GREEN) }
+    protected animLeft() { return images.replaceColourAll(super.animLeft(), Colour.YELLOW, Colour.GREEN) }
+    protected animRight() { return images.replaceColourAll(super.animRight(), Colour.YELLOW, Colour.GREEN) }
 
     constructor(klass: string) {
         super(klass)

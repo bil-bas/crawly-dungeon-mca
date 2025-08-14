@@ -1,6 +1,5 @@
 class Entity extends Sprite {
     protected _life: int8
-
     public get maxLife(): int8 { return 1 }
 
     constructor(image: Image, kind: number, z: number, tile: tiles.Location) {
@@ -36,24 +35,11 @@ class Entity extends Sprite {
         characterAnimations.loopFrames(this, images, 200, rule)
     }
 
-    protected static replaceColour(image: Image, oldColor: number, newColour: number): Image {
-        image = image.clone()
-        image.replace(oldColor, newColour)
-        return image
-    }
+    
 
-    protected replaceColourAll(frames: Image[], oldColor: number, newColour: number): Image[] {
-        return frames.map((icon: Image) => Entity.replaceColour(icon, oldColor, newColour))
-    }
-
-    protected static flipX(image: Image) {
-        image = image.clone()
-        image.flipX()
-        return image
-    }
-
-    protected flipXAll(frames: Image[]) {
-        return frames.map((image: Image) => Entity.flipX(image))
+    protected onDeath() {
+        music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
+        this.destroy(effects.ashes, 200)
     }
 }
 
@@ -65,11 +51,7 @@ class EntityWithStatus extends Entity {
         this._life = Math.max(value, 0)
 
         if (this._life == 0) {
-            this.destroy()
-            if (this.lifeBar) {
-                this.lifeBar.destroy()
-            }
-            music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
+            this.onDeath()
         } else if (this._life == this.maxLife) {
             // hide status bar when fully healed.
             if (this.lifeBar) {
@@ -87,8 +69,8 @@ class EntityWithStatus extends Entity {
         }
     }
 
-    public destroy(effect?: effects.ParticleEffect, duration?: number): void {
-        super.destroy(effect, duration)
+    protected onDeath(): void {
+        super.onDeath()
         if (this.lifeBar) {
             this.lifeBar.destroy()
         }

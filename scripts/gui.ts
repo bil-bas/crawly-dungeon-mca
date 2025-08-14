@@ -112,6 +112,8 @@ class StatUpdate extends Label {
         super(icon, `${change > 0 ? "+" : ""}${change}`, change < 0 ? Colour.RED : Colour.GREEN)
 
         this.setMaxFontHeight(5)
+        this.setFlag(SpriteFlag.RelativeToCamera, false)
+        game.currentScene().physicsEngine.addSprite(this)
         this.setPosition(player.x, player.y - 8)
         this.vy = -15
         after(300, () => {

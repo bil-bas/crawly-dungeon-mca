@@ -24,3 +24,25 @@ namespace scene {
         return tiles.getTileLocation(screenCoordinateToTile(s.x), screenCoordinateToTile(s.y))
     }
 }
+
+namespace images {
+    export function replaceColour(image: Image, oldColor: number, newColour: number): Image {
+        image = image.clone()
+        image.replace(oldColor, newColour)
+        return image
+    }
+
+    export function replaceColourAll(frames: Image[], oldColor: number, newColour: number): Image[] {
+        return frames.map((icon: Image) => replaceColour(icon, oldColor, newColour))
+    }
+
+    export function flipX(image: Image) {
+        image = image.clone()
+        image.flipX()
+        return image
+    }
+
+    export function flipXAll(frames: Image[]) {
+        return frames.map((image: Image) => flipX(image))
+    }
+}

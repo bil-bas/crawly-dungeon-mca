@@ -8,7 +8,6 @@ class Item extends Entity {
 
     constructor(image: Image, tile: tiles.Location) {
         super(image, SpriteKind.Item, ZOrder.ITEMS, tile)
-        game.currentScene().physicsEngine.addSprite(this)
     }
 
     protected tryUse(selected: string, index: number): boolean { return true }
