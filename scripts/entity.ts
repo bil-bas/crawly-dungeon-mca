@@ -25,7 +25,7 @@ class Entity extends Sprite {
         after(500, () => this.destroy())
     }
 
-    protected add_animation(images: Image[], predicate1: Predicate, predicate2?: Predicate) {
+    protected addAnimation(images: Image[], predicate1: Predicate, predicate2?: Predicate) {
         let rule: characterAnimations.Rule
 
         if (predicate2) {
@@ -36,14 +36,24 @@ class Entity extends Sprite {
         characterAnimations.loopFrames(this, images, 200, rule)
     }
 
-    protected static replaceColour(icon: Image, colour: number): Image {
-        icon = icon.clone()
-        icon.replace(Colour.YELLOW, colour)
-        return icon
+    protected static replaceColour(image: Image, oldColor: number, newColour: number): Image {
+        image = image.clone()
+        image.replace(oldColor, newColour)
+        return image
     }
 
-    protected replaceColourAll(frames: Image[], color: number): Image[] {
-        return frames.map((icon: Image) => Entity.replaceColour(icon, color))
+    protected replaceColourAll(frames: Image[], oldColor: number, newColour: number): Image[] {
+        return frames.map((icon: Image) => Entity.replaceColour(icon, oldColor, newColour))
+    }
+
+    protected static flipX(image: Image) {
+        image = image.clone()
+        image.flipX()
+        return image
+    }
+
+    protected flipXAll(frames: Image[]) {
+        return frames.map((image: Image) => Entity.flipX(image))
     }
 }
 

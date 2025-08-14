@@ -37,9 +37,8 @@ class Bat extends Enemy {
         this.vx = 40
 
         let left = [sprites.builtin.forestBat0, sprites.builtin.forestBat1, sprites.builtin.forestBat2, sprites.builtin.forestBat3]
-        this.add_animation(left, Predicate.MovingLeft)
-
-        this.add_animation(left, Predicate.MovingRight)
+        this.addAnimation(left, Predicate.MovingLeft)
+        this.addAnimation(left, Predicate.MovingRight)
     }
 }
 
@@ -56,10 +55,10 @@ class HermitCrab extends Enemy {
         this.setScale(2)
 
         let walk = [sprites.builtin.hermitCrabWalk0, sprites.builtin.hermitCrabWalk1, sprites.builtin.hermitCrabWalk2, sprites.builtin.hermitCrabWalk3]
-        this.add_animation(walk, Predicate.MovingUp)
-        this.add_animation(walk, Predicate.MovingDown)
-        this.add_animation(walk, Predicate.MovingLeft)
-        this.add_animation(walk, Predicate.MovingRight)
+        this.addAnimation(walk, Predicate.MovingUp)
+        this.addAnimation(walk, Predicate.MovingDown)
+        this.addAnimation(walk, Predicate.MovingLeft)
+        this.addAnimation(walk, Predicate.MovingRight)
     }
 
     public touchWall(tile: tiles.Location): void {
@@ -88,10 +87,10 @@ class Monkey extends Enemy {
         this.vy = 50
 
         let up = [sprites.builtin.forestMonkey0, sprites.builtin.forestMonkey1, sprites.builtin.forestMonkey2, sprites.builtin.forestMonkey3]
-        this.add_animation(up, Predicate.MovingUp)
+        this.addAnimation(up, Predicate.MovingUp)
 
         let down = [sprites.builtin.forestMonkey4, sprites.builtin.forestMonkey5, sprites.builtin.forestMonkey2, sprites.builtin.forestMonkey7]
-        this.add_animation(up, Predicate.MovingDown)
+        this.addAnimation(up, Predicate.MovingDown)
     }
 
     public melee(damage: number): int8 {
@@ -114,16 +113,16 @@ class Shroom extends Enemy {
         this.vy = 20
 
         let ne = [sprites.swamp.mushroomBackLeft0, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft2, sprites.swamp.mushroomBackLeft3]
-        this.add_animation(ne, Predicate.MovingLeft, Predicate.MovingUp)
+        this.addAnimation(ne, Predicate.MovingLeft, Predicate.MovingUp)
 
         let nw = [sprites.swamp.mushroomBackRight0, sprites.swamp.mushroomBackRight1, sprites.swamp.mushroomBackRight2, sprites.swamp.mushroomBackRight3]
-        this.add_animation(nw, Predicate.MovingRight, Predicate.MovingUp)
+        this.addAnimation(nw, Predicate.MovingRight, Predicate.MovingUp)
 
         let sw = [sprites.swamp.mushroomFrontLeft0, sprites.swamp.mushroomFrontLeft2, sprites.swamp.mushroomFrontLeft2, sprites.swamp.mushroomFrontLeft3]
-        this.add_animation(sw, Predicate.MovingLeft, Predicate.MovingDown)
+        this.addAnimation(sw, Predicate.MovingLeft, Predicate.MovingDown)
 
         let se = [sprites.swamp.mushroomFrontRight0, sprites.swamp.mushroomFrontRight1, sprites.swamp.mushroomFrontRight2, sprites.swamp.mushroomFrontRight3]
-        this.add_animation(se, Predicate.MovingRight, Predicate.MovingDown)
+        this.addAnimation(se, Predicate.MovingRight, Predicate.MovingDown)
     }
 }
 
@@ -137,8 +136,8 @@ class Skeleton extends Enemy {
         this.vy = 40
 
         let down = [sprites.castle.skellyWalkFront1, sprites.castle.skellyWalkFront2]
-        this.add_animation(down, Predicate.MovingUp)
-        this.add_animation(down, Predicate.MovingDown)
+        this.addAnimation(down, Predicate.MovingUp)
+        this.addAnimation(down, Predicate.MovingDown)
     }
 
     public melee(damage: number): int8 {

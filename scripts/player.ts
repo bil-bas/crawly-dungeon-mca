@@ -214,10 +214,6 @@ class Player extends Entity {
         }
     }
 
-    protected addAnimation(frames: Image[], predicate: Predicate): void{
-        characterAnimations.loopFrames(this, frames, 200, characterAnimations.rule(predicate))
-    }
-
     protected addAnimations(): void {
         this.addAnimation(this.animUp(), Predicate.MovingUp)
         this.addAnimation([this.animUp()[0]], Predicate.FacingUp)
@@ -287,12 +283,12 @@ class Wizard extends Player {
 
 class BloodWitch extends Wizard {
     static get title(): string { return "Blood Witch" }
-    static get icon(): Image { return Player.replaceColour(Player.icon, Colour.RED) }
+    static get icon(): Image { return Player.replaceColour(Player.icon, Colour.YELLOW, Colour.RED) }
 
-    protected animUp() { return super.replaceColourAll(super.animUp(), Colour.RED) }
-    protected animDown() { return super.replaceColourAll(super.animDown(), Colour.RED) }
-    protected animLeft() { return super.replaceColourAll(super.animLeft(), Colour.RED) }
-    protected animRight() { return super.replaceColourAll(super.animRight(), Colour.RED) }
+    protected animUp() { return super.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.RED) }
+    protected animDown() { return super.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.RED) }
+    protected animLeft() { return super.replaceColourAll(super.animLeft(), Colour.YELLOW, Colour.RED) }
+    protected animRight() { return super.replaceColourAll(super.animRight(), Colour.YELLOW, Colour.RED) }
 
     constructor(klass: string) {
         super(klass)
@@ -302,12 +298,12 @@ class BloodWitch extends Wizard {
 
 class Druid extends Wizard {
     static get title(): string { return "Druid" }
-    static get icon(): Image { return Player.replaceColour(Player.icon, Colour.GREEN) }
+    static get icon(): Image { return Player.replaceColour(Player.icon,  Colour.YELLOW, Colour.GREEN) }
 
-    protected animUp() { return super.replaceColourAll(super.animUp(), Colour.GREEN) }
-    protected animDown() { return super.replaceColourAll(super.animDown(), Colour.GREEN) }
-    protected animLeft() { return super.replaceColourAll(super.animLeft(), Colour.GREEN) }
-    protected animRight() { return super.replaceColourAll(super.animRight(), Colour.GREEN) }
+    protected animUp() { return super.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.GREEN) }
+    protected animDown() { return super.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.GREEN) }
+    protected animLeft() { return super.replaceColourAll(super.animLeft(), Colour.YELLOW, Colour.GREEN) }
+    protected animRight() { return super.replaceColourAll(super.animRight(), Colour.YELLOW, Colour.GREEN) }
 
     constructor(klass: string) {
         super(klass)
