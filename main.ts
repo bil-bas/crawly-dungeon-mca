@@ -1,3 +1,5 @@
+const NOT_IMPLEMENTED = "Not implemented!"
+
 namespace ZOrder {
     export const ITEMS: int8 = 0
     export const ENEMIES: int8 = 1

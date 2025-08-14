@@ -24,6 +24,27 @@ class Entity extends Sprite {
         this.startEffect(effects.bubbles, 1000)
         after(500, () => this.destroy())
     }
+
+    protected add_animation(images: Image[], predicate1: Predicate, predicate2?: Predicate) {
+        let rule: characterAnimations.Rule
+
+        if (predicate2) {
+            rule = characterAnimations.rule(predicate1, predicate2)
+        } else {
+            rule = characterAnimations.rule(predicate1)
+        }
+        characterAnimations.loopFrames(this, images, 200, rule)
+    }
+
+    protected static replaceColour(icon: Image, colour: number): Image {
+        icon = icon.clone()
+        icon.replace(Colour.YELLOW, colour)
+        return icon
+    }
+
+    protected replaceColourAll(frames: Image[], color: number): Image[] {
+        return frames.map((icon: Image) => Entity.replaceColour(icon, color))
+    }
 }
 
 class EntityWithStatus extends Entity {

@@ -235,7 +235,7 @@ class Restore extends Spell {
 }
 
 class Summon extends Spell {
-    public get icon(): Image { return sprites.builtin.angelFish0 }
+    public get icon(): Image { return sprites.builtin.cat0 }
     public get title(): string { return "Summon" }
     public get mana(): int8 { return 2 }
 

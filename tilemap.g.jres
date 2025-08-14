@@ -1,14 +1,15 @@
 {
-    "myTiles.transparency16": {
-        "id": "myTiles.transparency16",
+    "myTiles.tile5": {
+        "id": "myTiles.tile5",
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
         "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
+        "tilemapTile": true,
+        "displayName": "transparency16"
     },
-    "myTiles.tile1": {
-        "id": "myTiles.tile1",
+    "myTiles.tile6": {
+        "id": "myTiles.tile6",
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAACwuwAAAAAAALDVy8zMAAAAsNW9W8UAAAC7VV1VzQAAsFtVVdXNAABbVVVV1QwAsF1VVVW1DAAAWxVRVdUMAACwG1FV1c0AAAC7VV1VzQAAALDVvVvFAAAAsNXLzMwAAACwuwAAAAAAAAAAAAAAAA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -16,8 +17,8 @@
         "tilemapTile": true,
         "displayName": "mana potion"
     },
-    "myTiles.tile2": {
-        "id": "myTiles.tile2",
+    "myTiles.tile7": {
+        "id": "myTiles.tile7",
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8PAAAAAADwM/MPAAAAAPAzM/8AAAAA8DOz+w8AAAAAP7O7DwAAAPAzs/sPAAAA8BMz/wAAAADwM/MPAAAAAAD/DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -25,8 +26,8 @@
         "tilemapTile": true,
         "displayName": "life potion"
     },
-    "myTiles.tile4": {
-        "id": "myTiles.tile4",
+    "myTiles.tile8": {
+        "id": "myTiles.tile8",
         "data": "hwQQABAAAAAzMzPzMzMzMzMzMz8zMzMzMzPzMzMzMzMzMzM/MzMzMzMzM/MzMzMzMzMz/z8zMzMzM/Mv/zEzMzMzM///MzMzMzPzL/8xMzMzMzP/PzMzMzMzM/MzMzMzMzMzPzMzMzMzM/MzMzMzMzMzMz8zMzMzMzMz8zMzMzMzMzMzMzMzMw==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -34,8 +35,8 @@
         "tilemapTile": true,
         "displayName": "bat"
     },
-    "myTiles.tile5": {
-        "id": "myTiles.tile5",
+    "myTiles.tile9": {
+        "id": "myTiles.tile9",
         "data": "hwQQABAAAAAzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz////PzMzM/MRERH/PzMz8xEfER8/MzPzER8R/z8zM/MREf8fPzMz8xEfEf8/MzPzER8RHz8zM/MRERH/PzMzM////z8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMw==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -43,8 +44,8 @@
         "tilemapTile": true,
         "displayName": "skeleton"
     },
-    "myTiles.tile6": {
-        "id": "myTiles.tile6",
+    "myTiles.tile10": {
+        "id": "myTiles.tile10",
         "data": "hwQQABAAAAAzMzMzMzMzMzMzMzP/PzMzMzMzMzPzPzMzMzMzMzPzMzMzMzMzM/MzMzP/////Mz8z8yIiIvL/PzMzLy/y8iI/MzMv8vLy8j8z8yIv8vIiPzMzLyIi8v8/MzPz////MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMw==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -52,8 +53,8 @@
         "tilemapTile": true,
         "displayName": "monkey"
     },
-    "myTiles.tile7": {
-        "id": "myTiles.tile7",
+    "myTiles.tile11": {
+        "id": "myTiles.tile11",
         "data": "hwQQABAAAAAzMzMzMzMzMzMzMzMzM/8/MzMzMzPzPzMzMzMzM/MzMzMzMzMz//8/MzMzM///PzMzMzPzv/s/MzMz86+7u/ozM/P/q7q7+j8zv6u7q7s6M/Ovu7q7+j8z86u7q/r//z/zurq7+v8zMzP/+///MzMzM/M/MzMzMzMzMzMzMzMzMw==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -61,8 +62,8 @@
         "tilemapTile": true,
         "displayName": "hermit crab"
     },
-    "myTiles.tile11": {
-        "id": "myTiles.tile11",
+    "myTiles.tile12": {
+        "id": "myTiles.tile12",
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAADgzu7uDgAAAO7O7u4OAADg7s7u7g4AAOARzu7uDgAA4PHOLuIOAADg7i4i7g4AAODuLuLuDgAA4BHO7u4OAADg8c7u7g4AAODuzu7uDgAAAO7O7u4OAAAA4M7u7g4AAAAAAAAAAAAAAAAAAAAAAA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -70,8 +71,8 @@
         "tilemapTile": true,
         "displayName": "mimic"
     },
-    "myTiles.tile8": {
-        "id": "myTiles.tile8",
+    "myTiles.tile13": {
+        "id": "myTiles.tile13",
         "data": "hwQQABAAAAAAu7u7y7y7C7Du7u677M6760Tk7rvs7rtLRETuu+zuC0tERO677O4LS0RE7rvs7gtLRETuu8vuC0tERO7NvO4LS0RE7s287gtLRETuu8vuC0tERO677O4LS0RE7rvs7gtLRETuu+zuC+tE5O677O67sO7u7rvszrsAu7u7y7y7Cw==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -79,8 +80,8 @@
         "tilemapTile": true,
         "displayName": "chest"
     },
-    "myTiles.tile12": {
-        "id": "myTiles.tile12",
+    "myTiles.tile14": {
+        "id": "myTiles.tile14",
         "data": "hwQQABAAAAD//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////w==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -88,8 +89,8 @@
         "tilemapTile": true,
         "displayName": "top of wall"
     },
-    "myTiles.tile3": {
-        "id": "myTiles.tile3",
+    "myTiles.tile15": {
+        "id": "myTiles.tile15",
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8P8AAAAAAAAfEf8AAAAA8BEREQ8AAADwEczx////APARERFeVVUP8BHM8f9fXw/wERER/1VfDwAfEf8A//AAAPD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -97,8 +98,8 @@
         "tilemapTile": true,
         "displayName": "key"
     },
-    "myTiles.tile13": {
-        "id": "myTiles.tile13",
+    "myTiles.tile16": {
+        "id": "myTiles.tile16",
         "data": "hwQQABAAAACwuwu7u7u7C+vuu8wcIs67S+S7zCHr7rtLRCvMIevuC0skIswc6yIMS0S7zMwrIsJLRLvLIiIiIktEzbwsIsIiS0TNvCwi7CtLRLvLIsLuK0tEu8zM6+4LS0SyzBzr7gtLRLvMIesuC0vku8wh6+K7S+67zBzrzruwuwu7u7u7Cw==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -106,8 +107,8 @@
         "tilemapTile": true,
         "displayName": "dead mimic"
     },
-    "myTiles.tile15": {
-        "id": "myTiles.tile15",
+    "myTiles.tile17": {
+        "id": "myTiles.tile17",
         "data": "hwQQABAAAAAREREREREREfH///////8f8WZmZmZmZh/x9v9mZv9vH/H28WZmH28f8fb/////bx/x9hERERFvH/H2ER8fEW8f8fbx//8fbx/x9hEfHxFvH/H2ER8fEW8f8fYRERERbx/x9v////9vH/FmZmZmZmYf8f///////x8REREREREREQ==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -115,8 +116,8 @@
         "tilemapTile": true,
         "displayName": "spell shop"
     },
-    "myTiles.tile14": {
-        "id": "myTiles.tile14",
+    "myTiles.tile18": {
+        "id": "myTiles.tile18",
         "data": "hwQQABAAAAAREREREREREfH///////8f8WZmZmZmZh/xZmZmZmZmH/FmZmZmZmYf8WZmZv9vZh/x9m//IvJmH/H2ryIh8mYf8favIiLyZh/x9m//IvJmH/FmZmb/b2Yf8WZmZmZmZh/xZmZmZmZmH/FmZmZmZmYf8f///////x8REREREREREQ==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -124,8 +125,8 @@
         "tilemapTile": true,
         "displayName": "item shop"
     },
-    "myTiles.tile9": {
-        "id": "myTiles.tile9",
+    "myTiles.tile19": {
+        "id": "myTiles.tile19",
         "data": "hwQQABAAAAARERERERERERERERERERERERERERERERERERERERHx/xEREf///y/y8f/xIiIiIvKPiP8iIiIi8o+I+CIiIiLyLyLyiIiIiPgvIv+IiIiI+PH/8YiIiIj4ERER////j/gRERERERHx/xEREREREREREREREREREREREREREREREQ==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -133,8 +134,8 @@
         "tilemapTile": true,
         "displayName": "shrine"
     },
-    "myTiles.tile10": {
-        "id": "myTiles.tile10",
+    "myTiles.tile20": {
+        "id": "myTiles.tile20",
         "data": "hwQQABAAAAAAAACwzAAAAAAAALu7DAAAAACwEbvLAAAAsBsRs8sAAAA7EzGzuwwAsDMzM9G7DLuwMzMT0b28EbAzMxPRvRzRsBMxM9G73N2wExEzs7vcvQAbETO7u7y7ADsRM9u9DAAAsDOz3c0AAAAAu7vdDAAAAACwu8sAAAAAAADLDAAAAA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -142,8 +143,8 @@
         "tilemapTile": true,
         "displayName": "mushroom"
     },
-    "myTiles.tile16": {
-        "id": "myTiles.tile16",
+    "myTiles.tile21": {
+        "id": "myTiles.tile21",
         "data": "hwQQABAAAAAAAADADLALAMALALvM27sAuwy/3cvbzQDd/L/dy7/NANv7v927v8sPsP/L27v/vA8Av93M/P//uwC/3cv8/7+9AMu7y7z7272wzLzMz/zbzbu9zP+7zNvL293Lv73Lu8zbvcu/3cu7vNu9y7/du8sLsLsMALsLuwAAAAAAsAAAAA==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -151,8 +152,8 @@
         "tilemapTile": true,
         "displayName": "rockslide"
     },
-    "myTiles.tile17": {
-        "id": "myTiles.tile17",
+    "myTiles.tile22": {
+        "id": "myTiles.tile22",
         "data": "hwQQABAAAAAzMzMzMzMzMzMzk5mZMzMzMzOZKSIzMzMzk5kpIjMzMzOTmSkiMzMzM5mZmZlmZmYzmSKSmWZmZjOZIpKZZmZmM5kikilmZmYzmZmZKWZmZjOTmZkpMzMzM5MpIpkzMzMzMykimTMzMzMzKSKZMzMzMzMzMzMzMzMzMzMzMzMzMw==",
         "dataEncoding": "base64",
         "namespace": "myTiles.",
@@ -168,27 +169,27 @@
         "mimeType": "application/mkcd-tilemap",
         "displayName": "level 1",
         "tileset": [
-            "myTiles.transparency16",
+            "myTiles.tile5",
             "sprites.builtin.brick",
             "sprites.dungeon.stairLarge",
             "sprites.dungeon.stairSouth",
-            "myTiles.tile1",
-            "myTiles.tile2",
-            "myTiles.tile3",
-            "myTiles.tile4",
-            "myTiles.tile5",
             "myTiles.tile6",
             "myTiles.tile7",
-            "myTiles.tile8",
-            "sprites.dungeon.stairLadder",
-            "myTiles.tile11",
-            "myTiles.tile9",
-            "sprites.dungeon.doorLockedNorth",
-            "myTiles.tile14",
             "myTiles.tile15",
+            "myTiles.tile8",
+            "myTiles.tile9",
             "myTiles.tile10",
-            "myTiles.tile16",
-            "myTiles.tile17"
+            "myTiles.tile11",
+            "myTiles.tile13",
+            "sprites.dungeon.stairLadder",
+            "myTiles.tile12",
+            "myTiles.tile19",
+            "sprites.dungeon.doorLockedNorth",
+            "myTiles.tile18",
+            "myTiles.tile17",
+            "myTiles.tile20",
+            "myTiles.tile21",
+            "myTiles.tile22"
         ]
     }
 }

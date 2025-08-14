@@ -14,7 +14,7 @@ class Enemy extends EntityWithStatus {
         this.setFlag(SpriteFlag.BounceOnWall, true)
     }
 
-    protected get killedMessage(): string { return "" }
+    protected get killedMessage(): string { throw NOT_IMPLEMENTED }
 
     public melee(damage: number): int8 {
         if (game.runtime() < this.meleeCooldownAt) return 0
@@ -23,17 +23,6 @@ class Enemy extends EntityWithStatus {
         this.meleeCooldownAt = game.runtime() + 1000
         sounds.play(sounds.melee)
         return 1
-    }
-
-    protected add_animation(images: Image[], predicate1: Predicate, predicate2?: Predicate) {
-        let rule: characterAnimations.Rule
-
-        if (predicate2) {
-            rule = characterAnimations.rule(predicate1, predicate2)
-        } else {
-            rule = characterAnimations.rule(predicate1)
-        }
-        characterAnimations.loopFrames(this, images, 200, rule)
     }
 
     public touchWall(tile: tiles.Location) { }

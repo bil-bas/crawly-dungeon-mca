@@ -3,7 +3,8 @@ namespace myImages {
 
     helpers._registerFactory("image", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "myTiles.transparency16":return img`
+            case "myTiles.tile5":
+            case "transparency16":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -21,7 +22,7 @@ namespace myImages {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "myTiles.tile1":
+            case "myTiles.tile6":
             case "mana potion":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . b . . . . . . . 
@@ -40,7 +41,7 @@ namespace myImages {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "myTiles.tile2":
+            case "myTiles.tile7":
             case "life potion":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -59,7 +60,7 @@ namespace myImages {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "myTiles.tile4":
+            case "myTiles.tile8":
             case "bat":return img`
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -78,7 +79,7 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 `;
-            case "myTiles.tile5":
+            case "myTiles.tile9":
             case "skeleton":return img`
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -97,7 +98,7 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 `;
-            case "myTiles.tile6":
+            case "myTiles.tile10":
             case "monkey":return img`
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -116,7 +117,7 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 3 3 3 3 3 f f f f f f 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 `;
-            case "myTiles.tile7":
+            case "myTiles.tile11":
             case "hermit crab":return img`
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 f f f 3 3 3 
@@ -135,7 +136,7 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 3 f 3 3 f 3 3 3 f 3 3 f 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 `;
-            case "myTiles.tile11":
+            case "myTiles.tile12":
             case "mimic":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -154,7 +155,7 @@ f 3 3 3 f f 2 f 2 f f 3 3 3 f 3
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "myTiles.tile8":
+            case "myTiles.tile13":
             case "chest":return img`
 . . b b b b b b b b b b b b . . 
 . b e 4 4 4 4 4 4 4 4 4 4 e b . 
@@ -173,7 +174,7 @@ b c e e e e e e e e e e e e c b
 b b b b b b b b b b b b b b b b 
 . b b . . . . . . . . . . b b . 
 `;
-            case "myTiles.tile12":
+            case "myTiles.tile14":
             case "top of wall":return img`
 f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f 
@@ -192,7 +193,7 @@ f f f f f f f f f f f f f f f f
 f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f 
 `;
-            case "myTiles.tile3":
+            case "myTiles.tile15":
             case "key":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . f f f f f . . . . . . 
@@ -211,7 +212,7 @@ f f f f f f f f f f f f f f f f
 . . . . . . . f f f . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "myTiles.tile13":
+            case "myTiles.tile16":
             case "dead mimic":return img`
 . b b b b b b b b b b b b b b . 
 b e 4 4 4 4 4 4 4 4 4 4 4 4 4 b 
@@ -230,7 +231,7 @@ b c e e 2 2 2 c e e e e 2 e c b
 b b b b c 2 2 2 b b b b b b b b 
 . b b . . c 2 2 2 2 . . . b b . 
 `;
-            case "myTiles.tile15":
+            case "myTiles.tile17":
             case "spell shop":return img`
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 1 f f f f f f f f f f f f f f 1 
@@ -249,7 +250,7 @@ b b b b c 2 2 2 b b b b b b b b
 1 f f f f f f f f f f f f f f 1 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `;
-            case "myTiles.tile14":
+            case "myTiles.tile18":
             case "item shop":return img`
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 1 f f f f f f f f f f f f f f 1 
@@ -268,7 +269,7 @@ b b b b c 2 2 2 b b b b b b b b
 1 f f f f f f f f f f f f f f 1 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 `;
-            case "myTiles.tile9":
+            case "myTiles.tile19":
             case "shrine":return img`
 1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
 1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
@@ -287,7 +288,7 @@ b b b b c 2 2 2 b b b b b b b b
 1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
 1 1 1 f f f f f f f f f f 1 1 1 
 `;
-            case "myTiles.tile10":
+            case "myTiles.tile20":
             case "mushroom":return img`
 . . . . . . . . . . . . . . . . 
 . . . . . b b b b b . . . . . . 
@@ -306,7 +307,7 @@ c b b b b d d d d b b d d d c .
 . . . . . b 1 1 d d b . . . . . 
 . . . . . b 1 d d b b . . . . . 
 `;
-            case "myTiles.tile16":
+            case "myTiles.tile21":
             case "rockslide":return img`
 . . b d b . . . . . b b b b . . 
 . c b d d b . . . b b d d d b . 
@@ -325,7 +326,7 @@ b b d d b c f f b b b b b b b .
 . . . . f f b d d d b c c b . . 
 . . . . . . b b b c c c b . . . 
 `;
-            case "myTiles.tile17":
+            case "myTiles.tile22":
             case "shroom":return img`
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -368,41 +369,41 @@ b b d d b c f f b b b b b b b .
 // Auto-generated code. Do not edit.
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
-    export const transparency16 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile1 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile2 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile4 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile5 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile6 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile7 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile11 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile8 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile12 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile3 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile13 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile15 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile14 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile9 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile10 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
+    export const tile11 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile12 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile13 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile14 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile15 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
     export const tile16 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile17 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile18 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile19 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile20 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile21 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile22 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -424,48 +425,49 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.transparency16,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,sprites.dungeon.stairLadder,myTiles.tile11,myTiles.tile9,sprites.dungeon.doorLockedNorth,myTiles.tile14,myTiles.tile15,myTiles.tile10,myTiles.tile16,myTiles.tile17], TileScale.Sixteen);
+`, [myTiles.tile5,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile6,myTiles.tile7,myTiles.tile15,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile13,sprites.dungeon.stairLadder,myTiles.tile12,myTiles.tile19,sprites.dungeon.doorLockedNorth,myTiles.tile18,myTiles.tile17,myTiles.tile20,myTiles.tile21,myTiles.tile22], TileScale.Sixteen);
         }
         return null;
     })
 
     helpers._registerFactory("tile", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "transparency16":return myTiles.transparency16;
-            case "mana potion":
-            case "tile1":return myTiles.tile1;
-            case "life potion":
-            case "tile2":return myTiles.tile2;
-            case "bat":
-            case "tile4":return myTiles.tile4;
-            case "skeleton":
+            case "transparency16":
             case "tile5":return myTiles.tile5;
-            case "monkey":
+            case "mana potion":
             case "tile6":return myTiles.tile6;
-            case "hermit crab":
+            case "life potion":
             case "tile7":return myTiles.tile7;
-            case "mimic":
-            case "tile11":return myTiles.tile11;
-            case "chest":
+            case "bat":
             case "tile8":return myTiles.tile8;
-            case "top of wall":
-            case "tile12":return myTiles.tile12;
-            case "key":
-            case "tile3":return myTiles.tile3;
-            case "dead mimic":
-            case "tile13":return myTiles.tile13;
-            case "spell shop":
-            case "tile15":return myTiles.tile15;
-            case "item shop":
-            case "tile14":return myTiles.tile14;
-            case "shrine":
+            case "skeleton":
             case "tile9":return myTiles.tile9;
-            case "mushroom":
+            case "monkey":
             case "tile10":return myTiles.tile10;
-            case "rockslide":
+            case "hermit crab":
+            case "tile11":return myTiles.tile11;
+            case "mimic":
+            case "tile12":return myTiles.tile12;
+            case "chest":
+            case "tile13":return myTiles.tile13;
+            case "top of wall":
+            case "tile14":return myTiles.tile14;
+            case "key":
+            case "tile15":return myTiles.tile15;
+            case "dead mimic":
             case "tile16":return myTiles.tile16;
-            case "shroom":
+            case "spell shop":
             case "tile17":return myTiles.tile17;
+            case "item shop":
+            case "tile18":return myTiles.tile18;
+            case "shrine":
+            case "tile19":return myTiles.tile19;
+            case "mushroom":
+            case "tile20":return myTiles.tile20;
+            case "rockslide":
+            case "tile21":return myTiles.tile21;
+            case "shroom":
+            case "tile22":return myTiles.tile22;
         }
         return null;
     })

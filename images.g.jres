@@ -6,5 +6,21 @@
         "namespace": "myImages.",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "random"
+    },
+    "myImages.image3": {
+        "id": "myImages.image3",
+        "data": "hwQQAA4AAAAARA4AAAAAAEBV5QAAAAAAVFXk/g8AAABURVRV9P//AFRFVV9lVPUA4FVVVWVVDwAAXlVFb1UPAABeVUVvVf8A4FVVVWVV9QBURVVfZVX0AFRFVFVGVfUAVFXk/k9F9QBAVeUAAPD0AABEDgAAX/UAAAAAAPBVDwAAAAAA8P8AAA==",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "dogSit"
+    },
+    "myImages.image2": {
+        "id": "myImages.image2",
+        "data": "hwQOAA4AAADgzPzu/wAAAOC9s929//8A4N07/d2y/QAA3N3d39L9AADw3d290v0AAPDb3b3S/QAA3N3d39L9AODdO/3d0vsA4L2z3S3b/QDgzPzu/7v9AAAAAAAAv/8AAAAAAPv//QAAAAAA3937AAAAAAD7/w8A",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "catSit"
     }
 }

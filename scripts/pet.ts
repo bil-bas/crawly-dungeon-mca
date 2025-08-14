@@ -2,39 +2,79 @@ namespace SpriteKind {
     export const Pet = SpriteKind.create()
 }
 
-sprites.onOverlap(SpriteKind.Pet, SpriteKind.Enemy, (pet: Sprite, enemy: Sprite) => {
-    let pet_ = pet as Pet
-    let enemy_ = enemy as Enemy
-    pet_.onHitEnemy(enemy_)
+sprites.onOverlap(SpriteKind.Pet, SpriteKind.Enemy, (petSprite: Sprite, enemySprite: Sprite) => {
+    let pet = petSprite as Pet
+    let enemy = enemySprite as Enemy
+    pet.onHitEnemy(enemy)
+})
+
+scene.onPathCompletion(SpriteKind.Pet, (sprite: Sprite) => {
+    let pet = sprite as Pet
+    animation.stopAnimation(animation.AnimationTypes.ImageAnimation, pet)
+    pet.thinkAboutThinking()
 })
 
 class Pet extends EntityWithStatus {
     protected get meleeDamage(): int8 { return 1 }
-    protected get distanceRange(): [int8, int8] { throw "Not impemented" }
+    protected get distanceRange(): [int8, int8] { throw NOT_IMPLEMENTED }
     protected get speed(): int8 { return 30 }
     protected get thinkingDelay(): int16 { return 2000 }
+    protected get sitLeft(): Image { return this.walkLeft[0] }
+    protected get sitRight(): Image {
+        let image = this.sitLeft.clone()
+        image.flipX()
+        return image
+    }
+    protected get walkLeft(): Image[] { throw NOT_IMPLEMENTED }
+    protected get walkRight(): Image[] {
+        return this.walkLeft.map((image: Image) => {
+            image = image.clone()
+            image.flipX()
+            return image
+        })
+    }
 
     constructor(image: Image) {
         super(image, SpriteKind.Pet, ZOrder.PET, scene.locationOfSprite(player))
         this.setScale(0.75)
-        after(this.thinkingDelay, () => this.think())
+        this.thinkAboutThinking()
         this.onDestroyed(() => player.pet = null)
     }
 
     protected think(): void {
+        if (!this) return
+
         let path = scene.aStar(scene.locationOfSprite(this), scene.locationOfSprite(player))
 
         if (path) {
             let [min, max] = this.distanceRange
-            let preferred = randint(min, max)
+            let preferredDistance = randint(min, max)
 
-            if (path.length > preferred) {
-                scene.followPath(this, path.slice(0, -preferred), this.speed)
-            } else if (path.length < preferred) {
-                // TODO: Wander away
+            if (path.length > preferredDistance) {
+                path = path.slice(0, -preferredDistance)
+            } else if (path.length < preferredDistance) {
+                path = []
             }
-        }
 
+            if (path.length > 0) {
+                this.move(path)
+            } else {
+                this.thinkAboutThinking()
+            }
+        } else {
+            this.thinkAboutThinking()
+        }
+    }
+
+    protected move(path: tiles.Location[]) {
+        scene.followPath(this, path, this.speed)
+
+        let direction = (path[path.length - 1].x > path[0].x) ? this.walkRight : this.walkLeft
+        animation.runImageAnimation(this, direction, 200, true)
+    }
+
+    public thinkAboutThinking() {
+        this.setImage((randint(0, 1) == 1) ? this.sitLeft : this.sitRight)
         after(this.thinkingDelay, () => {
             this.think()
         })
@@ -49,6 +89,8 @@ class Cat extends Pet {
     protected get distanceRange(): [int8, int8] { return [0, 2] }
     protected get thinkingDelay(): int16 { return 1000 }
     protected get speed(): int8 { return 40 }
+    protected get walkLeft(): Image[] { return [sprites.builtin.cat1, sprites.builtin.cat2] }
+    protected get sitLeft(): Image { return assets.image`catSit` }
 
     constructor() {
         super(sprites.builtin.cat0)
@@ -58,6 +100,8 @@ class Cat extends Pet {
 class Dog extends Pet {
     protected get distanceRange(): [int8, int8] { return [1, 1] }
     public get maxLife(): int8 { return 2 }
+    protected get walkLeft(): Image[] { return [sprites.builtin.dog1, sprites.builtin.dog2] }
+    protected get sitLeft(): Image { return assets.image`dogSit` }
 
     constructor() {
         super(sprites.builtin.dog0)
@@ -66,6 +110,8 @@ class Dog extends Pet {
 
 class ClownFish extends Pet {
     protected get distanceRange(): [int8, int8] { return [2, 4] }
+    protected get sit(): Image { return sprites.builtin.clownFish0 }
+    protected get walkLeft(): Image[] { return [sprites.builtin.clownFish0, sprites.builtin.clownFish1, sprites.builtin.clownFish2, sprites.builtin.clownFish3] }
 
     protected get meleeDamage(): int8 { return 2 }
     protected get speed(): int8 { return 10 }
