@@ -10,7 +10,6 @@ sprites.onOverlap(SpriteKind.Pet, SpriteKind.Enemy, (petSprite: Sprite, enemySpr
 
 scene.onPathCompletion(SpriteKind.Pet, (sprite: Sprite) => {
     let pet = sprite as Pet
-    animation.stopAnimation(animation.AnimationTypes.ImageAnimation, pet)
     pet.thinkAboutThinking()
 })
 
@@ -67,6 +66,8 @@ class Pet extends EntityWithStatus {
     }
 
     public thinkAboutThinking() {
+        animation.stopAnimation(animation.AnimationTypes.ImageAnimation, this)
+
         this.setImage((randint(0, 1) == 1) ? this.sitLeft : this.sitRight)
         after(this.thinkingDelay, () => {
             this.think()
@@ -74,7 +75,7 @@ class Pet extends EntityWithStatus {
     }
 
     public onHitEnemy(enemy: Enemy): void {
-        enemy.melee(this.meleeDamage)
+        this.life -= enemy.melee(this.meleeDamage)
     }
 }
 

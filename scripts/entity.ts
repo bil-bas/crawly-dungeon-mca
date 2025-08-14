@@ -35,8 +35,6 @@ class Entity extends Sprite {
         characterAnimations.loopFrames(this, images, 200, rule)
     }
 
-
-
     protected onDeath() {
         music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
         this.destroy(effects.ashes, 200)
@@ -71,9 +69,7 @@ class EntityWithStatus extends Entity {
         }
     }
 
-    protected onWounded(): void {
-
-    }
+    protected onWounded(): void { }
 
     protected onDeath(): void {
         super.onDeath()
