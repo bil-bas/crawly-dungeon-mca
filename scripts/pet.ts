@@ -126,7 +126,7 @@ class Zombie extends Pet {
     public get maxLife(): int8 { return 3 }
     protected get animationDelay(): int16 { return 500 }
     protected get distanceRange(): [int8, int8] { return [2, 4] }
-    protected get sit(): Image { return Zombie.zombify(sprites.builtin.villager3WalkFront1) }
+    protected get sitLeft(): Image { return Zombie.zombify(sprites.builtin.villager3WalkFront1) }
     protected get walkLeft(): Image[] {
         return [sprites.builtin.villager3WalkLeft1, sprites.builtin.villager3WalkLeft2].map((i) => Zombie.zombify(i))
     }
