@@ -2,16 +2,7 @@ namespace SpriteKind {
     export const Pet = SpriteKind.create()
 }
 
-sprites.onOverlap(SpriteKind.Pet, SpriteKind.Enemy, (petSprite: Sprite, enemySprite: Sprite) => {
-    let pet = petSprite as Pet
-    let enemy = enemySprite as Enemy
-    pet.onHitEnemy(enemy)
-})
 
-scene.onPathCompletion(SpriteKind.Pet, (sprite: Sprite) => {
-    let pet = sprite as Pet
-    pet.thinkAboutThinking()
-})
 
 class Pet extends EntityWithStatus {
     protected get meleeDamage(): int8 { return 1 }
@@ -19,9 +10,9 @@ class Pet extends EntityWithStatus {
     protected get speed(): int8 { return 30 }
     protected get thinkingDelay(): int16 { return 2000 }
     protected get animationDelay(): int16 { return 200 }
-    protected get sitLeft(): Image { return this.walkLeft[0] }
+    protected get sitLeft(): Image { return images.flipX(this.sitRight) }
     protected get sitRight(): Image { return images.flipX(this.sitLeft) }
-    protected get walkLeft(): Image[] { throw NOT_IMPLEMENTED }
+    protected get walkLeft(): Image[] { return images.flipXAll(this.walkRight) }
     protected get walkRight(): Image[] { return images.flipXAll(this.walkLeft) }
 
     constructor(image: Image) {
@@ -78,6 +69,19 @@ class Pet extends EntityWithStatus {
     public onHitEnemy(enemy: Enemy): void {
         this.life -= enemy.melee(this.meleeDamage)
     }
+
+    public static registerHandlers(): void {
+        sprites.onOverlap(SpriteKind.Pet, SpriteKind.Enemy, (petSprite: Sprite, enemySprite: Sprite) => {
+            let pet = petSprite as Pet
+            let enemy = enemySprite as Enemy
+            pet.onHitEnemy(enemy)
+        })
+
+        scene.onPathCompletion(SpriteKind.Pet, (sprite: Sprite) => {
+            let pet = sprite as Pet
+            pet.thinkAboutThinking()
+        })
+    }
 }
 
 class Cat extends Pet {
@@ -100,6 +104,21 @@ class Dog extends Pet {
 
     constructor() {
         super(sprites.builtin.dog0)
+    }
+}
+
+class Duck extends Pet {
+    protected get distanceRange(): [int8, int8] { return [1, 2] }
+    protected get walkRight(): Image[] {
+        return [
+            sprites.duck.duck1, sprites.duck.duck2, sprites.duck.duck3,
+            sprites.duck.duck4, sprites.duck.duck5, sprites.duck.duck6,
+        ]
+    }
+    protected get sitRight(): Image { return sprites.duck.duckHurt }
+
+    constructor() {
+        super(sprites.duck.duck1)
     }
 }
 

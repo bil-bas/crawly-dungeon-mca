@@ -250,9 +250,10 @@ class BeastFriend extends Spell {
     protected randomPet(): Pet {
         Math.randomRange(0, game.runtime()) // Push the RNG to be more random.
 
-        switch (randint(0, 1)) {
+        switch (randint(0, 2)) {
             case 0: return new Cat()
             case 1: return new Dog()
+            case 2: return new Duck()
             default: throw null
         }
     }

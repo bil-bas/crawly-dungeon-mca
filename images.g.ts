@@ -68,18 +68,6 @@ f b d d b b d d 2 f . f d f
 9 9 9 9 5 9 9 9 9 
 . 9 9 9 9 9 9 9 . 
 `;
-            case "image6":
-            case "raise dead":return img`
-. 9 9 9 9 9 9 9 . 
-9 9 1 1 1 1 1 9 9 
-9 9 1 1 1 1 1 9 9 
-9 9 1 f 1 f 1 9 9 
-9 9 1 1 e 1 1 9 9 
-9 9 9 1 1 1 9 9 9 
-9 9 9 f e e 9 9 9 
-9 9 9 1 1 1 9 9 9 
-. 9 9 9 9 9 9 9 . 
-`;
             case "image4":
             case "blood magic":return img`
 . 9 9 9 9 9 9 9 . 
@@ -140,18 +128,6 @@ f b d d b b d d 2 f . f d f
 9 9 9 2 2 2 9 9 9 
 . 9 9 9 9 9 9 9 . 
 `;
-            case "image8":
-            case "beast friend":return img`
-. 9 9 9 9 9 9 9 . 
-9 9 9 9 9 9 9 9 9 
-9 9 e 9 e 9 e 9 9 
-9 9 9 9 9 9 9 9 9 
-9 9 e e e e e 9 9 
-9 9 e e e e e 9 9 
-9 9 e e e e e 9 9 
-9 9 9 e e e 9 9 9 
-. 9 9 9 9 9 9 9 . 
-`;
             case "image12":
             case "mana":return img`
 . . . . 9 . . . . 
@@ -187,6 +163,30 @@ f b d d b b d d 2 f . f d f
 . . . . 5 5 . . . 
 . . . . 5 . . . . 
 . . . . 5 5 . . . 
+`;
+            case "image8":
+            case "beast friend":return img`
+. 9 9 9 9 9 9 9 . 
+9 9 9 e 9 e 9 9 9 
+9 e 9 e 9 e 9 e 9 
+9 e 9 9 9 9 9 e 9 
+9 9 9 e e e 9 9 9 
+9 9 e e e e e 9 9 
+9 9 e e e e e 9 9 
+9 9 9 e e e 9 9 9 
+. 9 9 9 9 9 9 9 . 
+`;
+            case "image6":
+            case "raise dead":return img`
+. 9 9 9 9 9 9 9 . 
+9 9 9 1 1 1 9 9 9 
+9 9 1 d d d d 9 9 
+9 9 1 f d f d 9 9 
+9 9 1 d e d d 9 9 
+9 9 9 d d d 9 9 9 
+9 9 9 4 f 4 9 9 9 
+9 9 9 d d d 9 9 9 
+. 9 9 9 9 9 9 9 . 
 `;
         }
         return null;

@@ -31,14 +31,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "starfire"
     },
-    "myImages.image6": {
-        "id": "myImages.image6",
-        "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAGRGRmQkAAAAZ8REfCQAAABkRHh4JAAAAGfERHgkAAAAZEZGZCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
-        "dataEncoding": "base64",
-        "namespace": "myImages.",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "raise dead"
-    },
     "myImages.image4": {
         "id": "myImages.image4",
         "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAmYmImAkAAACJGCKCCQAAACkiIiIJAAAAiSgiggkAAACZiYiYCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
@@ -79,14 +71,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "fireball"
     },
-    "myImages.image8": {
-        "id": "myImages.image8",
-        "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAmZ7ungkAAACZme7uCQAAAJme7u4JAAAAmZnu7gkAAACZnu6eCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
-        "dataEncoding": "base64",
-        "namespace": "myImages.",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "beast friend"
-    },
     "myImages.image12": {
         "id": "myImages.image12",
         "data": "hwQJAAkAAAAAAAkAAAAAAACZmAkAAAAAkJiYmAAAAACQiYiZAAAAAImIiYgJAAAAkImImQAAAACQmJiYAAAAAACZmAkAAAAAAAAJAAAAAAA=",
@@ -110,5 +94,21 @@
         "namespace": "myImages.",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "key"
+    },
+    "myImages.image8": {
+        "id": "myImages.image8",
+        "data": "hwQJAAkAAACQmZmZAAAAAJnumZkJAAAAmZnpngkAAADpnu7uCQAAAJmZ7u4JAAAA6Z7u7gkAAACZmemeCQAAAJnumZkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "beast friend"
+    },
+    "myImages.image6": {
+        "id": "myImages.image6",
+        "data": "hwQJAAkAAACQmZmZAAAAAJmZmZkJAAAAmRGRmQkAAAAZ/d3UCQAAABnd3t8JAAAAGf3d1AkAAACZ3Z2ZCQAAAJmZmZkJAAAAkJmZmQAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "raise dead"
     }
 }

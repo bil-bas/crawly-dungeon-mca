@@ -71,6 +71,7 @@ storyboard.registerScene(scenes.PLAY_GAME, () => {
 
     Enemy.registerHandlers()
     ProjectileSpell.registerHandlers()
+    Pet.registerHandlers()
 
     player = createPlayer(playerClass)
     gui = new Gui()
