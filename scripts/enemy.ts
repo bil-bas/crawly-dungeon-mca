@@ -1,10 +1,3 @@
-// Enemy interactions
-scene.onHitWall(SpriteKind.Enemy, (enemy: Sprite, tile: tiles.Location) => {
-    let enemy_ = enemy as Enemy
-    enemy_.touchWall(tile)
-})
-
-
 // Base enemy obj.
 class Enemy extends EntityWithStatus {
     protected get meleeCooldown(): int16 { return 500 }
@@ -24,6 +17,14 @@ class Enemy extends EntityWithStatus {
         this.meleeCooldownAt = game.runtime() + this.meleeCooldown
         sounds.play(sounds.melee)
         return 1
+    }
+
+    public static registerHandlers(): void {
+        // Enemy interactions
+        scene.onHitWall(SpriteKind.Enemy, (sprite: Sprite, tile: tiles.Location) => {
+            let enemy = sprite as Enemy
+            enemy.touchWall(tile)
+        })
     }
 
     public touchWall(tile: tiles.Location): void { }

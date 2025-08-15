@@ -103,7 +103,7 @@ class Player extends Entity {
     protected onDeath(): void {
         sounds.play(sounds.enemyDeath)
         dataStore.setRichest(this.title, this.coins)
-        new DeathMessage(this)
+        storyboard.replace(scenes.DEATH)
         this.destroy()
     }
 
@@ -140,9 +140,9 @@ class Player extends Entity {
 
     protected initEventHandlers(): void {
         // Interacting with the environment
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (_: Sprite, item: Sprite) => {
-            let item_ = item as Item
-            item_.use()
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (_: Sprite, sprite: Sprite) => {
+            let item = sprite as Item
+            item.use()
         })
 
         scene.onHitWall(SpriteKind.Player, (_: Sprite, tile: tiles.Location) => {
@@ -156,9 +156,9 @@ class Player extends Entity {
             })
         }
 
-        sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (_: Sprite, enemy: Sprite) => {
-            let enemy_ = enemy as Enemy
-            this.touchedEnemy(enemy_)
+        sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (_: Sprite, sprite: Sprite) => {
+            let enemy = sprite as Enemy
+            this.touchedEnemy(enemy)
         })
 
         for (let stair of ALL_STAIRS) {

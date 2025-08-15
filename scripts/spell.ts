@@ -10,24 +10,6 @@ namespace Direction {
     export const DOWN: int8 = 4
 }
 
-
-sprites.onDestroyed(SpriteKind.ProjectileSpell, (projectile: Sprite) => {
-    projectile.data["obj"].onProjectileDestroyed(projectile)
-})
-
-// Spell effects
-
-// Fireball hits ENEMY
-sprites.onOverlap(SpriteKind.ProjectileSpell, SpriteKind.Enemy, (projectile: Sprite, enemy: Sprite) => {
-    let enemy_ = enemy as Enemy
-    projectile.data["obj"].onProjectileHitEnemy(projectile, enemy_)
-})
-
-// Destoy flamable items
-scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles.Location) => {
-    projectile.data["obj"].onProjectileHitWall(projectile, location)
-})
-
 // Abstract base spell logic
 class Spell {
     public get icon(): Image { throw NOT_IMPLEMENTED }
@@ -75,6 +57,23 @@ class ProjectileSpell extends Spell {
 
             this.castInDirection(Direction.DOWN)
         }
+    }
+
+    public static registerHandlers(): void {
+        sprites.onDestroyed(SpriteKind.ProjectileSpell, (projectile: Sprite) => {
+            projectile.data["obj"].onProjectileDestroyed(projectile)
+        })
+
+        // Fireball hits ENEMY
+        sprites.onOverlap(SpriteKind.ProjectileSpell, SpriteKind.Enemy, (projectile: Sprite, enemy: Sprite) => {
+            let enemy_ = enemy as Enemy
+            projectile.data["obj"].onProjectileHitEnemy(projectile, enemy_)
+        })
+
+        // Destoy flamable items
+        scene.onHitWall(SpriteKind.ProjectileSpell, (projectile: Sprite, location: tiles.Location) => {
+            projectile.data["obj"].onProjectileHitWall(projectile, location)
+        })
     }
 
     protected castInDirection(direction: number) { }

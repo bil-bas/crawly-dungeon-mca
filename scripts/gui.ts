@@ -200,47 +200,7 @@ class ScreenMessage extends Overlay {
         this.actionText.left = 4
         this.actionText.bottom = screen.height
 
-        controller.A.onEvent(ControllerButtonEvent.Pressed, () => {
-            handler()
-        })
-    }
-}
-
-class StartMessage extends ScreenMessage {
-    constructor(handler: () => void) {
-        let message = [
-            "\\n",
-            "     Welcome to the",
-            "     Crawly Dungeon!",
-            "\\n",
-            "Seek your fortune, as",
-            "many before you have,",
-            "predictably, tried and",
-            "unerringly failed...",
-        ]
-        super(message, "Press <A> to delve!", () => {
-            game.popScene()
-            handler()
-        })
-    }
-}
-
-class DeathMessage extends ScreenMessage {
-    constructor(player: Player) {
-        let message: string[] = [
-            `A ${player.title} died today,`,
-            `grasping ${player.coins} gold.`,
-            "\\nThe richest corpses were:",
-        ]
-
-        for (let highscore of dataStore.richest) {
-            let [klass, score] = highscore
-            message.push(`${padStart(score.toString(), 6)} gold: ${klass}`)
-        }
-
-        super(message, "\\nPress <A> to live again!", () => {
-            game.reset()
-        })
+        controller.A.onEvent(ControllerButtonEvent.Pressed, handler)
     }
 }
 

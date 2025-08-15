@@ -11,9 +11,11 @@
         "status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
         "arcade-shadowcasting": "github:riknoll/arcade-shadowcasting#v0.0.4",
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
-        "arcade-tilemap-a-star": "github:jwunderl/arcade-tilemap-a-star#v0.4.0"
+        "arcade-tilemap-a-star": "github:jwunderl/arcade-tilemap-a-star#v0.4.0",
+        "storyboard": "*"
     },
     "files": [
+        "scripts/scenes.ts",
         "scripts/pet.ts",
         "scripts/entity.ts",
         "scripts/dataStore.ts",
@@ -26,7 +28,7 @@
         "scripts/spell.ts",
         "scripts/utils.ts",
         "scripts/item.ts",
-        "main.ts",
+        "scripts/main.ts",
         "README.md",
         "assets.json",
         "images.g.jres",
