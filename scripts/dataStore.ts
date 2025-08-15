@@ -26,7 +26,7 @@ class DataStore {
             achievements.create("Killed 10 enemies", undefined, "Red Handed", assets.image`life`)
         } else if (this.totalKills == 100) {
             achievements.create("Killed 100 enemies", undefined, "Butcher", assets.image`life`)
-        } else if (this.totalKills == 100) {
+        } else if (this.totalKills == 1000) {
             achievements.create("Killed 1000 enemies", undefined, "Berserker", assets.image`life`)
         }
 
