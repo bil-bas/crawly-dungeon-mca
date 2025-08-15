@@ -153,7 +153,7 @@ class StatusBar extends Label {
     protected readonly status: StatusBarSprite
 
     constructor(kind: number) {
-        super(kind == StatusBarKind.Health ? sprites.projectile.heart3 : sprites.projectile.star3, "0/0")
+        super(kind == StatusBarKind.Health ? assets.image`life` : assets.image`mana`, "0/0")
 
         this.status = statusbars.create(45, 6, kind)
 
@@ -172,8 +172,7 @@ class StatusBar extends Label {
         this.status.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 
         this.setMaxFontHeight(5)
-        this.bottom = screen.height + 8
-
+        this.bottom = screen.height + 4
         this.setupSprite(this.status)
     }
 
@@ -215,6 +214,7 @@ class Gui {
         this.magicStatus = new StatusBar(StatusBarKind.Magic)
 
         this.keyLabel = new Label(assets.image`key`, "x0")
+        this.keyLabel.setMaxFontHeight(5)
         this.keyLabel.left = -4
         this.keyLabel.bottom = scene.screenHeight() - 8
 
@@ -237,6 +237,6 @@ class SpellIndicator extends Overlay {
         super(spell.icon, `${spell.mana} ${primary ? "A" : "B"}`)
         this.setMaxFontHeight(5)
         this.right = screen.width
-        this.bottom = screen.height - (primary ? 10 : 0) - 5
+        this.bottom = screen.height - (primary ? 10 : 0) - 7
     }
 }

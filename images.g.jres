@@ -86,5 +86,29 @@
         "namespace": "myImages.",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "beast friend"
+    },
+    "myImages.image12": {
+        "id": "myImages.image12",
+        "data": "hwQJAAkAAAAAAAkAAAAAAACZmAkAAAAAkJiYmAAAAACQiYiZAAAAAImIiYgJAAAAkImImQAAAACQmJiYAAAAAACZmAkAAAAAAAAJAAAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "mana"
+    },
+    "myImages.image13": {
+        "id": "myImages.image13",
+        "data": "hwQJAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAgIgAAAAAAIBIiAgAAACIiIiICAAAAACAiIgIAAAAAACAiAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "life"
+    },
+    "myImages.image14": {
+        "id": "myImages.image14",
+        "data": "hwQJAAkAAAAAAAAAAAAAAAAAAAAAAAAA0N0AAAAAAADd3w0AAAAAAN3tTVUFAAAA3d8NBQUAAADQ3QAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "key"
     }
 }

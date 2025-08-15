@@ -159,9 +159,9 @@ class ItemShop extends Shop {
 
     protected get wares(): ShopItem[] {
         return [
-            [assets.tile`life potion`, "Life Potion", 10],
-            [assets.tile`mana potion`, "Mana Crystal", 10],
-            [assets.tile`key`, "Skeleton Key", 10],
+            [assets.image`life`, "Life Potion", 10],
+            [assets.image`mana`, "Mana Crystal", 10],
+            [assets.image`key`, "Skeleton Key", 10],
         ]
     }
 
