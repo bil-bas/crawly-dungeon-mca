@@ -30,7 +30,7 @@ class DataStore {
             achievements.create("Killed 1000 enemies", undefined, "Berserker", assets.image`life`)
         }
 
-        if (kills["Crab"] == 1) {
+        if (title == "Crab" && kills["Crab"] == 1) {
             achievements.create("Cooked a big crab", undefined, "Crabman", sprites.builtin.hermitCrabWalk0)
         }
     }
