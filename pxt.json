@@ -1,6 +1,6 @@
 {
     "name": "Crawly Dungeon",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Dungeon crawler created with Makecode Arcade (Typescript)",
     "license": "MIT",
     "dependencies": {
