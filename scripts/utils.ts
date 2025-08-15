@@ -45,4 +45,12 @@ namespace images {
     export function flipXAll(frames: Image[]) {
         return frames.map((image: Image) => flipX(image))
     }
+
+    export function visibleToColour(image: Image, colour: number) {
+        image = image.clone()
+        for (let i = 1; i < 16; i++) {
+            image.replace(i, colour)
+        }
+        return image
+    }
 }
