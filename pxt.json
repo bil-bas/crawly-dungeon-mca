@@ -12,7 +12,8 @@
         "arcade-shadowcasting": "github:riknoll/arcade-shadowcasting#v0.0.4",
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
         "arcade-tilemap-a-star": "github:jwunderl/arcade-tilemap-a-star#v0.4.0",
-        "storyboard": "*"
+        "storyboard": "*",
+        "achievements": "github:meeeeeeeep1/achievements#master"
     },
     "files": [
         "scripts/scenes.ts",

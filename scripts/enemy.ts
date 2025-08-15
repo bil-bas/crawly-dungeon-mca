@@ -31,6 +31,11 @@ class Enemy extends EntityWithStatus {
         })
     }
 
+    protected onDeath() {
+        super.onDeath()
+        dataStore.addKill(this.title)
+    }
+
     public touchWall(tile: tiles.Location): void { }
 }
 

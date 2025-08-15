@@ -7,7 +7,7 @@ namespace ZOrder {
     export const PLAYER: int8 = 3
     export const SPELLS: int8 = 4
     export const FLOATER: int8 = 5
-    export const UI: int8 = 250
+    export const UI: int8 = 6
 }
 
 
@@ -18,9 +18,9 @@ let playerClass: string
 let player: Player
 
 const dataStore = new DataStore()
+settings.clear()
 dataStore.unlockClass(Druid.title)
 dataStore.unlockClass(Necromancer.title)
 dataStore.unlockClass(BloodWitch.title)
-dataStore.unlockRandom()
 
 storyboard.replace(scenes.INTRO)
