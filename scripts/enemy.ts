@@ -96,12 +96,13 @@ class Monkey extends Enemy {
     }
 
     public melee(damage: number): int8 {
-        if (player.keys > 0) {
+        let effect = super.melee(damage)
+        if (effect && player.keys > 0) {
             player.keys -= 1
             this._life -= damage
             return 0
         }
-        return super.melee(damage)
+        return effect
     }
 }
 
@@ -144,13 +145,14 @@ class Skeleton extends Enemy {
     }
 
     public melee(damage: number): int8 {
-        if (player.mana > 0) {
+        let effect = super.melee(damage)
+        if (effect && player.mana > 0) {
             player.mana -= 1
             this._life -= damage
             return 0
         }
 
-        return super.melee(damage)
+        return effect
     }
 }
 
