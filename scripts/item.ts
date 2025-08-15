@@ -80,7 +80,7 @@ class Shrine extends Item {
     }
 
     protected postUse(): void {
-        player.coins += 1000
+        player.coins += 100
         sounds.play(sounds.sacrifice)
 
         this.startEffect(effects.coolRadial, 2000)
@@ -124,7 +124,7 @@ class Shop extends Item {
     protected get wares(): ShopItem[] { throw NOT_IMPLEMENTED }
 
     protected label(text: string, value: number): string {
-        return `${text}${padStart(value ? (value.toString() + " gold") : "", 23 - text.length)}`
+        return `${text}${padStart(value ? (value.toString() + " gold") : "", 22 - text.length)}`
     }
 
     protected get options(): MenuOption[] {
@@ -159,9 +159,9 @@ class ItemShop extends Shop {
 
     protected get wares(): ShopItem[] {
         return [
-            [assets.tile`life potion`, "Life Potion", 100],
-            [assets.tile`mana potion`, "Mana Crystal", 100],
-            [assets.tile`key`, "Skeleton Key", 100],
+            [assets.tile`life potion`, "Life Potion", 10],
+            [assets.tile`mana potion`, "Mana Crystal", 10],
+            [assets.tile`key`, "Skeleton Key", 10],
         ]
     }
 

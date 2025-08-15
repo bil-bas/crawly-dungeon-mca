@@ -1,14 +1,17 @@
 // Base enemy obj.
 class Enemy extends EntityWithStatus {
+    public get title(): string { throw NOT_IMPLEMENTED }
+    public get killedMessage(): string { throw NOT_IMPLEMENTED }
+
     protected get meleeCooldown(): int16 { return 500 }
     protected meleeCooldownAt: number = 0
 
     constructor(image: Image, tile: tiles.Location) {
-        super(image,  SpriteKind.Enemy, ZOrder.ENEMIES, tile)
+        super(image, SpriteKind.Enemy, ZOrder.ENEMIES, tile)
+        if (this.killedMessage.length > 24) throw this.killedMessage
+
         this.setFlag(SpriteFlag.BounceOnWall, true)
     }
-
-    protected get killedMessage(): string { throw NOT_IMPLEMENTED }
 
     public melee(damage: number): int8 {
         if (game.runtime() < this.meleeCooldownAt) return 0
@@ -16,6 +19,7 @@ class Enemy extends EntityWithStatus {
         this.life -= damage
         this.meleeCooldownAt = game.runtime() + this.meleeCooldown
         sounds.play(sounds.melee)
+        player.killedBy = this
         return 1
     }
 
@@ -32,7 +36,8 @@ class Enemy extends EntityWithStatus {
 
 // BAT
 class Bat extends Enemy {
-    protected get killedMessage(): string { return `Exsanguinated by Bat` }
+    public get title(): string { return "Bat" }
+    public get killedMessage(): string { return `Exsanguinated by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
         super(sprites.builtin.forestBat0, tile)
@@ -47,7 +52,8 @@ class Bat extends Enemy {
 
 // HERMIT CRAB
 class HermitCrab extends Enemy {
-    protected get killedMessage(): string { return `Squished by Hermit Crab` }
+    public get title(): string { return "Crab" }
+    public get killedMessage(): string { return `crushed by a ${this.title}` }
     public get maxLife(): number { return 3 }
 
     constructor(tile: tiles.Location) {
@@ -82,7 +88,8 @@ class HermitCrab extends Enemy {
 
 // Monkey steals keys
 class Monkey extends Enemy {
-    protected get killedMessage(): string { return `Eyes gouged by Monkey` }
+    public get title(): string { return "Monkey" }
+    public get killedMessage(): string { return `eyes gouged by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
         super(sprites.builtin.forestMonkey0, tile)
@@ -108,7 +115,8 @@ class Monkey extends Enemy {
 
 class Shroom extends Enemy {
     public get maxLife(): int8 { return 2 }
-    protected get killedMessage(): string { return `Zoomed by a Shroom` }
+    public get title(): string { return "Shroom" }
+    public get killedMessage(): string { return `zoomed by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
         super(sprites.builtin.forestMonkey0, tile)
@@ -132,7 +140,8 @@ class Shroom extends Enemy {
 
 // Skeleton steals mana
 class Skeleton extends Enemy {
-    protected get killedMessage(): string { return `Rattled by Skellington` }
+    public get title(): string { return "Skelly" }
+    public get killedMessage(): string { return `rattled by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
         super(sprites.castle.skellyFront, tile)
@@ -158,7 +167,8 @@ class Skeleton extends Enemy {
 
 class Mimic extends Enemy {
     public get maxLife(): int8 { return 2 }
-    protected get killedMessage(): string { return `Swallowed by Mimic` }
+    public get title(): string { return "Mimic" }
+    public get killedMessage(): string { return `Swallowed by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
         super(sprites.dungeon.chestClosed, tile)

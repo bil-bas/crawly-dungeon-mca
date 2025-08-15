@@ -51,7 +51,6 @@ storyboard.registerScene(scenes.CHOOSE_CLASS, () => {
             }
 
             playerClass = selected
-            console.log(playerClass)
             storyboard.replace(scenes.PLAY_GAME)
 
             return false
@@ -80,14 +79,15 @@ storyboard.registerScene(scenes.PLAY_GAME, () => {
 
 storyboard.registerScene(scenes.DEATH, () => {
     let message: string[] = [
-        `A ${player.title} died today,`,
-        `clasping ${player.coins} gold.`,
+        `A ${player.title} just died,`,
+        `${player.killedBy.killedMessage},`,
+        `but clasping ${player.coins} gold.`,
         "\\nThe richest corpses were:",
     ]
 
     for (let highscore of dataStore.richest) {
-        let [klass, score] = highscore
-        message.push(`${padStart(score.toString(), 6)} gold: ${klass}`)
+        let [klass, score, killedBy] = highscore
+        message.push(`${padStart(score.toString(), 4)}: ${klass} by ${killedBy}`)
     }
 
     new ScreenMessage(message, "\\nPress <A> to live again!", () => storyboard.replace(scenes.CHOOSE_CLASS))

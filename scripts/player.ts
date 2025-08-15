@@ -25,7 +25,7 @@ class Player extends Entity {
     protected _secondarySpellIndicator: SpellIndicator
     protected _speed: int8 = 60
     protected _pet: Pet|null = null
-
+    public killedBy: Enemy
     public get pet(): Pet|null { return this._pet }
     public set pet(pet: Pet | null) {
         if (this.pet && pet) { // Replaced pet with new one.
@@ -102,7 +102,7 @@ class Player extends Entity {
 
     protected onDeath(): void {
         sounds.play(sounds.enemyDeath)
-        dataStore.setRichest(this.title, this.coins)
+        dataStore.setRichest(this.title, this.coins, this.killedBy.title)
         storyboard.replace(scenes.DEATH)
         this.destroy()
     }
@@ -199,7 +199,7 @@ class Player extends Entity {
             case assets.tile`chest`:
                 if (this.keys) {
                     this.keys -= 1
-                    this.coins += randint(100, 200)
+                    this.coins += randint(10, 20)
                     tiles.setTileAt(tile, sprites.dungeon.chestOpen)
                     sounds.play(sounds.unlock)
                 }
@@ -289,7 +289,7 @@ class Wizard extends Player {
 }
 
 class BloodWitch extends Wizard {
-    static get title(): string { return "Blood Witch" }
+    static get title(): string { return "Cultist" }
     static get icon(): Image { return images.replaceColour(Player.icon, Colour.YELLOW, Colour.RED) }
 
     protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.RED) }
@@ -319,7 +319,7 @@ class Druid extends Wizard {
 }
 
 class Necromancer extends Wizard {
-    static get title(): string { return "Necromancer" }
+    static get title(): string { return "Necroman" }
     static get icon(): Image { return images.replaceColour(Player.icon,  Colour.YELLOW, Colour.BLACK) }
 
     protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.BLACK) }

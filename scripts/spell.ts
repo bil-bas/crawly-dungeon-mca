@@ -15,7 +15,7 @@ class Spell {
     public get icon(): Image { throw NOT_IMPLEMENTED }
     public get title(): string { throw NOT_IMPLEMENTED }
     public get mana(): int8 { return 1 }
-    public get value(): int16 { return this.mana * 50 }
+    public get value(): int16 { return this.mana * 5 }
 
     public canCast(): boolean {
         return player.mana >= this.mana
@@ -211,7 +211,7 @@ class BloodMagic extends Spell {
     public get icon() { return assets.image`blood magic` }
     public get title() { return "Blood Magic" }
     public get mana(): int8 { return 0 }
-    public get value(): int16 { return 50 }
+    public get value(): int16 { return 5 }
 
     public canCast(): boolean {
         return player.life >= 2 && player.mana < player.maxMana

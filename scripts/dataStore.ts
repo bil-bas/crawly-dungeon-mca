@@ -1,7 +1,8 @@
 
-type HighScore = [string, number]
+type HighScore = [string, number, string]
 
 class DataStore {
+    static readonly NUM_RICHEST = 7
     public get classes(): string[] { return settings.readJSON("classes") || [Wizard.title] }
     public get richest(): HighScore[] { return settings.readJSON("richest") || [] }
     public get randomUnlocked(): boolean { return settings.readJSON("randomUnlocked") || false }
@@ -18,14 +19,15 @@ class DataStore {
         settings.writeJSON("randomUnlocked", "true")
     }
 
-    public setRichest(klass: string, amount: number): void {
+    public setRichest(klass: string, amount: number, killedBy: string): void {
         let richest = this.richest
-        richest.push([klass, amount])
+        richest.push([klass, amount, killedBy])
         richest = richest.sort((a, b) => {
-            let [ak, aa] = a
-            let [bk, ba] = b
-            return ba - aa
-        }).slice(0, 8)
+            let [aClass, aCoins, aKilledBy] = a
+            let [bClass, bCoins, bKilledBy] = b
+
+            return bCoins - aCoins
+        }).slice(0, DataStore.NUM_RICHEST)
 
         settings.writeJSON("richest", richest)
     }

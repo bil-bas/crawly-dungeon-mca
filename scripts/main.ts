@@ -21,5 +21,6 @@ const dataStore = new DataStore()
 dataStore.unlockClass(Druid.title)
 dataStore.unlockClass(Necromancer.title)
 dataStore.unlockClass(BloodWitch.title)
+dataStore.unlockRandom()
 
 storyboard.replace(scenes.INTRO)
