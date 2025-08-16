@@ -188,17 +188,6 @@ f b d d b b d d 2 f . f d f
 9 9 9 d d d 9 9 9 
 . 9 9 9 9 9 9 9 . 
 `;
-            case "image15":
-            case "ach random":return img`
-. d d d d d d . 
-d d d d d d d d 
-d d d d d d d d 
-d d d f f d d d 
-d d d f f d d d 
-d d d d d d d d 
-d d d d d d d d 
-. d d d d d d . 
-`;
         }
         return null;
     })

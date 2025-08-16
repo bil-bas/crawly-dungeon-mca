@@ -2,8 +2,9 @@ class Entity extends Sprite {
     protected _life: int8
     public get maxLife(): int8 { return 1 }
 
-    constructor(image: Image, kind: number, z: number, tile: tiles.Location) {
-        super(image)
+    constructor(kind: number, z: number, tile: tiles.Location) {
+        super(img`.`)
+        this.setImage(this.image)
         this.setKind(kind)
         this._life = this.maxLife
         this.z = z

@@ -39,10 +39,6 @@ class Dungeon {
                     break
                 case assets.tile`rockslide`:
                     tiles.setWallAt(tile, true)
-                case assets.tile`key`:
-                case assets.tile`chest`:
-                case assets.tile`mana potion`:
-                case assets.tile`life potion`:
                     break
                 case sprites.dungeon.stairLarge:
                     tiles.placeOnTile(player, tile)
@@ -69,9 +65,14 @@ class Dungeon {
             case assets.tile`shroom`: new Shroom(tile); break
             case assets.tile`mimic`: new Mimic(tile); break
 
+            case assets.tile`key`: new Key(tile); break
+            case assets.tile`chest`: new Chest(tile); break
+            case assets.tile`mana potion`: new ManaPotion(tile); break
+            case assets.tile`life potion`: new LifePotion(tile); break
+            case assets.tile`coins`: new Coins(tile); break
+
             case assets.tile`item shop`: new ItemShop(tile); break
             case assets.tile`spell shop`: new SpellShop(tile); break
-
             case assets.tile`shrine`: new Shrine(tile); break
             case assets.tile`mushroom`: new Mushroom(tile); break
             default:

@@ -2,8 +2,6 @@ namespace SpriteKind {
     export const Pet = SpriteKind.create()
 }
 
-
-
 class Pet extends EntityWithStatus {
     protected get meleeDamage(): int8 { return 1 }
     protected get distanceRange(): [int8, int8] { throw NOT_IMPLEMENTED }
@@ -15,8 +13,8 @@ class Pet extends EntityWithStatus {
     protected get walkLeft(): Image[] { return images.flipXAll(this.walkRight) }
     protected get walkRight(): Image[] { return images.flipXAll(this.walkLeft) }
 
-    constructor(image: Image) {
-        super(image, SpriteKind.Pet, ZOrder.PET, scene.locationOfSprite(player))
+    constructor() {
+        super(SpriteKind.Pet, ZOrder.PET, scene.locationOfSprite(player))
         this.thinkAboutThinking()
     }
 
@@ -85,29 +83,24 @@ class Pet extends EntityWithStatus {
 }
 
 class Cat extends Pet {
+    public get image(): Image { return sprites.builtin.cat0 }
     protected get distanceRange(): [int8, int8] { return [0, 2] }
     protected get thinkingDelay(): int16 { return 1000 }
     protected get speed(): int8 { return 40 }
     protected get walkLeft(): Image[] { return [sprites.builtin.cat1, sprites.builtin.cat2] }
     protected get sitLeft(): Image { return assets.image`catSit` }
-
-    constructor() {
-        super(sprites.builtin.cat0)
-    }
 }
 
 class Dog extends Pet {
+    public get image(): Image { return sprites.builtin.dog0 }
     protected get distanceRange(): [int8, int8] { return [1, 1] }
     public get maxLife(): int8 { return 2 }
     protected get walkLeft(): Image[] { return [sprites.builtin.dog1, sprites.builtin.dog2] }
     protected get sitLeft(): Image { return assets.image`dogSit` }
-
-    constructor() {
-        super(sprites.builtin.dog0)
-    }
 }
 
 class Duck extends Pet {
+    public get image(): Image { return sprites.duck.duck1 }
     protected get distanceRange(): [int8, int8] { return [1, 2] }
     protected get walkRight(): Image[] {
         return [
@@ -116,13 +109,10 @@ class Duck extends Pet {
         ]
     }
     protected get sitRight(): Image { return sprites.duck.duckHurt }
-
-    constructor() {
-        super(sprites.duck.duck1)
-    }
 }
 
 class Zombie extends Pet {
+    public get image(): Image { return Zombie.zombify(sprites.builtin.villager3WalkFront1) }
     public get maxLife(): int8 { return 3 }
     protected get animationDelay(): int16 { return 500 }
     protected get distanceRange(): [int8, int8] { return [2, 4] }
@@ -134,10 +124,6 @@ class Zombie extends Pet {
     protected get meleeDamage(): int8 { return 1 }
     protected get speed(): int8 { return 10 }
     protected get thinkingDelay(): int16 { return 4000 }
-
-    constructor() {
-        super(Zombie.zombify(sprites.builtin.villager3WalkFront1))
-    }
 
     public static zombify(image: Image) {
         image = image.clone()

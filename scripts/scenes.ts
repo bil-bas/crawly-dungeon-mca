@@ -23,11 +23,11 @@ storyboard.registerScene(scenes.INTRO, () => {
 storyboard.registerScene(scenes.CHOOSE_CLASS, () => {
     function playerIcon(title: string): Image {
         switch (title) {
-            case Druid.title: return Druid.icon
-            case Wizard.title: return Wizard.icon
-            case BloodWitch.title: return BloodWitch.icon
-            case Necromancer.title: return Necromancer.icon
-            case Random.title: return Random.icon
+            case Druid.title: return Druid.image
+            case Wizard.title: return Wizard.image
+            case BloodWitch.title: return BloodWitch.image
+            case Necromancer.title: return Necromancer.image
+            case Random.title: return Random.image
             default: throw title
         }
     }
@@ -37,7 +37,7 @@ storyboard.registerScene(scenes.CHOOSE_CLASS, () => {
     })
 
     if (dataStore.randomUnlocked) {
-        options.push([Random.icon, Random.title])
+        options.push([Random.image, Random.title])
     }
 
     new Menu(sprites.dungeon.statueLight, "Who are you?", options, false,

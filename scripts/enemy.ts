@@ -6,8 +6,8 @@ class Enemy extends EntityWithStatus {
     protected get meleeCooldown(): int16 { return 500 }
     protected meleeCooldownAt: number = 0
 
-    constructor(image: Image, tile: tiles.Location) {
-        super(image, SpriteKind.Enemy, ZOrder.ENEMIES, tile)
+    constructor(tile: tiles.Location) {
+        super(SpriteKind.Enemy, ZOrder.ENEMIES, tile)
         if (this.killedMessage.length > 24) throw this.killedMessage
 
         this.setFlag(SpriteFlag.BounceOnWall, true)
@@ -41,11 +41,12 @@ class Enemy extends EntityWithStatus {
 
 // BAT
 class Bat extends Enemy {
+    public get image(): Image { return sprites.builtin.forestBat0 }
     public get title(): string { return "Bat" }
     public get killedMessage(): string { return `exsanguinated by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
-        super(sprites.builtin.forestBat0, tile)
+        super(tile)
         this.vx = 40
 
         let left = [sprites.builtin.forestBat0, sprites.builtin.forestBat1, sprites.builtin.forestBat2, sprites.builtin.forestBat3]
@@ -57,12 +58,13 @@ class Bat extends Enemy {
 
 // HERMIT CRAB
 class HermitCrab extends Enemy {
+    public get image(): Image { return sprites.builtin.hermitCrabWalk0 }
     public get title(): string { return "Crab" }
     public get killedMessage(): string { return `crushed by a ${this.title}` }
     public get maxLife(): number { return 3 }
 
     constructor(tile: tiles.Location) {
-        super(sprites.builtin.hermitCrabWalk0, tile)
+        super(tile)
 
         this.vy = -30
         this.setScale(2)
@@ -93,11 +95,12 @@ class HermitCrab extends Enemy {
 
 // Monkey steals keys
 class Monkey extends Enemy {
+    public get image(): Image { return sprites.builtin.forestMonkey0 }
     public get title(): string { return "Monkey" }
     public get killedMessage(): string { return `eyes gouged by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
-        super(sprites.builtin.forestMonkey0, tile)
+        super(tile)
         this.vy = 50
 
         let up = [sprites.builtin.forestMonkey0, sprites.builtin.forestMonkey1, sprites.builtin.forestMonkey2, sprites.builtin.forestMonkey3]
@@ -119,12 +122,13 @@ class Monkey extends Enemy {
 }
 
 class Shroom extends Enemy {
+    public get image(): Image { return sprites.swamp.mushroomFrontLeft0 }
     public get maxLife(): int8 { return 2 }
     public get title(): string { return "Shroom" }
     public get killedMessage(): string { return `zoomed by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
-        super(sprites.builtin.forestMonkey0, tile)
+        super(tile)
 
         this.vx = 20
         this.vy = 20
@@ -145,11 +149,12 @@ class Shroom extends Enemy {
 
 // Skeleton steals mana
 class Skeleton extends Enemy {
+    public get image(): Image { return sprites.castle.skellyFront }
     public get title(): string { return "Skelly" }
     public get killedMessage(): string { return `rattled by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
-        super(sprites.castle.skellyFront, tile)
+        super(tile)
 
         this.vy = 40
 
@@ -171,13 +176,10 @@ class Skeleton extends Enemy {
 }
 
 class Mimic extends Enemy {
+    public get image(): Image { return sprites.dungeon.chestClosed }
     public get maxLife(): int8 { return 2 }
     public get title(): string { return "Mimic" }
     public get killedMessage(): string { return `swallowed by a ${this.title}` }
-
-    constructor(tile: tiles.Location) {
-        super(sprites.dungeon.chestClosed, tile)
-    }
 
     protected onWounded() {
         animation.runImageAnimation(this, [sprites.dungeon.chestOpen, sprites.dungeon.chestClosed],

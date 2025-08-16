@@ -116,7 +116,7 @@ class StatUpdate extends Label {
         game.currentScene().physicsEngine.addSprite(this)
         this.setPosition(player.x, player.y - 8)
         this.vy = -15
-        after(300, () => {
+        after(500, () => {
             sprites.destroy(this)
         })
 

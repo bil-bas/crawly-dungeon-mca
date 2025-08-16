@@ -345,6 +345,63 @@ b b d d b c f f b b b b b b b .
 3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
 3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
 `;
+            case "myTiles.tile25":
+            case "unused2":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . 3 3 . . . . . . . . . . . . 
+. . . 3 . . . . . . . . . . . . 
+. . . . 3 . . . . . . . . . . . 
+. . . . 3 3 5 5 5 . . . . . . . 
+. . . . . 3 3 4 4 5 . . . . . . 
+. . . . . 5 3 5 4 5 f . . . . . 
+. . . . . 5 3 3 4 5 f . . . . . 
+. . . . . . 5 3 3 f . . . . . . 
+. . . . . . . f 3 3 . . . . . . 
+. . . . . . . . . 3 . . . . . . 
+. . . . . . . . . . 3 . . . . . 
+. . . . . . . . . . . 3 . . . . 
+. . . . . . . . . . . . 3 . . . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "myTiles.tile24":
+            case "unused1":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . 3 3 3 . . . 5 5 5 . . . . . 
+. . . 3 3 3 . 5 4 4 4 5 . . . . 
+. . . . 3 3 3 5 4 5 4 5 f . . . 
+. . . . 3 3 3 3 4 5 4 5 f . . . 
+. . . . . 3 3 3 3 5 5 f . . . . 
+. . . . 5 5 3 3 3 3 f . . . . . 
+. . . 5 4 4 3 3 3 3 3 . . . . . 
+. . . 5 4 5 4 3 3 3 3 . . . . . 
+. . . 5 4 5 4 3 3 3 3 3 . . . . 
+. . . . 5 5 5 f 3 3 3 3 . . . . 
+. . . . . f f . . . 3 3 3 . . . 
+. . . . . . . . . . . 3 3 . . . 
+. . . . . . . . . . . . . . . . 
+`;
+            case "myTiles.tile23":
+            case "coins":return img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . e e . . . . . . . 
+. . . . . . . 4 4 . . . . . . . 
+. . . . . . 4 e e e . . . . . . 
+. . . . . e 4 e f e e . . . . . 
+. . . . . e 4 e f e e . . . . . 
+. . . . . e e e f e e . . . . . 
+. . . . . e e f e e f . . . . . 
+. . . . e f e e e e f . . . . . 
+. . . . e e e e f f f . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`;
         }
         return null;
     })
@@ -404,11 +461,17 @@ namespace myTiles {
     export const tile21 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile22 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile25 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile24 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile23 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
             case "level 1":
-            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010000000001010000001300000000010100000a000101000101010001010001010000000001010001010100010100010100000000010105050101000101000101000000000101050001010001010301010c0c0c0c0101010f01010001010101010000000001010100010100010101010100000000000e000900000000130d0101040404000000000b0006000000000101000000001200000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000140007000101110000000000100b0b000000000d0101010101010101010101010101010101`, img`
+            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010015000001010000001300000000010100000a000101000101010001010001010000000001010001010100010100010100001500010105050101000101000101000000000101150001010001010301010c0c0c0c0101010f01010001010101010000000001010100010100010101010100000000000e000900000000130d0101040404000000000b0006000000000101001515001200000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000140007000101110000000000100b0b000000000d0101010101010101010101010101010101`, img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
@@ -425,7 +488,7 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, [myTiles.tile5,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile6,myTiles.tile7,myTiles.tile15,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile13,sprites.dungeon.stairLadder,myTiles.tile12,myTiles.tile19,sprites.dungeon.doorLockedNorth,myTiles.tile18,myTiles.tile17,myTiles.tile20,myTiles.tile21,myTiles.tile22], TileScale.Sixteen);
+`, [myTiles.tile5,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile6,myTiles.tile7,myTiles.tile15,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile13,sprites.dungeon.stairLadder,myTiles.tile12,myTiles.tile19,sprites.dungeon.doorLockedNorth,myTiles.tile18,myTiles.tile17,myTiles.tile20,myTiles.tile21,myTiles.tile22,myTiles.tile23], TileScale.Sixteen);
         }
         return null;
     })
@@ -468,6 +531,12 @@ namespace myTiles {
             case "tile21":return myTiles.tile21;
             case "shroom":
             case "tile22":return myTiles.tile22;
+            case "unused2":
+            case "tile25":return myTiles.tile25;
+            case "unused1":
+            case "tile24":return myTiles.tile24;
+            case "coins":
+            case "tile23":return myTiles.tile23;
         }
         return null;
     })

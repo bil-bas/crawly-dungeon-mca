@@ -10,8 +10,8 @@ const ALL_STAIRS: Image[] = [
 
 
 class Player extends Entity {
-    static get title(): string { throw NOT_IMPLEMENTED }
-    static get icon(): Image { return sprites.swamp.witchForward0 }
+    public static get title(): string { throw NOT_IMPLEMENTED }
+    public static get image(): Image { return sprites.swamp.witchForward0 }
 
     protected isFalling: boolean = false
     protected _keys: int8 = 0
@@ -108,7 +108,7 @@ class Player extends Entity {
     }
 
     constructor(public title: string) {
-        super(sprites.swamp.witchForward0, SpriteKind.Player, ZOrder.PLAYER, tiles.getTileLocation(0, 0))
+        super(SpriteKind.Player, ZOrder.PLAYER, tiles.getTileLocation(0, 0))
         scene.cameraFollowSprite(this)
 
         this.addAnimations()
@@ -142,19 +142,14 @@ class Player extends Entity {
         // Interacting with the environment
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, (_: Sprite, sprite: Sprite) => {
             let item = sprite as Item
-            item.use()
+            if (item.canUse) {
+                item.use()
+            }
         })
 
         scene.onHitWall(SpriteKind.Player, (_: Sprite, tile: tiles.Location) => {
             this.touchedWall(tile)
         })
-
-        for (let image of [assets.tile`chest`, assets.tile`key`,
-                           assets.tile`mana potion`, assets.tile`life potion`]) {
-            scene.onOverlapTile(SpriteKind.Player, image, (_: Sprite, tile: tiles.Location) => {
-                this.touchedTile(image, tile)
-            })
-        }
 
         sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, (_: Sprite, sprite: Sprite) => {
             let enemy = sprite as Enemy
@@ -187,38 +182,6 @@ class Player extends Entity {
                 sounds.play(sounds.spellFail)
             }
         })
-    }
-
-    protected touchedTile(image: Image, tile: tiles.Location): void {
-        switch (image) {
-            case assets.tile`key`:
-                dungeon.clearTile(tile)
-                this.keys += 1
-                sounds.play(sounds.useItemSound)
-                break
-            case assets.tile`chest`:
-                if (this.keys) {
-                    this.keys -= 1
-                    this.coins += randint(10, 20)
-                    tiles.setTileAt(tile, sprites.dungeon.chestOpen)
-                    sounds.play(sounds.unlock)
-                }
-                break
-            case assets.tile`life potion`:
-                if (this.life < this.maxLife) {
-                    dungeon.clearTile(tile)
-                    this.life += 1
-                    sounds.play(sounds.useItemSound)
-                }
-                break
-            case assets.tile`mana potion`:
-                if (this.mana < this.maxMana) {
-                    dungeon.clearTile(tile)
-                    this.mana += 1
-                    sounds.play(sounds.useItemSound)
-                }
-                break
-        }
     }
 
     protected addAnimations(): void {
@@ -290,7 +253,7 @@ class Wizard extends Player {
 
 class BloodWitch extends Wizard {
     static get title(): string { return "Cultist" }
-    static get icon(): Image { return images.replaceColour(Player.icon, Colour.YELLOW, Colour.RED) }
+    static get image(): Image { return images.replaceColour(Player.image, Colour.YELLOW, Colour.RED) }
 
     protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.RED) }
     protected animDown() { return images.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.RED) }
@@ -305,7 +268,7 @@ class BloodWitch extends Wizard {
 
 class Druid extends Wizard {
     static get title(): string { return "Druid" }
-    static get icon(): Image { return images.replaceColour(Player.icon,  Colour.YELLOW, Colour.GREEN) }
+    static get image(): Image { return images.replaceColour(Player.image,  Colour.YELLOW, Colour.GREEN) }
 
     protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.GREEN) }
     protected animDown() { return images.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.GREEN) }
@@ -320,7 +283,7 @@ class Druid extends Wizard {
 
 class Necromancer extends Wizard {
     static get title(): string { return "Necroman" }
-    static get icon(): Image { return images.replaceColour(Player.icon,  Colour.YELLOW, Colour.BLACK) }
+    static get image(): Image { return images.replaceColour(Player.image,  Colour.YELLOW, Colour.BLACK) }
 
     protected animUp() { return images.replaceColourAll(super.animUp(), Colour.YELLOW, Colour.BLACK) }
     protected animDown() { return images.replaceColourAll(super.animDown(), Colour.YELLOW, Colour.BLACK) }
@@ -336,5 +299,5 @@ class Necromancer extends Wizard {
 
 class Random extends Player {
     static get title() { return "Random" }
-    static get icon(): Image { return assets.image`random` }
+    static get image(): Image { return assets.image`random` }
 }
