@@ -16,11 +16,8 @@ class Pet extends EntityWithStatus {
     constructor() {
         super(SpriteKind.Pet, ZOrder.PET, scene.locationOfSprite(player))
         this.thinkAboutThinking()
-    }
 
-    protected onDeath(): void {
-        player.pet = null
-        super.onDeath()
+        this.on("death", () => player.pet = null)
     }
 
     protected think(): void {

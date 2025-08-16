@@ -1,6 +1,7 @@
 class Entity extends Sprite {
     protected _life: int8
     public get maxLife(): int8 { return 1 }
+    protected _eventHandlers: { [id: string]: (() => void)[]} = {}
 
     constructor(kind: number, z: number, tile: tiles.Location) {
         super(img`.`)
@@ -10,6 +11,11 @@ class Entity extends Sprite {
         this.z = z
         tiles.placeOnTile(this, tile)
         game.currentScene().physicsEngine.addSprite(this)
+
+        this.on("death", () => {
+            music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
+            this.destroy(effects.ashes, 200)
+        })
     }
 
     public summon(): void {
@@ -36,12 +42,24 @@ class Entity extends Sprite {
         characterAnimations.loopFrames(this, images, 200, rule)
     }
 
-    protected onDeath() {
-        music.play(sounds.enemyDeath, music.PlaybackMode.InBackground)
-        this.destroy(effects.ashes, 200)
+    protected on(event: string, handler: () => void): void {
+        if (["death", "wounded"].indexOf(event) == -1) throw event
+
+        if (!this._eventHandlers[event]) {
+            this._eventHandlers[event] = []
+        }
+
+        this._eventHandlers[event].push(handler)
     }
 
-    protected onWounded(): void { }
+    protected triggerEvent(event: string) {
+        if (["death", "wounded"].indexOf(event) == -1) throw event
+        if (!this._eventHandlers[event]) return
+
+        for (let handler of this._eventHandlers[event]) {
+            handler()
+        }
+    }
 }
 
 class EntityWithStatus extends Entity {
@@ -52,7 +70,7 @@ class EntityWithStatus extends Entity {
         this._life = Math.max(value, 0)
 
         if (this._life == 0) {
-            this.onDeath()
+            this.triggerEvent("death")
         } else if (this._life == this.maxLife) {
             // hide status bar when fully healed.
             if (this.lifeBar) {
@@ -68,16 +86,17 @@ class EntityWithStatus extends Entity {
             }
             this.lifeBar.value = this._life
 
-            this.onWounded()
+            this.triggerEvent("wounded")
         }
     }
 
+    constructor(kind: number, z: number, tile: tiles.Location) {
+        super(kind, z, tile)
 
-
-    protected onDeath(): void {
-        super.onDeath()
-        if (this.lifeBar) {
-            this.lifeBar.destroy()
-        }
+        this.on("death", () => {
+            if (this.lifeBar) {
+                this.lifeBar.destroy()
+            }
+        })
     }
 }

@@ -1,5 +1,6 @@
 // Base enemy obj.
 class Enemy extends EntityWithStatus {
+    public get corpse(): Image { return assets.image`corpse` }
     public get title(): string { throw NOT_IMPLEMENTED }
     public get killedMessage(): string { throw NOT_IMPLEMENTED }
 
@@ -11,6 +12,10 @@ class Enemy extends EntityWithStatus {
         if (this.killedMessage.length > 24) throw this.killedMessage
 
         this.setFlag(SpriteFlag.BounceOnWall, true)
+
+        this.on("death", () => {
+            dataStore.addKill(this.title)
+        })
     }
 
     public melee(damage: number): int8 {
@@ -29,11 +34,6 @@ class Enemy extends EntityWithStatus {
             let enemy = sprite as Enemy
             enemy.touchWall(tile)
         })
-    }
-
-    protected onDeath() {
-        super.onDeath()
-        dataStore.addKill(this.title)
     }
 
     public touchWall(tile: tiles.Location): void { }
@@ -176,18 +176,20 @@ class Skeleton extends Enemy {
 }
 
 class Mimic extends Enemy {
+    public get corpse(): Image { return assets.tile`dead mimic` }
     public get image(): Image { return sprites.dungeon.chestClosed }
     public get maxLife(): int8 { return 2 }
     public get title(): string { return "Mimic" }
     public get killedMessage(): string { return `swallowed by a ${this.title}` }
 
-    protected onWounded() {
-        animation.runImageAnimation(this, [sprites.dungeon.chestOpen, sprites.dungeon.chestClosed],
-                                    200, true)
-    }
-
-    protected onDeath() {
-        tiles.setTileAt(scene.locationOfSprite(this), assets.tile`dead mimic`)
-        super.onDeath()
+    constructor(tile: tiles.Location) {
+        super(tile)
+        this.on("wounded", () => {
+            animation.runImageAnimation(this, [sprites.dungeon.chestOpen, sprites.dungeon.chestClosed],
+                200, true)
+        })
+        this.on("death", () => {
+            tiles.setTileAt(scene.locationOfSprite(this), this.corpse)
+        })
     }
 }
