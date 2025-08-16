@@ -50,10 +50,5 @@
     "languageRestriction": "javascript-only",
     "authors": [
         "Bil Bas"
-    ],
-    "yotta": {
-        "config": {
-            "PXT_GC_CHECKS": 1
-        }
-    }
+    ]
 }
