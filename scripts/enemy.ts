@@ -42,7 +42,7 @@ class Enemy extends EntityWithStatus {
 // BAT
 class Bat extends Enemy {
     public get title(): string { return "Bat" }
-    public get killedMessage(): string { return `Exsanguinated by a ${this.title}` }
+    public get killedMessage(): string { return `exsanguinated by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
         super(sprites.builtin.forestBat0, tile)
@@ -173,7 +173,7 @@ class Skeleton extends Enemy {
 class Mimic extends Enemy {
     public get maxLife(): int8 { return 2 }
     public get title(): string { return "Mimic" }
-    public get killedMessage(): string { return `Swallowed by a ${this.title}` }
+    public get killedMessage(): string { return `swallowed by a ${this.title}` }
 
     constructor(tile: tiles.Location) {
         super(sprites.dungeon.chestClosed, tile)
