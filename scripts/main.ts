@@ -7,7 +7,7 @@ namespace ZOrder {
     export const PLAYER: int8 = 3
     export const SPELLS: int8 = 4
     export const FLOATER: int8 = 5
-    export const UI: int8 = 6
+    export const UI: int8 = 250
 }
 
 

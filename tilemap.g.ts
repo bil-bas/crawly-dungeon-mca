@@ -402,6 +402,82 @@ b b d d b c f f b b b b b b b .
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
+            case "myTiles.tile2":
+            case "wall end e":return img`
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+a a a a a a a a a a a a a a a f 
+a a a a a a a a a a a a a a a f 
+a a a a a a a a a a a a a a a f 
+a a a a a a a a a a a a a a a f 
+a a a a a a a a a a a a a a a f 
+a a a a a a a a a a a a a a a f 
+a a a a a a a a a a a a a a a f 
+`;
+            case "myTiles.tile3":
+            case "wall end w":return img`
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f a a a a a a a a a a a a a a a 
+f a a a a a a a a a a a a a a a 
+f a a a a a a a a a a a a a a a 
+f a a a a a a a a a a a a a a a 
+f a a a a a a a a a a a a a a a 
+f a a a a a a a a a a a a a a a 
+f a a a a a a a a a a a a a a a 
+`;
+            case "myTiles.tile4":
+            case "wall end s":return img`
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+`;
+            case "myTiles.tile1":
+            case "wall end n":return img`
+f f f f f f f f f f f f f f f f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+f a a a a a a a a a a a a a a f 
+`;
         }
         return null;
     })
@@ -467,6 +543,14 @@ namespace myTiles {
     export const tile24 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile23 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile2 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile3 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile4 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile1 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -489,6 +573,41 @@ namespace myTiles {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `, [myTiles.tile5,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile6,myTiles.tile7,myTiles.tile15,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile13,sprites.dungeon.stairLadder,myTiles.tile12,myTiles.tile19,sprites.dungeon.doorLockedNorth,myTiles.tile18,myTiles.tile17,myTiles.tile20,myTiles.tile21,myTiles.tile22,myTiles.tile23], TileScale.Sixteen);
+            case "empty16":
+            case "level2":return tiles.createTilemap(hex`2000200001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101`, img`
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+22222222222222222222222222222222
+`, [myTiles.tile5,sprites.builtin.brick], TileScale.Sixteen);
         }
         return null;
     })
@@ -537,6 +656,14 @@ namespace myTiles {
             case "tile24":return myTiles.tile24;
             case "coins":
             case "tile23":return myTiles.tile23;
+            case "wall end e":
+            case "tile2":return myTiles.tile2;
+            case "wall end w":
+            case "tile3":return myTiles.tile3;
+            case "wall end s":
+            case "tile4":return myTiles.tile4;
+            case "wall end n":
+            case "tile1":return myTiles.tile1;
         }
         return null;
     })

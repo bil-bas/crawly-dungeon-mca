@@ -3,13 +3,17 @@ namespace SpriteKind {
 }
 
 class Dungeon {
-    protected static readonly ADJACENT_OFFSETS = [
+    static readonly FULL = sprites.builtin.brick
+    static readonly ENTRANCE = sprites.dungeon.stairLarge
+    static readonly EXIT = sprites.dungeon.stairNorth
+    static readonly RUBBLE = sprites.castle.rock2
+
+    public static readonly ADJACENT_OFFSETS = [
         [-1, -1], [+0, -1], [+1, -1],
         [-1, +0],           [+1, +0],
         [-1, +1], [+0, +1], [+1, +1],
     ]
 
-    public level: tiles.TileMapData|null = null
     protected levelIndex: int8 = -1
 
     constructor() {
@@ -17,77 +21,53 @@ class Dungeon {
         this.advance()
     }
 
-    protected getLevel(index: number): tiles.TileMapData {
-        switch (index) {
-            case 0: return tilemap`level 1`
-            default: throw index
-        }
-    }
-
     // Render the level tiles, add player and creatues.
     protected render_level(): void {
-        let read_level = this.getLevel(this.levelIndex)
-        this.level = tileUtil.cloneMap(read_level)
-        tiles.setCurrentTilemap(this.level)
+        let level = tileUtil.cloneMap(assets.tilemap`empty16`)
 
-        tileUtil.forEachTileInMap(read_level, (column: number, row: number, tile: tiles.Location) => {
-            let image = read_level.getTileImage(read_level.getTile(column, row))
+        let worm = new Worm(level)
+        worm.createDungeon()
+        tiles.placeOnRandomTile(player, Dungeon.ENTRANCE)
 
-            switch (image) {
-                case sprites.builtin.brick:
-                    this.render_brick(read_level, column, row, tile)
-                    break
-                case assets.tile`rockslide`:
-                    tiles.setWallAt(tile, true)
-                    break
-                case sprites.dungeon.stairLarge:
-                    tiles.placeOnTile(player, tile)
-                    this.clearTile(tile)
-                    break
-                case sprites.dungeon.doorLockedNorth:
-                case sprites.dungeon.stairLadder: // represents a heavy crate/wooden wall.
-                    tiles.setWallAt(tile, true)
-                    break
-                default:
-                    this.render_object(image, tile)
-            }
+        let readLevel = tileUtil.cloneMap(level)
+
+        tiles.getTilesByType(sprites.builtin.brick).forEach((tile: tiles.Location) => {
+            this.render_brick(readLevel, tile)
         })
+
+        tiles.setCurrentTilemap(level)
     }
 
-    protected render_object(image: Image, tile: tiles.Location): void {
-        let clear = true
+    // protected render_object(image: Image, tile: tiles.Location): void {
+    //     let clear = true
 
-        switch (image) {
-            case assets.tile`bat`: new Bat(tile); break
-            case assets.tile`skeleton`: new Skeleton(tile); break
-            case assets.tile`monkey`: new Monkey(tile); break
-            case assets.tile`hermit crab`: new HermitCrab(tile); break
-            case assets.tile`shroom`: new Shroom(tile); break
-            case assets.tile`mimic`: new Mimic(tile); break
+    //     switch (image) {
+    //         case assets.tile`bat`: new Bat(tile); break
+    //         case assets.tile`skeleton`: new Skeleton(tile); break
+    //         case assets.tile`monkey`: new Monkey(tile); break
+    //         case assets.tile`hermit crab`: new HermitCrab(tile); break
+    //         case assets.tile`shroom`: new Shroom(tile); break
+    //         case assets.tile`mimic`: new Mimic(tile); break
 
-            case assets.tile`key`: new Key(tile); break
-            case assets.tile`chest`: new Chest(tile); break
-            case assets.tile`mana potion`: new ManaPotion(tile); break
-            case assets.tile`life potion`: new LifePotion(tile); break
-            case assets.tile`coins`: new Coins(tile); break
+    //         case assets.tile`key`: new Key(tile); break
+    //         case assets.tile`chest`: new Chest(tile); break
+    //         case assets.tile`mana potion`: new ManaPotion(tile); break
+    //         case assets.tile`life potion`: new LifePotion(tile); break
+    //         case assets.tile`coins`: new Coins(tile); break
 
-            case assets.tile`item shop`: new ItemShop(tile); break
-            case assets.tile`spell shop`: new SpellShop(tile); break
-            case assets.tile`shrine`: new Shrine(tile); break
-            case assets.tile`mushroom`: new Mushroom(tile); break
-            default:
-                clear = false
-        }
-
-        if (clear) {
-            this.clearTile(tile)
-        }
-    }
+    //         case assets.tile`item shop`: new ItemShop(tile); break
+    //         case assets.tile`spell shop`: new SpellShop(tile); break
+    //         case assets.tile`shrine`: new Shrine(tile); break
+    //         case assets.tile`mushroom`: new Mushroom(tile); break
+    //         default:
+    //             clear = false
+    //     }
+    // }
 
     // Replace default tile with correct, linking walls.
-    protected render_brick(view_map: tiles.TileMapData, column: number, row: number, tile: tiles.Location) : void {
+    protected render_brick(view_map: tiles.TileMapData, tile: tiles.Location) : void {
         let adjacent_pattern = Dungeon.ADJACENT_OFFSETS.map((offset: Array<number>) => {
-            let x = column + offset[0], y = row + offset[1]
+            let x = tile.column + offset[0], y = tile.row + offset[1]
 
             if (view_map.isOutsideMap(x, y)) return 1
 
@@ -96,7 +76,6 @@ class Dungeon {
         })
 
         tiles.setTileAt(tile, this.wall_image_from_adjacent(adjacent_pattern.join("")))
-        tiles.setWallAt(tile, true)
     }
 
     // check adjacent squares for walls, to work out how to join them.
@@ -155,7 +134,7 @@ class Dungeon {
             case "11111111":
                 return assets.tile`top of wall`
             default:
-                return assets.tile`transparency16` // To see backround
+                return Dungeon.RUBBLE
         }
     }
 
@@ -174,5 +153,6 @@ class Dungeon {
     // Clear tile to transparency
     public clearTile(tile: tiles.Location): void {
         tiles.setTileAt(tile, assets.tile`transparency16`)
+        tiles.setWallAt(tile, false)
     }
 }

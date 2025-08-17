@@ -13,9 +13,11 @@
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
         "arcade-tilemap-a-star": "github:jwunderl/arcade-tilemap-a-star#v0.4.0",
         "storyboard": "*",
-        "achievements": "github:meeeeeeeep1/achievements#master"
+        "achievements": "github:meeeeeeeep1/achievements#master",
+        "arcade-minimap": "github:microsoft/arcade-minimap#v0.6.1"
     },
     "files": [
+        "scripts/worm.ts",
         "scripts/scenes.ts",
         "scripts/pet.ts",
         "scripts/entity.ts",
