@@ -5,8 +5,7 @@ namespace SpriteKind {
 class Dungeon {
     static readonly FULL = sprites.builtin.brick
     static readonly ENTRANCE = sprites.dungeon.stairLarge
-    static readonly EXIT = sprites.dungeon.stairNorth
-    static readonly RUBBLE = sprites.castle.rock2
+    static readonly EXIT = sprites.dungeon.stairWest
 
     public static readonly ADJACENT_OFFSETS = [
         [-1, -1], [+0, -1], [+1, -1],
@@ -23,10 +22,19 @@ class Dungeon {
 
     // Render the level tiles, add player and creatues.
     protected render_level(): void {
-        let level = tileUtil.cloneMap(assets.tilemap`empty16`)
+        let level: tiles.TileMapData = tileUtil.cloneMap(assets.tilemap`empty16`)
 
-        let worm = new Worm(level)
-        worm.createDungeon()
+        let isValid = false
+        while (!isValid) {
+            let worm = new Worm(level)
+            worm.createDungeon()
+            if (worm.isValid) {
+                isValid = true
+            } else {
+                level = tileUtil.cloneMap(assets.tilemap`empty16`)
+            }
+        }
+
         tiles.placeOnRandomTile(player, Dungeon.ENTRANCE)
 
         let readLevel = tileUtil.cloneMap(level)
@@ -38,31 +46,33 @@ class Dungeon {
         tiles.setCurrentTilemap(level)
     }
 
-    // protected render_object(image: Image, tile: tiles.Location): void {
-    //     let clear = true
+    /*
+    protected render_object(image: Image, tile: tiles.Location): void {
+        let clear = true
 
-    //     switch (image) {
-    //         case assets.tile`bat`: new Bat(tile); break
-    //         case assets.tile`skeleton`: new Skeleton(tile); break
-    //         case assets.tile`monkey`: new Monkey(tile); break
-    //         case assets.tile`hermit crab`: new HermitCrab(tile); break
-    //         case assets.tile`shroom`: new Shroom(tile); break
-    //         case assets.tile`mimic`: new Mimic(tile); break
+        switch (image) {
+            case assets.tile`bat`: new Bat(tile); break
+            case assets.tile`skeleton`: new Skeleton(tile); break
+            case assets.tile`monkey`: new Monkey(tile); break
+            case assets.tile`hermit crab`: new HermitCrab(tile); break
+            case assets.tile`shroom`: new Shroom(tile); break
+            case assets.tile`mimic`: new Mimic(tile); break
 
-    //         case assets.tile`key`: new Key(tile); break
-    //         case assets.tile`chest`: new Chest(tile); break
-    //         case assets.tile`mana potion`: new ManaPotion(tile); break
-    //         case assets.tile`life potion`: new LifePotion(tile); break
-    //         case assets.tile`coins`: new Coins(tile); break
+            case assets.tile`key`: new Key(tile); break
+            case assets.tile`chest`: new Chest(tile); break
+            case assets.tile`mana potion`: new ManaPotion(tile); break
+            case assets.tile`life potion`: new LifePotion(tile); break
+            case assets.tile`coins`: new Coins(tile); break
 
-    //         case assets.tile`item shop`: new ItemShop(tile); break
-    //         case assets.tile`spell shop`: new SpellShop(tile); break
-    //         case assets.tile`shrine`: new Shrine(tile); break
-    //         case assets.tile`mushroom`: new Mushroom(tile); break
-    //         default:
-    //             clear = false
-    //     }
-    // }
+            case assets.tile`item shop`: new ItemShop(tile); break
+            case assets.tile`spell shop`: new SpellShop(tile); break
+            case assets.tile`shrine`: new Shrine(tile); break
+            case assets.tile`mushroom`: new Mushroom(tile); break
+            default:
+                clear = false
+        }
+    }
+    */
 
     // Replace default tile with correct, linking walls.
     protected render_brick(view_map: tiles.TileMapData, tile: tiles.Location) : void {
@@ -75,11 +85,11 @@ class Dungeon {
             return (adjacent == sprites.builtin.brick) ? 1 : 0
         })
 
-        tiles.setTileAt(tile, this.wall_image_from_adjacent(adjacent_pattern.join("")))
+        tiles.setTileAt(tile, this.wall_image_from_adjacent(adjacent_pattern.join(""), tile))
     }
 
     // check adjacent squares for walls, to work out how to join them.
-    protected wall_image_from_adjacent(pattern: string): Image {
+    protected wall_image_from_adjacent(pattern: string, tile: tiles.Location): Image {
         switch (pattern) {
             case "11111110":
                 return sprites.dungeon.purpleOuterNorthWest
@@ -134,7 +144,8 @@ class Dungeon {
             case "11111111":
                 return assets.tile`top of wall`
             default:
-                return Dungeon.RUBBLE
+                tiles.setWallAt(tile, false)
+                return assets.tile`transparency16`
         }
     }
 

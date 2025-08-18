@@ -115,12 +115,22 @@ class Player extends Entity {
 
         this.addAnimations()
 
-        // shadowcasting.setAnchor(this)
-        // shadowcasting.setShadowColor(Colour.BLACK)
-        // shadowcasting.setShadowMode(shadowcasting.ShadowCastingMode.Fill)
+        shadowcasting.setAnchor(this)
+        shadowcasting.setShadowColor(Colour.BLACK)
+        shadowcasting.setShadowMode(shadowcasting.ShadowCastingMode.Fill)
 
+        //this.enableMinimap()
+
+        this.initEventHandlers()
+        this.resetMovement()
+
+        this.primarySpell = findSpell("Firebolt")
+        this.secondarySpell = findSpell("Fireball")
+    }
+
+    protected enableMinimap() {
         game.onUpdateInterval(100, () => {
-            let map = minimap.minimap(MinimapScale.Sixteenth)
+            let map = minimap.minimap(MinimapScale.Quarter)
             minimap.includeSprite(map, this, MinimapSpriteScale.Double)
             this.minimapSprite.setImage(map.image)
 
@@ -130,12 +140,6 @@ class Player extends Entity {
         this.minimapSprite.setFlag(SpriteFlag.RelativeToCamera, true)
         this.minimapSprite.left = 0
         this.minimapSprite.top = 0
-
-        this.initEventHandlers()
-        this.resetMovement()
-
-        this.primarySpell = findSpell("Firebolt")
-        this.secondarySpell = findSpell("Fireball")
     }
 
     public freeze(): void {
