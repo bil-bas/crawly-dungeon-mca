@@ -119,7 +119,7 @@ class Player extends Entity {
         shadowcasting.setShadowColor(Colour.BLACK)
         shadowcasting.setShadowMode(shadowcasting.ShadowCastingMode.Fill)
 
-        //this.enableMinimap()
+        this.enableMinimap()
 
         this.initEventHandlers()
         this.resetMovement()
@@ -130,7 +130,7 @@ class Player extends Entity {
 
     protected enableMinimap() {
         game.onUpdateInterval(100, () => {
-            let map = minimap.minimap(MinimapScale.Quarter)
+            let map = minimap.minimap(MinimapScale.Sixteenth)
             minimap.includeSprite(map, this, MinimapSpriteScale.Double)
             this.minimapSprite.setImage(map.image)
 
@@ -226,6 +226,10 @@ class Player extends Entity {
             tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
             tiles.setWallAt(tile, false)
             sounds.play(sounds.unlock)
+        } else if (tiles.tileAtLocationEquals(tile, sprites.dungeon.doorClosedNorth)) {
+            tiles.setTileAt(tile, sprites.dungeon.doorOpenNorth)
+            tiles.setWallAt(tile, false)
+            sounds.play(sounds.useItemSound)
         }
     }
 

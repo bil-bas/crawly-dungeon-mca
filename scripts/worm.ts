@@ -1,17 +1,20 @@
 class Room {
-    protected static readonly SPACING = 3
+    protected static readonly SPACING = 4
 
-    public get top(): int8 { return this.tile.row - Math.ceil(this.height / 2) }
-    public get left(): int8 { return this.tile.column - Math.ceil(this.width / 2) }
-    public get bottom(): int8 { return this.tile.row + Math.floor(this.height / 2) }
-    public get right(): int8 { return this.tile.column + Math.floor(this.width / 2) }
+    public get top(): int8 { return this.tile.row }
+    public get left(): int8 { return this.tile.column }
+    public get bottom(): int8 { return this.tile.row + this.height - 1 }
+    public get right(): int8 { return this.tile.column + this.width - 1 }
 
     public get outerTop(): int8 { return this.top - Room.SPACING }
     public get outerLeft(): int8 { return this.left - Room.SPACING }
     public get outerBottom(): int8 { return this.bottom + Room.SPACING }
     public get outerRight(): int8 { return this.right + Room.SPACING }
+    public get area(): int8 { return this.width * this.height }
 
-    constructor(public tile: tiles.Location, public width: number, public height: number) {
+    constructor(public readonly tile: tiles.Location,
+                public readonly width: number,
+                public readonly height: number) {
     }
 
     public commonRows(other: Room): number[] {
@@ -26,32 +29,53 @@ class Room {
 
     public commonColumns(other: Room): number[] {
         let common: number[] = []
-        for (let column = this.left; column <= this.bottom; column++) {
+        for (let column = this.left; column <= this.right; column++) {
             if (column >= other.left && column <= other.right) {
                 common.push(column)
             }
         }
         return common
     }
+
+    public randomTile(margin?: number): tiles.Location {
+        margin = margin || 0
+        return tiles.getTileLocation(randint(this.left + margin, this.right - margin),
+            randint(this.top + margin, this.bottom - margin))
+    }
 }
 
 
 class Worm {
-    static readonly EDGE_MARGIN = 5
+    protected static readonly EDGE_MARGIN: int8 = 5
+    protected static readonly MINIMUM_AREA: int8 = 50
+    protected static readonly MINIMUM_DISTANCE: int8 = 25
+    protected static readonly MAX_ROOM_PLACEMENTS: int8 = 75
+    protected static readonly MIN_ROOMS: int8 = 4
+    protected static readonly MAX_ROOMS: int8 = 7
 
     static readonly DIRECTIONS = [
         CollisionDirection.Bottom, CollisionDirection.Top, CollisionDirection.Left, CollisionDirection.Right,
     ]
 
-    protected width: int8
-    protected height: int8
-    protected rooms: Room[] = []
+    protected readonly width: int8
+    protected readonly height: int8
+    protected readonly rooms: Room[] = []
     protected entrance: Room
     protected exit: Room
 
     public get isValid(): boolean {
+        let area = this.rooms.reduce((p: number, r: Room) => p + r.area, 0)
+
+        if (area < Worm.MINIMUM_AREA) return false
+
+        if (!this.entrance || !this.exit) return false
+
         let path = scene.aStar(this.entrance.tile, this.exit.tile)
-        return path != undefined && path.length >= 30
+        return path != undefined && path.length >= Worm.MINIMUM_DISTANCE
+    }
+
+    protected isClear(column: number, row: number): boolean {
+        return tiles.getTileAt(column, row) == assets.tile`transparency16`
     }
 
     constructor(data: tiles.TileMapData) {
@@ -61,8 +85,20 @@ class Worm {
     }
 
     public createDungeon(): void {
-        this.digRooms(50)
+        this.digRooms(Worm.MAX_ROOM_PLACEMENTS)
+        if (this.rooms.length < Worm.MIN_ROOMS) {
+            console.log(this.rooms.length)
+            return
+        }
+        this.assignEntrance()
+        this.assignExit()
         this.digCorridors()
+    }
+
+    protected clear(column: number, row: number): void {
+        let tile = tiles.getTileLocation(column, row)
+        tiles.setTileAt(tile, assets.tile`transparency16`)
+        tiles.setWallAt(tile, false)
     }
 
     protected digCorridors(): void {
@@ -87,23 +123,24 @@ class Worm {
         }
     }
 
-    protected digTile(column: number, row: number): void {
-        let pos = tiles.getTileLocation(column, row)
-        if (tiles.tileAtLocationEquals(pos, Dungeon.FULL)) {
-            tiles.setTileAt(pos, assets.tile`transparency16`)
-            tiles.setWallAt(pos, false)
-        }
-    }
-
     protected digCorridorHorizontally(room1: Room, room2: Room): void {
         if (room1.tile.column > room2.tile.column) {
             [room1, room2] = [room2, room1]
         }
-        let commonRow = room1.commonRows(room2)._pickRandom()
 
-        for (let column = room1.right + 1; column < room2.left; column++) {
-            this.digTile(column, commonRow)
+        let row = room1.commonRows(room2)._pickRandom()
+
+        for (let column = room1.right + 1; column <= room2.left - 1; column++) {
+            if (this.isClear(column, row)) {
+                return
+            }
         }
+
+        this.buildDoor(room1.right + 1, row)
+        for (let column = room1.right + 2; column <= room2.left - 2; column++) {
+            this.clear(column, row)
+        }
+        this.buildDoor(room2.left - 1, row)
     }
 
     protected digCorridorVertically(room1: Room, room2: Room): void {
@@ -111,73 +148,81 @@ class Worm {
             [room1, room2] = [room2, room1]
         }
 
-        let commonColumn = room1.commonColumns(room2)._pickRandom()
+        let column = room1.commonColumns(room2)._pickRandom()
 
-        for (let row = room1.bottom + 1; row < room2.top; row++) {
-            this.digTile(commonColumn, row)
+        for (let row = room1.bottom + 1; row <= room2.top - 1; row++) {
+            if (this.isClear(column, row)) {
+                return
+            }
         }
+
+        this.buildDoor(column, room1.bottom + 1)
+        for (let row = room1.bottom + 2; row <= room2.top - 2; row++) {
+            this.clear(column, row)
+        }
+        this.buildDoor(column, room2.top - 1)
+    }
+
+    protected buildDoor(column: number, row: number): void {
+        let tile = tiles.getTileLocation(column, row)
+        tiles.setTileAt(tile, sprites.dungeon.doorClosedNorth)
+        tiles.setWallAt(tile, false)
     }
 
     protected digRooms(numRooms: number): void {
         for (let i = 0; i < numRooms; i++) {
-            let room: Room | null = this.placeRoom()
-            if (room) {
-                this.rooms.push(room)
-            }
+            this.placeRoom()
+            if (this.rooms.length == Worm.MAX_ROOMS) break
         }
+    }
 
+    protected assignEntrance(): void {
         this.entrance = this.rooms._pickRandom()
-        tiles.setTileAt(this.entrance.tile, Dungeon.ENTRANCE)
+        tiles.setTileAt(this.entrance.randomTile(1), Dungeon.ENTRANCE)
+    }
 
+    protected assignExit(): void {
         this.exit = this.rooms._pickRandom()
         while (this.exit == this.entrance) {
             this.exit = this.rooms._pickRandom()
         }
-        tiles.setTileAt(this.exit.tile, Dungeon.EXIT)
+        tiles.setTileAt(this.exit.randomTile(1), Dungeon.EXIT)
     }
 
-    protected placeRoom(): Room | null {
-        let width = randint(3, 6)
-        let height = randint(3, 6)
-        let position = this.getSafeLocation()
+    protected placeRoom(): void {
+        let width = [3, 4, 4, 5, 5, 5, 6, 6, 7]._pickRandom()
+        let height = [3, 4, 4, 5, 5, 5, 6, 6, 7]._pickRandom()
+        let position = this.getSafeLocation(width, height)
         let room = new Room(position, width, height)
 
-        if (this.isRoomValid(room)) {
-            return room
-        } else {
-            return null
+        if (!this.isRoomOverlappingRoom(room)) {
+            this.clearRoom(room)
+            this.rooms.push(room)
         }
     }
 
-    protected isRoomValid(room: Room): boolean {
-        for (let col = room.outerLeft; col <= room.outerRight;  col++) {
-            for (let row = room.outerTop; row <= room.outerBottom;  row++) {
-                if (tiles.getTileAt(col, row) == assets.tile`transparency16`) {
-                    return false
+    protected isRoomOverlappingRoom(room: Room): boolean {
+        // Not over any other room.
+        for (let column = room.outerLeft; column <= room.outerRight; column++) {
+            for (let row = room.outerTop; row <= room.outerBottom; row++) {
+                if (this.isClear(column, row)) {
+                    return true
                 }
             }
         }
+        return false
+    }
 
-        for (let col = room.left; col <= room.right;  col++) {
+    protected clearRoom(room: Room): void {
+        for (let column = room.left; column <= room.right;  column++) {
             for (let row = room.top; row <= room.bottom; row++) {
-                let pos = tiles.getTileLocation(col, row)
-                tiles.setTileAt(pos, assets.tile`transparency16`)
-                tiles.setWallAt(pos, false)
+                this.clear(column, row)
             }
         }
-
-        return true
     }
 
-    protected getSafeLocation(): tiles.Location {
-        return tiles.getTileLocation(randint(Worm.EDGE_MARGIN, this.width - 1 - Worm.EDGE_MARGIN),
-                                     randint(Worm.EDGE_MARGIN, this.height - 1 - Worm.EDGE_MARGIN))
-    }
-
-    protected isInsideMargin(tile: tiles.Location): boolean {
-        return ((tile.column >= Worm.EDGE_MARGIN) &&
-            (tile.column < this.width - Worm.EDGE_MARGIN) &&
-            (tile.row >= Worm.EDGE_MARGIN) &&
-            (tile.row < this.height - Worm.EDGE_MARGIN))
+    protected getSafeLocation(width: number, height: number): tiles.Location {
+        return tiles.getTileLocation(randint(Worm.EDGE_MARGIN, this.width - 1 - Worm.EDGE_MARGIN - width),
+                                     randint(Worm.EDGE_MARGIN, this.height - 1 - Worm.EDGE_MARGIN - height))
     }
 }

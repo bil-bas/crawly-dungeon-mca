@@ -22,7 +22,7 @@ class Dungeon {
 
     // Render the level tiles, add player and creatues.
     protected render_level(): void {
-        let level: tiles.TileMapData = tileUtil.cloneMap(assets.tilemap`empty16`)
+        let level: tiles.TileMapData = tileUtil.cloneMap(assets.tilemap`empty36`)
 
         let isValid = false
         while (!isValid) {
@@ -31,7 +31,7 @@ class Dungeon {
             if (worm.isValid) {
                 isValid = true
             } else {
-                level = tileUtil.cloneMap(assets.tilemap`empty16`)
+                level = tileUtil.cloneMap(assets.tilemap`empty36`)
             }
         }
 
@@ -41,6 +41,10 @@ class Dungeon {
 
         tiles.getTilesByType(sprites.builtin.brick).forEach((tile: tiles.Location) => {
             this.render_brick(readLevel, tile)
+        })
+
+        tiles.getTilesByType(sprites.dungeon.doorClosedNorth).forEach((tile: tiles.Location) => {
+            tiles.setWallAt(tile, true)
         })
 
         tiles.setCurrentTilemap(level)
@@ -144,8 +148,9 @@ class Dungeon {
             case "11111111":
                 return assets.tile`top of wall`
             default:
-                tiles.setWallAt(tile, false)
-                return assets.tile`transparency16`
+                //tiles.setWallAt(tile, false)
+            //return assets.tile`transparency16`
+                return sprites.castle.rock2
         }
     }
 
