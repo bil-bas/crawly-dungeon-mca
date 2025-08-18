@@ -188,6 +188,18 @@ f b d d b b d d 2 f . f d f
 9 9 9 d d d 9 9 9 
 . 9 9 9 9 9 9 9 . 
 `;
+            case "image15":
+            case "level":return img`
+. . . c . c . . . 
+. . c d c d c . . 
+. c d c c c d c . 
+. c 5 2 2 2 5 c . 
+. c 2 f 2 f 2 c . 
+. c 2 2 2 2 2 c . 
+. . c 2 f 2 c . . 
+. . . c f c . . . 
+. . . . c . . . . 
+`;
         }
         return null;
     })

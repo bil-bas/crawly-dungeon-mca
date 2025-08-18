@@ -74,8 +74,9 @@ storyboard.registerScene(scenes.PLAY_GAME, () => {
     Pet.registerHandlers()
 
     player = createPlayer(playerClass)
-    gui = new Gui()
     dungeon = new Dungeon()
+    gui = new Gui()
+    dungeon.advance()
 })
 
 storyboard.registerScene(scenes.DEATH, () => {

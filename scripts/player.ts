@@ -119,7 +119,7 @@ class Player extends Entity {
         shadowcasting.setShadowColor(Colour.BLACK)
         shadowcasting.setShadowMode(shadowcasting.ShadowCastingMode.Fill)
 
-        this.enableMinimap()
+        //this.enableMinimap()
 
         this.initEventHandlers()
         this.resetMovement()

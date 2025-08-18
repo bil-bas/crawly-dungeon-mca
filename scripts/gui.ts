@@ -130,11 +130,11 @@ class CoinLabel extends Label {
     constructor() {
         super(undefined, "0", Colour.YELLOW)
 
-        this.top = -1
+        this.top = 0
 
         this.coin = sprites.create(sprites.builtin.coin0, SpriteKind.Text)
-        this.coin.top = 1
-        this.coin.right = screen.width - 1
+        this.coin.top = 2
+        this.coin.right = screen.width - 2
         this.setupSprite(this.coin)
     }
 
@@ -145,7 +145,7 @@ class CoinLabel extends Label {
 
     public setText(text: string): void {
         super.setText(text)
-        this.right = screen.width - 8
+        this.right = screen.width - 10
     }
 }
 
@@ -160,7 +160,7 @@ class StatusBar extends Label {
         if (kind == StatusBarKind.Health) {
             this.status.setColor(Colour.RED, Colour.DARK_PURPLE, Colour.BROWN)
             this.status.right = screen.width / 2
-            this.left = -4
+            this.left = -2
         } else {
             this.status.setColor(Colour.BLUE, Colour.DARK_PURPLE, Colour.LIGHT_BLUE)
             this.status.left = screen.width / 2
@@ -208,6 +208,7 @@ class Gui {
     protected readonly keyLabel: Label
     protected readonly magicStatus: StatusBar
     protected readonly lifeStatus: StatusBar
+    protected readonly levelLabel: Label
 
     constructor() {
         this.lifeStatus = new StatusBar(StatusBarKind.Health)
@@ -215,20 +216,27 @@ class Gui {
 
         this.keyLabel = new Label(assets.image`key`, "x0")
         this.keyLabel.setMaxFontHeight(5)
-        this.keyLabel.left = -4
+        this.keyLabel.left = -2
         this.keyLabel.bottom = scene.screenHeight() - 8
 
         this.coinLabel = new CoinLabel()
+
+        this.levelLabel = new Label(assets.image`level`, "0")
+        this.levelLabel.setMaxFontHeight(5)
+        this.levelLabel.left = -2
+        this.levelLabel.top = 0
 
         this.updateLabels()
     }
 
     public updateLabels(): void {
         this.keyLabel.setText(`x${player.keys}`)
-        this.coinLabel.setText(`${player.coins}`)
+        this.coinLabel.setText(player.coins.toString())
 
         this.lifeStatus.updateValues(player.life, player.maxLife)
         this.magicStatus.updateValues(player.mana, player.maxMana)
+
+        this.levelLabel.setText(dungeon.level.toString())
     }
 }
 

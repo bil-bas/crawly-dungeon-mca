@@ -13,11 +13,10 @@ class Dungeon {
         [-1, +1], [+0, +1], [+1, +1],
     ]
 
-    protected levelIndex: int8 = -1
+    public level: int8 = 0
 
     constructor() {
         scene.setBackgroundColor(Colour.DARK_PURPLE)
-        this.advance()
     }
 
     // Render the level tiles, add player and creatues.
@@ -46,37 +45,7 @@ class Dungeon {
         tiles.getTilesByType(sprites.dungeon.doorClosedNorth).forEach((tile: tiles.Location) => {
             tiles.setWallAt(tile, true)
         })
-
-        tiles.setCurrentTilemap(level)
     }
-
-    /*
-    protected render_object(image: Image, tile: tiles.Location): void {
-        let clear = true
-
-        switch (image) {
-            case assets.tile`bat`: new Bat(tile); break
-            case assets.tile`skeleton`: new Skeleton(tile); break
-            case assets.tile`monkey`: new Monkey(tile); break
-            case assets.tile`hermit crab`: new HermitCrab(tile); break
-            case assets.tile`shroom`: new Shroom(tile); break
-            case assets.tile`mimic`: new Mimic(tile); break
-
-            case assets.tile`key`: new Key(tile); break
-            case assets.tile`chest`: new Chest(tile); break
-            case assets.tile`mana potion`: new ManaPotion(tile); break
-            case assets.tile`life potion`: new LifePotion(tile); break
-            case assets.tile`coins`: new Coins(tile); break
-
-            case assets.tile`item shop`: new ItemShop(tile); break
-            case assets.tile`spell shop`: new SpellShop(tile); break
-            case assets.tile`shrine`: new Shrine(tile); break
-            case assets.tile`mushroom`: new Mushroom(tile); break
-            default:
-                clear = false
-        }
-    }
-    */
 
     // Replace default tile with correct, linking walls.
     protected render_brick(view_map: tiles.TileMapData, tile: tiles.Location) : void {
@@ -148,8 +117,6 @@ class Dungeon {
             case "11111111":
                 return assets.tile`top of wall`
             default:
-                //tiles.setWallAt(tile, false)
-            //return assets.tile`transparency16`
                 return sprites.castle.rock2
         }
     }
@@ -160,7 +127,9 @@ class Dungeon {
             sprites.destroyAllSpritesOfKind(kind)
         }
 
-        this.levelIndex += 1
+        this.level += 1
+        gui.updateLabels()
+
         player.setScale(1)
         player.resetMovement()
         this.render_level()

@@ -110,5 +110,13 @@
         "namespace": "myImages.",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "raise dead"
+    },
+    "myImages.image15": {
+        "id": "myImages.image15",
+        "data": "hwQJAAkAAAAAAAAAAAAAAADMzAAAAAAAwF0iDAAAAADcLC/CAAAAAMAsIv8MAAAA3CwvwgAAAADAXSIMAAAAAADMzAAAAAAAAAAAAAAAAAA=",
+        "dataEncoding": "base64",
+        "namespace": "myImages.",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "level"
     }
 }
