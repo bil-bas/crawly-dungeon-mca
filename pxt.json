@@ -38,6 +38,7 @@
         "images.g.ts",
         "tilemap.g.jres",
         "tilemap.g.ts",
+        "pxt_modules/arcade-tilemap-a-star/tilemap.g.jres",
         "tutorial-info-cache.json"
     ],
     "public": true,

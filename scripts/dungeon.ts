@@ -58,64 +58,65 @@ class Dungeon {
             return (adjacent == sprites.builtin.brick) ? 1 : 0
         })
 
-        tiles.setTileAt(tile, this.wall_image_from_adjacent(adjacent_pattern.join(""), tile))
+        let image = this.wall_image_from_adjacent(adjacent_pattern.join(""), tile)
+        if (!image) throw adjacent_pattern.join("")
+        tiles.setTileAt(tile, image)
     }
 
     // check adjacent squares for walls, to work out how to join them.
     protected wall_image_from_adjacent(pattern: string, tile: tiles.Location): Image {
         switch (pattern) {
             case "11111110":
-                return sprites.dungeon.purpleOuterNorthWest
+                return assets.tile`wall outer nw+`
             case "11111011":
-                return sprites.dungeon.purpleOuterNorthEast
+                return assets.tile`wall outer ne+`
             case "11011111":
-                return sprites.dungeon.purpleOuterSouthEast
+                return assets.tile`wall outer se+`
             case "01111111":
-                return sprites.dungeon.purpleOuterSouthWest
+                return assets.tile`wall outer sw+`
 
             case "11111000":
             case "11111001":
             case "11111100":
             case "11111101":
-                return sprites.dungeon.purpleOuterNorth0
+                return assets.tile`wall outer n`
             case "00011111":
             case "10011111":
             case "00111111":
             case "10111111":
-                return sprites.dungeon.purpleOuterSouth0
+                return assets.tile`wall outer s`
             case "01101011":
             case "11101011":
             case "01101111":
             case "11101111":
-                return sprites.dungeon.purpleOuterEast0
+                return assets.tile`wall outer e`
             case "11010110":
             case "11110110":
             case "11010111":
             case "11110111":
-                return sprites.dungeon.purpleOuterWest0
-
+                return assets.tile`wall outer w`
             case "00001011":
             case "00001111":
             case "00101011":
             case "00101111":
-                return sprites.dungeon.purpleInnerNorthWest
+                return assets.tile`wall inner nw`
             case "00010110":
             case "10010110":
             case "00010111":
             case "10010111":
-                return sprites.dungeon.purpleInnerNorthEast
+                return assets.tile`wall inner ne`
             case "11010000":
             case "11010100":
             case "11110000":
             case "11110100":
-                return sprites.dungeon.purpleInnerSouthEast
+                return assets.tile`wall inner se`
             case "01101000":
             case "01101001":
             case "11101000":
             case "11101001":
-                return sprites.dungeon.purpleInnerSouthWest
+                return assets.tile`wall inner sw`
             case "11111111":
-                return assets.tile`top of wall`
+                return assets.tile`wall solid`
             default:
                 return sprites.castle.rock2
         }

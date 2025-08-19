@@ -22,407 +22,48 @@ namespace myImages {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `;
-            case "myTiles.tile6":
-            case "mana potion":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . b . . . . . . . 
-. . . . . . . b d b . . . . . . 
-. . . . . . b 5 5 5 b . . . . . 
-. . . . . b b 5 5 5 b b . . . . 
-. . b b b b 5 5 5 1 1 b b b b . 
-. . b 5 5 5 5 5 5 1 1 5 5 5 b . 
-. . b d d 5 5 5 5 5 5 5 d d b . 
-. . . b d d 5 5 5 5 5 d d b . . 
-. . . c b 5 5 5 5 5 5 5 b c . . 
-. . . c b 5 5 5 5 5 5 5 b c . . 
-. . . c 5 5 d d b d d 5 5 c . . 
-. . . c 5 d d c c c d d 5 c . . 
-. . . c c c c . . . c c c c . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "myTiles.tile7":
-            case "life potion":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . f f f . f f f . . . . 
-. . . . f 3 3 3 f 3 3 3 f . . . 
-. . . . f 3 3 3 3 3 1 3 f . . . 
-. . . . f 3 3 3 3 3 3 3 f . . . 
-. . . . . f 3 b b b 3 f . . . . 
-. . . . . f f b b b f f . . . . 
-. . . . . . f f b f f . . . . . 
-. . . . . . . f f f . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "myTiles.tile8":
-            case "bat":return img`
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 f 3 3 3 f 3 f 3 3 3 f 3 3 3 
-3 f 3 f 3 f f f f f 3 f 3 f 3 3 
-f 3 3 3 f f 2 f 2 f f 3 3 3 f 3 
-3 3 3 3 3 f f f f f 3 3 3 3 3 3 
-3 3 3 3 3 3 f f f 3 3 3 3 3 3 3 
-3 3 3 3 3 3 1 3 1 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-`;
-            case "myTiles.tile9":
-            case "skeleton":return img`
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 f f f f f f f 3 3 3 3 
-3 3 3 3 f 1 1 1 1 1 1 1 f 3 3 3 
-3 3 3 3 f 1 1 1 1 1 1 1 f 3 3 3 
-3 3 3 3 f 1 f f 1 f f 1 f 3 3 3 
-3 3 3 3 f 1 1 1 1 1 1 1 f 3 3 3 
-3 3 3 3 f 1 1 1 f 1 1 1 f 3 3 3 
-3 3 3 3 f 1 1 1 f 1 1 1 f 3 3 3 
-3 3 3 3 f f f f f f f f f 3 3 3 
-3 3 3 3 3 f 1 f 1 f 1 f 3 3 3 3 
-3 3 3 3 3 f f f f f f f 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-`;
-            case "myTiles.tile10":
-            case "monkey":return img`
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 f 3 3 f 3 3 3 3 3 3 
-3 3 3 3 3 f 2 f f 2 f 3 3 3 3 3 
-3 3 3 3 3 f 2 2 2 2 2 f 3 3 3 3 
-3 3 3 3 3 f 2 f 2 f 2 f 3 3 3 3 
-3 3 3 3 3 f 2 2 f 2 2 f 3 3 3 3 
-3 f 3 3 3 f 2 2 2 2 2 f 3 3 3 3 
-3 f 3 3 3 f 2 f f f 2 f 3 3 3 3 
-3 f 3 3 3 f 2 2 2 2 2 f 3 3 3 3 
-3 3 f 3 3 f f f f f f f 3 3 3 3 
-3 3 f 3 3 3 f 2 2 2 f 3 3 3 3 3 
-3 3 3 f f 3 f 2 f 2 f 3 3 3 3 3 
-3 3 3 3 3 f f f f f f 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-`;
-            case "myTiles.tile11":
-            case "hermit crab":return img`
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 f f f 3 3 3 
-3 3 3 3 3 3 3 3 3 f f b a f 3 3 
-3 3 3 3 3 3 3 3 f b a a b f f 3 
-3 3 3 3 3 3 3 3 f b b b a b f 3 
-3 3 3 3 3 3 3 f f a b b b f 3 3 
-3 3 3 3 3 3 3 f b b a b b f 3 3 
-3 3 3 3 3 3 f a a b b a b f 3 3 
-3 3 3 3 3 f f b a b b a a f 3 3 
-3 3 3 3 3 f b b b a b f f f 3 3 
-3 3 3 3 f f b b b b a f f 3 3 3 
-3 3 f f f f f b b b f f f 3 3 3 
-3 f f 3 f f f a a a f f 3 3 3 3 
-3 f 3 3 f 3 3 f f 3 3 f 3 3 3 3 
-3 f 3 3 f 3 3 3 f 3 3 f 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-`;
-            case "myTiles.tile12":
-            case "mimic":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . e e e e e e e e . . . . 
-. . . e e 1 1 e e 1 1 e e . . . 
-. . e e e 1 f e e 1 f e e e . . 
-. . e e e e e e e e e e e e . . 
-. . c c c c c 2 2 c c c c c . . 
-. . e e e e e 2 2 e e e e e . . 
-. . e e e e 2 2 e e e e e e . . 
-. . e e e e 2 e e e e e e e . . 
-. . e e e e e e e e e e e e . . 
-. . e e e e e e e e e e e e . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "myTiles.tile13":
-            case "chest":return img`
-. . b b b b b b b b b b b b . . 
-. b e 4 4 4 4 4 4 4 4 4 4 e b . 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e e 4 4 4 4 4 4 4 4 4 4 e e b 
-b e e e e e e e e e e e e e e b 
-b e e e e e e e e e e e e e e b 
-b b b b b b b d d b b b b b b b 
-c b b b b b b c c b b b b b b c 
-c c c c c c b c c b c c c c c c 
-b e e e e e c b b c e e e e e b 
-b e e e e e e e e e e e e e e b 
-b c e e e e e e e e e e e e c b 
-b b b b b b b b b b b b b b b b 
-. b b . . . . . . . . . . b b . 
-`;
-            case "myTiles.tile14":
-            case "top of wall":return img`
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-`;
-            case "myTiles.tile15":
-            case "key":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . f f f f f . . . . . . 
-. . . . f 1 1 1 1 1 f . . . . . 
-. . . f 1 1 1 1 1 1 1 f . . . . 
-. . . f 1 1 c 1 c 1 1 f . . . . 
-. . . f 1 1 c 1 c 1 1 f . . . . 
-. . . . f 1 1 1 1 1 f . . . . . 
-. . . . f 1 f 1 f 1 f . . . . . 
-. . . . . f f e f f . . . . . . 
-. . . . . . f 5 f f . . . . . . 
-. . . . . . f 5 f 5 f . . . . . 
-. . . . . . f 5 5 5 f . . . . . 
-. . . . . . f 5 f f . . . . . . 
-. . . . . . f 5 5 5 f . . . . . 
-. . . . . . . f f f . . . . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "myTiles.tile16":
-            case "dead mimic":return img`
-. b b b b b b b b b b b b b b . 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 4 b 
-b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
-b e e 4 2 4 4 4 4 4 4 4 4 e e b 
-b b b b 2 b b d d b b 2 b b b b 
-. b b 2 2 b b c c b b b b b b . 
-b c c c c c b c c b c c c c c b 
-b c c c c c c b b c c c c c c b 
-b c 1 1 c c 2 c c 2 c c 1 1 c b 
-b 1 2 2 1 c 2 2 2 2 c 1 2 2 1 b 
-b 2 b b b b 2 2 2 2 b b b b b b 
-b 2 e e e 2 2 2 2 c e e e e e b 
-b e e e 2 2 2 2 c e e e e 2 e b 
-b c e e 2 2 2 c e e e e 2 e c b 
-b b b b c 2 2 2 b b b b b b b b 
-. b b . . c 2 2 2 2 . . . b b . 
-`;
-            case "myTiles.tile17":
-            case "spell shop":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 f f f f f f f f f f f f f f 1 
-1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
-1 f 6 f f f f f f f f f f 6 f 1 
-1 f 6 f 1 f 1 1 1 1 1 1 f 6 f 1 
-1 f 6 f f f 1 1 f 1 1 1 f 6 f 1 
-1 f 6 6 6 f 1 f f f f 1 f 6 f 1 
-1 f 6 6 6 f 1 1 f 1 1 1 f 6 f 1 
-1 f 6 6 6 f 1 f f f f 1 f 6 f 1 
-1 f 6 6 6 f 1 1 f 1 1 1 f 6 f 1 
-1 f 6 f f f 1 1 f 1 1 1 f 6 f 1 
-1 f 6 f 1 f 1 1 1 1 1 1 f 6 f 1 
-1 f 6 f f f f f f f f f f 6 f 1 
-1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
-1 f f f f f f f f f f f f f f 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-`;
-            case "myTiles.tile18":
-            case "item shop":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 f f f f f f f f f f f f f f 1 
-1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
-1 f 6 6 6 6 f f f f 6 6 6 6 f 1 
-1 f 6 6 6 6 f f f f 6 6 6 6 f 1 
-1 f 6 6 6 6 6 a a 6 6 6 6 6 f 1 
-1 f 6 6 6 6 f 2 2 f 6 6 6 6 f 1 
-1 f 6 6 6 6 f 2 2 f 6 6 6 6 f 1 
-1 f 6 6 6 f 2 1 2 2 f 6 6 6 f 1 
-1 f 6 6 6 f 2 2 2 2 f 6 6 6 f 1 
-1 f 6 6 6 f 2 2 2 2 f 6 6 6 f 1 
-1 f 6 6 6 6 f f f f 6 6 6 6 f 1 
-1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
-1 f 6 6 6 6 6 6 6 6 6 6 6 6 f 1 
-1 f f f f f f f f f f f f f f 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-`;
-            case "myTiles.tile19":
-            case "shrine":return img`
-1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
-1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
-1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
-1 1 1 1 1 f 8 8 2 2 f 1 1 1 1 1 
-1 1 1 1 1 1 f 8 2 f 1 1 1 1 1 1 
-1 1 1 1 1 f f f f f f 1 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 1 f 2 2 2 8 8 8 f 1 1 1 1 
-1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
-1 1 1 f 2 2 2 2 8 8 8 8 f 1 1 1 
-1 1 1 f f f f f f f f f f 1 1 1 
-`;
-            case "myTiles.tile20":
-            case "mushroom":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . b b b b b . . . . . . 
-. . . . b 3 3 3 3 3 b b . . . . 
-. . . b 3 3 3 3 1 1 1 3 b . . . 
-. . . b 3 3 3 3 1 1 1 1 3 b . . 
-. . b 1 1 3 3 3 3 1 1 1 3 b b . 
-. b 1 1 1 3 3 3 3 3 3 3 3 b b b 
-b b 1 1 3 3 1 1 3 3 3 3 b b b c 
-c b b 3 3 1 1 1 1 3 b b d d b c 
-c b b b b d d d d b b d d d c . 
-. c b b b b d d b b b d d c . . 
-. . c c b b b b b b b b c . . . 
-. . . . c c c c c c c c . . . . 
-. . . . . . b 1 d d b . . . . . 
-. . . . . b 1 1 d d b . . . . . 
-. . . . . b 1 d d b b . . . . . 
-`;
-            case "myTiles.tile21":
-            case "rockslide":return img`
-. . b d b . . . . . b b b b . . 
-. c b d d b . . . b b d d d b . 
-. b c c b f f f b c d d d d b . 
-. . . f f f b b c c b d b b b . 
-. . f f f b d d b c c b b b c . 
-. . b b b c d d b b c c c c . . 
-. b d d d b c b b c f f f f . . 
-c b d d d d c c c c f b b b . . 
-c c b b b b c c c f b d d d b . 
-. c c c b b f f b c b b d d b b 
-. b b f f f f f b c c b b b b . 
-b d d b b f f f f f c c c b . . 
-b b d d b c f f b b b b b b b . 
-. b c c c b f b d d d b b c b . 
-. . . . f f b d d d b c c b . . 
-. . . . . . b b b c c c b . . . 
-`;
-            case "myTiles.tile22":
-            case "shroom":return img`
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-3 3 3 3 3 9 9 9 9 9 3 3 3 3 3 3 
-3 3 3 9 9 9 9 9 9 9 9 9 3 3 3 3 
-3 3 9 9 9 9 2 2 2 9 9 9 9 9 3 3 
-3 9 9 9 9 9 2 2 2 9 9 2 2 2 3 3 
-3 9 9 9 9 9 2 2 2 9 9 2 2 2 3 3 
-3 9 2 2 2 9 9 9 9 9 9 2 2 2 3 3 
-3 9 2 2 2 9 9 9 9 9 9 9 9 9 3 3 
-3 9 2 2 2 9 9 9 2 2 2 9 9 9 3 3 
-3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
-3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
-3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
-3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
-3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
-3 3 3 3 3 6 6 6 6 6 3 3 3 3 3 3 
-`;
-            case "myTiles.tile25":
-            case "unused2":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . 3 3 . . . . . . . . . . . . 
-. . . 3 . . . . . . . . . . . . 
-. . . . 3 . . . . . . . . . . . 
-. . . . 3 3 5 5 5 . . . . . . . 
-. . . . . 3 3 4 4 5 . . . . . . 
-. . . . . 5 3 5 4 5 f . . . . . 
-. . . . . 5 3 3 4 5 f . . . . . 
-. . . . . . 5 3 3 f . . . . . . 
-. . . . . . . f 3 3 . . . . . . 
-. . . . . . . . . 3 . . . . . . 
-. . . . . . . . . . 3 . . . . . 
-. . . . . . . . . . . 3 . . . . 
-. . . . . . . . . . . . 3 . . . 
-. . . . . . . . . . . . . . . . 
-`;
-            case "myTiles.tile24":
-            case "unused1":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . 3 3 3 . . . 5 5 5 . . . . . 
-. . . 3 3 3 . 5 4 4 4 5 . . . . 
-. . . . 3 3 3 5 4 5 4 5 f . . . 
-. . . . 3 3 3 3 4 5 4 5 f . . . 
-. . . . . 3 3 3 3 5 5 f . . . . 
-. . . . 5 5 3 3 3 3 f . . . . . 
-. . . 5 4 4 3 3 3 3 3 . . . . . 
-. . . 5 4 5 4 3 3 3 3 . . . . . 
-. . . 5 4 5 4 3 3 3 3 3 . . . . 
-. . . . 5 5 5 f 3 3 3 3 . . . . 
-. . . . . f f . . . 3 3 3 . . . 
-. . . . . . . . . . . 3 3 . . . 
-. . . . . . . . . . . . . . . . 
-`;
             case "myTiles.tile23":
-            case "coins":return img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . e e . . . . . . . 
-. . . . . . . 4 4 . . . . . . . 
-. . . . . . 4 e e e . . . . . . 
-. . . . . e 4 e f e e . . . . . 
-. . . . . e 4 e f e e . . . . . 
-. . . . . e e e f e e . . . . . 
-. . . . . e e f e e f . . . . . 
-. . . . e f e e e e f . . . . . 
-. . . . e e e e f f f . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
+            case "wall solid":return img`
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
 `;
             case "myTiles.tile26":
-            case "wall end e":return img`
+            case "wall outer n":return img`
+a a a c a a c a a a c a a c a a 
+a a a c a a c a a a c a a c a a 
 f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-a a a a a a a a a a a a a a a f 
-a a a a a a a a a a a a a a a f 
-a a a a a a a a a a a a a a a f 
-a a a a a a a a a a a a a a a f 
-a a a a a a a a a a a a a a a f 
-a a a a a a a a a a a a a a a f 
-a a a a a a a a a a a a a a a f 
+c a a a a c a a a a c a a a a a 
+c a a a a c a a a a c a a a a a 
+c a a a a c c c c c c c c c c c 
+c c c c c c a c a a a a a c c c 
+a c a a a c c c a a a a a c a a 
+a c a a a a c c a a a a a c a a 
+c c c a a a c c c c c c c c c c 
+a a c a a a c a a a a c a a a a 
+a a c a a a c a a a a c a a a a 
+c c c c c c c a a a a c a a a a 
+a a a a c a c c c c c c c c c c 
+a a a a c a a a a a a a c a a a 
+a a a a c a a a a a a a c a a a 
 `;
-            case "myTiles.tile27":
-            case "wall end w":return img`
+            case "myTiles.tile6":
+            case "wall outer s":return img`
+a a a c a a c a a a c a a c a a 
+a a a c a a c a a a c a a c a a 
 f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f 
@@ -432,51 +73,315 @@ f f f f f f f f f f f f f f f f
 f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f 
 f f f f f f f f f f f f f f f f 
-f a a a a a a a a a a a a a a a 
-f a a a a a a a a a a a a a a a 
-f a a a a a a a a a a a a a a a 
-f a a a a a a a a a a a a a a a 
-f a a a a a a a a a a a a a a a 
-f a a a a a a a a a a a a a a a 
-f a a a a a a a a a a a a a a a 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
 `;
-            case "myTiles.tile28":
-            case "wall end s":return img`
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f f f f f f f f f f f f f f f f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
+            case "myTiles.tile9":
+            case "unused":return img`
+a a c a a c a a a c a a c a a a 
+a a c a a c a a a c a a c a a a 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
 `;
             case "myTiles.tile29":
-            case "wall end n":return img`
+            case "wall inner se":return img`
+a a a c a a c a a a c a a c a a 
+a a a c a a c a a a c a a c a a 
 f f f f f f f f f f f f f f f f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
-f a a a a a a a a a a a a a a f 
+c a a a a c a a a a c a a a a a 
+c a a a a c a a a a c a a a a a 
+c a a a a c c c c c c c c c c c 
+c c c c c c a c a a a a a c c c 
+a c a a a c c c a a a a a c a a 
+a c a a a a c c a a a a a c a a 
+c c c a a a c c c c c c c c c c 
+a a c a a a c a a a a c a a a a 
+a a c a a a c a a a a c a a a a 
+c c c c c c c a a a a c a a a a 
+a a a a c a c c c c c c c c c c 
+a a a a c a a a a a a a c a a a 
+a a a a c a a a a a a a c a a a 
+`;
+            case "myTiles.tile8":
+            case "wall inner nw":return img`
+a a a c a a c a a a c a a c a a 
+a a a c a a c a a a c a a c a a 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+`;
+            case "myTiles.tile7":
+            case "wall inner ne":return img`
+a a a c a a c a a a c a a c a a 
+a a a c a a c a a a c a a c a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+`;
+            case "myTiles.tile10":
+            case "wall inner sw":return img`
+a a a c a a c a a a c a a c a a 
+a a a c a a c a a a c a a c a a 
+f f f f f f f f f f f f f f f f 
+c a a a a c a a a a c a a a a a 
+c a a a a c a a a a c a a a a a 
+c a a a a c c c c c c c c c c c 
+c c c c c c a c a a a a a c c c 
+a c a a a c c c a a a a a c a a 
+a c a a a a c c a a a a a c a a 
+c c c a a a c c c c c c c c c c 
+a a c a a a c a a a a c a a a a 
+a a c a a a c a a a a c a a a a 
+c c c c c c c a a a a c a a a a 
+a a a a c a c c c c c c c c c c 
+a a a a c a a a a a a a c a a a 
+a a a a c a a a a a a a c a a a 
+`;
+            case "myTiles.tile28":
+            case "wall outer w":return img`
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+`;
+            case "myTiles.tile27":
+            case "wall outer e":return img`
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+`;
+            case "myTiles.tile24":
+            case "wall vertical":return img`
+a a f f f f f f f f f f f f a a 
+c c f f f f f f f f f f f f a a 
+a a f f f f f f f f f f f f c c 
+a a f f f f f f f f f f f f a a 
+c c f f f f f f f f f f f f a a 
+a a f f f f f f f f f f f f c c 
+a a f f f f f f f f f f f f a a 
+a a f f f f f f f f f f f f a a 
+c c f f f f f f f f f f f f c c 
+a a f f f f f f f f f f f f a a 
+a a f f f f f f f f f f f f a a 
+a a f f f f f f f f f f f f a a 
+c c f f f f f f f f f f f f a a 
+a a f f f f f f f f f f f f c c 
+a a f f f f f f f f f f f f a a 
+a a f f f f f f f f f f f f a a 
+`;
+            case "myTiles.tile1":
+            case "unused0":return img`
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+`;
+            case "myTiles.tile2":
+            case "unused1":return img`
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+`;
+            case "myTiles.tile4":
+            case "unused2":return img`
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+`;
+            case "myTiles.tile3":
+            case "unused3":return img`
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+`;
+            case "myTiles.tile14":
+            case "wall outer sw+":return img`
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+`;
+            case "myTiles.tile13":
+            case "wall outer se+":return img`
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+f f f f f f f f f f f f f f f f 
+`;
+            case "myTiles.tile12":
+            case "wall outer nw+":return img`
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f c c 
+f f f f f f f f f f f f f f a a 
+f f f f f f f f f f f f f f a a 
+`;
+            case "myTiles.tile11":
+            case "wall outer ne+":return img`
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+c c f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
+a a f f f f f f f f f f f f f f 
 `;
         }
         return null;
@@ -504,75 +409,46 @@ namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
     export const tile5 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile6 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile7 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile8 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile9 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile10 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile11 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile12 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile13 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile14 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile15 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile16 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile17 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile18 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile19 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile20 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile21 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile22 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile25 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
-    export const tile24 = image.ofBuffer(hex``);
-    //% fixedInstance jres blockIdentity=images._tile
     export const tile23 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile26 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile27 = image.ofBuffer(hex``);
+    export const tile6 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile9 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile29 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile8 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile7 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile10 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile28 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
-    export const tile29 = image.ofBuffer(hex``);
+    export const tile27 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile24 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile1 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile2 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile4 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile3 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile14 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile13 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile12 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile11 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "level 1":
-            case "level1":return tiles.createTilemap(hex`1000100001010101010101010101010101010101010015000001010000001300000000010100000a000101000101010001010001010000000001010001010100010100010100001500010105050101000101000101000000000101150001010001010301010c0c0c0c0101010f01010001010101010000000001010100010100010101010100000000000e000900000000130d0101040404000000000b0006000000000101001515001200000000000000000001010505050000000000000000080000010100000000000000000000000000000101000200060606000b0000140007000101110000000000100b0b000000000d0101010101010101010101010101010101`, img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, [myTiles.tile5,sprites.builtin.brick,sprites.dungeon.stairLarge,sprites.dungeon.stairSouth,myTiles.tile6,myTiles.tile7,myTiles.tile15,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile13,sprites.dungeon.stairLadder,myTiles.tile12,myTiles.tile19,sprites.dungeon.doorLockedNorth,myTiles.tile18,myTiles.tile17,myTiles.tile20,myTiles.tile21,myTiles.tile22,myTiles.tile23], TileScale.Sixteen);
             case "empty36":
             case "level2":return tiles.createTilemap(hex`24002400010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101`, img`
 222222222222222222222222222222222222
@@ -620,54 +496,44 @@ namespace myTiles {
         switch(helpers.stringTrim(name)) {
             case "transparency16":
             case "tile5":return myTiles.tile5;
-            case "mana potion":
-            case "tile6":return myTiles.tile6;
-            case "life potion":
-            case "tile7":return myTiles.tile7;
-            case "bat":
-            case "tile8":return myTiles.tile8;
-            case "skeleton":
-            case "tile9":return myTiles.tile9;
-            case "monkey":
-            case "tile10":return myTiles.tile10;
-            case "hermit crab":
-            case "tile11":return myTiles.tile11;
-            case "mimic":
-            case "tile12":return myTiles.tile12;
-            case "chest":
-            case "tile13":return myTiles.tile13;
-            case "top of wall":
-            case "tile14":return myTiles.tile14;
-            case "key":
-            case "tile15":return myTiles.tile15;
-            case "dead mimic":
-            case "tile16":return myTiles.tile16;
-            case "spell shop":
-            case "tile17":return myTiles.tile17;
-            case "item shop":
-            case "tile18":return myTiles.tile18;
-            case "shrine":
-            case "tile19":return myTiles.tile19;
-            case "mushroom":
-            case "tile20":return myTiles.tile20;
-            case "rockslide":
-            case "tile21":return myTiles.tile21;
-            case "shroom":
-            case "tile22":return myTiles.tile22;
-            case "unused2":
-            case "tile25":return myTiles.tile25;
-            case "unused1":
-            case "tile24":return myTiles.tile24;
-            case "coins":
+            case "wall solid":
             case "tile23":return myTiles.tile23;
-            case "wall end e":
+            case "wall outer n":
             case "tile26":return myTiles.tile26;
-            case "wall end w":
-            case "tile27":return myTiles.tile27;
-            case "wall end s":
-            case "tile28":return myTiles.tile28;
-            case "wall end n":
+            case "wall outer s":
+            case "tile6":return myTiles.tile6;
+            case "unused":
+            case "tile9":return myTiles.tile9;
+            case "wall inner se":
             case "tile29":return myTiles.tile29;
+            case "wall inner nw":
+            case "tile8":return myTiles.tile8;
+            case "wall inner ne":
+            case "tile7":return myTiles.tile7;
+            case "wall inner sw":
+            case "tile10":return myTiles.tile10;
+            case "wall outer w":
+            case "tile28":return myTiles.tile28;
+            case "wall outer e":
+            case "tile27":return myTiles.tile27;
+            case "wall vertical":
+            case "tile24":return myTiles.tile24;
+            case "unused0":
+            case "tile1":return myTiles.tile1;
+            case "unused1":
+            case "tile2":return myTiles.tile2;
+            case "unused2":
+            case "tile4":return myTiles.tile4;
+            case "unused3":
+            case "tile3":return myTiles.tile3;
+            case "wall outer sw+":
+            case "tile14":return myTiles.tile14;
+            case "wall outer se+":
+            case "tile13":return myTiles.tile13;
+            case "wall outer nw+":
+            case "tile12":return myTiles.tile12;
+            case "wall outer ne+":
+            case "tile11":return myTiles.tile11;
         }
         return null;
     })
